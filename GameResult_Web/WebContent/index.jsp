@@ -13,7 +13,7 @@
 <body>
  <form name="form1" onsubmit="checkBoxValidation()">
      <h3>Please insert data then press submit button</h3>
-     <p>Search Emp_ID >= <input type="text" name="id" value="0"/><input type="submit" value="submit"/></p>
+     <p>Search 玩家唯一碼 :  <input type="text" name="id" value="0"/><input type="submit" value="submit"/></p>
  </form>
 <% 
 String submit= request.getParameter("id");
@@ -21,10 +21,19 @@ String submit= request.getParameter("id");
 
 <table border="11" width="100%">
 <tr>
-   <th>Emp ID</th>
-   <th>First Name</th>
-   <th>Last Name</th>
-   <th>Age</th>
+   <th>局號 UUID</th>
+   <th>玩家唯一碼</th>
+   <th>遊戲編號</th>
+   <th>下注點數</th>
+   <th>下注線數</th>
+   <th>輸贏點數</th>
+   <th>特殊獎項狀態</th>
+   <th>特殊獎金點數</th>
+   <th>下注前  玩家持有點數</th>
+   <th>下注前  玩家持有點數</th>
+   <th>特殊局號 </th>
+   <th>賽果建立時間</th>
+   <th>詳細下注記錄 </th>
 </tr>
 
 <%
@@ -32,20 +41,29 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
 String url = "jdbc:mysql://10.36.1.102:3306/TEST";
 String user = "root";
 String pwd = "3edc2wsx!QAZ";
-Connection conn= DriverManager.getConnection(url,user,pwd); 
+Connection conn= DriverManager.getConnection(url, user, pwd); 
 Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE); 
 String sql;
 if(submit != null && submit != "")
-	sql = "select * from Employees where id >= " + submit;
+	sql = "select * from resultsRecords where userID = " + submit;
 else
-	sql = "select * from Employees";
+	sql = "select * from resultsRecords";
 ResultSet rs = stmt.executeQuery(sql);
 while(rs.next()) {%> 
 <tr>
 	<td><%=rs.getString(1)%></td>
+	<td><%=rs.getString(2)%></td>
 	<td><%=rs.getString(3)%></td>
 	<td><%=rs.getString(4)%></td>
-	<td><%=rs.getString(2)%></td>
+	<td><%=rs.getString(5)%></td>
+	<td><%=rs.getString(6)%></td>
+	<td><%=rs.getString(7)%></td>
+	<td><%=rs.getString(8)%></td>
+	<td><%=rs.getString(9)%></td>
+	<td><%=rs.getString(10)%></td>
+	<td><%=rs.getString(11)%></td>
+	<td><%=rs.getString(12)%></td>
+	<td><%=rs.getString(13)%></td>
 </tr>
 <%}%>
 </table>
