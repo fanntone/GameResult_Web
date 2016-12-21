@@ -12,42 +12,48 @@
 </head>
 <body>
  <form name="form1" onsubmit="checkBoxValidation()">
-     <h3>Please insert data</h3>
-     <p><input type="text" name="game" value="0"/>Emp_ID</p>
-     <p><input type="submit" value="submit"/>
+     <h3>Please insert data then press submit button</h3>
+     <p>Search Emp_ID >= <input type="text" name="id" value="0"/><input type="submit" value="submit"/></p>
  </form>
+<% 
+String submit= request.getParameter("id");
+%>
 
-
-<br>
-
-<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-     url="jdbc:mysql://10.36.1.102:3306/TEST"
-     user="root"  password="3edc2wsx!QAZ"/>
-
- <%String game= request.getParameter("game");
-	if(game != null){%>
-	<h4>Your select Emp_ID > <%=game%></h4>
-	<%}%>
-	
-<sql:query dataSource="${snapshot}" var="result">
-SELECT * from Employees Where id > <%=game%>;
-</sql:query>
- 
-<table border="1" width="100%">
+<table border="11" width="100%">
 <tr>
    <th>Emp ID</th>
    <th>First Name</th>
    <th>Last Name</th>
    <th>Age</th>
 </tr>
-<c:forEach var="row" items="${result.rows}">
+
+<%
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+String url = "jdbc:mysql://10.36.1.102:3306/TEST";
+String user = "root";
+String pwd = "3edc2wsx!QAZ";
+Connection conn= DriverManager.getConnection(url,user,pwd); 
+Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE); 
+String sql;
+if(submit != null && submit != "")
+	sql = "select * from Employees where id >= " + submit;
+else
+	sql = "select * from Employees";
+ResultSet rs = stmt.executeQuery(sql);
+while(rs.next()) {%> 
 <tr>
-	<td><c:out value="${row.id}"/></td>
-	<td><c:out value="${row.first}"/></td>
-	<td><c:out value="${row.last}"/></td>
-	<td><c:out value="${row.age}"/></td>
+	<td><%=rs.getString(1)%></td>
+	<td><%=rs.getString(3)%></td>
+	<td><%=rs.getString(4)%></td>
+	<td><%=rs.getString(2)%></td>
 </tr>
-</c:forEach>
+<%}%>
 </table>
+
+<%rs.close(); 
+stmt.close(); 
+conn.close(); 
+%>
+ 
 </body>
 </html>
