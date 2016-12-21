@@ -43,34 +43,30 @@ String user = "root";
 String pwd = "3edc2wsx!QAZ";
 Connection conn= DriverManager.getConnection(url, user, pwd); 
 Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE); 
-String sql;
-if(submit != null && submit != "")
+
+String sql = "";
+ResultSet rs = null;
+if(submit != null && submit.length() != 0)
 	sql = "select * from resultsRecords where userID = " + submit;
 else
 	sql = "select * from resultsRecords";
-ResultSet rs = stmt.executeQuery(sql);
-while(rs.next()) {%> 
+rs = stmt.executeQuery(sql);
+
+while(rs.next()){%>
 <tr>
-	<td><%=rs.getString(1)%></td>
-	<td><%=rs.getString(2)%></td>
-	<td><%=rs.getString(3)%></td>
-	<td><%=rs.getString(4)%></td>
-	<td><%=rs.getString(5)%></td>
-	<td><%=rs.getString(6)%></td>
-	<td><%=rs.getString(7)%></td>
-	<td><%=rs.getString(8)%></td>
-	<td><%=rs.getString(9)%></td>
-	<td><%=rs.getString(10)%></td>
-	<td><%=rs.getString(11)%></td>
-	<td><%=rs.getString(12)%></td>
-	<td><%=rs.getString(13)%></td>
+	<%for(int i = 1 ; i < 14; i ++) {%>
+		<td><%=rs.getString(i)%></td>
+	<%}%>
 </tr>
 <%}%>
 </table>
 
-<%rs.close(); 
-stmt.close(); 
-conn.close(); 
+<%
+
+if(stmt != null)
+	stmt.close();
+if(conn != null)
+	conn.close(); 
 %>
  
 </body>
