@@ -59,7 +59,11 @@ if(rs != null) {
 	<tr>
 		<%for(int i = 1 ; i < 14; i ++) {%>
 			<td>
+				<% if(i == 2) { %>
+				<a href ="<c:url value = "http://google.com.tw" />">
+				<%}%>
 				<%out.print(rs.getString(i));%>
+				</a>
 			</td>
 		<%}%>
 	</tr>
