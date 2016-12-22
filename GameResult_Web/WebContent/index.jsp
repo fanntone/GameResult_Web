@@ -19,9 +19,7 @@ document.selection.submit();
 }
 </script>
 
-<% int pageSize = 5;
-   String sel = request.getParameter("select");
-%>
+<% String sel = request.getParameter("select");%>
 
 <form name="selection" action="index.jsp" method="post"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
@@ -35,22 +33,24 @@ document.selection.submit();
 <br>
   
 <%
+int pageSize = 5;
 if(sel != null)
 	pageSize = Integer.parseInt(sel);
-GameResultRecordsDao ed = new GameResultRecordsDao();
-int totalpages=ed.getTotalPage(pageSize);
-String currentPage=request.getParameter("pageIndex");
 
+GameResultRecordsDao ed = new GameResultRecordsDao();
+int totalpages = ed.getTotalPage(pageSize);
+
+String currentPage = request.getParameter("pageIndex");
 if(currentPage==null){  
     currentPage="1";  
 }  
-int pageIndex=Integer.parseInt(currentPage);  
-if(pageIndex<1){  
-    pageIndex=1;  
-}else if(pageIndex>totalpages){  
-    pageIndex=totalpages;  
+int pageIndex = Integer.parseInt(currentPage);  
+if(pageIndex < 1){  
+    pageIndex = 1;  
+}else if(pageIndex > totalpages){  
+    pageIndex = totalpages;  
 }  
-List<Map<String, String>> list= ed.getAllempByPage(pageSize,pageIndex);
+List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 %>
 
 <table border="1" width="100%">
@@ -71,8 +71,8 @@ List<Map<String, String>> list= ed.getAllempByPage(pageSize,pageIndex);
 	</tr>
 	<%  
 	  Map<String, String> map=null;  
-	  for(int i=0; i<list.size(); i++) {  
-	      map=(Map<String, String>)list.get(i);
+	  for(int i = 0; i < list.size(); i++) {  
+	      map = (Map<String, String>)list.get(i);
 	%>
       <tr>  
          <td><%=map.get("roundUUID") %></td>  
@@ -97,7 +97,7 @@ List<Map<String, String>> list= ed.getAllempByPage(pageSize,pageIndex);
 <a href="index.jsp?pageIndex=1">&nbsp;首頁</a>   
 <a href="index.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
 <a href="index.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
-<a href="index.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>  
+<a href="index.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>
  
 </body>
 </html>
