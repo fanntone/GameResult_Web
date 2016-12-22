@@ -22,8 +22,9 @@ String url  =  "http://"
 			   +  ":"  
 			   +  request.getServerPort()
 			   +  request.getContextPath()
-			   +  request.getServletPath().substring(0,request.getServletPath().lastIndexOf("/")+1); 
-String users = request.getQueryString().substring(7);
+			   +  request.getServletPath().substring(0,request.getServletPath().lastIndexOf("/")+1);
+String parameter = "userID=";
+String users = request.getQueryString().substring(parameter.length());
 PlayerDetail data = new PlayerDetail();
 if(users == null)
 	users = "1";
