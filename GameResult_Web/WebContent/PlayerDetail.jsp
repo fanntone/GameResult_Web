@@ -15,14 +15,7 @@
 <body>
 
 <%
-String path = request.getContextPath(); 
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
-String url  =  "http://"
-			   +  request.getServerName()
-			   +  ":"  
-			   +  request.getServerPort()
-			   +  request.getContextPath()
-			   +  request.getServletPath().substring(0,request.getServletPath().lastIndexOf("/")+1);
+
 String parameter = "userID=";
 String users = request.getQueryString().substring(parameter.length());
 PlayerDetail data = new PlayerDetail();
@@ -33,9 +26,6 @@ if(id < 0)
 	id = 1;
 List<Map<String, String>> list = data.getAllData(id);
 %>
-
-Hello! player <%=id%>
-
 <table border="1" width="100%">
 	<tr>
 	   <th>ª±®a°ß¤@½X</th>
