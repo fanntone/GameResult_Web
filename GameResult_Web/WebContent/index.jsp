@@ -12,9 +12,32 @@
 <title>SELECT Operation</title>
 </head>
 <body>
+
+<script>
+function change(){
+document.selection.submit();
+}
+</script>
+
+<% int pageSize = 5;
+   String sel = request.getParameter("select");
+%>
+
+<form name="selection" action="index.jsp" method="post"> 請選擇筆數
+<select name="select" size="1" id="select" onChange="change()">
+<option value="5"  <%if (sel == null || sel.equals("5")){%> selected <%}%>>5</option>
+<option value="10" <%if (sel != null && sel.equals("10")){%> selected <%}%>>10</option>
+<option value="25" <%if (sel != null && sel.equals("25")){%> selected <%}%>>25</option> 
+<option value="50" <%if (sel != null && sel.equals("50")){%> selected <%}%>>50</option> 
+<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
+</select>
+</form>
+<br>
+  
 <%
+if(sel != null)
+	pageSize = Integer.parseInt(sel);
 GameResultRecordsDao ed = new GameResultRecordsDao();
-int pageSize=4;
 int totalpages=ed.getTotalPage(pageSize);
 String currentPage=request.getParameter("pageIndex");
 
@@ -69,12 +92,12 @@ List<Map<String, String>> list= ed.getAllempByPage(pageSize,pageIndex);
 	<%}%>  
 
 </table>
- <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
- <a href="index.jsp?pageIndex=1">&nbsp;首頁</a>   
- <a href="index.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
- <a href="index.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
- <a href="index.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>  
- 
+
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
+<a href="index.jsp?pageIndex=1">&nbsp;首頁</a>   
+<a href="index.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
+<a href="index.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
+<a href="index.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>  
  
 </body>
 </html>
