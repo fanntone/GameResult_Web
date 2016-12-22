@@ -15,8 +15,7 @@ public class GameResultRecordsDao {
 	private PreparedStatement psmt=null;  
 	private ResultSet rs=null;  
 	
-	private void openConn(){  
-		
+	private void openConn() {  
 	    String url="jdbc:mysql://10.36.1.102:3306/TEST";  
 	    String user="root";  
 	    String password="3edc2wsx!QAZ";  
@@ -30,14 +29,14 @@ public class GameResultRecordsDao {
 	    }  
 	}  
 
-    public List<Map<String, String>> getAllemp(){  
+    public List<Map<String, String>> getAllemp() {  
         List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
         String sql="select * from resultsRecords";  
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
-            while(rs.next()){  
+            while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
                 map.put("roundUUID", rs.getString("roundUUID"));  
                 map.put("userID",rs.getString("userID"));
@@ -45,8 +44,8 @@ public class GameResultRecordsDao {
                 map.put("betting", rs.getString("betting"));  
                 map.put("lines",rs.getString("lines"));
                 map.put("results", rs.getString("results"));
-                map.put("results", rs.getString("results"));  
-                map.put("prizeREsults",rs.getString("prizeREsults"));
+                map.put("roundStatus", rs.getString("roundStatus"));  
+                map.put("prizeResults",rs.getString("prizeResults"));
                 map.put("beforeBalance", rs.getString("beforeBalance"));
                 map.put("afterBalance", rs.getString("afterBalance"));  
                 map.put("specialNumber",rs.getString("specialNumber"));
@@ -76,8 +75,8 @@ public class GameResultRecordsDao {
                   map.put("betting", rs.getString("betting"));  
                   map.put("lines",rs.getString("lines"));
                   map.put("results", rs.getString("results"));
-                  map.put("results", rs.getString("results"));  
-                  map.put("prizeREsults",rs.getString("prizeREsults"));
+                  map.put("roundStatus", rs.getString("roundStatus"));  
+                  map.put("prizeResults",rs.getString("prizeResults"));
                   map.put("beforeBalance", rs.getString("beforeBalance"));
                   map.put("afterBalance", rs.getString("afterBalance"));  
                   map.put("specialNumber",rs.getString("specialNumber"));
@@ -92,8 +91,8 @@ public class GameResultRecordsDao {
     }  
 
     public int countEmp(){  
-        int count=0;  
-        String sql="select count(*) from resultsRecords";  
+        int count = 0;  
+        String sql = "select count(*) from resultsRecords";  
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -107,7 +106,7 @@ public class GameResultRecordsDao {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize){  
+    public int getTotalPage(int pageSize) {  
         int totalPage=countEmp();  
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  
     }  

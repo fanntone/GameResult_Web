@@ -23,10 +23,10 @@ document.selection.submit();
 
 <form name="selection" action="index.jsp" method="post"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
-<option value="5"  <%if (sel == null || sel.equals("5")){%> selected <%}%>>5</option>
-<option value="10" <%if (sel != null && sel.equals("10")){%> selected <%}%>>10</option>
-<option value="25" <%if (sel != null && sel.equals("25")){%> selected <%}%>>25</option> 
-<option value="50" <%if (sel != null && sel.equals("50")){%> selected <%}%>>50</option> 
+<option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
+<option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
+<option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
+<option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
 <option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
 </select>
 </form>
@@ -41,9 +41,9 @@ GameResultRecordsDao ed = new GameResultRecordsDao();
 int totalpages = ed.getTotalPage(pageSize);
 
 String currentPage = request.getParameter("pageIndex");
-if(currentPage==null){  
+if(currentPage==null)  
     currentPage="1";  
-}  
+ 
 int pageIndex = Integer.parseInt(currentPage);  
 if(pageIndex < 1){  
     pageIndex = 1;  
@@ -82,7 +82,7 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
          <td><%=map.get("lines") %></td>  
          <td><%=map.get("results")%></td>
          <td><%=map.get("roundStatus") %></td>  
-         <td><%=map.get("prizeREsults") %></td>  
+         <td><%=map.get("prizeResults") %></td>  
          <td><%=map.get("beforeBalance")%></td> 
          <td><%=map.get("afterBalance") %></td>  
          <td><%=map.get("specialNumber") %></td>  
