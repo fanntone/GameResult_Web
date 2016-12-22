@@ -76,7 +76,11 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 	%>
       <tr>  
          <td><%=map.get("roundUUID") %></td>  
-         <td><%=map.get("userID") %></td>  
+         <td>
+	         <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>">
+	            <%=map.get("userID") %>
+	         </a>
+ 		 </td> 
          <td><%=map.get("gameID")%></td>
          <td><%=map.get("betting") %></td>  
          <td><%=map.get("lines") %></td>  
