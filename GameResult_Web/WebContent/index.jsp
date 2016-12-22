@@ -46,18 +46,24 @@ Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CO
 
 String sql = "";
 ResultSet rs = null;
-if(submit != null && submit.length() != 0)
-	sql = "select * from resultsRecords where userID = " + submit;
-else
-	sql = "select * from resultsRecords";
-rs = stmt.executeQuery(sql);
+if(submit != null && submit.length() != 0) {
+	if(submit.equalsIgnoreCase("all"))
+		sql = "select * from resultsRecords";
+	else
+		sql = "select * from resultsRecords where userID = " + submit;
+	rs = stmt.executeQuery(sql);
+}
 
-while(rs.next()){%>
-<tr>
-	<%for(int i = 1 ; i < 14; i ++) {%>
-		<td><%=rs.getString(i)%></td>
+if(rs != null) {
+	while(rs.next()){%>
+	<tr>
+		<%for(int i = 1 ; i < 14; i ++) {%>
+			<td>
+				<%out.print(rs.getString(i));%>
+			</td>
+		<%}%>
+	</tr>
 	<%}%>
-</tr>
 <%}%>
 </table>
 
