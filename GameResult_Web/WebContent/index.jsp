@@ -1,83 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ page import = "com.dao.GameResultRecordsDao" %>
 
 <html>
 <head>	
 <title>SELECT Operation</title>
 </head>
 <body>
- <form name="form1" onsubmit="checkBoxValidation()">
-     <h3>Please insert data then press submit button</h3>
-     <p>Search ª±®a°ß¤@½X :  <input type="text" name="id" value="0"/><input type="submit" value="submit"/></p>
- </form>
-<% 
-String submit= request.getParameter("id");
+<%
+GameResultRecordsDao ed = new GameResultRecordsDao();
+int pageSize=4;
+int totalpages=ed.getTotalPage(pageSize);
+String currentPage=request.getParameter("pageIndex");
+
+if(currentPage==null){  
+    currentPage="1";  
+}  
+int pageIndex=Integer.parseInt(currentPage);  
+if(pageIndex<1){  
+    pageIndex=1;  
+}else if(pageIndex>totalpages){  
+    pageIndex=totalpages;  
+}  
+List<Map<String, String>> list= ed.getAllempByPage(pageSize,pageIndex);
 %>
 
-<table border="11" width="100%">
-<tr>
-   <th>§½¸¹ UUID</th>
-   <th>ª±®a°ß¤@½X</th>
-   <th>¹CÀ¸½s¸¹</th>
-   <th>¤Uª`ÂI¼Æ</th>
-   <th>¤Uª`½u¼Æ</th>
-   <th>¿éÄ¹ÂI¼Æ</th>
-   <th>¯S®í¼ú¶µª¬ºA</th>
-   <th>¯S®í¼úª÷ÂI¼Æ</th>
-   <th>¤Uª`«e  ª±®a«ù¦³ÂI¼Æ</th>
-   <th>¤Uª`«e  ª±®a«ù¦³ÂI¼Æ</th>
-   <th>¯S®í§½¸¹ </th>
-   <th>ÁÉªG«Ø¥ß®É¶¡</th>
-   <th>¸Ô²Ó¤Uª`°O¿ý </th>
-</tr>
-
-<%
-Class.forName("com.mysql.jdbc.Driver").newInstance();
-String url = "jdbc:mysql://10.36.1.102:3306/TEST";
-String user = "root";
-String pwd = "3edc2wsx!QAZ";
-Connection conn= DriverManager.getConnection(url, user, pwd); 
-Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE); 
-
-String sql = "";
-ResultSet rs = null;
-if(submit != null && submit.length() != 0) {
-	if(submit.equalsIgnoreCase("all"))
-		sql = "select * from resultsRecords";
-	else
-		sql = "select * from resultsRecords where userID = " + submit;
-	rs = stmt.executeQuery(sql);
-}
-
-if(rs != null) {
-	while(rs.next()){%>
+<table border="1" width="100%">
 	<tr>
-		<%for(int i = 1 ; i < 14; i ++) {%>
-			<td>
-				<% if(i == 2) { %>
-				<a href ="<c:url value = "http://google.com.tw" />">
-				<%}%>
-				<%out.print(rs.getString(i));%>
-				</a>
-			</td>
-		<%}%>
+	   <th>å±€è™Ÿ UUID</th>
+	   <th>çŽ©å®¶å”¯ä¸€ç¢¼</th>
+	   <th>éŠæˆ²ç·¨è™Ÿ</th>
+	   <th>ä¸‹æ³¨é»žæ•¸</th>
+	   <th>ä¸‹æ³¨ç·šæ•¸</th>
+	   <th>è¼¸è´é»žæ•¸</th>
+	   <th>ç‰¹æ®ŠçŽé …ç‹€æ…‹</th>
+	   <th>ç‰¹æ®ŠçŽé‡‘é»žæ•¸</th>
+	   <th>ä¸‹æ³¨å‰  çŽ©å®¶æŒæœ‰é»žæ•¸</th>
+	   <th>ä¸‹æ³¨å‰  çŽ©å®¶æŒæœ‰é»žæ•¸</th>
+	   <th>ç‰¹æ®Šå±€è™Ÿ </th>
+	   <th>è³½æžœå»ºç«‹æ™‚é–“</th>
+	   <th>è©³ç´°ä¸‹æ³¨è¨˜éŒ„ </th>
 	</tr>
-	<%}%>
-<%}%>
+	<%  
+	  Map<String, String> map=null;  
+	  for(int i=0; i<list.size(); i++) {  
+	      map=(Map<String, String>)list.get(i);
+	%>
+      <tr>  
+         <td><%=map.get("roundUUID") %></td>  
+         <td><%=map.get("userID") %></td>  
+         <td><%=map.get("gameID")%></td>
+         <td><%=map.get("betting") %></td>  
+         <td><%=map.get("lines") %></td>  
+         <td><%=map.get("results")%></td>
+         <td><%=map.get("roundStatus") %></td>  
+         <td><%=map.get("prizeREsults") %></td>  
+         <td><%=map.get("beforeBalance")%></td> 
+         <td><%=map.get("afterBalance") %></td>  
+         <td><%=map.get("specialNumber") %></td>  
+         <td><%=map.get("resultsDate")%></td>
+         <td><%=map.get("resultsParams")%></td> 
+      </tr>  
+	<%}%>  
+
 </table>
-
-<%
-
-if(stmt != null)
-	stmt.close();
-if(conn != null)
-	conn.close(); 
-%>
+ <p style="color:red">ç•¶å‰é æ•¸:<%=pageIndex%>/<%=totalpages%>
+ <a href="index.jsp?pageIndex=1">&nbsp;é¦–é </a>   
+ <a href="index.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;ä¸Šä¸€é </a>  
+ <a href="index.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;ä¸‹ä¸€é </a>  
+ <a href="index.jsp?pageIndex=<%=totalpages%>">&nbsp;æœ«é </a>  
+ 
  
 </body>
 </html>
