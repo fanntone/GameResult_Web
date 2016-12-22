@@ -26,7 +26,7 @@ if(id < 0)
 	id = 1;
 List<Map<String, String>> list = data.getAllData(id);
 %>
-<table border="1" width="100%">
+<table border="1" width="auto">
 	<tr>
 	   <th>ª±®a°ß¤@½X</th>
 	   <th>¦~ÄÖ</th>
@@ -40,12 +40,11 @@ List<Map<String, String>> list = data.getAllData(id);
 	%>
       <tr> 
          <td><%=map.get("id")%></td>
-         <td><%=map.get("age") %></td>  
-         <td><%=map.get("first") %></td>  
+         <td><%=map.get("age")%></td>  
+         <td><%=map.get("first")%></td>  
          <td><%=map.get("last")%></td>
       </tr>  
 	<%}%>  
-
 </table>
 
 </body>
