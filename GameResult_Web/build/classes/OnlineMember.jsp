@@ -10,19 +10,55 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<title>玩家在線清單</title>
 </head>
 <body>
 
+<script>
+function change(){
+document.selection.submit();
+}
+</script>
+
+<% String sel = request.getParameter("select");%>
+<form name="selection" action="OnlineMember.jsp" method="post"> 請選擇筆數
+<select name="select" size="1" id="select" onChange="change()">
+<option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
+<option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
+<option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
+<option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
+<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
+</select>
+</form>
+<br>
+
 <%
+int pageSize = 5;
+if(sel != null)
+	pageSize = Integer.parseInt(sel);
+
 OnlineMember data = new OnlineMember();
-List<Map<String, String>> list = data.getAllData();
+int totalpages = data.getTotalPage(pageSize);
+
+String currentPage = request.getParameter("pageIndex");
+if(currentPage==null)  
+    currentPage="1";  
+ 
+int pageIndex = Integer.parseInt(currentPage);  
+if(pageIndex < 1){  
+    pageIndex = 1;  
+}else if(pageIndex > totalpages){  
+    pageIndex = totalpages;  
+} 
+
+List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 %>
 
 <table border="1" width="auto">
 	<tr>
-	   <th>遊戲(GameID)</th>
-	   <th>線上遊戲人數(Online Players)</th>
+	   <th>玩家編號(useID)</th>
+	   <th>帳號餘額(Money)</th>
+	   <th>所在遊戲(Game)</th>
 	</tr>
 	<%  
 	  Map<String, String> map=null;  
@@ -31,10 +67,17 @@ List<Map<String, String>> list = data.getAllData();
 	%>
     <tr> 
        <td><%=map.get("userID")%></td>
-       <td><%=map.get("gameID")%></td>
+       <td><%=map.get("blance")%></td>
+       <td><%=map.get("GameID")%></td>
     </tr>  
 	<%}%>  
 </table>
+
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
+<a href="OnlineMember.jsp?pageIndex=1">&nbsp;首頁</a>   
+<a href="OnlineMember.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
+<a href="OnlineMember.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
+<a href="OnlineMember.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>
 
 </body>
 </html>

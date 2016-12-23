@@ -90,7 +90,7 @@ public class GameResultRecordsDao {
         return list;  
     }  
 
-    public int countEmp(){  
+    public int countRs(){  
         int count = 0;  
         String sql = "select count(*) from resultsRecords";  
         openConn();  
@@ -107,7 +107,7 @@ public class GameResultRecordsDao {
     }  
 
     public int getTotalPage(int pageSize) {  
-        int totalPage=countEmp();  
+        int totalPage=countRs();  
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  
     }  
 }

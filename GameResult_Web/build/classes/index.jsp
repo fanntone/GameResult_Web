@@ -18,9 +18,11 @@ function change(){
 document.selection.submit();
 }
 </script>
+<br>
+	<a href = "OnlineMember.jsp" target = "_blank">玩家在線清單</a>
+<br>
 
 <% String sel = request.getParameter("select");%>
-
 <form name="selection" action="index.jsp" method="post"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
 <option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
@@ -77,7 +79,7 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
       <tr>  
          <td><%=map.get("roundUUID") %></td>  
          <td>
-	         <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>">
+	         <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
 	            <%=map.get("userID") %>
 	         </a>
  		 </td> 

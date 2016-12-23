@@ -28,22 +28,34 @@ List<Map<String, String>> list = data.getAllData(id);
 %>
 <table border="1" width="auto">
 	<tr>
-	   <th>玩家唯一碼</th>
-	   <th>年齡</th>
-	   <th>姓</th>
-	   <th>名</th>
+		<th>玩家唯一碼</th>
+	    <th>幣別代碼</th>
+	    <th>玩家登入帳號</th>
+	    <th>玩家登入密碼</th>
+	    <th>玩家暱稱</th>
+	    <th>玩家現有點數(BG)</th>
+	    <th>玩家狀態</th>
+	    <th>等同玩家狀態</th>
+	    <th>註冊類型</th>
+	    <th>帳號是否為管理者(0:不是, 1:是)</th>
 	</tr>
 	<%  
-	  Map<String, String> map=null;  
+	  Map<String, String> map = null;  
 	  for(int i = 0; i < list.size(); i++) {  
 	      map = (Map<String, String>)list.get(i);
 	%>
-      <tr> 
-         <td><%=map.get("id")%></td>
-         <td><%=map.get("age")%></td>
-         <td><%=map.get("first")%></td>
-         <td><%=map.get("last")%></td>
-      </tr>  
+    <tr>
+    	<td><%=map.get("userID")%></td>
+        <td><%=map.get("currency")%></td>
+        <td><%=map.get("loginID")%></td>
+        <td><%=map.get("passWord")%></td>
+        <td><%=map.get("nickName")%></td>
+        <td><%=map.get("balance")%></td>
+        <td><%=map.get("userStatus")%></td>
+        <td><%=map.get("status")%></td>
+        <td><%=map.get("regType")%></td>
+        <td><%=map.get("gm")%></td>
+    </tr>  
 	<%}%>  
 </table>
 

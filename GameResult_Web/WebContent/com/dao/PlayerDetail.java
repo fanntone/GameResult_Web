@@ -33,21 +33,27 @@ public class PlayerDetail {
 	public List<Map<String, String>> getAllData(int userID) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
-        String sql="select * from Employees where id = " + String.valueOf(userID);  
+        String sql="select * from member_Account where userID = " + String.valueOf(userID);  
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("id", rs.getString("id"));  
-                map.put("age",rs.getString("age"));
-                map.put("first", rs.getString("first"));
-                map.put("last", rs.getString("last"));  
+                map.put("userID", rs.getString("userID"));  
+                map.put("currency",rs.getString("currency"));
+                map.put("loginID", rs.getString("loginID"));
+                map.put("passWord", rs.getString("passWord"));
+                map.put("nickName", rs.getString("nickName"));  
+                map.put("balance",rs.getString("balance"));
+                map.put("userStatus", rs.getString("userStatus"));
+                map.put("status", rs.getString("status")); 
+                map.put("regType", rs.getString("regType"));
+                map.put("gm", rs.getString("gm")); 
                 list.add(map);
             }  
         } catch (SQLException e) {  
             e.printStackTrace();  
-        }  
+        }
         return list;
 	}
 }
