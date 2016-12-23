@@ -9,7 +9,7 @@
 
 <html>
 <head>	
-<title>SELECT Operation</title>
+<title>後端查詢首頁</title>
 </head>
 <body>
 
@@ -21,6 +21,10 @@ document.selection.submit();
 <br>
 	<a href = "OnlineMember.jsp" target = "_blank">玩家在線清單</a>
 <br>
+<br>
+	<a href = "AllGamesOnlinePlayers.jsp" target = "_blank">遊戲在線人數清單</a>
+<br>
+
 
 <% String sel = request.getParameter("select");%>
 <form name="selection" action="index.jsp" method="post"> 請選擇筆數

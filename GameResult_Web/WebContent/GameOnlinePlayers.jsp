@@ -5,12 +5,13 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.OnlineMember" %>
+<%@ page import="com.dao.GameOnlinePlayers" %>
+
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>玩家在線清單</title>
+<title>各遊戲在線玩家清單</title>
 </head>
 <body>
 
@@ -21,7 +22,7 @@ document.selection.submit();
 </script>
 
 <% String sel = request.getParameter("select");%>
-<form name="selection" action="OnlineMember.jsp" method="post"> 請選擇筆數
+<form name="selection" action="GameOnlinePlayers.jsp" method="post"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
 <option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
 <option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
@@ -33,12 +34,15 @@ document.selection.submit();
 <br>
 
 <%
+String parameter = "GameID=";
+String gameid = request.getQueryString().substring(parameter.length(), parameter.length()+ 4);
+
 int pageSize = 5;
 if(sel != null)
 	pageSize = Integer.parseInt(sel);
 
-OnlineMember data = new OnlineMember();
-int totalpages = data.getTotalPage(pageSize);
+GameOnlinePlayers data = new GameOnlinePlayers();
+int totalpages = data.getTotalPage(pageSize, gameid);
 
 String currentPage = request.getParameter("pageIndex");
 if(currentPage==null)  
@@ -51,7 +55,9 @@ if(pageIndex < 1){
     pageIndex = totalpages;  
 } 
 
-List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
+
+
+List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameid);
 %>
 
 <table border="1" width="auto">
@@ -68,16 +74,16 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
     <tr> 
        <td><%=map.get("userID")%></td>
        <td><%=map.get("blance")%></td>
-       <td><%=map.get("GameID")%></td>
+       <td><%=map.get("gameID")%></td>
     </tr>  
 	<%}%>
 </table>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
-<a href="OnlineMember.jsp?pageIndex=1">&nbsp;首頁</a>   
-<a href="OnlineMember.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
-<a href="OnlineMember.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
-<a href="OnlineMember.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=1">&nbsp;首頁</a>   
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=totalpages%>">&nbsp;末頁</a>
 
 </body>
 </html>
