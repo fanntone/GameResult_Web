@@ -33,14 +33,11 @@ public class AllGamesOnlinePlayers {
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();
         List<String> game_list = new ArrayList<String>();
-		game_list.add("1001");
-		game_list.add("1002");
-		game_list.add("1003");
-		game_list.add("1004");
-		game_list.add("1005");
-		game_list.add("1006");
+        for(EnumAllGamesList eu : EnumAllGamesList.values()) {
+        	game_list.add(eu.getValue());
+        }
 		
-		for(int i = 0; i < game_list.size(); i++) {  
+		for(int i = 1; i < game_list.size(); i++) {  
 		    Map<String, String> map=new HashMap<String, String>();
 		    String game_id = game_list.get(i);
 		    map.put("GameID", String.valueOf(game_id));
