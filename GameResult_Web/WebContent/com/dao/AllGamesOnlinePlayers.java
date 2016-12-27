@@ -16,11 +16,11 @@ public class AllGamesOnlinePlayers {
 	private ResultSet rs=null; 	
 	
 	private void openConn() {  
-	    String url="jdbc:mysql://10.36.1.102:3306/TEST";  
-	    String user="root";  
-	    String password="3edc2wsx!QAZ";  
+	    String url=CommonString.DB_URL;  
+	    String user=CommonString.DB_USER;  
+	    String password=CommonString.DB_PW;  
 	    try {  
-	        Class.forName("com.mysql.jdbc.Driver");  
+	        Class.forName(CommonString.DB_DRIVER);  
 	        conn=DriverManager.getConnection(url,user,password);  
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
