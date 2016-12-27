@@ -72,7 +72,11 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gamei
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr> 
-       <td><%=map.get("userID")%></td>
+       <td>
+           <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
+               <%=map.get("userID")%>
+           </a>
+       </td>
        <td><%=map.get("blance")%></td>
        <td><%=map.get("gameID")%></td>
     </tr>  

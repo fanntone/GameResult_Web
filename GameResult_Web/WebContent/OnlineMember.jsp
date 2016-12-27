@@ -68,7 +68,7 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
     <tr> 
        <td><%=map.get("userID")%></td>
        <td><%=map.get("blance")%></td>
-       <td><%=map.get("GameID")%></td>
+       <td><%=map.get("gameID")%></td>
     </tr>  
 	<%}%>
 </table>
