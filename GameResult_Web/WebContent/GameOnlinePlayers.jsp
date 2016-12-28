@@ -57,7 +57,7 @@ if(pageIndex < 1){
 
 
 
-List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameid);
+List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
 %>
 
 <table border="1" width="auto">

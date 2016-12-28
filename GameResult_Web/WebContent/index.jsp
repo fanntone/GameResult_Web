@@ -24,7 +24,9 @@ document.selection.submit();
 <br>
 	<a href = "AllGamesOnlinePlayers.jsp" target = "_blank">遊戲在線人數清單</a>
 <br>
-
+<br>
+	<a href = "OnlinePeopleCountsReport.jsp" target = "_blank">遊戲在線人數報表</a>
+<br>
 
 <% String sel = request.getParameter("select");%>
 <form name="selection" action="index.jsp" method="post"> 請選擇筆數

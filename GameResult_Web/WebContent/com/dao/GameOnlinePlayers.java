@@ -30,31 +30,34 @@ public class GameOnlinePlayers {
 	    }  
 	}
 	
-	public List<Map<String, String>> getAllempByPage(int pageSize,int pageIndex,String gameid) {  
+	public List<Map<String, String>> getAllByPage(int pageSize,int pageIndex,String gameid) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
-        openConn();
-        String dots = ",";
-        String sql = " select member_Login.userID,member_Account.balance,member_Login.gameID" +
-        			 " from member_Login, member_Account" +
-        			 " where member_Login.userID = member_Account.userID" + 
-        			 " and member_Login.gameID = " + 
-        			 gameid + 
-        			 " Limit "
-        			 + pageSize*(pageIndex-1) + dots +(pageSize);  
+        openConn();  
+        String sql="select * from resultsRecords";  
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("userID", rs.getString("member_Login.userID"));
-                map.put("blance", rs.getString("member_Account.balance"));
-                map.put("gameID",rs.getString("member_Login.gameID"));
-                list.add(map);
-            }
+                map.put("roundUUID", rs.getString("roundUUID"));  
+                map.put("userID",rs.getString("userID"));
+                map.put("gameID", rs.getString("gameID"));
+                map.put("betting", rs.getString("betting"));  
+                map.put("lines",rs.getString("lines"));
+                map.put("results", rs.getString("results"));
+                map.put("roundStatus", rs.getString("roundStatus"));  
+                map.put("prizeResults",rs.getString("prizeResults"));
+                map.put("beforeBalance", rs.getString("beforeBalance"));
+                map.put("afterBalance", rs.getString("afterBalance"));  
+                map.put("specialNumber",rs.getString("specialNumber"));
+                map.put("resultsDate", rs.getString("resultsDate"));
+                map.put("resultsParams", rs.getString("resultsParams"));
+                list.add(map);  
+            }  
         } catch (SQLException e) {  
             e.printStackTrace();  
         }  
-        return list;
+        return list;  
 	}
 	
     public int countRs(String gameid){  
