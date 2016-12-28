@@ -24,44 +24,69 @@ document.selection.submit();
 <% String sel = request.getParameter("select");%>
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post"> 請選擇遊戲ID
 <select name="select" size="ALL" id="select" onChange="change()">
-<option value="1001"<%if (sel == null || sel.equals("1001")) {%> selected <%}%>>1001</option>
-<option value="1002"<%if (sel != null && sel.equals("1002")) {%> selected <%}%>>1002</option>
-<option value="1003"<%if (sel != null && sel.equals("1003")) {%> selected <%}%>>1003</option> 
-<option value="1004"<%if (sel != null && sel.equals("1004")) {%> selected <%}%>>1004</option> 
-<option value="1005"<%if (sel != null && sel.equals("1005")) {%> selected <%}%>>1005</option> 
-<option value="1006"<%if (sel != null && sel.equals("1006")) {%> selected <%}%>>1006</option> 
+<option value="0"<%if (sel == null || sel.equals("0")) {%> selected <%}%>>ALL</option>
+<option value="1"<%if (sel != null && sel.equals("1")) {%> selected <%}%>>1001</option>
+<option value="2"<%if (sel != null && sel.equals("2")) {%> selected <%}%>>1002</option>
+<option value="3"<%if (sel != null && sel.equals("3")) {%> selected <%}%>>1003</option> 
+<option value="4"<%if (sel != null && sel.equals("4")) {%> selected <%}%>>1004</option> 
+<option value="5"<%if (sel != null && sel.equals("5")) {%> selected <%}%>>1005</option> 
+<option value="6"<%if (sel != null && sel.equals("6")) {%> selected <%}%>>1006</option> 
 </select> 
 </form>
 <br>
 <%
 OnlinePeopleCountsReport data = new OnlinePeopleCountsReport();
-List<Map<String, String>> list = data.getAllDataByPage();
+List<Map<String, String>> list = data.getAllData();
+int size = 0;
+if(sel == null)
+	size = list.size();
+else
+	size = Integer.parseInt(sel);
+
 %>
-<table border="1" width="100%">
+<table border="1">
 	<tr>
 	   <th>時間</th>
-	   <th>Game <%=EnumAllGamesList.GAME_1.getValue()%></th>
-	   <th>Game <%=EnumAllGamesList.GAME_2.getValue()%></th>
-	   <th>Game <%=EnumAllGamesList.GAME_3.getValue()%></th>
-	   <th>Game <%=EnumAllGamesList.GAME_4.getValue()%></th>
-	   <th>Game <%=EnumAllGamesList.GAME_5.getValue()%></th>
-	   <th>Game <%=EnumAllGamesList.GAME_6.getValue()%></th>
+	   <% if(size == 1 || sel == null || sel.equals("0")) {%>
+	   		<th>Game <%=EnumAllGamesList.GAME_1.getValue()%></th>
+	   <%}%>
+	   <% if(size == 2 || sel == null || sel.equals("0")) {%>
+	   		<th>Game <%=EnumAllGamesList.GAME_2.getValue()%></th>
+	   <%}%>
+	   <% if(size == 3 || sel == null || sel.equals("0")) {%>	
+	   		<th>Game <%=EnumAllGamesList.GAME_3.getValue()%></th>
+	   <%}%>
+	   <% if(size == 4 || sel == null || sel.equals("0")) {%>
+	   		<th>Game <%=EnumAllGamesList.GAME_4.getValue()%></th>
+	   <%}%>
+	   <% if(size == 5 || sel == null || sel.equals("0")) {%>
+	   		<th>Game <%=EnumAllGamesList.GAME_5.getValue()%></th>
+	   <%}%>
+	   <% if(size == 6 || sel == null || sel.equals("0")) {%>
+	   		<th>Game <%=EnumAllGamesList.GAME_6.getValue()%></th>
+	   <%}%>
 	</tr>
 	<%  
 	  Map<String, String> map=null;  
 	  for(int i = 0; i < list.size(); i++) {  
 	      map = (Map<String, String>)list.get(i);
 	%>
-      <tr>  
-         <td><%=map.get("time") %></td>  
-         <td><%=map.get("Game1")%></td>
-         <td><%=map.get("Game2")%></td>
-         <td><%=map.get("Game3")%></td>
-         <td><%=map.get("Game4")%></td>
-         <td><%=map.get("Game5")%></td>
-         <td><%=map.get("Game6")%></td>
-      </tr>  
-	<%}%>  
+    <tr>  
+       <td><%=map.get("time") %></td>
+       <% if(size ==1 || sel == null || sel.equals("0")){ %>
+       		<td><%=map.get("Game1")%></td><%}%>
+       <% if(size ==2 || sel == null || sel.equals("0")){ %>
+       		<td><%=map.get("Game2")%></td><%}%>
+       <% if(size ==3 || sel == null || sel.equals("0")){ %>
+       		<td><%=map.get("Game3")%></td><%}%>
+       <% if(size ==4 || sel == null || sel.equals("0")){ %>
+       		<td><%=map.get("Game4")%></td><%}%>
+       <% if(size ==5 || sel == null || sel.equals("0")){ %>
+       		<td><%=map.get("Game5")%></td><%}%>
+       <% if(size ==6 || sel == null || sel.equals("0")){ %>
+       		<td><%=map.get("Game6")%></td><%}%>
+    </tr>
+<%}%>  
 
 </table>
 

@@ -30,32 +30,32 @@ public class OnlinePeopleCountsReport {
 	    }  
 	}
 	
-	public List<Map<String, String>> getAllDataByPage() {  
+	public List<Map<String, String>> getAllData() {  
         List<Map<String, String>> list =new ArrayList<Map<String, String>>();
         openConn();
         String create1_1st = parser1("`Game_1`");
         String create1_2nd = parser2("`Game_1`");
-		String create1_3rd = parser3("`Game_1`", "1001");
+		String create1_3rd = parser3("`Game_1`", EnumAllGamesList.GAME_1.getValue());
 
         String create2_1st = parser1("`Game_2`");
         String create2_2nd = parser2("`Game_2`");
-		String create2_3rd = parser3("`Game_2`", "1002");
+		String create2_3rd = parser3("`Game_2`", EnumAllGamesList.GAME_2.getValue());
 		
         String create3_1st = parser1("`Game_3`");
         String create3_2nd = parser2("`Game_3`");
-		String create3_3rd = parser3("`Game_3`", "1003");
+		String create3_3rd = parser3("`Game_3`", EnumAllGamesList.GAME_3.getValue());
 		
         String create4_1st = parser1("`Game_4`");
         String create4_2nd = parser2("`Game_4`");
-		String create4_3rd = parser3("`Game_4`", "1004");
+		String create4_3rd = parser3("`Game_4`", EnumAllGamesList.GAME_4.getValue());
 		
         String create5_1st = parser1("`Game_5`");
         String create5_2nd = parser2("`Game_5`");
-		String create5_3rd = parser3("`Game_5`", "1005");
+		String create5_3rd = parser3("`Game_5`", EnumAllGamesList.GAME_5.getValue());
 		
         String create6_1st = parser1("`Game_6`");
         String create6_2nd = parser2("`Game_6`");
-		String create6_3rd = parser3("`Game_6`", "1006");
+		String create6_3rd = parser3("`Game_6`", EnumAllGamesList.GAME_6.getValue());
 		
 		String query_show = 
 			" SELECT Game_1.t_time, Game_1.t_count, Game_2.t_count, Game_3.t_count,"
@@ -124,7 +124,7 @@ public class OnlinePeopleCountsReport {
     
             while(rs.next()) {
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("time", rs.getString("Game_1.t_time").toString());  
+                map.put("time", rs.getString("Game_1.t_time"));
                 map.put("Game1",rs.getString("Game_1.t_count"));
                 map.put("Game2",rs.getString("Game_2.t_count"));
                 map.put("Game3",rs.getString("Game_3.t_count"));
