@@ -13,7 +13,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>各遊戲在線玩家清單</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
@@ -78,9 +77,9 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
-	   <th>玩家編號(useID)</th>
-	   <th>帳號餘額(Money)</th>
-	   <th>所在遊戲(Game)</th>
+	    <th>玩家編號(useID)</th>
+	    <th>帳號餘額(Money)</th>
+	    <th>所在遊戲(Game)</th>
 	</tr>
 	<%  
 	  Map<String, String> map=null;  
@@ -88,13 +87,13 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr> 
-       <th>
-           <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
+        <th>
+            <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
                <%=map.get("userID")%>
-           </a>
-       </th>
-       <th><%=map.get("balance")%></th>
-       <th><%=map.get("gameID")%></th>
+            </a>
+        </th>
+        <th><%=map.get("balance")%></th>
+        <th><%=map.get("gameID")%></th>
     </tr>  
 	<%}%>
 </table>

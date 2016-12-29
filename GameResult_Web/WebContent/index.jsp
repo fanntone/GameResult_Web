@@ -6,7 +6,6 @@
 <head>	
 <title>後端查詢首頁</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;

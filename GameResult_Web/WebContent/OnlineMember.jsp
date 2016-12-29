@@ -12,7 +12,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>玩家在線清單</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
@@ -72,9 +71,9 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
-	   <th>玩家編號(useID)</th>
-	   <th>帳號餘額(Money)</th>
-	   <th>所在遊戲(Game)</th>
+	    <th>玩家編號(useID)</th>
+	    <th>帳號餘額(Money)</th>
+	    <th>所在遊戲(Game)</th>
 	</tr>
 	<%
 	  Map<String, String> map=null;  

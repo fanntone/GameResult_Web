@@ -12,7 +12,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>賽果資訊</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
@@ -71,19 +70,19 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
-	   <th>局號 UUID</th>
-	   <th>玩家唯一碼</th>
-	   <th>遊戲編號</th>
-	   <th>下注點數</th>
-	   <th>下注線數</th>
-	   <th>輸贏點數</th>
-	   <th>特殊獎項狀態</th>
-	   <th>特殊獎金點數</th>
-	   <th>下注前  玩家持有點數</th>
-	   <th>下注前  玩家持有點數</th>
-	   <th>特殊局號 </th>
-	   <th>賽果建立時間</th>
-	   <th>詳細下注記錄 </th>
+	    <th>局號 UUID</th>
+	    <th>玩家唯一碼</th>
+	    <th>遊戲編號</th>
+	    <th>下注點數</th>
+	    <th>下注線數</th>
+	    <th>輸贏點數</th>
+	    <th>特殊獎項狀態</th>
+	    <th>特殊獎金點數</th>
+	    <th>下注前  玩家持有點數</th>
+	    <th>下注前  玩家持有點數</th>
+	    <th>特殊局號 </th>
+	    <th>賽果建立時間</th>
+	    <th>詳細下注記錄 </th>
 	</tr>
 	<%  
 	  Map<String, String> map=null;  
@@ -91,26 +90,25 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 	      map = (Map<String, String>)list.get(i);
 	%>
       <tr>  
-         <th><%=map.get("roundUUID") %></th>  
-         <th>
-	         <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
+          <th><%=map.get("roundUUID") %></th>  
+          <th>
+	          <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
 	            <%=map.get("userID") %>
-	         </a>
- 		 </th> 
-         <th><%=map.get("gameID")%></th>
-         <th><%=map.get("betting") %></th>  
-         <th><%=map.get("lines") %></th>  
-         <th><%=map.get("results")%></th>
-         <th><%=map.get("roundStatus") %></th>  
-         <th><%=map.get("prizeResults") %></th>  
-         <th><%=map.get("beforeBalance")%></th> 
-         <th><%=map.get("afterBalance") %></th>  
-         <th><%=map.get("specialNumber") %></th>  
-         <th><%=map.get("resultsDate")%></th>
-         <th><%=map.get("resultsParams")%></th> 
+	          </a>
+ 		  </th> 
+          <th><%=map.get("gameID")%></th>
+          <th><%=map.get("betting") %></th>  
+          <th><%=map.get("lines") %></th>  
+          <th><%=map.get("results")%></th>
+          <th><%=map.get("roundStatus") %></th>  
+          <th><%=map.get("prizeResults") %></th>  
+          <th><%=map.get("beforeBalance")%></th> 
+          <th><%=map.get("afterBalance") %></th>  
+          <th><%=map.get("specialNumber") %></th>  
+          <th><%=map.get("resultsDate")%></th>
+          <th><%=map.get("resultsParams")%></th> 
       </tr>  
-	<%}%>  
-
+	<%}%>
 </table>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
