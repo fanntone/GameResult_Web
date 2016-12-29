@@ -49,9 +49,9 @@ if(currentPage==null)
     currentPage="1";  
  
 int pageIndex = Integer.parseInt(currentPage);  
-if(pageIndex < 1){  
+if(pageIndex < 1) {  
     pageIndex = 1;  
-}else if(pageIndex > totalpages){  
+} else if(pageIndex > totalpages){  
     pageIndex = totalpages;  
 } 
 
@@ -60,7 +60,7 @@ if(pageIndex < 1){
 List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
 %>
 
-<table border="1" width="auto">
+<table style="text-align:center;" border="1" width="auto">
 	<tr>
 	   <th>ª±®a½s¸¹(useID)</th>
 	   <th>±b¸¹¾lÃB(Money)</th>

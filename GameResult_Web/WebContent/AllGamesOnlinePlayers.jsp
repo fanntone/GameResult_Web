@@ -20,7 +20,7 @@ List<Map<String, String>> list = data.getAllData();
 %>
 
 
-<table border="1" width="auto">
+<table style="text-align:center;" border="1" width="auto">
 	<tr>
 	   <th>遊戲(Game)</th>
 	   <th>遊戲人數(Online Players)</th>

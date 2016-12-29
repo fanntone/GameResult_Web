@@ -54,21 +54,24 @@ if(pageIndex < 1){
 List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 %>
 
-<table border="1" width="auto">
+<table style="text-align:center;" border="1" width="auto">
 	<tr>
 	   <th>玩家編號(useID)</th>
 	   <th>帳號餘額(Money)</th>
 	   <th>所在遊戲(Game)</th>
 	</tr>
-	<%  
+	<%
 	  Map<String, String> map=null;  
 	  for(int i = 0; i < list.size(); i++) {  
 	      map = (Map<String, String>)list.get(i);
 	%>
-    <tr> 
-       <td><%=map.get("userID")%></td>
-       <td><%=map.get("blance")%></td>
-       <td><%=map.get("gameID")%></td>
+    <tr>
+        <td>
+        	<a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
+               <%=map.get("userID")%>
+           	</a>
+        <td><%=map.get("blance")%></td>
+        <td><%=map.get("gameID")%></td>
     </tr>  
 	<%}%>
 </table>

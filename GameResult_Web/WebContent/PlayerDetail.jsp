@@ -26,7 +26,7 @@ if(id < 0)
 	id = 1;
 List<Map<String, String>> list = data.getAllData(id);
 %>
-<table border="1" width="auto">
+<table style="text-align:center;" border="1" width="auto">
 	<tr>
 		<th>玩家唯一碼</th>
 	    <th>幣別代碼</th>

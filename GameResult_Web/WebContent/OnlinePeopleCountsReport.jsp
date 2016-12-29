@@ -44,7 +44,7 @@ else
 	size = Integer.parseInt(sel);
 
 %>
-<table border="1">
+<table style="text-align:center;" border="1">
 	<tr>
 	   <th>®É¶¡</th>
 	   <% if(size == 1 || sel == null || sel.equals("0")) {%>
