@@ -33,25 +33,19 @@ public class GameOnlinePlayers {
 	public List<Map<String, String>> getAllByPage(int pageSize,int pageIndex,String gameid) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
-        String sql="select * from resultsRecords";  
+        String sql=" select *" +
+        		" from member_Login, member_Account" +
+   			 	" where member_Login.userID = member_Account.userID" + 
+   			 	" and member_Login.gameID = " +
+	   			 gameid; 
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("roundUUID", rs.getString("roundUUID"));  
                 map.put("userID",rs.getString("userID"));
                 map.put("gameID", rs.getString("gameID"));
-                map.put("betting", rs.getString("betting"));  
-                map.put("lines",rs.getString("lines"));
-                map.put("results", rs.getString("results"));
-                map.put("roundStatus", rs.getString("roundStatus"));  
-                map.put("prizeResults",rs.getString("prizeResults"));
-                map.put("beforeBalance", rs.getString("beforeBalance"));
-                map.put("afterBalance", rs.getString("afterBalance"));  
-                map.put("specialNumber",rs.getString("specialNumber"));
-                map.put("resultsDate", rs.getString("resultsDate"));
-                map.put("resultsParams", rs.getString("resultsParams"));
+                map.put("balance", rs.getString("balance"));  
                 list.add(map);  
             }  
         } catch (SQLException e) {  

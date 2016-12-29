@@ -77,16 +77,16 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
                <%=map.get("userID")%>
            </a>
        </td>
-       <td><%=map.get("blance")%></td>
+       <td><%=map.get("balance")%></td>
        <td><%=map.get("gameID")%></td>
     </tr>  
 	<%}%>
 </table>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
-<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=1">&nbsp;首頁</a>   
-<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
-<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=1">&nbsp;首頁</a> 
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a> 
+<a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a> 
 <a href="GameOnlinePlayers.jsp?GameID=<%=gameid%>&pageIndex=<%=totalpages%>">&nbsp;末頁</a>
 
 </body>
