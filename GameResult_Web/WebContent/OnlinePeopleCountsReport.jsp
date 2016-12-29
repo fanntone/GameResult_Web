@@ -11,6 +11,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<style>
+  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+</style>
 <title>在線人數查詢</title>
 <style>
 
@@ -49,6 +56,14 @@ document.selection.submit();
 <option value="6" <%if (sel != null && sel.equals("6")) {%> selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select> 
 </form>
+
+<input id="datepicker1" type="text" />
+<script language="JavaScript">
+  $(document).ready(function(){ 
+    $("#datepicker1").datepicker({appendText: "點一下顯示日曆", firstDay: 1});
+    });
+</script>
+
 <br>
 <%
 OnlinePeopleCountsReport data = new OnlinePeopleCountsReport();

@@ -45,8 +45,7 @@ document.selection.submit();
 <option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
 </select>
 </form>
-<br>
-  
+<br>  
 <%
 int pageSize = 5;
 if(sel != null)
