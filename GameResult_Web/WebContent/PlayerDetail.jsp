@@ -10,7 +10,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<title>會員資料</title>
+<style>
+
+table, td, th {
+    border: 3px solid #FFAC55;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
 </head>
 <body>
 
@@ -26,18 +42,18 @@ if(id < 0)
 	id = 1;
 List<Map<String, String>> list = data.getAllData(id);
 %>
-<table style="text-align:center;" border="1" width="auto">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
-		<th>玩家唯一碼</th>
-	    <th>幣別代碼</th>
-	    <th>玩家登入帳號</th>
-	    <th>玩家登入密碼</th>
-	    <th>玩家暱稱</th>
-	    <th>玩家現有點數(BG)</th>
-	    <th>玩家狀態</th>
-	    <th>等同玩家狀態</th>
-	    <th>註冊類型</th>
-	    <th>帳號是否為管理者(0:不是, 1:是)</th>
+		<th>玩家唯一碼</td>
+	    <th>幣別代碼</td>
+	    <th>玩家登入帳號</td>
+	    <th>玩家登入密碼</td>
+	    <th>玩家暱稱</td>
+	    <th>玩家現有點數(BG)</td>
+	    <th>玩家狀態</td>
+	    <th>等同玩家狀態</td>
+	    <th>註冊類型</td>
+	    <th>帳號是否為管理者(0:不是, 1:是)</td>
 	</tr>
 	<%  
 	  Map<String, String> map = null;  
@@ -45,16 +61,16 @@ List<Map<String, String>> list = data.getAllData(id);
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr>
-    	<td><%=map.get("userID")%></td>
-        <td><%=map.get("currency")%></td>
-        <td><%=map.get("loginID")%></td>
-        <td><%=map.get("passWord")%></td>
-        <td><%=map.get("nickName")%></td>
-        <td><%=map.get("balance")%></td>
-        <td><%=map.get("userStatus")%></td>
-        <td><%=map.get("status")%></td>
-        <td><%=map.get("regType")%></td>
-        <td><%=map.get("gm")%></td>
+    	<th><%=map.get("userID")%></th>
+        <th><%=map.get("currency")%></th>
+        <th><%=map.get("loginID")%></th>
+        <th><%=map.get("passWord")%></th>
+        <th><%=map.get("nickName")%></th>
+        <th><%=map.get("balance")%></th>
+        <th><%=map.get("userStatus")%></th>
+        <th><%=map.get("status")%></th>
+        <th><%=map.get("regType")%></th>
+        <th><%=map.get("gm")%></th>
     </tr>  
 	<%}%>  
 </table>

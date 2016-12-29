@@ -12,6 +12,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>在線人數查詢</title>
+<style>
+
+table, td, th {
+    border: 3px solid #FFAC55;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
 </head>
 <body>
 
@@ -24,13 +40,13 @@ document.selection.submit();
 <% String sel = request.getParameter("select");%>
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post"> 請選擇遊戲ID
 <select name="select" size="ALL" id="select" onChange="change()">
-<option value="0"<%if (sel == null || sel.equals("0")) {%> selected <%}%>>ALL</option>
-<option value="1"<%if (sel != null && sel.equals("1")) {%> selected <%}%>>1001</option>
-<option value="2"<%if (sel != null && sel.equals("2")) {%> selected <%}%>>1002</option>
-<option value="3"<%if (sel != null && sel.equals("3")) {%> selected <%}%>>1003</option> 
-<option value="4"<%if (sel != null && sel.equals("4")) {%> selected <%}%>>1004</option> 
-<option value="5"<%if (sel != null && sel.equals("5")) {%> selected <%}%>>1005</option> 
-<option value="6"<%if (sel != null && sel.equals("6")) {%> selected <%}%>>1006</option> 
+<option value="0" <%if (sel == null || sel.equals("0")) {%> selected <%}%>>ALL</option>
+<option value="1" <%if (sel != null && sel.equals("1")) {%> selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>
+<option value="2" <%if (sel != null && sel.equals("2")) {%> selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>
+<option value="3" <%if (sel != null && sel.equals("3")) {%> selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 
+<option value="4" <%if (sel != null && sel.equals("4")) {%> selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
+<option value="5" <%if (sel != null && sel.equals("5")) {%> selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
+<option value="6" <%if (sel != null && sel.equals("6")) {%> selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select> 
 </form>
 <br>
@@ -44,7 +60,7 @@ else
 	size = Integer.parseInt(sel);
 
 %>
-<table style="text-align:center;" border="1">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>時間</th>
 	   <% if(size == 1 || sel == null || sel.equals("0")) {%>
@@ -67,24 +83,24 @@ else
 	   <%}%>
 	</tr>
 	<%  
-	  Map<String, String> map=null;  
+	  Map<String, String> map = null;  
 	  for(int i = 0; i < list.size(); i++) {  
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr>  
-       <td><%=map.get("time") %></td>
-       <% if(size ==1 || sel == null || sel.equals("0")){ %>
-       		<td><%=map.get("Game1")%></td><%}%>
-       <% if(size ==2 || sel == null || sel.equals("0")){ %>
-       		<td><%=map.get("Game2")%></td><%}%>
-       <% if(size ==3 || sel == null || sel.equals("0")){ %>
-       		<td><%=map.get("Game3")%></td><%}%>
-       <% if(size ==4 || sel == null || sel.equals("0")){ %>
-       		<td><%=map.get("Game4")%></td><%}%>
-       <% if(size ==5 || sel == null || sel.equals("0")){ %>
-       		<td><%=map.get("Game5")%></td><%}%>
-       <% if(size ==6 || sel == null || sel.equals("0")){ %>
-       		<td><%=map.get("Game6")%></td><%}%>
+       <th><%=map.get("time") %></th>
+       <% if(size == 1 || sel == null || sel.equals("0")){ %>
+       		<th><%=map.get("Game1")%></th><%}%>
+       <% if(size == 2 || sel == null || sel.equals("0")){ %>
+       		<th><%=map.get("Game2")%></th><%}%>
+       <% if(size == 3 || sel == null || sel.equals("0")){ %>
+       		<th><%=map.get("Game3")%></th><%}%>
+       <% if(size == 4 || sel == null || sel.equals("0")){ %>
+       		<th><%=map.get("Game4")%></th><%}%>
+       <% if(size == 5 || sel == null || sel.equals("0")){ %>
+       		<th><%=map.get("Game5")%></th><%}%>
+       <% if(size == 6 || sel == null || sel.equals("0")){ %>
+       		<th><%=map.get("Game6")%></th><%}%>
     </tr>
 <%}%>  
 

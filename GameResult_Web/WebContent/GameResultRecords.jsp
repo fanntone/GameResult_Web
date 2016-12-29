@@ -10,7 +10,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<title>賽果資訊</title>
+<style>
+
+table, td, th {
+    border: 3px solid #FFAC55;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
 </head>
 <body>
 
@@ -53,7 +69,7 @@ if(pageIndex < 1){
 List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 %>
 
-<table style="text-align:center;" border="1" width="100%">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>局號 UUID</th>
 	   <th>玩家唯一碼</th>
@@ -75,23 +91,23 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 	      map = (Map<String, String>)list.get(i);
 	%>
       <tr>  
-         <td><%=map.get("roundUUID") %></td>  
-         <td>
+         <th><%=map.get("roundUUID") %></th>  
+         <th>
 	         <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
 	            <%=map.get("userID") %>
 	         </a>
- 		 </td> 
-         <td><%=map.get("gameID")%></td>
-         <td><%=map.get("betting") %></td>  
-         <td><%=map.get("lines") %></td>  
-         <td><%=map.get("results")%></td>
-         <td><%=map.get("roundStatus") %></td>  
-         <td><%=map.get("prizeResults") %></td>  
-         <td><%=map.get("beforeBalance")%></td> 
-         <td><%=map.get("afterBalance") %></td>  
-         <td><%=map.get("specialNumber") %></td>  
-         <td><%=map.get("resultsDate")%></td>
-         <td><%=map.get("resultsParams")%></td> 
+ 		 </th> 
+         <th><%=map.get("gameID")%></th>
+         <th><%=map.get("betting") %></th>  
+         <th><%=map.get("lines") %></th>  
+         <th><%=map.get("results")%></th>
+         <th><%=map.get("roundStatus") %></th>  
+         <th><%=map.get("prizeResults") %></th>  
+         <th><%=map.get("beforeBalance")%></th> 
+         <th><%=map.get("afterBalance") %></th>  
+         <th><%=map.get("specialNumber") %></th>  
+         <th><%=map.get("resultsDate")%></th>
+         <th><%=map.get("resultsParams")%></th> 
       </tr>  
 	<%}%>  
 

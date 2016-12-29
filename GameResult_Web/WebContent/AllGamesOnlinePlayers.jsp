@@ -11,6 +11,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>遊戲在線人數清單</title>
+<style>
+
+table, td, th {
+    border: 3px solid #FFAC55;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
 </head>
 <body>
 
@@ -20,7 +36,7 @@ List<Map<String, String>> list = data.getAllData();
 %>
 
 
-<table style="text-align:center;" border="1" width="auto">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>遊戲(Game)</th>
 	   <th>遊戲人數(Online Players)</th>
@@ -31,12 +47,12 @@ List<Map<String, String>> list = data.getAllData();
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr> 
-       <td><%=map.get("GameID")%></td>
-       <td>
+       <th><%=map.get("GameID")%></th>
+       <th>
 	       <a href="GameOnlinePlayers.jsp?GameID=<%=map.get("GameID")%>" target = "_blank">
 	       		<%=map.get("OnlinePlayers")%>
 	       </a>
-       </td>
+       </th>
     </tr>  
 	<%}%>
 </table>

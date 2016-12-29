@@ -11,6 +11,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>玩家在線清單</title>
+<style>
+
+table, td, th {
+    border: 3px solid #FFAC55;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
 </head>
 <body>
 
@@ -54,7 +70,7 @@ if(pageIndex < 1){
 List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 %>
 
-<table style="text-align:center;" border="1" width="auto">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>玩家編號(useID)</th>
 	   <th>帳號餘額(Money)</th>
@@ -66,12 +82,13 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr>
-        <td>
+        <th>
         	<a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
                <%=map.get("userID")%>
            	</a>
-        <td><%=map.get("blance")%></td>
-        <td><%=map.get("gameID")%></td>
+        </th>
+        <th><%=map.get("blance")%></th>
+        <th><%=map.get("gameID")%></th>
     </tr>  
 	<%}%>
 </table>
