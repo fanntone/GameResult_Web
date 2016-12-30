@@ -30,7 +30,7 @@ public class OnlinePeopleCountsReport {
 	    }  
 	}
 	
-	public List<Map<String, String>> getAllData() {  
+	public List<Map<String, String>> getAllData(String datetime) {  
         List<Map<String, String>> list =new ArrayList<Map<String, String>>();
         openConn();
         String create1_1st = parser1("`Game_1`");
@@ -66,6 +66,8 @@ public class OnlinePeopleCountsReport {
 			+" AND Game_1.t_time = Game_4.t_time"
 			+" AND Game_1.t_time = Game_5.t_time"
 			+" AND Game_1.t_time = Game_6.t_time"
+			+" AND Game_1.t_time BETWEEN " + "'" + datetime +" 00:00:00'"
+			+" AND " +  "'" + datetime +" 23:59:59'"
 			+" ORDER BY Game_1.t_time;";
 		
 		String remove_1 = parser1("`Game_1`");
@@ -123,7 +125,7 @@ public class OnlinePeopleCountsReport {
             rs =psmt.executeQuery(query_show);
     
             while(rs.next()) {
-                Map<String, String> map=new HashMap<String, String>();  
+                Map<String, String> map=new HashMap<String, String>();
                 map.put("time", rs.getString("Game_1.t_time"));
                 map.put("Game1",rs.getString("Game_1.t_count"));
                 map.put("Game2",rs.getString("Game_2.t_count"));

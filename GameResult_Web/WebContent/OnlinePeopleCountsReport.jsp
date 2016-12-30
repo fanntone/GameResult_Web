@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import = "com.dao.OnlinePeopleCountsReport" %>
 <%@ page import = "com.dao.EnumAllGamesList" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <html>
 <head>
@@ -42,9 +43,16 @@ th, td {
 function change(){
 document.selection.submit();
 }
+
+function test() {
+document.pickers.submit();
+}
 </script>
 
-<% String sel = request.getParameter("select");%>
+<% 
+	String sel = request.getParameter("select");
+%>
+
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post"> 請選擇遊戲ID
 <select name="select" size="ALL" id="select" onChange="change()">
 <option value="0" <%if (sel == null || sel.equals("0")) {%> selected <%}%>>ALL</option>
@@ -57,53 +65,79 @@ document.selection.submit();
 </select> 
 </form>
 
-<input id="datepicker1" type="text" />
+<br>
+<%
+String date = request.getParameter("datepicker1");
+if(date == null) {
+	java.util.Date c_date = new java.util.Date();
+	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
+	date = trans.format(c_date);
+}
+%>
+<form name="pickers" action="OnlinePeopleCountsReport.jsp" method="post">
+<input name = "datepicker1" id= "datepicker1" type= "text" value = <%=date%>>
+<input type="submit" value="Submit">
+
+</form>
 <script language="JavaScript">
   $(document).ready(function(){ 
-    $("#datepicker1").datepicker({appendText: "點一下顯示日曆", firstDay: 1});
-    });
+    $("#datepicker1").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+  });
 </script>
 
 <br>
 <%
 OnlinePeopleCountsReport data = new OnlinePeopleCountsReport();
-List<Map<String, String>> list = data.getAllData();
+List<Map<String, String>> list = data.getAllData(date);
 int size = 0;
 if(sel == null)
 	size = list.size();
 else
 	size = Integer.parseInt(sel);
-
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>時間</th>
-	   <% if(size == 1 || sel == null || sel.equals("0")) {%>
+	   <th>ALL</th>
+	   <% if(sel == null || sel.equals("0")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_1.getValue()%></th>
 	   <%}%>
-	   <% if(size == 2 || sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_2.getValue()%></th>
 	   <%}%>
-	   <% if(size == 3 || sel == null || sel.equals("0")) {%>	
+	   <% if(sel == null || sel.equals("0")) {%>	
 	   		<th>Game <%=EnumAllGamesList.GAME_3.getValue()%></th>
 	   <%}%>
-	   <% if(size == 4 || sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_4.getValue()%></th>
 	   <%}%>
-	   <% if(size == 5 || sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_5.getValue()%></th>
 	   <%}%>
-	   <% if(size == 6 || sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_6.getValue()%></th>
 	   <%}%>
 	</tr>
 	<%  
-	  Map<String, String> map = null;  
+	  Map<String, String> map = null;
 	  for(int i = 0; i < list.size(); i++) {  
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr>  
        <th><%=map.get("time") %></th>
+       <% if(sel == null || sel.equals("0")) { %>
+       		<th>
+       			<%
+       				int all = 0;
+       			 	all = Integer.parseInt(map.get("Game1"))
+       					+ Integer.parseInt(map.get("Game2"))
+       					+ Integer.parseInt(map.get("Game3"))
+       					+ Integer.parseInt(map.get("Game4"))
+       					+ Integer.parseInt(map.get("Game5"))
+       					+ Integer.parseInt(map.get("Game6"));%>
+       		    <%=all%>
+       		</th>
+       <%}%>
        <% if(size == 1 || sel == null || sel.equals("0")){ %>
        		<th><%=map.get("Game1")%></th><%}%>
        <% if(size == 2 || sel == null || sel.equals("0")){ %>
