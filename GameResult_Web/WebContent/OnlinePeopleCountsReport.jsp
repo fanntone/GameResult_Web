@@ -50,7 +50,13 @@ document.pickers.submit();
 </script>
 
 <% 
-	String sel = request.getParameter("select");
+String sel = request.getParameter("select");
+String date = request.getParameter("datepicker1");
+if(date == null) {
+	java.util.Date c_date = new java.util.Date();
+	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
+	date = trans.format(c_date);
+}
 %>
 
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post"> 請選擇遊戲ID
@@ -62,23 +68,13 @@ document.pickers.submit();
 <option value="4" <%if (sel != null && sel.equals("4")) {%> selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
 <option value="5" <%if (sel != null && sel.equals("5")) {%> selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
 <option value="6" <%if (sel != null && sel.equals("6")) {%> selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
-</select> 
+</select>
+
+<input name = "datepicker1" id= "datepicker1" type= "text" value = <%=date%>>
+<input type="submit" value="Submit">
 </form>
 
 <br>
-<%
-String date = request.getParameter("datepicker1");
-if(date == null) {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
-	date = trans.format(c_date);
-}
-%>
-<form name="pickers" action="OnlinePeopleCountsReport.jsp" method="post">
-<input name = "datepicker1" id= "datepicker1" type= "text" value = <%=date%>>
-<input type="submit" value="Submit">
-
-</form>
 <script language="JavaScript">
   $(document).ready(function(){ 
     $("#datepicker1").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
@@ -90,31 +86,35 @@ if(date == null) {
 OnlinePeopleCountsReport data = new OnlinePeopleCountsReport();
 List<Map<String, String>> list = data.getAllData(date);
 int size = 0;
-if(sel == null)
+if(sel == null) {
+	sel = "0";
 	size = list.size();
+}
 else
 	size = Integer.parseInt(sel);
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>時間</th>
-	   <th>ALL</th>
 	   <% if(sel == null || sel.equals("0")) {%>
+	   		<th>ALL</th>
+	   <%}%>
+	   <% if(sel == null || sel.equals("0") || sel.equals("1") ) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_1.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0") || sel.equals("2")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_2.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0")) {%>	
+	   <% if(sel == null || sel.equals("0") || sel.equals("3")) {%>	
 	   		<th>Game <%=EnumAllGamesList.GAME_3.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0") || sel.equals("4")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_4.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0") || sel.equals("5")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_5.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals("0") || sel.equals("6")) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_6.getValue()%></th>
 	   <%}%>
 	</tr>
@@ -151,8 +151,8 @@ else
        <% if(size == 6 || sel == null || sel.equals("0")){ %>
        		<th><%=map.get("Game6")%></th><%}%>
     </tr>
-<%}%>  
 
+<%}%>
 </table>
 
 </body>

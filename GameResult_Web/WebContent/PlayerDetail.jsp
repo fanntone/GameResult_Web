@@ -31,7 +31,6 @@ th, td {
 <body>
 
 <%
-
 String parameter = "userID=";
 String users = request.getQueryString().substring(parameter.length());
 PlayerDetail data = new PlayerDetail();
@@ -44,16 +43,16 @@ List<Map<String, String>> list = data.getAllData(id);
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
-		<th>玩家唯一碼</td>
-	    <th>幣別代碼</td>
-	    <th>玩家登入帳號</td>
-	    <th>玩家登入密碼</td>
-	    <th>玩家暱稱</td>
-	    <th>玩家現有點數(BG)</td>
-	    <th>玩家狀態</td>
-	    <th>等同玩家狀態</td>
-	    <th>註冊類型</td>
-	    <th>帳號是否為管理者(0:不是, 1:是)</td>
+		<th>玩家唯一碼</th>
+	    <th>幣別代碼</th>
+	    <th>玩家登入帳號</th>
+	    <th>玩家登入密碼</th>
+	    <th>玩家暱稱</th>
+	    <th>玩家現有點數(BG)</th>
+	    <th>玩家狀態</th>
+	    <th>等同玩家狀態</th>
+	    <th>註冊類型</th>
+	    <th>帳號是否為管理者(0:不是, 1:是)</th>
 	</tr>
 	<%  
 	  Map<String, String> map = null;  
