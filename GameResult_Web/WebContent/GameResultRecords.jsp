@@ -6,6 +6,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import = "com.dao.GameResultRecords" %>
+<%@ page import = "com.dao.GameResultJsonParser" %>
+<%@ page import = "com.alibaba.fastjson.JSON" %>
 
 <html>
 <head>
@@ -19,7 +21,6 @@ table, td, th {
 
 table {
     border-collapse: collapse;
-    width: auto;
 }
 
 th, td {
@@ -78,7 +79,7 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 	    <th>特殊獎項狀態</th>
 	    <th>特殊獎金點數</th>
 	    <th>下注前  玩家持有點數</th>
-	    <th>下注前  玩家持有點數</th>
+	    <th>下注後  玩家持有點數</th>
 	    <th>特殊局號 </th>
 	    <th>賽果建立時間</th>
 	    <th>詳細下注記錄 </th>
@@ -105,7 +106,18 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
           <th><%=map.get("afterBalance") %></th>  
           <th><%=map.get("specialNumber") %></th>  
           <th><%=map.get("resultsDate")%></th>
-          <th><%=map.get("resultsParams")%></th> 
+          <th>
+          <%
+          	String jsonstring = map.get("resultsParams");
+          	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
+          	for(int j = 0; j< 15 ; j++) {
+				String text = "<img src=\"images/"+ ps.slot1[j] + ".png\" />";
+				if((j+1)%5==0)
+					text += "<br>";
+				out.println(text);
+			}
+          %>
+          </th>      
       </tr>  
 	<%}%>
 </table>
