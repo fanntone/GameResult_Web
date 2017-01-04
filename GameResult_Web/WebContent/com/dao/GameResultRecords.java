@@ -29,12 +29,13 @@ public class GameResultRecords {
 	    }  
 	}  
 
-    public List<Map<String, String>> getAllRecordsByPage(int pageSize, int pageIndex, String userID, String datetime){  
+    public List<Map<String, String>> getAllRecordsByPage(int pageSize, int pageIndex, String userID, String datetime, String gameid){  
           List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
           String dots = ",";
           String sql = " select * from resultsRecords where userID = " + userID 
         		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
         		  	 + " AND " +  "'" + datetime +" 23:59:59'"
+        		  	 + " AND gameID = " + gameid
         		  	 + " order by roundUUID ASC Limit "
         		  	 + pageSize*(pageIndex-1) + dots +(pageSize);
            try {  
@@ -63,11 +64,12 @@ public class GameResultRecords {
         return list;  
     }  
 
-    public int countRs(String userID, String datetime){  
+    public int countRs(String userID, String datetime, String gameid){  
         int count = 0;  
         String sql = "select count(*) from resultsRecords where userID = " + userID
    		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
-   		  	 + " AND " +  "'" + datetime +" 23:59:59'";
+   		  	 + " AND " +  "'" + datetime +" 23:59:59'"
+   		  	 + " AND gameID = " + gameid;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -81,8 +83,8 @@ public class GameResultRecords {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize, String userID, String datetime) {  
-        int totalPage=countRs(userID, datetime);  
+    public int getTotalPage(int pageSize, String userID, String datetime, String gameid) {  
+        int totalPage=countRs(userID, datetime, gameid);  
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  
     }  
 }

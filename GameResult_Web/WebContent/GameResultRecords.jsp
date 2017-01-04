@@ -8,7 +8,8 @@
 <%@ page import = "com.dao.GameResultRecords" %>
 <%@ page import = "com.dao.GameResultJsonParser" %>
 <%@ page import = "com.alibaba.fastjson.JSON" %>
-<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import = "java.text.SimpleDateFormat"%>
+<%@ page import = "com.dao.EnumAllGamesList"%>
 
 <html>
 <head>
@@ -48,15 +49,21 @@ document.selection.submit();
 String sel = request.getParameter("select");
 if(sel == null)
 	sel = "5";
+
 String userid = request.getParameter("userid");
 if(userid == null)
 	userid = "0";
+
 String date = request.getParameter("datepicker1");
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
 	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
 	date = trans.format(c_date);
 }
+
+String gameid = request.getParameter("gameid");
+if(gameid == null)
+	gameid = EnumAllGamesList.GAME_1.getValue();
 %>
 <form name="selection" action="GameResultRecords.jsp" method="get"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
@@ -68,6 +75,7 @@ if(date == null) {
 </select><br>
 Date:<input name = "datepicker1" id= "datepicker1" type= "text" value = <%=date%>><br>
 UerID:<input name = "userid" id= "userid" type= "text" value = <%=userid%>>
+GameID:<input name = "gameid" id = "gameid" type= "text" value = <%=gameid%>>
 <input type="submit" value="送出查詢" >
 </form>
 <br>
@@ -83,7 +91,7 @@ int pageSize = 5;
 pageSize = Integer.parseInt(sel);
 
 GameResultRecords ed = new GameResultRecords();
-int totalPages = ed.getTotalPage(pageSize, userid, date);
+int totalPages = ed.getTotalPage(pageSize, userid, date, gameid);
 
 String currentPage = request.getParameter("pageIndex");
 if(currentPage==null)  
@@ -96,7 +104,7 @@ if(pageIndex < 1){
     pageIndex = totalPages;  
 }
 
-List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date);
+List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, gameid);
 %>
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
@@ -165,9 +173,9 @@ if(upPage < 1)
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=1">&nbsp;首頁</a>
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&gameid=<%=gameid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&gameid=<%=gameid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&gameid=<%=gameid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>
