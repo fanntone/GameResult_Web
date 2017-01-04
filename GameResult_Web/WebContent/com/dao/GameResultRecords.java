@@ -29,40 +29,11 @@ public class GameResultRecords {
 	    }  
 	}  
 
-    public List<Map<String, String>> getAllemp() {  
-        List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
-        openConn();  
-        String sql="select * from resultsRecords";  
-        try {  
-            psmt=conn.prepareStatement(sql);  
-            rs=psmt.executeQuery();  
-            while(rs.next()) {  
-                Map<String, String> map=new HashMap<String, String>();  
-                map.put("roundUUID", rs.getString("roundUUID"));  
-                map.put("userID",rs.getString("userID"));
-                map.put("gameID", rs.getString("gameID"));
-                map.put("betting", rs.getString("betting"));  
-                map.put("lines",rs.getString("lines"));
-                map.put("results", rs.getString("results"));
-                map.put("roundStatus", rs.getString("roundStatus"));  
-                map.put("prizeResults",rs.getString("prizeResults"));
-                map.put("beforeBalance", rs.getString("beforeBalance"));
-                map.put("afterBalance", rs.getString("afterBalance"));  
-                map.put("specialNumber",rs.getString("specialNumber"));
-                map.put("resultsDate", rs.getString("resultsDate"));
-                map.put("resultsParams", rs.getString("resultsParams"));
-                list.add(map);  
-            }  
-        } catch (SQLException e) {  
-            e.printStackTrace();  
-        }  
-        return list;  
-    }   
-
-    public List<Map<String, String>> getAllempByPage(int pageSize,int pageIndex){  
+    public List<Map<String, String>> getAllRecordsByPage(int pageSize, int pageIndex, String userID){  
           List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
           String dots = ",";
-          String sql= "select * from resultsRecords order by roundUUID ASC Limit "
+          String sql= " select * from resultsRecords where userID = " + userID 
+        		  	  + " order by roundUUID ASC Limit "
         		  	  + pageSize*(pageIndex-1) + dots +(pageSize);
            try {  
               psmt=conn.prepareStatement(sql);  
@@ -90,9 +61,9 @@ public class GameResultRecords {
         return list;  
     }  
 
-    public int countRs(){  
+    public int countRs(String userID){  
         int count = 0;  
-        String sql = "select count(*) from resultsRecords";  
+        String sql = "select count(*) from resultsRecords where userID = " + userID;  
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -106,8 +77,8 @@ public class GameResultRecords {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize) {  
-        int totalPage=countRs();  
+    public int getTotalPage(int pageSize, String userID) {  
+        int totalPage=countRs(userID);  
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  
     }  
 }

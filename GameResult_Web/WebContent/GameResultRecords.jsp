@@ -36,24 +36,32 @@ document.selection.submit();
 }
 </script>
 
-<% String sel = request.getParameter("select");%>
+<% 
+String sel = request.getParameter("select");
+if(sel == null)
+	sel = "5";
+String userid = request.getParameter("userid");
+if(userid == null)
+	userid = "0";
+%>
 <form name="selection" action="GameResultRecords.jsp" method="post"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
 <option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
 <option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
 <option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
 <option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
-<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
+<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option>
 </select>
+<input name = "userid" id= "userid" type= "text" value = <%=userid%>>
+<input type="submit" value="Submit">
 </form>
 <br>  
 <%
 int pageSize = 5;
-if(sel != null)
-	pageSize = Integer.parseInt(sel);
+pageSize = Integer.parseInt(sel);
 
 GameResultRecords ed = new GameResultRecords();
-int totalpages = ed.getTotalPage(pageSize);
+int totalPages = ed.getTotalPage(pageSize, userid);
 
 String currentPage = request.getParameter("pageIndex");
 if(currentPage==null)  
@@ -62,10 +70,11 @@ if(currentPage==null)
 int pageIndex = Integer.parseInt(currentPage);  
 if(pageIndex < 1){  
     pageIndex = 1;  
-}else if(pageIndex > totalpages){  
-    pageIndex = totalpages;  
-}  
-List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
+}else if(pageIndex > totalPages){  
+    pageIndex = totalPages;  
+}
+
+List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid);
 %>
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
@@ -122,11 +131,21 @@ List<Map<String, String>> list = ed.getAllempByPage(pageSize,pageIndex);
 	<%}%>
 </table>
 
-<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
-<a href="GameResultRecords.jsp?pageIndex=1">&nbsp;首頁</a>   
-<a href="GameResultRecords.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
-<a href="GameResultRecords.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
-<a href="GameResultRecords.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>
+<%
+int nextPage = pageIndex + 1;
+if(nextPage > totalPages)
+	nextPage = totalPages;
+
+int upPage = pageIndex - 1;
+if(upPage < 1)
+	upPage = 1;
+%>
+
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=1">&nbsp;首頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>

@@ -53,7 +53,7 @@ if(sel != null)
 	pageSize = Integer.parseInt(sel);
 
 OnlineMember data = new OnlineMember();
-int totalpages = data.getTotalPage(pageSize);
+int totalPages = data.getTotalPage(pageSize);
 
 String currentPage = request.getParameter("pageIndex");
 if(currentPage==null)  
@@ -62,8 +62,8 @@ if(currentPage==null)
 int pageIndex = Integer.parseInt(currentPage);  
 if(pageIndex < 1){  
     pageIndex = 1;  
-}else if(pageIndex > totalpages){  
-    pageIndex = totalpages;  
+}else if(pageIndex > totalPages){  
+    pageIndex = totalPages;  
 } 
 
 List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
@@ -92,11 +92,21 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 	<%}%>
 </table>
 
-<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalpages%>
-<a href="OnlineMember.jsp?pageIndex=1">&nbsp;首頁</a>   
-<a href="OnlineMember.jsp?pageIndex=<%=pageIndex-1 %>">&nbsp;上一頁</a>  
-<a href="OnlineMember.jsp?pageIndex=<%=pageIndex+1 %>">&nbsp;下一頁</a>  
-<a href="OnlineMember.jsp?pageIndex=<%=totalpages%>">&nbsp;末頁</a>
+<%
+int nextPage = pageIndex + 1;
+if(nextPage > totalPages)
+	nextPage = totalPages;
+
+int upPage = pageIndex - 1;
+if(upPage < 1)
+	upPage = 1;
+%>
+
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="GameResultRecords.jsp?pageIndex=1">&nbsp;首頁</a>
+<a href="GameResultRecords.jsp?pageIndex=<%=upPage %>">&nbsp;上一頁</a>  
+<a href="GameResultRecords.jsp?pageIndex=<%=nextPage %>">&nbsp;下一頁</a>
+<a href="GameResultRecords.jsp?pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>
