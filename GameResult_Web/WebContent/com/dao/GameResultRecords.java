@@ -29,12 +29,14 @@ public class GameResultRecords {
 	    }  
 	}  
 
-    public List<Map<String, String>> getAllRecordsByPage(int pageSize, int pageIndex, String userID){  
+    public List<Map<String, String>> getAllRecordsByPage(int pageSize, int pageIndex, String userID, String datetime){  
           List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
           String dots = ",";
-          String sql= " select * from resultsRecords where userID = " + userID 
-        		  	  + " order by roundUUID ASC Limit "
-        		  	  + pageSize*(pageIndex-1) + dots +(pageSize);
+          String sql = " select * from resultsRecords where userID = " + userID 
+        		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
+        		  	 + " AND " +  "'" + datetime +" 23:59:59'"
+        		  	 + " order by roundUUID ASC Limit "
+        		  	 + pageSize*(pageIndex-1) + dots +(pageSize);
            try {  
               psmt=conn.prepareStatement(sql);  
               rs=psmt.executeQuery();  
@@ -61,9 +63,11 @@ public class GameResultRecords {
         return list;  
     }  
 
-    public int countRs(String userID){  
+    public int countRs(String userID, String datetime){  
         int count = 0;  
-        String sql = "select count(*) from resultsRecords where userID = " + userID;  
+        String sql = "select count(*) from resultsRecords where userID = " + userID
+   		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
+   		  	 + " AND " +  "'" + datetime +" 23:59:59'";
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -77,8 +81,8 @@ public class GameResultRecords {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize, String userID) {  
-        int totalPage=countRs(userID);  
+    public int getTotalPage(int pageSize, String userID, String datetime) {  
+        int totalPage=countRs(userID, datetime);  
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  
     }  
 }

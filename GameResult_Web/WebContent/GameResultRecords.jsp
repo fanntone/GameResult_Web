@@ -8,10 +8,18 @@
 <%@ page import = "com.dao.GameResultRecords" %>
 <%@ page import = "com.dao.GameResultJsonParser" %>
 <%@ page import = "com.alibaba.fastjson.JSON" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<style>
+  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+</style>
 <title>賽果資訊</title>
 <style>
 table, td, th {
@@ -43,25 +51,39 @@ if(sel == null)
 String userid = request.getParameter("userid");
 if(userid == null)
 	userid = "0";
+String date = request.getParameter("datepicker1");
+if(date == null) {
+	java.util.Date c_date = new java.util.Date();
+	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
+	date = trans.format(c_date);
+}
 %>
-<form name="selection" action="GameResultRecords.jsp" method="post"> 請選擇筆數
+<form name="selection" action="GameResultRecords.jsp" method="get"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
 <option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
 <option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
 <option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
 <option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
 <option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option>
-</select>
-<input name = "userid" id= "userid" type= "text" value = <%=userid%>>
-<input type="submit" value="Submit">
+</select><br>
+Date:<input name = "datepicker1" id= "datepicker1" type= "text" value = <%=date%>><br>
+UerID:<input name = "userid" id= "userid" type= "text" value = <%=userid%>>
+<input type="submit" value="送出查詢" >
 </form>
-<br>  
+<br>
+
+<script language="JavaScript">
+  $(document).ready(function(){ 
+    $("#datepicker1").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+  });
+</script>
+
 <%
 int pageSize = 5;
 pageSize = Integer.parseInt(sel);
 
 GameResultRecords ed = new GameResultRecords();
-int totalPages = ed.getTotalPage(pageSize, userid);
+int totalPages = ed.getTotalPage(pageSize, userid, date);
 
 String currentPage = request.getParameter("pageIndex");
 if(currentPage==null)  
@@ -74,7 +96,7 @@ if(pageIndex < 1){
     pageIndex = totalPages;  
 }
 
-List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid);
+List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date);
 %>
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
@@ -142,10 +164,10 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=1">&nbsp;首頁</a>
-<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
-<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
-<a href="GameResultRecords.jsp?select=<%=sel%>&userid=<%=userid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=1">&nbsp;首頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>
