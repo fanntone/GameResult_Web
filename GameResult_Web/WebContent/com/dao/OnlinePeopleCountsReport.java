@@ -180,4 +180,42 @@ public class OnlinePeopleCountsReport {
     	return sql;
     }
     
+    public String getMaxGamePeopleByGameID(String gameID, String datetime) {
+        int max = 0;  
+        String sql = " select MAX(count) from online_People_Report where GameID = " + gameID
+        		+" AND time BETWEEN " + "'" + datetime +" 00:00:00'"
+    			+" AND " +  "'" + datetime +" 23:59:59'";
+        openConn();  
+        try {  
+            psmt=conn.prepareStatement(sql);  
+            rs=psmt.executeQuery();  
+            while(rs.next()){
+                max=rs.getInt(1);
+            }  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }   
+
+    	return String.valueOf(max);
+    }
+    
+    public String getAvgGamePeopleByGameID(String gameID, String datetime) {
+        float avg = 0;  
+        String sql = " select AVG(count) from online_People_Report where GameID = " + gameID
+        		+" AND time BETWEEN " + "'" + datetime +" 00:00:00'"
+    			+" AND " +  "'" + datetime +" 23:59:59'";
+        openConn();  
+        try {  
+            psmt=conn.prepareStatement(sql);  
+            rs=psmt.executeQuery();  
+            while(rs.next()){
+                avg=rs.getFloat(1);
+            }  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }   
+
+    	return String.valueOf(avg);
+    }
+    
 }
