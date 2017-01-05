@@ -79,12 +79,14 @@ public class GameResultRecords {
             }  
         } catch (SQLException e) {  
             e.printStackTrace();  
-        }  
+        }
         return count;  
     }  
 
     public int getTotalPage(int pageSize, String userID, String datetime, String gameid) {  
-        int totalPage=countRs(userID, datetime, gameid);  
-        return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  
+        int totalPage=countRs(userID, datetime, gameid);
+        if(pageSize> totalPage)
+        	return 1;
+        return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);
     }  
 }

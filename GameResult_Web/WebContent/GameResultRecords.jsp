@@ -52,7 +52,7 @@ if(sel == null)
 
 String userid = request.getParameter("userid");
 if(userid == null)
-	userid = "0";
+	userid = "1001001";
 
 String date = request.getParameter("datepicker1");
 if(date == null) {
