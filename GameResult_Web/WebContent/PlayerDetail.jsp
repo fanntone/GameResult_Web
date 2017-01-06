@@ -2,11 +2,11 @@
     pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.PlayerDetail" %>
-
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="com.dao.PlayerDetail"%>
+<%@ page import="com.dao.CommonString"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -31,11 +31,10 @@ th, td {
 <body>
 
 <%
-String parameter = "userID=";
-String users = request.getQueryString().substring(parameter.length());
+String users = request.getParameter(CommonString.PAREMETER_USERID);
 PlayerDetail data = new PlayerDetail();
 if(users == null)
-	users = "1";
+	users = "1001001";
 int id = Integer.parseInt(users);
 if(id < 0)
 	id = 1;

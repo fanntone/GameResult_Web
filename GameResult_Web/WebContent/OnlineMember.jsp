@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import="com.dao.OnlineMember" %>
+<%@ page import="com.dao.CommonString" %>
 
 <html>
 <head>
@@ -82,7 +83,7 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
 	%>
     <tr>
         <th>
-        	<a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
+        	<a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
                <%=map.get("userID")%>
            	</a>
         </th>
@@ -103,10 +104,10 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="OnlineMember.jsp?pageIndex=1">&nbsp;首頁</a>
-<a href="OnlineMember.jsp?pageIndex=<%=upPage %>">&nbsp;上一頁</a>  
-<a href="OnlineMember.jsp?pageIndex=<%=nextPage %>">&nbsp;下一頁</a>
-<a href="OnlineMember.jsp?pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>

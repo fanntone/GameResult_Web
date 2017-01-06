@@ -3,13 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="com.dao.GameResultRecords" %>
+<%@ page import="com.dao.GameResultJsonParser" %>
+<%@ page import="com.alibaba.fastjson.JSON" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.dao.EnumAllGamesList"%>
+<%@ page import="com.dao.CommonString"%>
+<%@ page import="com.dao.EnumSelectionList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import = "com.dao.GameResultRecords" %>
-<%@ page import = "com.dao.GameResultJsonParser" %>
-<%@ page import = "com.alibaba.fastjson.JSON" %>
-<%@ page import = "java.text.SimpleDateFormat"%>
-<%@ page import = "com.dao.EnumAllGamesList"%>
 
 <html>
 <head>
@@ -46,34 +48,45 @@ document.selection.submit();
 </script>
 
 <% 
-String sel = request.getParameter("select");
+String sel = request.getParameter(CommonString.PARAMETER_SELECT);
 if(sel == null)
 	sel = "5";
 
-String userid = request.getParameter("userid");
+String userid = request.getParameter(CommonString.PAREMETER_USERID);
 if(userid == null)
 	userid = "1001001";
 
-String date = request.getParameter("datepicker1");
+String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
 	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
 	date = trans.format(c_date);
 }
 
-String gameid = request.getParameter("gameid");
+String gameid = request.getParameter(CommonString.PARAMETER_GAMEID);
 if(gameid == null)
 	gameid = EnumAllGamesList.GAME_1.getValue();
 %>
 <form name="selection" action="GameResultRecords.jsp" method="get"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
-<option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
-<option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
-<option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
-<option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
-<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option>
-</select><br>
-Date:<input name = "datepicker1" id= "datepicker1" type= "text" value = <%=date%>><br>
+<option value=<%=EnumSelectionList.SELECT_5.getValue()%>
+	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_10.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_10.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_10.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_25.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_25.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_25.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_50.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_50.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_50.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_100.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_100.getValue())){%>
+		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
+</select>
+<br>
+Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 UerID:<input name = "userid" id= "userid" type= "text" value = <%=userid%>>
 GameID:<input name = "gameid" id = "gameid" type= "text" value = <%=gameid%>>
 <input type="submit" value="送出查詢" >
@@ -82,7 +95,7 @@ GameID:<input name = "gameid" id = "gameid" type= "text" value = <%=gameid%>>
 
 <script language="JavaScript">
   $(document).ready(function(){ 
-    $("#datepicker1").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
   });
 </script>
 
@@ -172,10 +185,22 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&pageIndex=1">&nbsp;首頁</a>
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&gameid=<%=gameid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&gameid=<%=gameid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
-<a href="GameResultRecords.jsp?select=<%=sel%>&datepicker1=<%=date%>&userid=<%=userid%>&gameid=<%=gameid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=1">&nbsp;首頁</a>
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>

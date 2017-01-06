@@ -2,10 +2,13 @@
     pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ page import="com.dao.GameOnlinePlayers" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="com.dao.GameOnlinePlayers"%>
+<%@ page import="com.dao.EnumAllGamesList"%>
+<%@ page import="com.dao.CommonString"%>
+<%@ page import="com.dao.EnumSelectionList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <html>
 <head>
@@ -35,23 +38,32 @@ document.selection.submit();
 }
 </script>
 
-<% String sel = request.getParameter("select");%>
+<%String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
 <form name="selection" action="GameOnlinePlayers.jsp" method="post"> 請選擇筆數
 <select name="select" size="1" id="select" onChange="change()">
-<option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
-<option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
-<option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
-<option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
-<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
+<option value=<%=EnumSelectionList.SELECT_5.getValue()%>
+	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_10.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_10.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_10.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_25.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_25.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_25.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_50.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_50.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_50.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_100.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_100.getValue())){%>
+		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 </form>
 <br>
 
 <%
-String parameter = "gameID=";
-String gameid = request.getParameter("gameID");
+String gameid = request.getParameter(CommonString.PARAMETER_GAMEID);
 if(gameid == null)
-	gameid = "1001";
+	gameid = EnumAllGamesList.GAME_1.getValue();
 
 int pageSize = 5;
 if(sel != null)
@@ -60,7 +72,7 @@ if(sel != null)
 GameOnlinePlayers data = new GameOnlinePlayers();
 int totalPages = data.getTotalPage(pageSize, gameid);
 
-String currentPage = request.getParameter("pageIndex");
+String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 if(currentPage==null)  
     currentPage="1";  
  
@@ -89,7 +101,7 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
 	%>
     <tr> 
         <th>
-            <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
+            <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
                <%=map.get("userID")%>
             </a>
         </th>
@@ -110,10 +122,10 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameOnlinePlayers.jsp?pageIndex=1&gameID=<%=gameid%>">&nbsp;首頁</a>
-<a href="GameOnlinePlayers.jsp?pageIndex=<%=upPage %>&gameID=<%=gameid%>">&nbsp;上一頁</a>  
-<a href="GameOnlinePlayers.jsp?pageIndex=<%=nextPage %>&gameID=<%=gameid%>">&nbsp;下一頁</a>
-<a href="GameOnlinePlayers.jsp?pageIndex=<%=totalPages%>&gameID=<%=gameid%>">&nbsp;末頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;首頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;上一頁</a>  
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;下一頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;末頁</a>
 
 </body>
 </html>

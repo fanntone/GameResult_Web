@@ -2,12 +2,13 @@
     pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import = "com.dao.OnlinePeopleCountsReport" %>
-<%@ page import = "com.dao.EnumAllGamesList" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import = "com.dao.OnlinePeopleCountsReport"%>
+<%@ page import = "com.dao.EnumAllGamesList"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.dao.CommonString"%>
 
 <html>
 <head>
@@ -43,8 +44,8 @@ document.selection.submit();
 }
 </script>
 <% 
-String sel = request.getParameter("select");
-String date = request.getParameter("date");
+String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
 	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
@@ -156,34 +157,34 @@ else
    		<% if(sel == null || sel.equals("0")){ %>
         <th><%=max_all%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getMaxGamePeopleByGameID("1001", date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date)%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getMaxGamePeopleByGameID("1002", date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date)%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getMaxGamePeopleByGameID("1003", date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date)%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getMaxGamePeopleByGameID("1004", date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date)%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getMaxGamePeopleByGameID("1005", date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date)%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getMaxGamePeopleByGameID("1006", date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date)%></th><%}%>
     </tr>
     <tr>
 	 	<th>AVG</th>
    		<% if(sel == null || sel.equals("0")){ %>
         <th><%=avg%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getAvgGamePeopleByGameID("1002", date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date)%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getAvgGamePeopleByGameID("1002", date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date)%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getAvgGamePeopleByGameID("1003", date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date)%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getAvgGamePeopleByGameID("1004", date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date)%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getAvgGamePeopleByGameID("1005", date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date)%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals("0")){ %>
-   		<th><%=data.getAvgGamePeopleByGameID("1006", date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date)%></th><%}%>
 	</tr>
     <%}%>
 <%}%>

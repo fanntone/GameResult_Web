@@ -2,8 +2,9 @@
     pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ page import="com.dao.AllGamesOnlinePlayers" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="com.dao.AllGamesOnlinePlayers"%>
+<%@ page import="com.dao.CommonString"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 
@@ -48,10 +49,10 @@ List<Map<String, String>> list = data.getAllData();
     <tr> 
        	<th><%=map.get("GameID")%></th>
        	<th>
-	       	<a href="GameOnlinePlayers.jsp?gameID=<%=map.get("GameID")%>" target = "_blank">
-	       		<%=map.get("OnlinePlayers")%>
+	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=map.get(CommonString.PARAMETER_GAMEID)%>" target = "_blank">
+	       	<%=map.get("OnlinePlayers")%>
 	       	</a>
-       </th>
+	    </th>
     </tr>  
 	<%}%>
 </table>
