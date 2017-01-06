@@ -207,11 +207,11 @@ public class OnlinePeopleCountsReport {
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
-            rs=psmt.executeQuery();  
+            rs=psmt.executeQuery();
             while(rs.next()){
                 avg=rs.getFloat(1);
             }  
-        } catch (SQLException e) {  
+        } catch (SQLException e) {
             e.printStackTrace();  
         }   
 

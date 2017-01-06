@@ -103,10 +103,10 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameResultRecords.jsp?pageIndex=1">&nbsp;首頁</a>
-<a href="GameResultRecords.jsp?pageIndex=<%=upPage %>">&nbsp;上一頁</a>  
-<a href="GameResultRecords.jsp?pageIndex=<%=nextPage %>">&nbsp;下一頁</a>
-<a href="GameResultRecords.jsp?pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+<a href="OnlineMember.jsp?pageIndex=1">&nbsp;首頁</a>
+<a href="OnlineMember.jsp?pageIndex=<%=upPage %>">&nbsp;上一頁</a>  
+<a href="OnlineMember.jsp?pageIndex=<%=nextPage %>">&nbsp;下一頁</a>
+<a href="OnlineMember.jsp?pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>
