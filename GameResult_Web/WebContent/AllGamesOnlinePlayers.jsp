@@ -49,7 +49,7 @@ List<Map<String, String>> list = data.getAllData();
     <tr> 
        	<th><%=map.get("GameID")%></th>
        	<th>
-	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=map.get(CommonString.PARAMETER_GAMEID)%>" target = "_blank">
+	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
 	       	<%=map.get("OnlinePlayers")%>
 	       	</a>
 	    </th>

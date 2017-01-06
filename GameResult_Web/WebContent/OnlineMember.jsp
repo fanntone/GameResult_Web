@@ -2,11 +2,12 @@
     pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.OnlineMember" %>
-<%@ page import="com.dao.CommonString" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="com.dao.OnlineMember"%>
+<%@ page import="com.dao.CommonString"%>
+<%@ page import="com.dao.EnumSelectionList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <html>
 <head>
@@ -36,14 +37,24 @@ document.selection.submit();
 }
 </script>
 
-<% String sel = request.getParameter("select");%>
+<% String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
 <form name="selection" action="OnlineMember.jsp" method="post"> ½Ð¿ï¾Üµ§¼Æ
 <select name="select" size="1" id="select" onChange="change()">
-<option value="5"  <%if (sel == null || sel.equals("5"))  {%> selected <%}%>>5</option>
-<option value="10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
-<option value="25" <%if (sel != null && sel.equals("25")) {%> selected <%}%>>25</option> 
-<option value="50" <%if (sel != null && sel.equals("50")) {%> selected <%}%>>50</option> 
-<option value="100"<%if (sel != null && sel.equals("100")){%> selected <%}%>>100</option> 
+<option value=<%=EnumSelectionList.SELECT_5.getValue()%>
+	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_10.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_10.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_10.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_25.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_25.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_25.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_50.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_50.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_50.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_100.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_100.getValue())){%>
+		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 </form>
 <br>
@@ -56,7 +67,7 @@ if(sel != null)
 OnlineMember data = new OnlineMember();
 int totalPages = data.getTotalPage(pageSize);
 
-String currentPage = request.getParameter("pageIndex");
+String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 if(currentPage==null)  
     currentPage="1";  
  

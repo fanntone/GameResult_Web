@@ -5,11 +5,11 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<%@ page import = "com.dao.OnlinePeopleCountsReport"%>
-<%@ page import = "com.dao.EnumAllGamesList"%>
+<%@ page import="com.dao.OnlinePeopleCountsReport"%>
+<%@ page import="com.dao.EnumAllGamesList"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.CommonString"%>
-
+<%@ page import="com.dao.EnumSelectionList"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -54,13 +54,27 @@ if(date == null) {
 %>
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post">請選擇遊戲:&nbsp;
 <select name="select" size="ALL" id="select" onChange="change()">
-<option value="0" <%if (sel == null || sel.equals("0")) {%> selected <%}%>>ALL</option>
-<option value="1" <%if (sel != null && sel.equals("1")) {%> selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>
-<option value="2" <%if (sel != null && sel.equals("2")) {%> selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>
-<option value="3" <%if (sel != null && sel.equals("3")) {%> selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 
-<option value="4" <%if (sel != null && sel.equals("4")) {%> selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
-<option value="5" <%if (sel != null && sel.equals("5")) {%> selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
-<option value="6" <%if (sel != null && sel.equals("6")) {%> selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_0.getValue()%>
+	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())) {%>
+		selected <%}%>>ALL</option>
+<option value=<%=EnumSelectionList.SELECT_1.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_1.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_2.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_2.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_3.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_3.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_4.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_4.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_5.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_5.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_6.getValue()%>
+	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_6.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select>
 <br>
 點一下顯示日曆:&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>>
@@ -87,25 +101,25 @@ else
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	   <th>時間</th>
-	   <% if(sel == null || sel.equals("0")) {%>
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())) {%>
 	   		<th>ALL</th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0") || sel.equals("1") ) {%>
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue()) || sel.equals(EnumSelectionList.SELECT_1.getValue())) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_1.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0") || sel.equals("2")) {%>
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue()) || sel.equals(EnumSelectionList.SELECT_2.getValue())) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_2.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0") || sel.equals("3")) {%>	
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue()) || sel.equals(EnumSelectionList.SELECT_3.getValue())) {%>	
 	   		<th>Game <%=EnumAllGamesList.GAME_3.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0") || sel.equals("4")) {%>
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue()) || sel.equals(EnumSelectionList.SELECT_4.getValue())) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_4.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0") || sel.equals("5")) {%>
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue()) || sel.equals(EnumSelectionList.SELECT_5.getValue())) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_5.getValue()%></th>
 	   <%}%>
-	   <% if(sel == null || sel.equals("0") || sel.equals("6")) {%>
+	   <% if(sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue()) || sel.equals(EnumSelectionList.SELECT_6.getValue())) {%>
 	   		<th>Game <%=EnumAllGamesList.GAME_6.getValue()%></th>
 	   <%}%>
 	</tr>
@@ -138,17 +152,17 @@ else
 	    <%=all%>
 	    </th>
         <%}%>
-        <% if(size == 1 || sel == null || sel.equals("0")){ %>
+        <% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
         <th><%=map.get("Game1")%></th><%}%>
-        <% if(size == 2 || sel == null || sel.equals("0")){ %>
+        <% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
         <th><%=map.get("Game2")%></th><%}%>
-        <% if(size == 3 || sel == null || sel.equals("0")){ %>
+        <% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
         <th><%=map.get("Game3")%></th><%}%>
-        <% if(size == 4 || sel == null || sel.equals("0")){ %>
+        <% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
         <th><%=map.get("Game4")%></th><%}%>
-        <% if(size == 5 || sel == null || sel.equals("0")){ %>
+        <% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
         <th><%=map.get("Game5")%></th><%}%>
-        <% if(size == 6 || sel == null || sel.equals("0")){ %>
+        <% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
         <th><%=map.get("Game6")%></th><%}%>
     </tr>
     <%if(i+1 == list.size()){ %>
@@ -156,34 +170,34 @@ else
     	<th>MAX</th>
    		<% if(sel == null || sel.equals("0")){ %>
         <th><%=max_all%></th><%}%>
-   		<% if(size == 1 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date)%></th><%}%>
-   		<% if(size == 2 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date)%></th><%}%>
-   		<% if(size == 3 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date)%></th><%}%>
-   		<% if(size == 4 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date)%></th><%}%>
-   		<% if(size == 5 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date)%></th><%}%>
-   		<% if(size == 6 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date)%></th><%}%>
     </tr>
     <tr>
 	 	<th>AVG</th>
    		<% if(sel == null || sel.equals("0")){ %>
         <th><%=avg%></th><%}%>
-   		<% if(size == 1 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date)%></th><%}%>
-   		<% if(size == 2 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date)%></th><%}%>
-   		<% if(size == 3 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date)%></th><%}%>
-   		<% if(size == 4 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date)%></th><%}%>
-   		<% if(size == 5 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date)%></th><%}%>
-   		<% if(size == 6 || sel == null || sel.equals("0")){ %>
+   		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date)%></th><%}%>
 	</tr>
     <%}%>
