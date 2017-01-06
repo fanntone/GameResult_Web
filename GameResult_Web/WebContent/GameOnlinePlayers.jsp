@@ -3,10 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="com.dao.GameOnlinePlayers" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.GameOnlinePlayers" %>
-
 
 <html>
 <head>
@@ -49,8 +48,10 @@ document.selection.submit();
 <br>
 
 <%
-String parameter = "GameID=";
-String gameid = request.getQueryString().substring(parameter.length(), parameter.length()+ 4);
+String parameter = "gameID=";
+String gameid = request.getParameter("gameID");
+if(gameid == null)
+	gameid = "1001";
 
 int pageSize = 5;
 if(sel != null)
@@ -109,10 +110,10 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameOnlinePlayers.jsp?pageIndex=1">&nbsp;首頁</a>
-<a href="GameOnlinePlayers.jsp?pageIndex=<%=upPage %>">&nbsp;上一頁</a>  
-<a href="GameOnlinePlayers.jsp?pageIndex=<%=nextPage %>">&nbsp;下一頁</a>
-<a href="GameOnlinePlayers.jsp?pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+<a href="GameOnlinePlayers.jsp?pageIndex=1&gameID=<%=gameid%>">&nbsp;首頁</a>
+<a href="GameOnlinePlayers.jsp?pageIndex=<%=upPage %>&gameID=<%=gameid%>">&nbsp;上一頁</a>  
+<a href="GameOnlinePlayers.jsp?pageIndex=<%=nextPage %>&gameID=<%=gameid%>">&nbsp;下一頁</a>
+<a href="GameOnlinePlayers.jsp?pageIndex=<%=totalPages%>&gameID=<%=gameid%>">&nbsp;末頁</a>
 
 </body>
 </html>
