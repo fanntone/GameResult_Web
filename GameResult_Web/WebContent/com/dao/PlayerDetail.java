@@ -48,7 +48,7 @@ public class PlayerDetail {
                 map.put(CommonString.USERSTATUS, rs.getString(CommonString.USERSTATUS));
                 map.put(CommonString.STATUS, rs.getString(CommonString.STATUS)); 
                 map.put(CommonString.REGTYPE, rs.getString(CommonString.REGTYPE));
-                map.put("gm", rs.getString("gm")); 
+                map.put(CommonString.GM, rs.getString(CommonString.GM)); 
                 list.add(map);
             }  
         } catch (SQLException e) {  
