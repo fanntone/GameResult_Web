@@ -41,8 +41,8 @@ public class AllGamesOnlinePlayers {
 		for(int i = 1; i < game_list.size(); i++) {  
 		    Map<String, String> map=new HashMap<String, String>();
 		    String game_id = game_list.get(i);
-		    map.put("GameID", String.valueOf(game_id));
-		    map.put("OnlinePlayers", String.valueOf(countRs(game_id)));
+		    map.put(CommonString.PARAMETER_GAMEID, String.valueOf(game_id));
+		    map.put(CommonString.ONLINEPLAYERS, String.valueOf(countRs(game_id)));
 		    list.add(map);
 		}  
         return list;
