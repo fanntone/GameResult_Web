@@ -22,7 +22,7 @@ public class GameOnlinePlayers {
 	    String password=CommonString.DB_PW;  
 	    try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn=DriverManager.getConnection(url,user,password);  
+	        conn=DriverManager.getConnection(url, user, password);  
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -30,7 +30,7 @@ public class GameOnlinePlayers {
 	    }  
 	}
 	
-	public List<Map<String, String>> getAllByPage(int pageSize,int pageIndex,String gameid) {  
+	public List<Map<String, String>> getAllByPage(int pageSize, int pageIndex, String gameid) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
         String sql=" select *" +
@@ -43,9 +43,9 @@ public class GameOnlinePlayers {
             rs=psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("userID",rs.getString("userID"));
-                map.put("gameID", rs.getString("gameID"));
-                map.put("balance", rs.getString("balance"));  
+                map.put(CommonString.PAREMETER_USERID,rs.getString(CommonString.PAREMETER_USERID));
+                map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
+                map.put(CommonString.BALANCE, rs.getString(CommonString.BALANCE));  
                 list.add(map);  
             }  
         } catch (SQLException e) {  

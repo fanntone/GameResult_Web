@@ -26,6 +26,13 @@ public class CommonString {
 	public static final String RESULTSDATE = "resultsDate";
 	public static final String RESULTSPARAMS = "resultsParams";
 	public static final String TIME = "time";
-	
-	
+	public static final String ROUNDUUID = "roundUUID";
+	public static final String CURRENCY = "currency";
+	public static final String LOGINID = "loginID";
+	public static final String PASSWORD = "passWord";
+	public static final String NICKNAME = "nickName";
+	public static final String USERSTATUS = "userStatus";
+	public static final String STATUS = "status";
+	public static final String REGTYPE = "regType";
+	public static final String GM = "gm";
 }

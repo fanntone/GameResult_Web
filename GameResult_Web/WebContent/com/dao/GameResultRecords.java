@@ -29,7 +29,11 @@ public class GameResultRecords {
 	    }  
 	}  
 
-    public List<Map<String, String>> getAllRecordsByPage(int pageSize, int pageIndex, String userID, String datetime, String gameid){  
+    public List<Map<String, String>> getAllRecordsByPage(int pageSize,
+    													 int pageIndex,
+    													 String userID,
+    													 String datetime,
+    													 String gameid){  
           List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
           String dots = ",";
           String sql = " select * from resultsRecords where userID = " + userID 
@@ -43,19 +47,19 @@ public class GameResultRecords {
               rs=psmt.executeQuery();  
               while(rs.next()){  
                   Map<String, String> map=new HashMap<String, String>();  
-                  map.put("roundUUID", rs.getString("roundUUID"));  
-                  map.put("userID",rs.getString("userID"));
-                  map.put("gameID", rs.getString("gameID"));
-                  map.put("betting", rs.getString("betting"));  
-                  map.put("lines",rs.getString("lines"));
-                  map.put("results", rs.getString("results"));
-                  map.put("roundStatus", rs.getString("roundStatus"));  
-                  map.put("prizeResults",rs.getString("prizeResults"));
-                  map.put("beforeBalance", rs.getString("beforeBalance"));
-                  map.put("afterBalance", rs.getString("afterBalance"));  
-                  map.put("specialNumber",rs.getString("specialNumber"));
-                  map.put("resultsDate", rs.getString("resultsDate"));
-                  map.put("resultsParams", rs.getString("resultsParams"));
+                  map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID));  
+                  map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
+                  map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
+                  map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
+                  map.put(CommonString.LINES, rs.getString(CommonString.LINES));
+                  map.put(CommonString.RESULTS, rs.getString(CommonString.RESULTS));
+                  map.put(CommonString.ROUNDSTATUS, rs.getString(CommonString.ROUNDSTATUS));  
+                  map.put(CommonString.PRIZERESULTS, rs.getString(CommonString.PRIZERESULTS));
+                  map.put(CommonString.BEFOREBALANCE, rs.getString(CommonString.BEFOREBALANCE));
+                  map.put(CommonString.AFTERBALANCE, rs.getString(CommonString.AFTERBALANCE));  
+                  map.put(CommonString.SPECIALNUMBER, rs.getString(CommonString.SPECIALNUMBER));
+                  map.put(CommonString.RESULTSDATE, rs.getString(CommonString.RESULTSDATE));
+                  map.put(CommonString.RESULTSPARAMS, rs.getString(CommonString.RESULTSPARAMS));
                   list.add(map);
               }  
         } catch (SQLException e) {  

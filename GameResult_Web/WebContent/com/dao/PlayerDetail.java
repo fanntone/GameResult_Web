@@ -39,15 +39,15 @@ public class PlayerDetail {
             rs=psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("userID", rs.getString("userID"));  
-                map.put("currency",rs.getString("currency"));
-                map.put("loginID", rs.getString("loginID"));
-                map.put("passWord", rs.getString("passWord"));
-                map.put("nickName", rs.getString("nickName"));  
-                map.put("balance",rs.getString("balance"));
-                map.put("userStatus", rs.getString("userStatus"));
-                map.put("status", rs.getString("status")); 
-                map.put("regType", rs.getString("regType"));
+                map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PARAMETER_GAMEID));  
+                map.put(CommonString.CURRENCY, rs.getString(CommonString.CURRENCY));
+                map.put(CommonString.LOGINID, rs.getString(CommonString.LOGINID));
+                map.put(CommonString.PASSWORD, rs.getString(CommonString.PASSWORD));
+                map.put(CommonString.NICKNAME, rs.getString(CommonString.NICKNAME));  
+                map.put(CommonString.BALANCE, rs.getString(CommonString.BALANCE));
+                map.put(CommonString.USERSTATUS, rs.getString(CommonString.USERSTATUS));
+                map.put(CommonString.STATUS, rs.getString(CommonString.STATUS)); 
+                map.put(CommonString.REGTYPE, rs.getString(CommonString.REGTYPE));
                 map.put("gm", rs.getString("gm")); 
                 list.add(map);
             }  
