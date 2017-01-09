@@ -48,7 +48,7 @@ String sel = request.getParameter(CommonString.PARAMETER_SELECT);
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
+	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
 	date = trans.format(c_date);
 }
 %>
@@ -132,7 +132,7 @@ else
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr>
-    	<th><%=map.get("time") %></th>
+    	<th><%=map.get(CommonString.TIME) %></th>
         <% if(sel == null || sel.equals("0")) { %>
         <th>
 	    <%

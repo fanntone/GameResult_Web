@@ -59,7 +59,7 @@ if(userid == null)
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat("YYYY/MM/dd");
+	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
 	date = trans.format(c_date);
 }
 
@@ -148,19 +148,19 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	            <%=map.get("userID") %>
 	          </a>
  		  </th> 
-          <th><%=map.get("gameID")%></th>
-          <th><%=map.get("betting") %></th>  
-          <th><%=map.get("lines") %></th>  
-          <th><%=map.get("results")%></th>
-          <th><%=map.get("roundStatus") %></th>  
-          <th><%=map.get("prizeResults") %></th>  
-          <th><%=map.get("beforeBalance")%></th> 
-          <th><%=map.get("afterBalance") %></th>  
-          <th><%=map.get("specialNumber") %></th>  
-          <th><%=map.get("resultsDate")%></th>
+          <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
+          <th><%=map.get(CommonString.BETTING)%></th>  
+          <th><%=map.get(CommonString.LINES)%></th>  
+          <th><%=map.get(CommonString.RESULTS)%></th>
+          <th><%=map.get(CommonString.ROUNDSTATUS)%></th>  
+          <th><%=map.get(CommonString.PRIZERESULTS)%></th>  
+          <th><%=map.get(CommonString.BEFOREBALANCE)%></th> 
+          <th><%=map.get(CommonString.AFTERBALANCE)%></th>  
+          <th><%=map.get(CommonString.SPECIALNUMBER)%></th>  
+          <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th>
           <%
-          	String jsonstring = map.get("resultsParams");
+          	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
           	for(int j = 0; j< 15 ; j++) {
 				String text = "<img src=\"images/"+ ps.slot1[j] + ".png\" />";

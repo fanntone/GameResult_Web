@@ -102,11 +102,11 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
     <tr> 
         <th>
             <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
-               <%=map.get("userID")%>
+               <%=map.get(CommonString.PAREMETER_USERID)%>
             </a>
         </th>
-        <th><%=map.get("balance")%></th>
-        <th><%=map.get("gameID")%></th>
+        <th><%=map.get(CommonString.BALANCE)%></th>
+        <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
     </tr>  
 	<%}%>
 </table>

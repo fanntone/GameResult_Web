@@ -48,13 +48,13 @@ document.selection.submit();
 		selected <%}%>><%=EnumSelectionList.SELECT_10.getValue()%></option>
 <option value=<%=EnumSelectionList.SELECT_25.getValue()%>
 	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_25.getValue())) {%>
-		selected <%}%>><%=EnumSelectionList.SELECT_25.getValue()%></option> 
+		selected <%}%>><%=EnumSelectionList.SELECT_25.getValue()%></option>
 <option value=<%=EnumSelectionList.SELECT_50.getValue()%>
 	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_50.getValue())) {%>
-		selected <%}%>><%=EnumSelectionList.SELECT_50.getValue()%></option> 
+		selected <%}%>><%=EnumSelectionList.SELECT_50.getValue()%></option>
 <option value=<%=EnumSelectionList.SELECT_100.getValue()%>
 	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_100.getValue())){%>
-		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
+		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option>
 </select>
 </form>
 <br>
