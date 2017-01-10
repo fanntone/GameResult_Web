@@ -171,34 +171,34 @@ else
    		<% if(sel == null || sel.equals("0")){ %>
         <th><%=max_all%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date, "game01")%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date, "game02")%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date, "game03")%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date, "game04")%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date, "game05")%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date)%></th><%}%>
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date, "game06")%></th><%}%>
     </tr>
     <tr>
 	 	<th>AVG</th>
    		<% if(sel == null || sel.equals("0")){ %>
         <th><%=avg%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date, "game01")%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date, "game02")%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date, "game03")%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date, "game04")%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date, "game05")%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date)%></th><%}%>
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date, "game06")%></th><%}%>
 	</tr>
     <%}%>
 <%}%>
