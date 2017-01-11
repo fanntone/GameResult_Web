@@ -87,8 +87,8 @@ if(gameid == null)
 </select>
 <br>
 Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
-UerID:<input name = "userid" id= "userid" type= "text" value = <%=userid%>>
-GameID:<input name = "gameid" id = "gameid" type= "text" value = <%=gameid%>>
+UerID:<input name = "userID" id= "userID" type= "text" value = <%=userid%>>
+GameID:<input name = "gameID" id = "gameID" type= "text" value = <%=gameid%>>
 <input type="submit" value="°e¥X¬d¸ß" >
 </form>
 <br>
