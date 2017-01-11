@@ -54,8 +54,15 @@ public class OnlinePeopleCountsReport {
             
         } catch (SQLException e) {  
           e.printStackTrace();  
-      }  
-      return list;  
+        }
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}      
+        return list;  
 	}
 	
     public String getMaxGamePeopleByGameID(String gameID, String datetime, String label_name) {
@@ -73,7 +80,14 @@ public class OnlinePeopleCountsReport {
         } catch (SQLException e) {  
             e.printStackTrace();  
         }   
-
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     	return String.valueOf(max);
     }
     
@@ -93,6 +107,12 @@ public class OnlinePeopleCountsReport {
             e.printStackTrace();  
         }   
 
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	return String.valueOf(avg);
     }
     

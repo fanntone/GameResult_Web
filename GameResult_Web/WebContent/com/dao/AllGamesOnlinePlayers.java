@@ -22,7 +22,7 @@ public class AllGamesOnlinePlayers {
 	    String password=CommonString.DB_PW;  
 	    try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn=DriverManager.getConnection(url,user,password);  
+	        conn=DriverManager.getConnection(url,user,password);
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -32,7 +32,6 @@ public class AllGamesOnlinePlayers {
 	
 	public List<Map<String, String>> getAllData() {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
-        openConn();
         List<String> game_list = new ArrayList<String>();
         for(EnumAllGamesList eu : EnumAllGamesList.values()) {
         	game_list.add(eu.getValue());
@@ -60,7 +59,15 @@ public class AllGamesOnlinePlayers {
             }  
         } catch (SQLException e) {  
             e.printStackTrace();  
-        }  
+        }
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         return count;  
     }
 	

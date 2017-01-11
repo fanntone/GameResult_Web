@@ -33,38 +33,46 @@ public class GameResultRecords {
     													 int pageIndex,
     													 String userID,
     													 String datetime,
-    													 String gameid){  
-          List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
-          String dots = ",";
-          String sql = " select * from resultsRecords where userID = " + userID 
-        		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
-        		  	 + " AND " +  "'" + datetime +" 23:59:59'"
-        		  	 + " AND gameID = " + gameid
-        		  	 + " order by roundUUID ASC Limit "
-        		  	 + pageSize*(pageIndex-1) + dots +(pageSize);
-           try {  
-              psmt=conn.prepareStatement(sql);  
-              rs=psmt.executeQuery();  
-              while(rs.next()){  
-                  Map<String, String> map=new HashMap<String, String>();  
-                  map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID));  
-                  map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
-                  map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
-                  map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
-                  map.put(CommonString.LINES, rs.getString(CommonString.LINES));
-                  map.put(CommonString.RESULTS, rs.getString(CommonString.RESULTS));
-                  map.put(CommonString.ROUNDSTATUS, rs.getString(CommonString.ROUNDSTATUS));  
-                  map.put(CommonString.PRIZERESULTS, rs.getString(CommonString.PRIZERESULTS));
-                  map.put(CommonString.BEFOREBALANCE, rs.getString(CommonString.BEFOREBALANCE));
-                  map.put(CommonString.AFTERBALANCE, rs.getString(CommonString.AFTERBALANCE));  
-                  map.put(CommonString.SPECIALNUMBER, rs.getString(CommonString.SPECIALNUMBER));
-                  map.put(CommonString.RESULTSDATE, rs.getString(CommonString.RESULTSDATE));
-                  map.put(CommonString.RESULTSPARAMS, rs.getString(CommonString.RESULTSPARAMS));
-                  list.add(map);
-              }  
+    													 String gameid){
+    	openConn(); 
+    	List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
+    	String dots = ",";
+    	String sql = " select * from resultsRecords where userID = " + userID 
+	  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
+	  	 + " AND " +  "'" + datetime +" 23:59:59'"
+	  	 + " AND gameID = " + gameid
+	  	 + " order by roundUUID ASC Limit "
+		  	 + pageSize*(pageIndex-1) + dots +(pageSize);
+	    try {
+	    	psmt=conn.prepareStatement(sql);  
+	    	rs=psmt.executeQuery();  
+	    	while(rs.next()){  
+	    		Map<String, String> map=new HashMap<String, String>();  
+	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID));  
+	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
+	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
+	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
+	    		map.put(CommonString.LINES, rs.getString(CommonString.LINES));
+	    		map.put(CommonString.RESULTS, rs.getString(CommonString.RESULTS));
+	    		map.put(CommonString.ROUNDSTATUS, rs.getString(CommonString.ROUNDSTATUS));  
+	    		map.put(CommonString.PRIZERESULTS, rs.getString(CommonString.PRIZERESULTS));
+	    		map.put(CommonString.BEFOREBALANCE, rs.getString(CommonString.BEFOREBALANCE));
+	    		map.put(CommonString.AFTERBALANCE, rs.getString(CommonString.AFTERBALANCE));  
+	    		map.put(CommonString.SPECIALNUMBER, rs.getString(CommonString.SPECIALNUMBER));
+	    		map.put(CommonString.RESULTSDATE, rs.getString(CommonString.RESULTSDATE));
+	    		map.put(CommonString.RESULTSPARAMS, rs.getString(CommonString.RESULTSPARAMS));
+	    		list.add(map);
+	    	}  
         } catch (SQLException e) {  
             e.printStackTrace();  
         }  
+           
+        try {
+   			conn.close();
+   		} catch (SQLException e) {
+   			// TODO Auto-generated catch block
+   			e.printStackTrace();
+   		}
         return list;  
     }  
 
@@ -84,6 +92,13 @@ public class GameResultRecords {
         } catch (SQLException e) {  
             e.printStackTrace();  
         }
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return count;  
     }  
 

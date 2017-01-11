@@ -39,7 +39,7 @@ public class PlayerDetail {
             rs=psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PARAMETER_GAMEID));  
+                map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));  
                 map.put(CommonString.CURRENCY, rs.getString(CommonString.CURRENCY));
                 map.put(CommonString.LOGINID, rs.getString(CommonString.LOGINID));
                 map.put(CommonString.PASSWORD, rs.getString(CommonString.PASSWORD));
@@ -54,6 +54,13 @@ public class PlayerDetail {
         } catch (SQLException e) {  
             e.printStackTrace();  
         }
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return list;
 	}
 }

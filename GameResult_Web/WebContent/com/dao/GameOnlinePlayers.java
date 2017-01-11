@@ -51,6 +51,13 @@ public class GameOnlinePlayers {
         } catch (SQLException e) {  
             e.printStackTrace();  
         }  
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return list;  
 	}
 	
@@ -72,6 +79,13 @@ public class GameOnlinePlayers {
         } catch (SQLException e) {  
             e.printStackTrace();  
         }  
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return count;  
     }  
 
