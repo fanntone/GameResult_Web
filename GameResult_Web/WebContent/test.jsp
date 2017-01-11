@@ -48,7 +48,7 @@ for(i = 0; i< 15 ; i++) {
 	if(j%5==0)
 		text += "<br>";
 }
-document.getElementById("demo").innerHTML = text;
+document.getElementById("demo").innerHTML = text; 
 </script>
 
 <br>
