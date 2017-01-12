@@ -53,6 +53,24 @@ public class OnlinePeopleCountsReportMonth {
 				map.put("Day10", rs.getString("day10"));
 				map.put("Day11", rs.getString("day11"));
 				map.put("Day12", rs.getString("day12"));
+				map.put("Day13", rs.getString("day13"));
+				map.put("Day14", rs.getString("day14"));
+				map.put("Day15", rs.getString("day15"));
+				map.put("Day16", rs.getString("day16"));
+				map.put("Day17", rs.getString("day17"));
+				map.put("Day18", rs.getString("day18"));
+				map.put("Day19", rs.getString("day19"));
+				map.put("Day20", rs.getString("day20"));
+				map.put("Day21", rs.getString("day21"));
+				map.put("Day22", rs.getString("day22"));
+				map.put("Day23", rs.getString("day23"));
+				map.put("Day24", rs.getString("day24"));
+				map.put("Day25", rs.getString("day25"));
+				map.put("Day26", rs.getString("day26"));
+				map.put("Day27", rs.getString("day27"));
+				map.put("Day28", rs.getString("day28"));
+				map.put("Day29", rs.getString("day29"));
+				map.put("Day30", rs.getString("day30"));
 				list.add(map);
 			}
             

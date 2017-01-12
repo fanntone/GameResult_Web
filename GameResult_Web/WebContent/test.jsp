@@ -97,6 +97,25 @@ document.selection.submit();
 	<th><%=map.get("Day10") %></th>
 	<th><%=map.get("Day11") %></th>
 	<th><%=map.get("Day12") %></th>
+	<th><%=map.get("Day13") %></th>
+	<th><%=map.get("Day14") %></th>
+	<th><%=map.get("Day15") %></th>
+	<th><%=map.get("Day16") %></th>
+	<th><%=map.get("Day17") %></th>
+	<th><%=map.get("Day18") %></th>
+	<th><%=map.get("Day19") %></th>
+	<th><%=map.get("Day20") %></th>
+	<th><%=map.get("Day21") %></th>
+	<th><%=map.get("Day22") %></th>
+	<th><%=map.get("Day23") %></th>
+	<th><%=map.get("Day24") %></th>
+	<th><%=map.get("Day25") %></th>
+	<th><%=map.get("Day26") %></th>
+	<th><%=map.get("Day27") %></th>
+	<th><%=map.get("Day28") %></th>
+	<th><%=map.get("Day29") %></th>
+	<th><%=map.get("Day30") %></th>
+	<th><%=map.get("Day30") %></th>
 </tr>
 	<%}%>
 </table>
