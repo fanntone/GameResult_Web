@@ -39,7 +39,7 @@ public class OnlinePeopleCountsReport {
         				+" AND " +  "'" + datetime +" 23:59:59'";
         	psmt=conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);
-        	  	
+        	
 			while(rs.next()) {
 			Map<String, String> map=new HashMap<String, String>();
 			map.put("time", rs.getString("test_report.time"));

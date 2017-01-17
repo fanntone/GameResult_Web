@@ -64,7 +64,7 @@ document.selection.submit();
 		int month = Integer.valueOf(sel).intValue();		
 		int day = 1;
 		for(day = 1; day <= 31; day++) { 
-			if(month == 2 && day == 30)
+			if(month == 2 && day == 29)
 				break;
 			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31)
 				break;
@@ -72,52 +72,47 @@ document.selection.submit();
 	%>
 	<th>
 	<%=month%>/<%=day%>
-	</th> 
+	</th>
 	<%}%>
 </tr>
 
+<tr>
+<th>00:00:00</th>
 	<%
 		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
-		List<Map<String, String>> list = data.getAllData();
+		List<Map<String, String>> list = data.getAllData("2017/01/01 00:00:00");
 		Map<String, String> map = null;
 		for(int ii = 0; ii < list.size(); ii++) {  
 		    map = (Map<String, String>)list.get(ii);
 	%>
-<tr>
-	<th><%=map.get("Time") %></th>
-	<th><%=map.get("Day1") %></th>
-	<th><%=map.get("Day2") %></th>
-	<th><%=map.get("Day3") %></th>
-	<th><%=map.get("Day4") %></th>
-	<th><%=map.get("Day5") %></th>
-	<th><%=map.get("Day6") %></th>
-	<th><%=map.get("Day7") %></th>
-	<th><%=map.get("Day8") %></th>
-	<th><%=map.get("Day9") %></th>
-	<th><%=map.get("Day10") %></th>
-	<th><%=map.get("Day11") %></th>
-	<th><%=map.get("Day12") %></th>
-	<th><%=map.get("Day13") %></th>
-	<th><%=map.get("Day14") %></th>
-	<th><%=map.get("Day15") %></th>
-	<th><%=map.get("Day16") %></th>
-	<th><%=map.get("Day17") %></th>
-	<th><%=map.get("Day18") %></th>
-	<th><%=map.get("Day19") %></th>
-	<th><%=map.get("Day20") %></th>
-	<th><%=map.get("Day21") %></th>
-	<th><%=map.get("Day22") %></th>
-	<th><%=map.get("Day23") %></th>
-	<th><%=map.get("Day24") %></th>
-	<th><%=map.get("Day25") %></th>
-	<th><%=map.get("Day26") %></th>
-	<th><%=map.get("Day27") %></th>
-	<th><%=map.get("Day28") %></th>
-	<th><%=map.get("Day29") %></th>
-	<th><%=map.get("Day30") %></th>
-	<th><%=map.get("Day30") %></th>
-</tr>
+	<%String counts = map.get("Counts_1");
+	if(counts == null)
+		counts = "0";
+	%>
+	<th><%=counts%></th>
+
 	<%}%>
+</tr>
+
+<tr>
+<th>00:05:00</th>
+	<%
+		data = new OnlinePeopleCountsReportMonth();
+		list = data.getAllData("2017/01/01 00:05:00");
+		map = null;
+		for(int ii = 0; ii < list.size(); ii++) {  
+		    map = (Map<String, String>)list.get(ii);
+	%>
+	<%String counts = map.get("Counts_1");
+	if(counts == null)
+		counts = "0";
+	%>
+	<th><%=counts%></th>
+
+	<%}%>
+</tr>
+
+
 </table>
 </body>
 </html>
