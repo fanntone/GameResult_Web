@@ -103,6 +103,12 @@ document.selection.submit();
 															  Integer.parseInt(sel_game));
 %><th><%=max_people%></th><%}%></tr>
 
+<tr><th>AVG</th><%
+		for(int avg = 0; avg < (day-1) ; avg++){
+			String max_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
+															  Integer.parseInt(sel_game));
+%><th><%=max_people%></th><%}%></tr>
+
 </table>
 </body>
 </html>

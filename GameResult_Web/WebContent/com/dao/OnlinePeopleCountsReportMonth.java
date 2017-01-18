@@ -114,36 +114,34 @@ public class OnlinePeopleCountsReportMonth {
 	
     public String getMaxGamePeopleByGameID(String date, int sel_game) {
         int max = 0;
-        for(int i = 0; i < 6; i++) {
-            String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from test_report"
-            		+" where time BETWEEN " + "'" + date +" 00:00:00'"
-        			+" AND " +  "'" + date +" 23:59:59';";
-            openConn();  
-            try {  
-                psmt=conn.prepareStatement(sql);  
-                rs=psmt.executeQuery();  
-                while(rs.next()){
-                	if(rs.getInt(1) != 0 && rs.getInt(1)> max)
-                		max=rs.getInt(1);
-                }  
-            } catch (SQLException e) {  
-                e.printStackTrace();  
-            }   
-            
-            try {
-    			conn.close();
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-        }
+        String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from test_report"
+        		+" where time BETWEEN " + "'" + date +" 00:00:00'"
+    			+" AND " +  "'" + date +" 23:59:59';";
+        openConn();  
+        try {  
+            psmt=conn.prepareStatement(sql);
+            rs=psmt.executeQuery();  
+            while(rs.next()){
+            	if(rs.getInt(1) != 0 && rs.getInt(1)> max)
+            		max=rs.getInt(1);
+            }  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }   
+        
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
     	return String.valueOf(max);
     }
     
-    public String getAvgGamePeopleByGameID(String gameID, String datetime,  String label_name) {
+    public String getAvgGamePeopleByGameID(String datetime,  int sel_game) {
         float avg = 0;  
-        String sql = " select AVG( "+ label_name + ") from test_report"
+        String sql = " select AVG( "+ CommonString.gameid_array[sel_game] + ") from test_report"
         		+" where time BETWEEN " + "'" + datetime +" 00:00:00'"
     			+" AND " +  "'" + datetime +" 23:59:59'";
         openConn();  

@@ -117,7 +117,7 @@ document.selection.submit();
 
 <tr><th>MAX</th><%
 		for(int j = 0; j < (day-1) ; j++){
-			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
+			String max_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
 															  Integer.parseInt(sel_game));
 %><th><%=max_people%></th><%}%></tr>
 
