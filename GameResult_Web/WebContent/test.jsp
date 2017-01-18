@@ -37,10 +37,21 @@ document.selection.submit();
 }
 </script>
 
-<%String sel_month = request.getParameter("month");%>
-<%String sel_year = request.getParameter("year");%>
-<form name="selection" action="OnlinePeopleCountsReportMonth.jsp" method="post">
-&nbsp;請選擇月份&nbsp;<select name="month" size="1" id="month" onChange="change()">
+<%String sel_game = request.getParameter("games");%>
+<%String sel_month = request.getParameter("months");%>
+<%String sel_year = request.getParameter("years");%>
+<form name="selection" action="test.jsp" method="post">
+&nbsp;請選擇遊戲&nbsp;<select name="games" size="1" id="games" onChange="change()">
+<option value = "0"  <%if (sel_game == null || sel_game.equals("0"))  {%> selected <%}%>>ALL</option>
+<option value = "1"  <%if (sel_game != null && sel_game.equals("1"))  {%> selected <%}%>>game01</option>
+<option value = "2"  <%if (sel_game != null && sel_game.equals("2"))  {%> selected <%}%>>game02</option>
+<option value = "3"  <%if (sel_game != null && sel_game.equals("3"))  {%> selected <%}%>>game03</option>
+<option value = "4"  <%if (sel_game != null && sel_game.equals("4"))  {%> selected <%}%>>game04</option>
+<option value = "5"  <%if (sel_game != null && sel_game.equals("5"))  {%> selected <%}%>>game05</option>
+<option value = "5"  <%if (sel_game != null && sel_game.equals("6"))  {%> selected <%}%>>game06</option>
+</select>
+<br>
+&nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
 <option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
 <option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
 <option value = "3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
@@ -55,7 +66,7 @@ document.selection.submit();
 <option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
 </select>
 <br>
-&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
+&nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
 <option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
@@ -67,10 +78,12 @@ document.selection.submit();
 <tr>
 	<th>時間\(月/日)</th>
 	<%
-		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
+		if(sel_game == null)
+			sel_game = "0";
 		if(sel_month == null)
 			sel_month = "1";
-		int month = Integer.valueOf(sel_month).intValue();		
+		int month = Integer.valueOf(sel_month).intValue();
+		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
 		int day = 1;
 		for(day = 1; day <= 31; day++) { 
 			if(month == 2 && day == 29)
@@ -79,24 +92,16 @@ document.selection.submit();
 				break;
 		if(sel_year == null)
 			sel_year = "2017";
+		
 			
-	%>
-	<th>
-	<%=month%>/<%=day%>
-	</th>
-	<%}%>
+	%><th><%=month%>/<%=day%></th><%}%>
 </tr>
 
-<tr>
-	<th>MAX</th>
-	<%
+<tr><th>MAX</th><%
 		for(int j = 0; j < (day-1) ; j++){
-			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j]);
-	%>
-	<th><%=max_people%></th>
-	<%}%>
-</tr>
-
+			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
+															  Integer.parseInt(sel_game));
+%><th><%=max_people%></th><%}%></tr>
 
 </table>
 </body>

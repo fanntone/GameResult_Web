@@ -60,7 +60,7 @@ public class OnlinePeopleCountsReportMonth {
 		return list;
 	}
 	
-	public List<Map<String, String>> getAllData(String datetime, int sel_month, int sel_year) {  
+	public List<Map<String, String>> getAllData(String datetime, int sel_month, int sel_year, int sel_game) {  
         List<Map<String, String>> list =new ArrayList<Map<String, String>>();
         openConn();
         
@@ -77,10 +77,10 @@ public class OnlinePeopleCountsReportMonth {
         	String sql = "set @test_1:= '" + datetime +"';";
         	psmt=conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);
-			String sql_2 = "select Sum(game01+game02+game03+game04+game05+game06)as counts from test_report where time = ADDDATE(@test_1, interval 0 DAY) ";
+			String sql_2 = "select Sum(" + CommonString.gameid_array[sel_game] + ")as counts from test_report where time = ADDDATE(@test_1, interval 0 DAY) ";
         	for(int i = 1; i<max; i++) {
         		sql_2 += " UNION ALL ";
-        		sql_2 += " select Sum(game01+game02+game03+game04+game05+game06)as counts from test_report" ;
+        		sql_2 += " select Sum(" + CommonString.gameid_array[sel_game] +  ")as counts from test_report" ;
         		sql_2 += " where time = ADDDATE(@test_1, interval " + i + " DAY)";
         	}
         	sql_2 += ";";
@@ -112,10 +112,10 @@ public class OnlinePeopleCountsReportMonth {
 		}
 	}
 	
-    public String getMaxGamePeopleByGameID(String date) {
+    public String getMaxGamePeopleByGameID(String date, int sel_game) {
         int max = 0;
         for(int i = 0; i < 6; i++) {
-            String sql = " select MAX(game01+game02+game03+game04+game05+game06)from test_report"
+            String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from test_report"
             		+" where time BETWEEN " + "'" + date +" 00:00:00'"
         			+" AND " +  "'" + date +" 23:59:59';";
             openConn();  
