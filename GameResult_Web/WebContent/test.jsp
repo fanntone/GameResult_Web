@@ -76,41 +76,40 @@ document.selection.submit();
 	<%}%>
 </tr>
 
+
 <tr>
-<th>00:00:00</th>
 	<%
+		String[] days_array = new String[] {"01","02","03","04","05","06","07","08","09","10",
+								  "11","12","13","14","15","16","17","18","19","20",
+								  "21","22","23","24","25","26","27","28","29","30","31"};
+		String[] months_array = new String[] {"01","02","03","04","05","06","07","08","09","10","11","12"};
+		
 		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
-		List<Map<String, String>> list = data.getAllData("2017/01/01 00:00:00");
+		List<Map<String, String>> time_list = data.getAllTimeList();
+		Map<String, String> maps = null;
+		day = 0;
+		for(int times = 0; times < time_list.size(); times++) {  
+		    maps = (Map<String, String>)time_list.get(times);
+		    String times_ = maps.get("Times");
+	%>
+<th><%=times_%></th>
+	<%
+		List<Map<String, String>> list = data.getAllData("2017/01/01 " + times_);
 		Map<String, String> map = null;
 		for(int ii = 0; ii < list.size(); ii++) {  
 		    map = (Map<String, String>)list.get(ii);
-	%>
-	<%String counts = map.get("Counts_1");
-	if(counts == null)
-		counts = "0";
+		    String counts = map.get("Counts_1");
+			if(counts == null)
+			counts = "0";
 	%>
 	<th><%=counts%></th>
-
 	<%}%>
-</tr>
+</tr><%}%>
 
 <tr>
-<th>00:05:00</th>
-	<%
-		data = new OnlinePeopleCountsReportMonth();
-		list = data.getAllData("2017/01/01 00:05:00");
-		map = null;
-		for(int ii = 0; ii < list.size(); ii++) {  
-		    map = (Map<String, String>)list.get(ii);
-	%>
-	<%String counts = map.get("Counts_1");
-	if(counts == null)
-		counts = "0";
-	%>
-	<th><%=counts%></th>
 
-	<%}%>
 </tr>
+
 
 
 </table>

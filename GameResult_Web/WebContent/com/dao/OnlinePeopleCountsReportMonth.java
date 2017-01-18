@@ -29,6 +29,37 @@ public class OnlinePeopleCountsReportMonth {
 	    }  
 	}
 	
+	public List<Map<String,String>> getAllTimeList() {
+		List<Map<String, String>> list =new ArrayList<Map<String, String>>();
+		openConn();
+		
+        try {
+        	String sql_1 = "set @test_1:= '2017/01/13 00:00:00';";
+        	String sql_2 = "set @test_2:= '2017/01/14 00:00:00';";
+        	String sql_3 = "select all Time(time) as Times from test_report where time between @test_1 and ADDDATE(@test_2, interval -5 minute);";
+        	psmt=conn.prepareStatement(sql_1);  
+        	rs = psmt.executeQuery(sql_1);
+        	psmt=conn.prepareStatement(sql_2);  
+        	rs = psmt.executeQuery(sql_2);
+        	psmt=conn.prepareStatement(sql_3);  
+        	rs = psmt.executeQuery(sql_3);      	
+        	while (rs.next())
+        	{
+    			Map<String, String> map=new HashMap<String, String>();
+				map.put("Times", rs.getString("Times"));
+				list.add(map);
+        	}
+        	
+			conn.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
 	public List<Map<String, String>> getAllData(String datetime) {  
         List<Map<String, String>> list =new ArrayList<Map<String, String>>();
         openConn();
