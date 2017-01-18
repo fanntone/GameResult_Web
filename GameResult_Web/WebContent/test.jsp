@@ -4,13 +4,14 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.OnlinePeopleCountsReportMonth" %>
+<%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
+<%@ page import="com.dao.CommonString"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<title>遊戲在線人數月報表</title>
 <style>
 
 table, td, th {
@@ -36,38 +37,48 @@ document.selection.submit();
 }
 </script>
 
-<%String sel = request.getParameter("select");%>
-<form name="selection" action="test.jsp" method="post"> 請選擇月份
-<select name="select" size="1" id="select" onChange="change()">
-<option value = "1"  <%if (sel == null || sel.equals("1"))  {%> selected <%}%>>1</option>
-<option value = "2"  <%if (sel != null && sel.equals("2"))  {%> selected <%}%>>2</option>
-<option value = "3"  <%if (sel != null && sel.equals("3"))  {%> selected <%}%>>3</option>
-<option value = "4"  <%if (sel != null && sel.equals("4"))  {%> selected <%}%>>4</option>
-<option value = "5"  <%if (sel != null && sel.equals("5"))  {%> selected <%}%>>5</option>
-<option value = "6"  <%if (sel != null && sel.equals("6"))  {%> selected <%}%>>6</option>
-<option value = "7"  <%if (sel != null && sel.equals("7"))  {%> selected <%}%>>7</option>
-<option value = "8"  <%if (sel != null && sel.equals("8"))  {%> selected <%}%>>8</option>
-<option value = "9"  <%if (sel != null && sel.equals("9"))  {%> selected <%}%>>9</option>
-<option value = "10" <%if (sel != null && sel.equals("10")) {%> selected <%}%>>10</option>
-<option value = "11" <%if (sel != null && sel.equals("11")) {%> selected <%}%>>11</option>
-<option value = "12" <%if (sel != null && sel.equals("12")) {%> selected <%}%>>12</option>
+<%String sel_month = request.getParameter("month");%>
+<%String sel_year = request.getParameter("year");%>
+<form name="selection" action="OnlinePeopleCountsReportMonth.jsp" method="post">
+&nbsp;請選擇月份&nbsp;<select name="month" size="1" id="month" onChange="change()">
+<option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
+<option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
+<option value = "3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
+<option value = "4"  <%if (sel_month != null && sel_month.equals("4"))  {%> selected <%}%>>4</option>
+<option value = "5"  <%if (sel_month != null && sel_month.equals("5"))  {%> selected <%}%>>5</option>
+<option value = "6"  <%if (sel_month != null && sel_month.equals("6"))  {%> selected <%}%>>6</option>
+<option value = "7"  <%if (sel_month != null && sel_month.equals("7"))  {%> selected <%}%>>7</option>
+<option value = "8"  <%if (sel_month != null && sel_month.equals("8"))  {%> selected <%}%>>8</option>
+<option value = "9"  <%if (sel_month != null && sel_month.equals("9"))  {%> selected <%}%>>9</option>
+<option value = "10" <%if (sel_month != null && sel_month.equals("10")) {%> selected <%}%>>10</option>
+<option value = "11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
+<option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
 </select>
+<br>
+&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
+<option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
+<option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
+</select>
+
 </form>
 
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>時間(月/日)</th>
+	<th>時間\(月/日)</th>
 	<%
-		if(sel== null)
-			sel = "1";
-		int month = Integer.valueOf(sel).intValue();		
+		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
+		if(sel_month == null)
+			sel_month = "1";
+		int month = Integer.valueOf(sel_month).intValue();		
 		int day = 1;
 		for(day = 1; day <= 31; day++) { 
 			if(month == 2 && day == 29)
 				break;
 			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31)
 				break;
+		if(sel_year == null)
+			sel_year = "2017";
 			
 	%>
 	<th>
@@ -76,40 +87,15 @@ document.selection.submit();
 	<%}%>
 </tr>
 
-
 <tr>
+	<th>MAX</th>
 	<%
-		String[] days_array = new String[] {"01","02","03","04","05","06","07","08","09","10",
-								  "11","12","13","14","15","16","17","18","19","20",
-								  "21","22","23","24","25","26","27","28","29","30","31"};
-		String[] months_array = new String[] {"01","02","03","04","05","06","07","08","09","10","11","12"};
-		
-		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
-		List<Map<String, String>> time_list = data.getAllTimeList();
-		Map<String, String> maps = null;
-		day = 0;
-		for(int times = 0; times < time_list.size(); times++) {  
-		    maps = (Map<String, String>)time_list.get(times);
-		    String times_ = maps.get("Times");
+		for(int j = 0; j < (day-1) ; j++){
+			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j]);
 	%>
-<th><%=times_%></th>
-	<%
-		List<Map<String, String>> list = data.getAllData("2017/01/01 " + times_);
-		Map<String, String> map = null;
-		for(int ii = 0; ii < list.size(); ii++) {  
-		    map = (Map<String, String>)list.get(ii);
-		    String counts = map.get("Counts_1");
-			if(counts == null)
-			counts = "0";
-	%>
-	<th><%=counts%></th>
+	<th><%=max_people%></th>
 	<%}%>
-</tr><%}%>
-
-<tr>
-
 </tr>
-
 
 
 </table>

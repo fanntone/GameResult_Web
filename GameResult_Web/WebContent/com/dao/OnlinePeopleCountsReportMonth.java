@@ -60,16 +60,25 @@ public class OnlinePeopleCountsReportMonth {
 		return list;
 	}
 	
-	public List<Map<String, String>> getAllData(String datetime) {  
+	public List<Map<String, String>> getAllData(String datetime, int sel_month, int sel_year) {  
         List<Map<String, String>> list =new ArrayList<Map<String, String>>();
         openConn();
         
+        int max = 31;
+        if (sel_month == 2) {
+        	max = 28;
+        	if(sel_year%4 == 0)
+        		max = 29;
+        }
+        else if (sel_month == 4 || sel_month == 6 || sel_month == 9 || sel_month == 11)
+        	max = 30;
+        	
         try {
         	String sql = "set @test_1:= '" + datetime +"';";
         	psmt=conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);
 			String sql_2 = "select Sum(game01+game02+game03+game04+game05+game06)as counts from test_report where time = ADDDATE(@test_1, interval 0 DAY) ";
-        	for(int i = 1; i<31; i++) {
+        	for(int i = 1; i<max; i++) {
         		sql_2 += " UNION ALL ";
         		sql_2 += " select Sum(game01+game02+game03+game04+game05+game06)as counts from test_report" ;
         		sql_2 += " where time = ADDDATE(@test_1, interval " + i + " DAY)";
@@ -84,7 +93,7 @@ public class OnlinePeopleCountsReportMonth {
 				map.put("Counts_1", rs.getString("counts"));
 				list.add(map);
         	}
-        	conn.close();
+        	closeConn();
         	
         } catch (SQLException e) {  
           e.printStackTrace();  
@@ -93,28 +102,41 @@ public class OnlinePeopleCountsReportMonth {
         return list;  
 	}
 	
-    public String getMaxGamePeopleByGameID(String gameID, String datetime, String label_name) {
-        int max = 0;  
-        String sql = " select MAX(" + label_name + ") from test_report"
-        		+" where time BETWEEN " + "'" + datetime +" 00:00:00'"
-    			+" AND " +  "'" + datetime +" 23:59:59'";
-        openConn();  
-        try {  
-            psmt=conn.prepareStatement(sql);  
-            rs=psmt.executeQuery();  
-            while(rs.next()){
-                max=rs.getInt(1);
-            }  
-        } catch (SQLException e) {  
-            e.printStackTrace();  
-        }   
-        
-        try {
+	
+	public void closeConn() {
+		try {
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+    public String getMaxGamePeopleByGameID(String date) {
+        int max = 0;
+        for(int i = 0; i < 6; i++) {
+            String sql = " select MAX(game01+game02+game03+game04+game05+game06)from test_report"
+            		+" where time BETWEEN " + "'" + date +" 00:00:00'"
+        			+" AND " +  "'" + date +" 23:59:59';";
+            openConn();  
+            try {  
+                psmt=conn.prepareStatement(sql);  
+                rs=psmt.executeQuery();  
+                while(rs.next()){
+                	if(rs.getInt(1) != 0 && rs.getInt(1)> max)
+                		max=rs.getInt(1);
+                }  
+            } catch (SQLException e) {  
+                e.printStackTrace();  
+            }   
+            
+            try {
+    			conn.close();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+        }
         
     	return String.valueOf(max);
     }
