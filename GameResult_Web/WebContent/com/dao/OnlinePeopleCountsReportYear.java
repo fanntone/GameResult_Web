@@ -35,14 +35,11 @@ public class OnlinePeopleCountsReportYear {
 		
         try {
         	String sql_1 = "set @test_1:= '2017/01/13 00:00:00';";
-        	String sql_2 = "set @test_2:= '2017/01/14 00:00:00';";
-        	String sql_3 = "select all Time(time) as Times from test_report where time between @test_1 and ADDDATE(@test_2, interval -5 minute);";
+        	String sql_2 = "select distinct Time(time) as Times from test_report where time between @test_1 and ADDDATE(@test_1, interval  1 DAY);";
         	psmt=conn.prepareStatement(sql_1);  
         	rs = psmt.executeQuery(sql_1);
         	psmt=conn.prepareStatement(sql_2);  
-        	rs = psmt.executeQuery(sql_2);
-        	psmt=conn.prepareStatement(sql_3);  
-        	rs = psmt.executeQuery(sql_3);      	
+        	rs = psmt.executeQuery(sql_2);   	
         	while (rs.next())
         	{
     			Map<String, String> map=new HashMap<String, String>();
@@ -107,48 +104,5 @@ public class OnlinePeopleCountsReportYear {
 			e.printStackTrace();
 		}
 	}
-	
-    public String getMaxGamePeopleByGameID(String date, int sel_game, int month) {
-        int max = 0;
-        String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from test_report"
-        		+" where time BETWEEN " + "'" + date +" 00:00:00'"
-    			+" AND ADDDATE(" + "'" + date +" 00:00:00'"+", interval  1 month)"
-        		+" AND Month(time) = " + month;
-        openConn();  
-        try {  
-            psmt=conn.prepareStatement(sql);
-            rs=psmt.executeQuery();  
-            while(rs.next()){
-            	if(rs.getInt(1) != 0 && rs.getInt(1)> max)
-            		max=rs.getInt(1);
-            }  
-        } catch (SQLException e) {  
-            e.printStackTrace();  
-        }   
-        
-    	closeConn();
-        
-    	return String.valueOf(max);
-    }
-    
-    public String getAvgGamePeopleByGameID(String date, int sel_game, int month) {
-        float avg = 0;  
-        String sql = " select AVG( "+ CommonString.gameid_array[sel_game] + ") from test_report"
-        		+" where time BETWEEN " + "'" + date +" 00:00:00'"
-    			+" AND ADDDATE(" + "'" + date +" 00:00:00'"+", interval  1 month)"
-        		+" AND Month(time) = " + month;
-        openConn();  
-        try {  
-            psmt=conn.prepareStatement(sql);  
-            rs=psmt.executeQuery();
-            while(rs.next()){
-                avg=rs.getFloat(1);
-            }  
-        } catch (SQLException e) {
-            e.printStackTrace();  
-        }   
 
-    	closeConn();
-    	return String.valueOf(avg);
-    }
 }

@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>遊戲在線人數月報表</title>
+<title>遊戲在線人數年報表</title>
 <style>
 
 table, td, th {
@@ -86,8 +86,10 @@ document.selection.submit();
 			sel_year = "2017";
 		int month = Integer.valueOf(sel_month).intValue();
 		OnlinePeopleCountsReportYear data = new OnlinePeopleCountsReportYear();
+		int[] max_array = new int[] {0,0,0, 0,0,0, 0,0,0, 0,0,0};
+		int[] sum_array = new int[] {0,0,0, 0,0,0, 0,0,0, 0,0,0};
 		int day = 1;
-
+		int sum_count = 0;
 		for(month = 1; month <= 12; month++){ 
 	%><th><%=month%></th><%}%>
 </tr>
@@ -95,7 +97,7 @@ document.selection.submit();
 <tr><%
 	List<Map<String, String>> time_list = data.getAllTimeList();
 	Map<String, String> maps = null;
-	for(int times = 0; times < time_list.size(); times++) {  
+	for(int times = 0; times < time_list.size(); times++,sum_count++) {  
 	    maps = (Map<String, String>)time_list.get(times);
 	    String times_ = maps.get("Times");
 %><th><%=times_%></th><%
@@ -109,24 +111,21 @@ document.selection.submit();
 	    map = (Map<String, String>)list.get(ii);
 	    String counts = map.get("Counts_1");
 		if(counts == null)
-		counts = "0";
+			counts = "0";
+		if(Integer.valueOf(counts) > max_array[ii])
+			max_array[ii] = Integer.valueOf(counts);
+		sum_array[ii] = sum_array[ii] + Integer.valueOf(counts);
 %><th><%=counts%></th><%}%></tr><%}%>
-
 
 <tr><th>MAX</th><%
 		for(int j = 0; j < (month-1) ; j++){
-			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
-															  Integer.parseInt(sel_game),
-															  j+1);
+			String max_people = String.valueOf(max_array[j]);
 %><th><%=max_people%></th><%}%></tr>
 
 <tr><th>AVG</th><%
 		for(int avg = 0; avg < (month-1) ; avg++){
-			String max_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
-															  Integer.parseInt(sel_game),
-															  avg+1);
+			String max_people = String.valueOf(sum_array[avg]/(float)time_list.size());
 %><th><%=max_people%></th><%}%></tr>
-
 </table>
 </body>
 </html>
