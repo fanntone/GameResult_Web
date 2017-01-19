@@ -129,12 +129,7 @@ public class OnlinePeopleCountsReportMonth {
             e.printStackTrace();  
         }   
         
-        try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	closeConn();
         
     	return String.valueOf(max);
     }
@@ -155,12 +150,7 @@ public class OnlinePeopleCountsReportMonth {
             e.printStackTrace();  
         }   
 
-        try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	closeConn();
     	return String.valueOf(avg);
     }
 }
