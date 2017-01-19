@@ -117,15 +117,15 @@ document.selection.submit();
 		sum_array[ii] = sum_array[ii] + Integer.valueOf(counts);
 %><th><%=counts%></th><%}%></tr><%}%>
 
-<tr><th>MAX</th><%
+<tr><th style="background-color:#00BBFF">MAX</th><%
 		for(int j = 0; j < (month-1) ; j++){
 			String max_people = String.valueOf(max_array[j]);
-%><th><%=max_people%></th><%}%></tr>
+%><th style="background-color:#00BBFF"><%=max_people%></th><%}%></tr>
 
-<tr><th>AVG</th><%
+<tr><th style="background-color:#00BBFF">AVG</th><%
 		for(int avg = 0; avg < (month-1) ; avg++){
 			String max_people = String.valueOf(sum_array[avg]/(float)time_list.size());
-%><th><%=max_people%></th><%}%></tr>
+%><th style="background-color:#00BBFF"><%=max_people%></th><%}%></tr>
 </table>
 </body>
 </html>
