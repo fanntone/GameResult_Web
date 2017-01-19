@@ -4,7 +4,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
+<%@ page import="com.dao.OnlinePeopleCountsReportYear"%>
 <%@ page import="com.dao.CommonString"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -76,37 +76,55 @@ document.selection.submit();
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>時間\(月/日)</th>
+	<th>時間\(月份)</th>
 	<%
 		if(sel_game == null)
 			sel_game = "0";
 		if(sel_month == null)
 			sel_month = "1";
-		int month = Integer.valueOf(sel_month).intValue();
-		OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
-		int day = 1;
-		for(day = 1; day <= 31; day++) { 
-			if(month == 2 && day == 29)
-				break;
-			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31)
-				break;
 		if(sel_year == null)
 			sel_year = "2017";
-		
-			
-	%><th><%=month%>/<%=day%></th><%}%>
+		int month = Integer.valueOf(sel_month).intValue();
+		OnlinePeopleCountsReportYear data = new OnlinePeopleCountsReportYear();
+		int day = 1;
+
+		for(month = 1; month <= 12; month++){ 
+	%><th><%=month%></th><%}%>
 </tr>
 
+<tr><%
+	List<Map<String, String>> time_list = data.getAllTimeList();
+	Map<String, String> maps = null;
+	for(int times = 0; times < time_list.size(); times++) {  
+	    maps = (Map<String, String>)time_list.get(times);
+	    String times_ = maps.get("Times");
+%><th><%=times_%></th><%
+	List<Map<String, String>> list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
+													 Integer.parseInt(sel_month),
+													 Integer.parseInt(sel_year),
+													 Integer.parseInt(sel_game),
+													 times_);
+	Map<String, String> map = null;
+	for(int ii = 0; ii < list.size(); ii++) {  
+	    map = (Map<String, String>)list.get(ii);
+	    String counts = map.get("Counts_1");
+		if(counts == null)
+		counts = "0";
+%><th><%=counts%></th><%}%></tr><%}%>
+
+
 <tr><th>MAX</th><%
-		for(int j = 0; j < (day-1) ; j++){
+		for(int j = 0; j < (month-1) ; j++){
 			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
-															  Integer.parseInt(sel_game));
+															  Integer.parseInt(sel_game),
+															  j+1);
 %><th><%=max_people%></th><%}%></tr>
 
 <tr><th>AVG</th><%
-		for(int avg = 0; avg < (day-1) ; avg++){
+		for(int avg = 0; avg < (month-1) ; avg++){
 			String max_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
-															  Integer.parseInt(sel_game));
+															  Integer.parseInt(sel_game),
+															  avg+1);
 %><th><%=max_people%></th><%}%></tr>
 
 </table>
