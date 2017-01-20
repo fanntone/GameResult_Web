@@ -77,7 +77,7 @@ document.selection.submit();
 		int day = 1;
 		int sum_count = 0;
 		for(month = 1; month <= 12; month++){ 
-	%><th><%=month%></th><%}%><th><%=sel_year%>ензб</th>
+	%><th><%=month%></th><%}%><th><%=sel_year%>ж~ензб</th>
 </tr>
 
 <tr><%

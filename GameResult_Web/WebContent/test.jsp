@@ -4,14 +4,14 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="com.dao.OnlinePeopleCountsReportYear"%>
+<%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>遊戲在線人數年報表</title>
+<title>遊戲在線人數月報表</title>
 <style>
 
 table, td, th {
@@ -40,7 +40,7 @@ document.selection.submit();
 <%String sel_game = request.getParameter("games");%>
 <%String sel_month = request.getParameter("months");%>
 <%String sel_year = request.getParameter("years");%>
-<form name="selection" action="test.jsp" method="post">
+<form name="selection" action="OnlinePeopleCountsReportMonth.jsp" method="post">
 &nbsp;請選擇遊戲&nbsp;<select name="games" size="1" id="games" onChange="change()">
 <option value = "0"  <%if (sel_game == null || sel_game.equals("0"))  {%> selected <%}%>>ALL</option>
 <option value = "1"  <%if (sel_game != null && sel_game.equals("1"))  {%> selected <%}%>>game01</option>
@@ -51,7 +51,21 @@ document.selection.submit();
 <option value = "5"  <%if (sel_game != null && sel_game.equals("6"))  {%> selected <%}%>>game06</option>
 </select>
 <br>
-
+&nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
+<option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
+<option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
+<option value = "3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
+<option value = "4"  <%if (sel_month != null && sel_month.equals("4"))  {%> selected <%}%>>4</option>
+<option value = "5"  <%if (sel_month != null && sel_month.equals("5"))  {%> selected <%}%>>5</option>
+<option value = "6"  <%if (sel_month != null && sel_month.equals("6"))  {%> selected <%}%>>6</option>
+<option value = "7"  <%if (sel_month != null && sel_month.equals("7"))  {%> selected <%}%>>7</option>
+<option value = "8"  <%if (sel_month != null && sel_month.equals("8"))  {%> selected <%}%>>8</option>
+<option value = "9"  <%if (sel_month != null && sel_month.equals("9"))  {%> selected <%}%>>9</option>
+<option value = "10" <%if (sel_month != null && sel_month.equals("10")) {%> selected <%}%>>10</option>
+<option value = "11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
+<option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
+</select>
+<br>
 &nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
 <option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
@@ -62,7 +76,7 @@ document.selection.submit();
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>時間\(月份)</th>
+	<th>時間\(月/日)</th>
 	<%
 		if(sel_game == null)
 			sel_game = "0";
@@ -70,56 +84,63 @@ document.selection.submit();
 			sel_month = "1";
 		if(sel_year == null)
 			sel_year = "2017";
-		int month = Integer.valueOf(sel_month).intValue();
-		OnlinePeopleCountsReportYear data = new OnlinePeopleCountsReportYear();
-		int[] max_array = new int[] {0,0,0, 0,0,0, 0,0,0, 0,0,0};
-		int[] sum_array = new int[] {0,0,0, 0,0,0, 0,0,0, 0,0,0};
+		int month = Integer.valueOf(sel_month).intValue();		
 		int day = 1;
-		int sum_count = 0;
-		for(month = 1; month <= 12; month++){ 
-	%><th><%=month%></th><%}%><th><%=sel_year%>平均</th>
+		int max_day = 31;
+		for(day = 1; day < 32; day++) { 
+			if(month == 2 && day == 29) {
+				if(Integer.parseInt(sel_month)%4 == 0)
+					max_day = 29;
+				else
+					max_day = 28;
+				break;
+			}
+			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
+				max_day = 30;
+				break;
+			}			
+	%><th><%=month%>/<%=day%></th><%}%><th><%=sel_month%>平均</th>
 </tr>
 
 <tr><%
+	OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
 	List<Map<String, String>> time_list = data.getAllTimeList();
 	Map<String, String> maps = null;
-	for(int times = 0; times < time_list.size(); times++,sum_count++) {  
+	for(int times = 0; times < time_list.size(); times++) {  
 	    maps = (Map<String, String>)time_list.get(times);
 	    String times_ = maps.get("Times");
 %><th><%=times_%></th><%
 	List<Map<String, String>> list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
 													 Integer.parseInt(sel_month),
 													 Integer.parseInt(sel_year),
-													 Integer.parseInt(sel_game),
-													 times_);
+													 Integer.parseInt(sel_game));
 	Map<String, String> map = null;
 	int row_sum = 0;
-
 	for(int ii = 0; ii < list.size(); ii++) {  
 	    map = (Map<String, String>)list.get(ii);
 	    String counts = map.get("Counts_1");
 		if(counts == null)
 			counts = "0";
-		if(Integer.valueOf(counts) > max_array[ii])
-			max_array[ii] = Integer.valueOf(counts);
-		sum_array[ii] = sum_array[ii] + Integer.valueOf(counts);
-		row_sum += Integer.valueOf(counts);
-		
-%><th><%=counts%></th><%}%><th><%=row_sum/(float)12%></th></tr><%}%>
+	    row_sum += Integer.valueOf(counts);
+%><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
 
-<tr><th style="background-color:#00BBFF">MAX</th><%
+<tr><th>MAX</th><%
 		float row_max = 0;
-		for(int j = 0; j < (month-1) ; j++){
-			String max_people = String.valueOf(max_array[j]);
-			row_max += max_array[j];
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th><%=row_max/12%></th></tr>
+		for(int j = 0; j < (day-1) ; j++){
+			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
+															  Integer.parseInt(sel_game));
+			row_max += Integer.parseInt(max_people);
+			
+%><th><%=max_people%></th><%}%><th><%=row_max/max_day%></th></tr>
 
-<tr><th style="background-color:#00BBFF">AVG</th><%
+<tr><th>AVG</th><%
 		float row_avg = 0;
-		for(int avg = 0; avg < (month-1) ; avg++){
-			String max_people = String.valueOf(sum_array[avg]/(float)time_list.size());
-			row_avg += Float.parseFloat(max_people);
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th><%=row_avg/12%></th></tr>
+		for(int avg = 0; avg < (day-1) ; avg++){
+			String avg_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
+															  Integer.parseInt(sel_game));
+			row_avg += Float.parseFloat(avg_people);
+%><th><%=avg_people%></th><%}%><th><%=row_avg/max_day%></th></tr>
+
 </table>
 </body>
 </html>

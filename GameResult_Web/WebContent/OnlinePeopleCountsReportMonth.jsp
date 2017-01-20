@@ -82,17 +82,24 @@ document.selection.submit();
 			sel_game = "0";
 		if(sel_month == null)
 			sel_month = "1";
-		int month = Integer.valueOf(sel_month).intValue();		
-		int day = 1;
-		for(day = 1; day <= 31; day++) { 
-			if(month == 2 && day == 29)
-				break;
-			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31)
-				break;
 		if(sel_year == null)
 			sel_year = "2017";
-			
-	%><th><%=month%>/<%=day%></th><%}%>
+		int month = Integer.valueOf(sel_month).intValue();		
+		int day = 1;
+		int max_day = 31;
+		for(day = 1; day < 32; day++) { 
+			if(month == 2 && day == 29) {
+				if(Integer.parseInt(sel_month)%4 == 0)
+					max_day = 29;
+				else
+					max_day = 28;
+				break;
+			}
+			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
+				max_day = 30;
+				break;
+			}			
+	%><th><%=month%>/<%=day%></th><%}%><th><%=sel_month%>дыензб</th>
 </tr>
 
 <tr><%
@@ -108,24 +115,31 @@ document.selection.submit();
 													 Integer.parseInt(sel_year),
 													 Integer.parseInt(sel_game));
 	Map<String, String> map = null;
+	int row_sum = 0;
 	for(int ii = 0; ii < list.size(); ii++) {  
 	    map = (Map<String, String>)list.get(ii);
 	    String counts = map.get("Counts_1");
 		if(counts == null)
-		counts = "0";
-%><th><%=counts%></th><%}%></tr><%}%>
+			counts = "0";
+	    row_sum += Integer.valueOf(counts);
+%><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
 
 <tr><th>MAX</th><%
+		float row_max = 0;
 		for(int j = 0; j < (day-1) ; j++){
 			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
 															  Integer.parseInt(sel_game));
-%><th><%=max_people%></th><%}%></tr>
+			row_max += Integer.parseInt(max_people);
+			
+%><th><%=max_people%></th><%}%><th><%=row_max/max_day%></th></tr>
 
 <tr><th>AVG</th><%
+		float row_avg = 0;
 		for(int avg = 0; avg < (day-1) ; avg++){
-			String max_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
+			String avg_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
 															  Integer.parseInt(sel_game));
-%><th><%=max_people%></th><%}%></tr>
+			row_avg += Float.parseFloat(avg_people);
+%><th><%=avg_people%></th><%}%><th><%=row_avg/max_day%></th></tr>
 
 </table>
 </body>
