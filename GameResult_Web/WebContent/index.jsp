@@ -23,7 +23,7 @@ th, td {
 </head>
 <body>
 
-<table>
+<table align="center">
 	<tr>
 		<th><a href = "OnlineMember.jsp" target = "_blank">玩家在線清單</a></th>
 		<th><a href = "AllGamesOnlinePlayers.jsp" target = "_blank">遊戲在線人數清單</a></th>
