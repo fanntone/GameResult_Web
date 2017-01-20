@@ -51,21 +51,7 @@ document.selection.submit();
 <option value = "5"  <%if (sel_game != null && sel_game.equals("6"))  {%> selected <%}%>>game06</option>
 </select>
 <br>
-&nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
-<option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
-<option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
-<option value = "3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
-<option value = "4"  <%if (sel_month != null && sel_month.equals("4"))  {%> selected <%}%>>4</option>
-<option value = "5"  <%if (sel_month != null && sel_month.equals("5"))  {%> selected <%}%>>5</option>
-<option value = "6"  <%if (sel_month != null && sel_month.equals("6"))  {%> selected <%}%>>6</option>
-<option value = "7"  <%if (sel_month != null && sel_month.equals("7"))  {%> selected <%}%>>7</option>
-<option value = "8"  <%if (sel_month != null && sel_month.equals("8"))  {%> selected <%}%>>8</option>
-<option value = "9"  <%if (sel_month != null && sel_month.equals("9"))  {%> selected <%}%>>9</option>
-<option value = "10" <%if (sel_month != null && sel_month.equals("10")) {%> selected <%}%>>10</option>
-<option value = "11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
-<option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
-</select>
-<br>
+
 &nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
 <option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
@@ -91,7 +77,7 @@ document.selection.submit();
 		int day = 1;
 		int sum_count = 0;
 		for(month = 1; month <= 12; month++){ 
-	%><th><%=month%></th><%}%>
+	%><th><%=month%></th><%}%><th><%=sel_year%>平均</th>
 </tr>
 
 <tr><%
@@ -107,6 +93,8 @@ document.selection.submit();
 													 Integer.parseInt(sel_game),
 													 times_);
 	Map<String, String> map = null;
+	int row_sum = 0;
+
 	for(int ii = 0; ii < list.size(); ii++) {  
 	    map = (Map<String, String>)list.get(ii);
 	    String counts = map.get("Counts_1");
@@ -115,17 +103,23 @@ document.selection.submit();
 		if(Integer.valueOf(counts) > max_array[ii])
 			max_array[ii] = Integer.valueOf(counts);
 		sum_array[ii] = sum_array[ii] + Integer.valueOf(counts);
-%><th><%=counts%></th><%}%></tr><%}%>
+		row_sum += Integer.valueOf(counts);
+		
+%><th><%=counts%></th><%}%><th><%=row_sum/(float)12%></th></tr><%}%>
 
 <tr><th style="background-color:#00BBFF">MAX</th><%
+		float row_max = 0;
 		for(int j = 0; j < (month-1) ; j++){
 			String max_people = String.valueOf(max_array[j]);
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%></tr>
+			row_max += max_array[j];
+%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th><%=row_max/12%></th></tr>
 
 <tr><th style="background-color:#00BBFF">AVG</th><%
+		float row_avg = 0;
 		for(int avg = 0; avg < (month-1) ; avg++){
 			String max_people = String.valueOf(sum_array[avg]/(float)time_list.size());
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%></tr>
+			row_avg += Float.parseFloat(max_people);
+%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th><%=row_avg/12%></th></tr>
 </table>
 </body>
 </html>
