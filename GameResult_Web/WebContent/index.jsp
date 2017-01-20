@@ -29,6 +29,7 @@ th, td {
 		<th><a href = "AllGamesOnlinePlayers.jsp" target = "_blank">遊戲在線人數清單</a></th>
 		<th><a href = "OnlinePeopleCountsReport.jsp" target = "_blank">遊戲在線人數日報表</a></th>
 		<th><a href = "OnlinePeopleCountsReportMonth.jsp" target = "_blank">遊戲在線人數月報表</a></th>
+		<th><a href = "OnlinePeopleCountsReportYear.jsp" target = "_blank">遊戲在線人數年報表</a></th>
 		<th><a href = "GameResultRecords.jsp" target = "_blank">賽果查詢</a></th>
 	</tr>
 </table>
