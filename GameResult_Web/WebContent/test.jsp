@@ -6,12 +6,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.dao.BetRecordByDay"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>遊戲在線人數月報表</title>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<style>
+  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+</style>
+
+<title>每日平台投注查詢</title>
 <style>
 
 table, td, th {
@@ -36,110 +46,78 @@ function change(){
 document.selection.submit();
 }
 </script>
-
-<%String sel_game = request.getParameter("games");%>
-<%String sel_month = request.getParameter("months");%>
-<%String sel_year = request.getParameter("years");%>
-<form name="selection" action="OnlinePeopleCountsReportMonth.jsp" method="post">
-&nbsp;請選擇遊戲&nbsp;<select name="games" size="1" id="games" onChange="change()">
-<option value = "0"  <%if (sel_game == null || sel_game.equals("0"))  {%> selected <%}%>>ALL</option>
-<option value = "1"  <%if (sel_game != null && sel_game.equals("1"))  {%> selected <%}%>>game01</option>
-<option value = "2"  <%if (sel_game != null && sel_game.equals("2"))  {%> selected <%}%>>game02</option>
-<option value = "3"  <%if (sel_game != null && sel_game.equals("3"))  {%> selected <%}%>>game03</option>
-<option value = "4"  <%if (sel_game != null && sel_game.equals("4"))  {%> selected <%}%>>game04</option>
-<option value = "5"  <%if (sel_game != null && sel_game.equals("5"))  {%> selected <%}%>>game05</option>
-<option value = "5"  <%if (sel_game != null && sel_game.equals("6"))  {%> selected <%}%>>game06</option>
-</select>
+<%
+String date = request.getParameter(CommonString.PARAMETER_DATE);
+if(date == null) {
+	java.util.Date c_date = new java.util.Date();
+	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+	date = trans.format(c_date);
+}
+%>
+<form name="selection" action="test.jsp" method="get"> 請選擇筆數
 <br>
-&nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
-<option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
-<option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
-<option value = "3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
-<option value = "4"  <%if (sel_month != null && sel_month.equals("4"))  {%> selected <%}%>>4</option>
-<option value = "5"  <%if (sel_month != null && sel_month.equals("5"))  {%> selected <%}%>>5</option>
-<option value = "6"  <%if (sel_month != null && sel_month.equals("6"))  {%> selected <%}%>>6</option>
-<option value = "7"  <%if (sel_month != null && sel_month.equals("7"))  {%> selected <%}%>>7</option>
-<option value = "8"  <%if (sel_month != null && sel_month.equals("8"))  {%> selected <%}%>>8</option>
-<option value = "9"  <%if (sel_month != null && sel_month.equals("9"))  {%> selected <%}%>>9</option>
-<option value = "10" <%if (sel_month != null && sel_month.equals("10")) {%> selected <%}%>>10</option>
-<option value = "11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
-<option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
-</select>
-<br>
-&nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
-<option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
-<option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
-</select>
-
+Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+<input type="submit" value="送出查詢" >
 </form>
-
+<script language="JavaScript">
+  $(document).ready(function(){ 
+    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+  });
+</script>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>時間\(月/日)</th>
-	<%
-		if(sel_game == null)
-			sel_game = "0";
-		if(sel_month == null)
-			sel_month = "1";
-		if(sel_year == null)
-			sel_year = "2017";
-		int month = Integer.valueOf(sel_month).intValue();		
-		int day = 1;
-		int max_day = 31;
-		for(day = 1; day < 32; day++) { 
-			if(month == 2 && day == 29) {
-				if(Integer.parseInt(sel_month)%4 == 0)
-					max_day = 29;
-				else
-					max_day = 28;
-				break;
-			}
-			if((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
-				max_day = 30;
-				break;
-			}			
-	%><th><%=month%>/<%=day%></th><%}%><th><%=sel_month%>平均</th>
+	<th>Games(遊戲數量)</th>
+	<th>Players(玩家數量)</th>
+	<th>Rounds(投注次數)</th>
+	<th>Bet(玩家投注金)</th>
+	<th>Win(玩家贏金)</th>
+	<th>Profit(官方利潤)</th>
+	<th>Pay Rate出獎率(%)</th>
 </tr>
 
-<tr><%
-	OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
-	List<Map<String, String>> time_list = data.getAllTimeList();
-	Map<String, String> maps = null;
-	for(int times = 0; times < time_list.size(); times++) {  
-	    maps = (Map<String, String>)time_list.get(times);
-	    String times_ = maps.get("Times");
-%><th><%=times_%></th><%
-	List<Map<String, String>> list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
-													 Integer.parseInt(sel_month),
-													 Integer.parseInt(sel_year),
-													 Integer.parseInt(sel_game));
-	Map<String, String> map = null;
-	int row_sum = 0;
-	for(int ii = 0; ii < list.size(); ii++) {  
-	    map = (Map<String, String>)list.get(ii);
-	    String counts = map.get("Counts_1");
-		if(counts == null)
-			counts = "0";
-	    row_sum += Integer.valueOf(counts);
-%><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
 
-<tr><th>MAX</th><%
-		float row_max = 0;
-		for(int j = 0; j < (day-1) ; j++){
-			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
-															  Integer.parseInt(sel_game));
-			row_max += Integer.parseInt(max_people);
-			
-%><th><%=max_people%></th><%}%><th><%=row_max/max_day%></th></tr>
-
-<tr><th>AVG</th><%
-		float row_avg = 0;
-		for(int avg = 0; avg < (day-1) ; avg++){
-			String avg_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
-															  Integer.parseInt(sel_game));
-			row_avg += Float.parseFloat(avg_people);
-%><th><%=avg_people%></th><%}%><th><%=row_avg/max_day%></th></tr>
+<%
+	BetRecordByDay data = new BetRecordByDay();
+	List<Map<String, String>> list = data.getAllRecords();
+	
+%>
+<tr>
+	<%
+		Map<String, String> map = null;
+		int games = 0;
+		int players = 0;
+		int rounds = 0;
+		int bet = 0;
+		int win = 0;
+		int profit = 0;
+		float rayrate = 0;
+	  	for(int i = 0; i < list.size(); i++) {  
+	      	map = (Map<String, String>)list.get(i);
+	      	if(map.get("Games") != null)
+	      		games = Integer.parseInt(map.get("Games"));
+	      	if(map.get("Players") != null)
+	      		players = Integer.parseInt(map.get("Players"));
+	      	if(map.get("Rounds") != null)
+	      		rounds = Integer.parseInt(map.get("Rounds"));
+	      	if(map.get("Bet") != null)
+	      		bet = Integer.parseInt(map.get("Bet"));
+	      	if(map.get("Win") != null)
+	      		win = Integer.parseInt(map.get("Win"));
+	      	if(map.get("Profit") != null)
+	      		profit = Integer.parseInt(map.get("Profit"));
+	      	if(map.get("PayRate") != null)
+	      		rayrate = Float.parseFloat(map.get("PayRate"));
+	%>
+	<th><%=games%></th>
+	<th><%=players%></th>
+	<th><%=rounds%></th>
+	<th><%=bet%></th>
+	<th><%=win%></th>
+	<th><%=profit%></th>
+	<th><%=rayrate%>%</th>
+	<%}%>
+</tr>
 
 </table>
 </body>
