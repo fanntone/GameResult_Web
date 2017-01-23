@@ -49,6 +49,17 @@ document.selection.submit();
 }
 </script>
 <%
+String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
+if(orderby == null)
+	orderby = "1";
+String asc = request.getParameter(CommonString.PARAMETER_ASC);
+if(asc == null)
+	asc = "1";
+String reorder;
+if(asc.equalsIgnoreCase("1"))
+	reorder = "0";
+else
+	reorder = "1";
 String sel = request.getParameter(CommonString.PARAMETER_GAMEID);
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
@@ -91,16 +102,34 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>Players(玩家數量)</th>
-	<th>Rounds(投注次數)</th>
-	<th>Bet(玩家投注金)</th>
-	<th>Win(玩家贏金)</th>
-	<th>Profit(官方利潤)</th>
-	<th>Pay Rate出獎率(%)</th>
+	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
+	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
+	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
+	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
+	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
+	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
 <%
 	BettingListForEachGame data = new BettingListForEachGame();
-	List<Map<String, String>> list = data.getAllRecords(date, sel);
+	List<Map<String, String>> list = data.getAllRecords(date, sel, orderby, asc);
 %>
 <tr>
 	<%

@@ -40,10 +40,15 @@ public class BettingListForEachGame {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String date, String gameID){
+	public List<Map<String, String>> getAllRecords(String date, String gameID, String orderby, String asc){
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
+    	String orderby_str;
+    	if(asc.equalsIgnoreCase("1"))
+    		orderby_str = " order by " + orderby + " ASC;"; 
+    	else
+    		orderby_str = " order by " + orderby + " DESC;";
     	String sql_quato = "'";
 	    try {
 	    	sql = " select userID," 
@@ -55,7 +60,8 @@ public class BettingListForEachGame {
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ sql_quato + date + sql_quato 
 	    		+ " and gameID = " +  gameID
-	    		+ " GROUP by userID;";
+	    		+ " GROUP by userID"
+	    		+ orderby_str;
 	    	
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
