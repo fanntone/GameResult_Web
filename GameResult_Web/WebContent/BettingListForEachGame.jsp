@@ -7,7 +7,9 @@
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<%@ page import="com.dao.AllGamesBetRecord"%>
+<%@ page import="com.dao.BettingListForEachGame"%>
+<%@ page import="com.dao.EnumSelectionList"%>
+<%@ page import="com.dao.EnumAllGamesList"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,6 +49,7 @@ document.selection.submit();
 }
 </script>
 <%
+String sel = request.getParameter(CommonString.PARAMETER_GAMEID);
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
@@ -54,7 +57,28 @@ if(date == null) {
 	date = trans.format(c_date);
 }
 %>
-<form name="selection" action="AllGamesBetRecord.jsp" method="get"> 請選擇筆數
+<form name="selection" action="BettingListForEachGame.jsp" method="get"> 請選擇筆數
+<select name="gameID" size="ALL" id="gameID" onChange="change()">
+<option value=<%=EnumAllGamesList.GAME_1.getValue()%>
+	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_1.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_2.getValue()%>
+	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_2.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_3.getValue()%>
+	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_3.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 		
+<option value=<%=EnumAllGamesList.GAME_4.getValue()%>
+	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_4.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
+<option value=<%=EnumAllGamesList.GAME_5.getValue()%>
+	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_5.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
+<option value=<%=EnumAllGamesList.GAME_6.getValue()%>
+	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_6.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
+</select>
+
 <br>
 Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <input type="submit" value="送出查詢" >
@@ -67,7 +91,6 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>Game(遊戲名稱)</th>
 	<th>Players(玩家數量)</th>
 	<th>Rounds(投注次數)</th>
 	<th>Bet(玩家投注金)</th>
@@ -76,8 +99,8 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	<th>Pay Rate出獎率(%)</th>
 </tr>
 <%
-	AllGamesBetRecord data = new AllGamesBetRecord();
-	List<Map<String, String>> list = data.getAllRecords(date);
+	BettingListForEachGame data = new BettingListForEachGame();
+	List<Map<String, String>> list = data.getAllRecords(date, sel);
 %>
 <tr>
 	<%
@@ -91,8 +114,6 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 		float rayrate = 0;
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
-	      	if(map.get("Game") != null)
-	      		games = Integer.parseInt(map.get("Game"));
 	      	if(map.get("Players") != null)
 	      		players = Integer.parseInt(map.get("Players"));
 	      	if(map.get("Rounds") != null)
@@ -106,7 +127,6 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	      	if(map.get("PayRate") != null)
 	      		rayrate = Float.parseFloat(map.get("PayRate"));
 	%>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=games%>&date=<%=date%>" target = "_blank"><%=games%></a></th>
 	<th><%=players%></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>

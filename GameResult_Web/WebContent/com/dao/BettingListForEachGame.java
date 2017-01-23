@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AllGamesBetRecord {
+public class BettingListForEachGame {
 
 
 	private Connection conn = null;  
@@ -40,14 +40,13 @@ public class AllGamesBetRecord {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String date){
+	public List<Map<String, String>> getAllRecords(String date, String gameID){
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
     	String sql_quato = "'";
 	    try {
-	    	sql = " select gameID," 
-	    		+ " count(distinct userID) as Players,"
+	    	sql = " select userID," 
 	    		+ " count(betting) as Rounds,"
 	    		+ " sum(betting) as Bet,"
 	    		+ " sum(results) as Win,"
@@ -55,14 +54,14 @@ public class AllGamesBetRecord {
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ sql_quato + date + sql_quato 
-	    		+ " GROUP by gameID;";
+	    		+ " and gameID = " +  gameID
+	    		+ " GROUP by userID;";
 	    	
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {
-		    	Map<String, String> map = new HashMap<String, String>();  
-	    		map.put("Game", rs.getString("gameID"));
-	    		map.put("Players", rs.getString("Players"));
+		    	Map<String, String> map = new HashMap<String, String>();
+	    		map.put("Players", rs.getString("userID"));
 	    		map.put("Rounds", rs.getString("Rounds"));
 	    		map.put("Bet", rs.getString("Bet"));
 	    		map.put("Win", rs.getString("Win"));
@@ -77,5 +76,4 @@ public class AllGamesBetRecord {
 	    closeConn();
 		return list;
 	}
-	
 }
