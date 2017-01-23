@@ -7,7 +7,7 @@
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<%@ page import="com.dao.BetRecordByDay"%>
+<%@ page import="com.dao.AllGamesBetRecord"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -54,7 +54,7 @@ if(date == null) {
 	date = trans.format(c_date);
 }
 %>
-<form name="selection" action="BetRecordByDay.jsp" method="get"> 請選擇筆數
+<form name="selection" action="AllGamesBetRecord.jsp" method="get"> 請選擇筆數
 <br>
 Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <input type="submit" value="送出查詢" >
@@ -67,7 +67,7 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>Games(遊戲數量)</th>
+	<th>Game(遊戲名稱)</th>
 	<th>Players(玩家數量)</th>
 	<th>Rounds(投注次數)</th>
 	<th>Bet(玩家投注金)</th>
@@ -76,7 +76,7 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	<th>Pay Rate出獎率(%)</th>
 </tr>
 <%
-	BetRecordByDay data = new BetRecordByDay();
+	AllGamesBetRecord data = new AllGamesBetRecord();
 	List<Map<String, String>> list = data.getAllRecords(date);
 %>
 <tr>
@@ -91,8 +91,8 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 		float rayrate = 0;
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
-	      	if(map.get("Games") != null)
-	      		games = Integer.parseInt(map.get("Games"));
+	      	if(map.get("Game") != null)
+	      		games = Integer.parseInt(map.get("Game"));
 	      	if(map.get("Players") != null)
 	      		players = Integer.parseInt(map.get("Players"));
 	      	if(map.get("Rounds") != null)
@@ -106,15 +106,15 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	      	if(map.get("PayRate") != null)
 	      		rayrate = Float.parseFloat(map.get("PayRate"));
 	%>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>" target = "_blank"><%=games%></a></th>
+	<th><%=games%></th>
 	<th><%=players%></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>
 	<th><%=win%></th>
 	<th><%=profit%></th>
 	<th><%=rayrate%>%</th>
-	<%}%>
 </tr>
+<%}%>
 
 </table>
 </body>

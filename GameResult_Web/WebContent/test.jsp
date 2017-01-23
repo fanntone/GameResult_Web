@@ -75,12 +75,9 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	<th>Profit(官方利潤)</th>
 	<th>Pay Rate出獎率(%)</th>
 </tr>
-
-
 <%
 	BetRecordByDay data = new BetRecordByDay();
-	List<Map<String, String>> list = data.getAllRecords(date);
-	
+	List<Map<String, String>> list = data.getAllRecords(date);	
 %>
 <tr>
 	<%
