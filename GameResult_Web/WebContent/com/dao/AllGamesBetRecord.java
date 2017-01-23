@@ -15,7 +15,7 @@ public class AllGamesBetRecord {
 
 	private Connection conn = null;  
 	private PreparedStatement psmt = null;  
-	private ResultSet rs = null;  
+	private ResultSet rs = null;
 	
 	private void openConn() {  
 	    String url=CommonString.DB_URL;  
@@ -40,10 +40,15 @@ public class AllGamesBetRecord {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String date){
+	public List<Map<String, String>> getAllRecords(String date, String orderby, String asc) {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
+    	String orderby_str;
+    	if(asc.equalsIgnoreCase("1"))
+    		orderby_str = " order by " + orderby + " ASC;"; 
+    	else
+    		orderby_str = " order by " + orderby + " DESC;";
     	String sql_quato = "'";
 	    try {
 	    	sql = " select gameID," 
@@ -55,7 +60,8 @@ public class AllGamesBetRecord {
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ sql_quato + date + sql_quato 
-	    		+ " GROUP by gameID;";
+	    		+ " GROUP by gameID"
+	    		+ orderby_str;
 	    	
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  

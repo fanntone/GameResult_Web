@@ -47,6 +47,18 @@ document.selection.submit();
 }
 </script>
 <%
+
+String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
+if(orderby == null)
+	orderby = "1";
+String asc = request.getParameter(CommonString.PARAMETER_ASC);
+if(asc == null)
+	asc = "1";
+String reorder;
+if(asc.equalsIgnoreCase("1"))
+	reorder = "0";
+else
+	reorder = "1";
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
@@ -67,17 +79,31 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th>Game(遊戲名稱)</th>
-	<th>Players(玩家數量)</th>
-	<th>Rounds(投注次數)</th>
-	<th>Bet(玩家投注金)</th>
-	<th>Win(玩家贏金)</th>
-	<th>Profit(官方利潤)</th>
-	<th>Pay Rate出獎率(%)</th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Game(遊戲名稱)</a></th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=2
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=3
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=4
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=5
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=6
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
+	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+			&<%=CommonString.PARAMETER_ORDERBY%>=7
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
 <%
 	AllGamesBetRecord data = new AllGamesBetRecord();
-	List<Map<String, String>> list = data.getAllRecords(date);
+	List<Map<String, String>> list = data.getAllRecords(date, orderby, asc);
 %>
 <tr>
 	<%
