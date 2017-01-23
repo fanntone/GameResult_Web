@@ -79,7 +79,7 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 
 <%
 	BetRecordByDay data = new BetRecordByDay();
-	List<Map<String, String>> list = data.getAllRecords();
+	List<Map<String, String>> list = data.getAllRecords(date);
 	
 %>
 <tr>
