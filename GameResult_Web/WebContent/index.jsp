@@ -32,6 +32,9 @@ th, td {
 		<th><a href = "OnlinePeopleCountsReportYear.jsp" target = "_blank">遊戲在線人數年報表</a></th>
 		<th><a href = "GameResultRecords.jsp" target = "_blank">賽果查詢</a></th>
 	</tr>
+	<tr>
+		<th><a href = "BetRecordByDay.jsp" target = "_blank">每日平台投注查詢</a></th>
+	</tr>
 </table>
 
 </body>
