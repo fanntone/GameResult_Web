@@ -60,76 +60,102 @@ if(asc.equalsIgnoreCase("1"))
 	reorder = "0";
 else
 	reorder = "1";
-String sel = request.getParameter(CommonString.PARAMETER_GAMEID);
+String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
 	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
 	date = trans.format(c_date);
 }
+String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
+if(sel_page == null)
+	sel_page = "5";
+
+int pageSize;
+pageSize = Integer.parseInt(sel_page);
+
 %>
-<form name="selection" action="BettingListForEachGame.jsp" method="get"> 請選擇筆數
+<form name="selection" action="BettingListForEachGame.jsp" method="get">
+&nbsp;請選擇遊戲&nbsp;
 <select name="gameID" size="ALL" id="gameID" onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_1.getValue()%>
-	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_1.getValue())) {%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_1.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>		
 <option value=<%=EnumAllGamesList.GAME_2.getValue()%>
-	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_2.getValue())) {%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_2.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>		
 <option value=<%=EnumAllGamesList.GAME_3.getValue()%>
-	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_3.getValue())) {%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_3.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 		
 <option value=<%=EnumAllGamesList.GAME_4.getValue()%>
-	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_4.getValue())) {%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_4.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
 <option value=<%=EnumAllGamesList.GAME_5.getValue()%>
-	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_5.getValue())) {%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_5.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
 <option value=<%=EnumAllGamesList.GAME_6.getValue()%>
-	<%if (sel != null && sel.equals(EnumAllGamesList.GAME_6.getValue())) {%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_6.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select>
-
 <br>
-Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
-<input type="submit" value="送出查詢" >
+&nbsp;請選擇筆數&nbsp;
+<select name="sel_page" size="1" id="sel_page" onChange="change()">
+<option value=<%=EnumSelectionList.SELECT_5.getValue()%>
+	<%if (sel_page == null || sel_page.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_10.getValue()%>
+	<%if (sel_page != null && sel_page.equals(EnumSelectionList.SELECT_10.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_10.getValue()%></option>
+<option value=<%=EnumSelectionList.SELECT_25.getValue()%>
+	<%if (sel_page != null && sel_page.equals(EnumSelectionList.SELECT_25.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_25.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_50.getValue()%>
+	<%if (sel_page != null && sel_page.equals(EnumSelectionList.SELECT_50.getValue())) {%>
+		selected <%}%>><%=EnumSelectionList.SELECT_50.getValue()%></option> 
+<option value=<%=EnumSelectionList.SELECT_100.getValue()%>
+	<%if (sel_page != null && sel_page.equals(EnumSelectionList.SELECT_100.getValue())){%>
+		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
+</select>
+<br>
+&nbsp;Date&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+&nbsp;<input type="submit" value="送出查詢" >
 </form>
 <script language="JavaScript">
   $(document).ready(function(){ 
-    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+    $("#date").datepicker({appendText: "  點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
   });
 </script>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=sel%>
+	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
 <%
 	BettingListForEachGame data = new BettingListForEachGame();
-	List<Map<String, String>> list = data.getAllRecords(date, sel, orderby, asc);
+	List<Map<String, String>> list = data.getAllRecords(date, sel_gameID, orderby, asc);
 %>
 <tr>
 	<%
@@ -164,7 +190,53 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	<th><%=rayrate%>%</th>
 </tr>
 <%}%>
-
 </table>
+<%
+	int totalPages = data.getTotalPage(pageSize, date, sel_gameID);
+	
+	String currentPage = request.getParameter("pageIndex");
+	if(currentPage==null)  
+	    currentPage="1";  
+	 
+	int pageIndex = Integer.parseInt(currentPage);  
+	if(pageIndex < 1){  
+	    pageIndex = 1;  
+	}else if(pageIndex > totalPages){  
+	    pageIndex = totalPages;  
+	}
+	
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
+%>
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&pageIndex=1">&nbsp;首頁</a>
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 </body>
 </html>

@@ -16,6 +16,7 @@ public class BettingListForEachGame {
 	private Connection conn = null;  
 	private PreparedStatement psmt = null;  
 	private ResultSet rs = null;  
+	private String sql_quato = "'";
 	
 	private void openConn() {  
 	    String url=CommonString.DB_URL;  
@@ -49,7 +50,7 @@ public class BettingListForEachGame {
     		orderby_str = " order by " + orderby + " ASC;"; 
     	else
     		orderby_str = " order by " + orderby + " DESC;";
-    	String sql_quato = "'";
+
 	    try {
 	    	sql = " select userID," 
 	    		+ " count(betting) as Rounds,"
@@ -82,4 +83,32 @@ public class BettingListForEachGame {
 	    closeConn();
 		return list;
 	}
+	
+    public int countRs(String date, String gameid){  
+        int count = 0;  
+        String sql = "select count(distinct userID) as Players"
+        		   + " from resultsRecords where Date(resultsDate) = "
+	    		   + sql_quato + date + sql_quato 
+	    		   + " AND gameID = " + gameid;
+        openConn();  
+        try {  
+            psmt=conn.prepareStatement(sql);  
+            rs=psmt.executeQuery();  
+            while(rs.next()){  
+                count=rs.getInt(1);  
+            }  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }
+        
+        closeConn();
+        return count;  
+    }  
+
+    public int getTotalPage(int pageSize, String datetime, String gameid) {  
+        int totalPage=countRs(datetime, gameid);
+        if(pageSize> totalPage)
+        	return 1;
+        return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);
+    }  
 }

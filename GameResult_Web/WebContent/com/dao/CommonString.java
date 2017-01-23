@@ -13,6 +13,7 @@ public class CommonString {
 	public static final String PARAMETER_DATE = "date";
 	public static final String PARAMETER_ORDERBY = "orderby";
 	public static final String PARAMETER_ASC = "asc";
+	public static final String PARAMETER_SELPAGESIZE = "selPageSize";
 	
 	public static final String BALANCE = "balance";
 	public static final String ONLINEPLAYERS = "OnlinePlayers";
