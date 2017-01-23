@@ -38,11 +38,12 @@ public class GameResultRecords {
     	List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
     	String dots = ",";
     	String sql = " select * from resultsRecords where userID = " + userID 
-	  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
-	  	 + " AND " +  "'" + datetime +" 23:59:59'"
-	  	 + " AND gameID = " + gameid
-	  	 + " order by roundUUID ASC Limit "
-		  	 + pageSize*(pageIndex-1) + dots +(pageSize);
+				  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
+				  	 + " AND " +  "'" + datetime +" 23:59:59'"
+				  	 + " AND gameID = " + gameid
+				  	 + " order by roundUUID ASC "
+				  	 + " Limit "
+				  	 + pageSize*(pageIndex-1) + dots +(pageSize);
 	    try {
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  

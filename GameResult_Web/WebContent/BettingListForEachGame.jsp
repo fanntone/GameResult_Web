@@ -161,7 +161,31 @@ pageSize = Integer.parseInt(sel_page);
 </tr>
 <%
 	BettingListForEachGame data = new BettingListForEachGame();
-	List<Map<String, String>> list = data.getAllRecords(date, sel_gameID, orderby, asc);
+	String currentPage = request.getParameter("pageIndex");
+	if(currentPage==null)  
+	    currentPage="1";
+	int pageIndex = Integer.parseInt(currentPage);  
+	List<Map<String, String>> list = data.getAllRecords(date,
+														sel_gameID,
+														orderby,
+														asc,
+														pageSize,
+														pageIndex);
+	int totalPages = data.getTotalPage(pageSize, date, sel_gameID);	 
+		
+	if(pageIndex < 1){  
+	    pageIndex = 1;  
+	}else if(pageIndex > totalPages){  
+	    pageIndex = totalPages;  
+	}
+	
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
 %>
 <tr>
 	<%
@@ -198,26 +222,7 @@ pageSize = Integer.parseInt(sel_page);
 <%}%>
 </table>
 <%
-	int totalPages = data.getTotalPage(pageSize, date, sel_gameID);
-	
-	String currentPage = request.getParameter("pageIndex");
-	if(currentPage==null)  
-	    currentPage="1";  
-	 
-	int pageIndex = Integer.parseInt(currentPage);  
-	if(pageIndex < 1){  
-	    pageIndex = 1;  
-	}else if(pageIndex > totalPages){  
-	    pageIndex = totalPages;  
-	}
-	
-	int nextPage = pageIndex + 1;
-	if(nextPage > totalPages)
-		nextPage = totalPages;
 
-	int upPage = pageIndex - 1;
-	if(upPage < 1)
-		upPage = 1;
 %>
 <p style="color:red">·í«e­¶¼Æ:<%=pageIndex%>/<%=totalPages%>
 <a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>

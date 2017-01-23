@@ -10,13 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BettingListForEachGame {
+public class PlayersWinRanking {
 
 	private Connection conn = null;  
 	private PreparedStatement psmt = null;  
 	private ResultSet rs = null;  
 	private String sql_quato = "'";
-	private String dots = ",";
 	
 	private void openConn() {  
 	    String url=CommonString.DB_URL;  
@@ -41,20 +40,15 @@ public class BettingListForEachGame {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String date,
-												   String gameID,
-												   String orderby,
-												   String asc,
-												   int pageSize,
-												   int pageIndex){
+	public List<Map<String, String>> getAllRecords(String date, String gameID, String orderby, String asc){
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
     	String orderby_str;
     	if(asc.equalsIgnoreCase("1"))
-    		orderby_str = " order by " + orderby + " ASC "; 
+    		orderby_str = " order by " + orderby + " ASC;"; 
     	else
-    		orderby_str = " order by " + orderby + " DESC ";
+    		orderby_str = " order by " + orderby + " DESC;";
 
 	    try {
 	    	sql = " select userID," 
@@ -67,10 +61,8 @@ public class BettingListForEachGame {
 	    		+ sql_quato + date + sql_quato 
 	    		+ " and gameID = " +  gameID
 	    		+ " GROUP by userID"
-	    		+ orderby_str
-			  	+ " Limit "
-			  	+ pageSize*(pageIndex-1) + dots +(pageSize);
-	    	sql += ";";
+	    		+ orderby_str;
+	    	
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {
