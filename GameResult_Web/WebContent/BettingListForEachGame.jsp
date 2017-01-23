@@ -23,7 +23,7 @@
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 
-<title>每日平台投注查詢</title>
+<title>單一遊戲投注清單</title>
 <style>
 
 table, td, th {
@@ -128,27 +128,33 @@ pageSize = Integer.parseInt(sel_page);
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	<th><a href = "BettingListForEachGame.jsp
+			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	<th><a href = "BettingListForEachGame.jsp
+			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	<th><a href = "BettingListForEachGame.jsp
+			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	<th><a href = "BettingListForEachGame.jsp
+			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	<th><a href = "BettingListForEachGame.jsp
+			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
-	<th><a href = "BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	<th><a href = "BettingListForEachGame.jsp
+			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>

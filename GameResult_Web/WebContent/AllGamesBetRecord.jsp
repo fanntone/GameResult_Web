@@ -21,7 +21,7 @@
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 
-<title>每日平台投注查詢</title>
+<title>各遊戲投注統計</title>
 <style>
 
 table, td, th {
