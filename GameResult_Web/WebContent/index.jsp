@@ -39,7 +39,7 @@ th, td {
 		<th><a href = "BettingListForEachGame.jsp" target = "_blank">單一遊戲投注查詢</a></th>
 		<th><a href = "PlayersWinRanking.jsp" target = "_blank">玩家輸贏排行(每日)</a></th>
 		<th><a href = "BetRecordReportMonth.jsp" target = "_blank">投注金額月報表</a></th>
-		<th><a href = "test.jsp" target = "_blank">投注金額年報表</a></th>
+		<th><a href = "BetRecordReportYear.jsp" target = "_blank">投注金額年報表</a></th>
 	</tr>
 	<tr>
 		<th>玩家金幣異動查詢</th>
