@@ -80,7 +80,7 @@ public class PlayersWinRanking {
 	    		list.add(map);	
 	    	}	    	
         } catch (SQLException e) {
-            e.printStackTrace();  
+            e.printStackTrace();
         }
 	    
 	    closeConn();
@@ -98,7 +98,7 @@ public class PlayersWinRanking {
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
             while(rs.next()){  
-                count=rs.getInt(1);  
+                count=rs.getInt(1);
             }  
         } catch (SQLException e) {  
             e.printStackTrace();  
