@@ -221,9 +221,7 @@ pageSize = Integer.parseInt(sel_page);
 </tr>
 <%}%>
 </table>
-<%
 
-%>
 <p style="color:red">·í«e­¶¼Æ:<%=pageIndex%>/<%=totalPages%>
 <a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
