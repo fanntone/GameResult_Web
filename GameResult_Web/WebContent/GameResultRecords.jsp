@@ -54,7 +54,7 @@ if(sel == null)
 
 String userid = request.getParameter(CommonString.PAREMETER_USERID);
 if(userid == null)
-	userid = "1001001";
+	userid = CommonString.TEST_UESRID;
 
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
@@ -68,7 +68,7 @@ if(gameid == null)
 	gameid = EnumAllGamesList.GAME_1.getValue();
 %>
 <form name="selection" action="GameResultRecords.jsp" method="get"> 請選擇筆數
-<select name="select" size="1" id="select" onChange="change()">
+<select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -86,9 +86,9 @@ if(gameid == null)
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
-UerID:<input name = "userID" id= "userID" type= "text" value = <%=userid%>>
-GameID:<input name = "gameID" id = "gameID" type= "text" value = <%=gameid%>>
+Date:<input name = <%=CommonString.PARAMETER_DATE%> id= <%=CommonString.PARAMETER_DATE%> type= "text" value = <%=date%>><br>
+UerID:<input name = <%=CommonString.PAREMETER_USERID%> id= <%=CommonString.PAREMETER_USERID%> type= "text" value = <%=userid%>>
+GameID:<input name = <%=CommonString.PARAMETER_GAMEID%> id = <%=CommonString.PARAMETER_GAMEID%> type= "text" value = <%=gameid%>>
 <input type="submit" value="送出查詢" >
 </form>
 <br>
@@ -144,8 +144,8 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
       <tr>  
           <th><%=map.get("roundUUID") %></th>  
           <th>
-	          <a href="PlayerDetail.jsp?userID=<%=map.get("userID")%>" target = "_blank">
-	            <%=map.get("userID") %>
+	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
+	            <%=map.get(CommonString.PAREMETER_USERID)%>
 	          </a>
  		  </th> 
           <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
@@ -162,7 +162,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
-          	for(int j = 0; j < 15 ; j++) {
+          	for(int j = 0; j < 15; j++) {
 				String text = "<img src=\"images/i"+ ps.slot1[j] + ".png\" />";
 				if((j+1)%5==0)
 					text += "<br>";

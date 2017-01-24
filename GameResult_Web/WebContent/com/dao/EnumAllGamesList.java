@@ -1,13 +1,13 @@
 package com.dao;
 
 public enum EnumAllGamesList {
-	GAME_0("0000"),
-	GAME_1("1001"),
-	GAME_2("1002"),
-	GAME_3("1003"),
-	GAME_4("1004"),
-	GAME_5("1005"),
-	GAME_6("1006"),
+	GAME_0("25000"),
+	GAME_1("25001"),
+	GAME_2("25002"),
+	GAME_3("25003"),
+	GAME_4("25004"),
+	GAME_5("25005"),
+	GAME_6("25006"),
 	;
 	private String value;
 	private EnumAllGamesList(String value) {
