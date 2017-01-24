@@ -39,11 +39,14 @@ public class BetRecordReportMonth {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String year, String month){
+	public List<Map<String, String>> getAllRecords(String year, String month, String sel_gameID){
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
     	String sql_end = ";";
+    	String sql_gameID = " and gameID = " + sel_gameID;
+    	if(sel_gameID.equalsIgnoreCase("ALL"))
+    		sql_gameID = "";
 	    try {
 	    	sql = " select resultsDate as Day, "
 	    		+ " count(distinct gameID) as Games, "
@@ -57,13 +60,14 @@ public class BetRecordReportMonth {
 	    		+ " where resultsDate "
 	    		+ " between '" + year + "/" + month + "/01 00:00:00'"
 	    		+ " and '" + year + "/" + month + "/31 23:59:59'"
+	    		+ sql_gameID
 	    		+ " GROUP by Date(resultsDate)" 
 	    		+ sql_end;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {
 		    	Map<String, String> map = new HashMap<String, String>();  
-	    		map.put("Day", rs.getString("Day"));
+	    		map.put("Day", rs.getString("Day").substring(0,10));
 	    		map.put("Games", rs.getString("Games"));
 	    		map.put("Players", rs.getString("Players"));
 	    		map.put("Rounds", rs.getString("Rounds"));

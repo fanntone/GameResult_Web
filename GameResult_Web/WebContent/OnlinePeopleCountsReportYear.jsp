@@ -40,7 +40,7 @@ document.selection.submit();
 <%String sel_game = request.getParameter("games");%>
 <%String sel_month = request.getParameter("months");%>
 <%String sel_year = request.getParameter("years");%>
-<form name="selection" action="test.jsp" method="post">
+<form name="selection" action="OnlinePeopleCountsReportYear.jsp" method="post">
 &nbsp;½Ð¿ï¾Ü¹CÀ¸&nbsp;<select name="games" size="1" id="games" onChange="change()">
 <option value = "0"  <%if (sel_game == null || sel_game.equals("0"))  {%> selected <%}%>>ALL</option>
 <option value = "1"  <%if (sel_game != null && sel_game.equals("1"))  {%> selected <%}%>>game01</option>

@@ -1,7 +1,7 @@
 package com.dao;
 
 public enum EnumAllGamesList {
-	GAME_0("25000"),
+	GAME_0("ALL"),
 	GAME_1("25001"),
 	GAME_2("25002"),
 	GAME_3("25003"),

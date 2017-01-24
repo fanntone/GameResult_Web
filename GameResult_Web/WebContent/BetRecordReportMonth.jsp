@@ -8,6 +8,7 @@
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.BetRecordReportMonth"%>
+<%@ page import="com.dao.EnumAllGamesList"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -53,8 +54,35 @@ if(sel_month == null)
 String sel_year = request.getParameter("years");
 if(sel_year == null)
 	sel_year = "2017";
+String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+if(sel_gameID == null)
+	sel_gameID = "ALL";
 %>
 <form name="selection" action="BetRecordReportMonth.jsp" method="get">
+&nbsp;請選擇遊戲&nbsp;<select name="gameID" size="ALL" id="gameID" onChange="change()">
+<option value=<%=EnumAllGamesList.GAME_0.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_1.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_1.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_2.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_2.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_3.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_3.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 		
+<option value=<%=EnumAllGamesList.GAME_4.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_4.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
+<option value=<%=EnumAllGamesList.GAME_5.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_5.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
+<option value=<%=EnumAllGamesList.GAME_6.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_6.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
+</select>
+<br>
 &nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
 <option value = "2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
 <option value = "2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
@@ -78,14 +106,16 @@ if(sel_year == null)
 </form>
 <script language="JavaScript">
   $(document).ready(function(){ 
-    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1, dateFormat: 'yy/mm/dd'});
   });
 </script>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
 	<th>Date(日期)</th>
+<%if(sel_gameID.equalsIgnoreCase("ALL")){%>
 	<th>Games(遊戲數量)</th>
+<%}%>
 	<th>Players(玩家數量)</th>
 	<th>Rounds(投注次數)</th>
 	<th>Bet(玩家投注金)</th>
@@ -95,7 +125,7 @@ if(sel_year == null)
 </tr>
 <%
 	BetRecordReportMonth data = new BetRecordReportMonth();
-	List<Map<String, String>> list = data.getAllRecords(sel_year, sel_month);
+	List<Map<String, String>> list = data.getAllRecords(sel_year, sel_month, sel_gameID);
 %>
 <tr>
 	<%
@@ -125,7 +155,9 @@ if(sel_year == null)
 	      		rayrate = Float.parseFloat(map.get("PayRate"));
 	%>
 	<th><%=map.get("Day")%></th>
+<%if(sel_gameID.equalsIgnoreCase("ALL")){ %>
 	<th><%=games%></th>
+<%}%>
 	<th><%=players%></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>
