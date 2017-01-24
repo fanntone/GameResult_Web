@@ -7,7 +7,7 @@
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<%@ page import="com.dao.BetRecordByDay"%>
+<%@ page import="com.dao.BetRecordReportMonth"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -75,7 +75,7 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	<th>Pay Rate¥X¼ú²v(%)</th>
 </tr>
 <%
-	BetRecordByDay data = new BetRecordByDay();
+	BetRecordReportMonth data = new BetRecordReportMonth();
 	List<Map<String, String>> list = data.getAllRecords(date);
 %>
 <tr>

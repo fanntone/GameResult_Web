@@ -22,7 +22,8 @@ th, td {
 </style>
 </head>
 <body>
-
+<br>
+<br>
 <table align="center">
 	<tr>
 		<th><a href = "OnlineMember.jsp" target = "_blank">玩家在線清單</a></th>
@@ -36,6 +37,17 @@ th, td {
 		<th><a href = "BetRecordByDay.jsp" target = "_blank">每日平台投注查詢</a></th>
 		<th><a href = "AllGamesBetRecord.jsp" target = "_blank">各遊戲投注查詢</a></th>
 		<th><a href = "BettingListForEachGame.jsp" target = "_blank">單一遊戲投注查詢</a></th>
+		<th><a href = "PlayersWinRanking.jsp" target = "_blank">玩家輸贏排行(每日)</a></th>
+		<th><a href = "test.jsp" target = "_blank">投注金額月報表</a></th>
+		<th><a href = "test.jsp" target = "_blank">投注金額年報表</a></th>
+	</tr>
+	<tr>
+		<th>玩家金幣異動查詢</th>
+		<th>遊戲日戰績查詢</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
 	</tr>
 </table>
 

@@ -23,7 +23,7 @@
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 
-<title>玩家總輸贏排行</title>
+<title>玩家總輸贏排行(每日)</title>
 <style>
 
 table, td, th {
