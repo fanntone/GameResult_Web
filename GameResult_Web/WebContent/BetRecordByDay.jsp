@@ -54,8 +54,7 @@ if(date == null) {
 	date = trans.format(c_date);
 }
 %>
-<form name="selection" action="BetRecordByDay.jsp" method="get"> 請選擇筆數
-<br>
+<form name="selection" action="BetRecordByDay.jsp" method="get">
 Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 <input type="submit" value="送出查詢" >
 </form>

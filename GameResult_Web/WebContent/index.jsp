@@ -34,6 +34,8 @@ th, td {
 	</tr>
 	<tr>
 		<th><a href = "BetRecordByDay.jsp" target = "_blank">每日平台投注查詢</a></th>
+		<th><a href = "AllGamesBetRecord.jsp" target = "_blank">各遊戲投注查詢</a></th>
+		<th><a href = "BettingListForEachGame.jsp" target = "_blank">單一遊戲投注查詢</a></th>
 	</tr>
 </table>
 
