@@ -19,7 +19,7 @@ public class CommonString {
 	public static final String ONLINEPLAYERS = "OnlinePlayers";
 	public static final String YYYYMMDD = "YYYY/MM/dd";
 	public static final String BETTING = "betting";
-	public static final String LINES = "lines";
+	public static final String LINE = "line";
 	public static final String RESULTS = "results";
 	public static final String ROUNDSTATUS = "roundStatus";
 	public static final String PRIZERESULTS= "prizeResults";

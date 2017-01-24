@@ -150,7 +150,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
  		  </th> 
           <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
           <th><%=map.get(CommonString.BETTING)%></th>  
-          <th><%=map.get(CommonString.LINES)%></th>  
+          <th><%=map.get(CommonString.LINE)%></th>  
           <th><%=map.get(CommonString.RESULTS)%></th>
           <th><%=map.get(CommonString.ROUNDSTATUS)%></th>  
           <th><%=map.get(CommonString.PRIZERESULTS)%></th>  
@@ -162,8 +162,8 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
-          	for(int j = 0; j< 15 ; j++) {
-				String text = "<img src=\"images/"+ ps.slot1[j] + ".png\" />";
+          	for(int j = 0; j < 15 ; j++) {
+				String text = "<img src=\"images/i"+ ps.slot1[j] + ".png\" />";
 				if((j+1)%5==0)
 					text += "<br>";
 				out.println(text);

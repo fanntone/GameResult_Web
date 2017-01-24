@@ -53,7 +53,7 @@ public class GameResultRecords {
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
 	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
-	    		map.put(CommonString.LINES, rs.getString(CommonString.LINES));
+	    		map.put(CommonString.LINE, rs.getString(CommonString.LINE));
 	    		map.put(CommonString.RESULTS, rs.getString(CommonString.RESULTS));
 	    		map.put(CommonString.ROUNDSTATUS, rs.getString(CommonString.ROUNDSTATUS));  
 	    		map.put(CommonString.PRIZERESULTS, rs.getString(CommonString.PRIZERESULTS));
