@@ -188,19 +188,23 @@ if(upPage < 1)
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=1">&nbsp;首頁</a>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
 </html>
