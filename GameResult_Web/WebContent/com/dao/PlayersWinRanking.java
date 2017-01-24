@@ -16,6 +16,7 @@ public class PlayersWinRanking {
 	private PreparedStatement psmt = null;  
 	private ResultSet rs = null;  
 	private String sql_quato = "'";
+	private String sql_end = ";";
 	
 	private void openConn() {  
 	    String url=CommonString.DB_URL;  
@@ -40,7 +41,11 @@ public class PlayersWinRanking {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String date, String gameID, String orderby, String asc){
+	public List<Map<String, String>> getAllRecords(String date,
+												   String orderby,
+												   String asc,
+												   int pageSize,
+												   int pageIndex){
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
@@ -59,8 +64,7 @@ public class PlayersWinRanking {
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ sql_quato + date + sql_quato 
-	    		+ " and gameID = " +  gameID
-	    		+ " GROUP by userID"
+	    		+ " GROUP by userID "
 	    		+ orderby_str;
 	    	
 	    	psmt=conn.prepareStatement(sql);  
@@ -75,7 +79,7 @@ public class PlayersWinRanking {
 	    		map.put("PayRate", rs.getString("PayRate"));
 	    		list.add(map);	
 	    	}	    	
-        } catch (SQLException e) {  
+        } catch (SQLException e) {
             e.printStackTrace();  
         }
 	    
@@ -83,12 +87,12 @@ public class PlayersWinRanking {
 		return list;
 	}
 	
-    public int countRs(String date, String gameid){  
+    public int countRs(String date){  
         int count = 0;  
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
-	    		   + sql_quato + date + sql_quato 
-	    		   + " AND gameID = " + gameid;
+	    		   + sql_quato + date + sql_quato
+	    		   + sql_end;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -104,8 +108,8 @@ public class PlayersWinRanking {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize, String datetime, String gameid) {  
-        int totalPage=countRs(datetime, gameid);
+    public int getTotalPage(int pageSize, String datetime) {  
+        int totalPage=countRs(datetime);
         if(pageSize> totalPage)
         	return 1;
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);
