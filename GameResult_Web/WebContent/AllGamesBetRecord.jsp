@@ -133,7 +133,7 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 	      		rayrate = Float.parseFloat(map.get("PayRate"));
 	%>
 	<th><a href = "BettingListForEachGame.jsp?gameID=<%=games%>&date=<%=date%>" target = "_blank"><%=games%></a></th>
-	<th><%=players%></th>
+	<th><a href = "PlayersWinRanking.jsp?&date=<%=date%>" target = "_blank"><%=players%></a></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>
 	<th><%=win%></th>
