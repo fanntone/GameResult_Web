@@ -132,7 +132,8 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	    <th>特殊獎金點數</th>
 	    <th>下注前  玩家持有點數</th>
 	    <th>下注後  玩家持有點數</th>
-	    <th>特殊局號 </th>
+	    <th>代理商 </th>
+	    <th>注單號碼</th>
 	    <th>賽果建立時間</th>
 	    <th>詳細下注記錄 </th>
 	</tr>
@@ -156,14 +157,15 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           <th><%=map.get(CommonString.PRIZERESULTS)%></th>  
           <th><%=map.get(CommonString.BEFOREBALANCE)%></th> 
           <th><%=map.get(CommonString.AFTERBALANCE)%></th>  
-          <th><%=map.get(CommonString.SPECIALNUMBER)%></th>  
+          <th><%=map.get(CommonString.AGENT)%></th>
+          <th><%=map.get(CommonString.ORDERID)%></th>  
           <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th>
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
           	for(int j = 0; j < 15; j++) {
-				String text = "<img src=\"images/i"+ ps.slot1[j] + ".png\" />";
+				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" />";
 				if((j+1)%5==0)
 					text += "<br>";
 				out.println(text);

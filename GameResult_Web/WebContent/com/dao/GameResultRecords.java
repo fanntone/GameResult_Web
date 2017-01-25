@@ -14,11 +14,13 @@ public class GameResultRecords {
 	private Connection conn=null;  
 	private PreparedStatement psmt=null;  
 	private ResultSet rs=null;  
+	private String sql_end = ";";
 	
 	private void openConn() {  
-	    String url=CommonString.DB_URL;  
-	    String user=CommonString.DB_USER;  
-	    String password=CommonString.DB_PW;  
+//	    String url=CommonString.DB_URL;
+	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
+	    String user = CommonString.DB_USER;  
+	    String password = CommonString.DB_PW;  
 	     try {  
 	        Class.forName(CommonString.DB_DRIVER);  
 	        conn=DriverManager.getConnection(url,user,password);  
@@ -41,9 +43,11 @@ public class GameResultRecords {
 				  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
 				  	 + " AND " +  "'" + datetime +" 23:59:59'"
 				  	 + " AND gameID = " + gameid
+				  	 + " AND roundStatus = 1 "
 				  	 + " order by roundUUID ASC "
 				  	 + " Limit "
-				  	 + pageSize*(pageIndex-1) + dots +(pageSize);
+				  	 + pageSize*(pageIndex-1) + dots +(pageSize)
+				  	 + sql_end;
 	    try {
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -59,7 +63,8 @@ public class GameResultRecords {
 	    		map.put(CommonString.PRIZERESULTS, rs.getString(CommonString.PRIZERESULTS));
 	    		map.put(CommonString.BEFOREBALANCE, rs.getString(CommonString.BEFOREBALANCE));
 	    		map.put(CommonString.AFTERBALANCE, rs.getString(CommonString.AFTERBALANCE));  
-	    		map.put(CommonString.SPECIALNUMBER, rs.getString(CommonString.SPECIALNUMBER));
+	    		map.put(CommonString.AGENT, rs.getString(CommonString.AGENT));
+	    		map.put(CommonString.ORDERID, rs.getString(CommonString.ORDERID));
 	    		map.put(CommonString.RESULTSDATE, rs.getString(CommonString.RESULTSDATE));
 	    		map.put(CommonString.RESULTSPARAMS, rs.getString(CommonString.RESULTSPARAMS));
 	    		list.add(map);
@@ -82,7 +87,10 @@ public class GameResultRecords {
         String sql = "select count(*) from resultsRecords where userID = " + userID
    		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
    		  	 + " AND " +  "'" + datetime +" 23:59:59'"
-   		  	 + " AND gameID = " + gameid;
+   		  	 + " AND gameID = " + gameid
+   		  	 + " AND roundStatus = 1 "
+   		  	 + sql_end;
+        
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  

@@ -25,7 +25,8 @@ public class CommonString {
 	public static final String PRIZERESULTS= "prizeResults";
 	public static final String BEFOREBALANCE = "beforeBalance";
 	public static final String AFTERBALANCE = "afterBalance";
-	public static final String SPECIALNUMBER = "specialNumber";
+	public static final String AGENT = "agent";
+	public static final String ORDERID = "orderID";
 	public static final String RESULTSDATE = "resultsDate";
 	public static final String RESULTSPARAMS = "resultsParams";
 	public static final String TIME = "time";
