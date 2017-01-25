@@ -150,7 +150,7 @@ if(pageIndex < 1){
 List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
 %>
 
-<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5' width = "1280">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width = "1280">
 	<tr>
 		<th>®É¶¡</th>
 	    <th>©ãª`½s¸¹</th>
