@@ -69,7 +69,7 @@ String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 if(sel_gameID == null)
 	sel_gameID = EnumAllGamesList.GAME_0.getValue();
 %>
-<form name="selection" action="GameResultRecords.jsp" method="get">
+<form name="selection" action="GameResultRecords.jsp" method="post">
 &nbsp;½Ð¿ï¾Üµ§¼Æ&nbsp;
 <select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
