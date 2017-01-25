@@ -16,8 +16,7 @@ public class GameResultRecords {
 	private ResultSet rs=null;  
 	private String sql_end = ";";
 	
-	private void openConn() {  
-//	    String url=CommonString.DB_URL;
+	private void openConn() {
 	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
 	    String user = CommonString.DB_USER;  
 	    String password = CommonString.DB_PW;  
@@ -34,15 +33,18 @@ public class GameResultRecords {
     public List<Map<String, String>> getAllRecordsByPage(int pageSize,
     													 int pageIndex,
     													 String userID,
-    													 String datetime,
-    													 String gameid){
+    													 String dateTime,
+    													 String gameID){
     	openConn(); 
     	List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
     	String dots = ",";
+    	String sql_gameID = " ";
+    	if(!gameID.equalsIgnoreCase("ALL"))
+    		sql_gameID = " AND gameID = " + gameID;
     	String sql = " select * from resultsRecords where userID = " + userID 
-				  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
-				  	 + " AND " +  "'" + datetime +" 23:59:59'"
-				  	 + " AND gameID = " + gameid
+				  	 + " AND resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
+				  	 + " AND " +  "'" + dateTime +" 23:59:59'"
+				  	 + sql_gameID
 				  	 + " AND roundStatus = 1 "
 				  	 + " order by roundUUID ASC "
 				  	 + " Limit "
@@ -83,12 +85,16 @@ public class GameResultRecords {
         return list;  
     }  
 
-    public int countRs(String userID, String datetime, String gameid){  
+    public int countRs(String userID, String dateTime, String gameID){  
         int count = 0;  
+    	String sql_gameID = " ";
+    	if(!gameID.equalsIgnoreCase("ALL"))
+    		sql_gameID = " AND gameID = " + gameID;
+    	
         String sql = "select count(*) from resultsRecords where userID = " + userID
-   		  	 + " AND resultsDate BETWEEN " + "'" + datetime +" 00:00:00'"
-   		  	 + " AND " +  "'" + datetime +" 23:59:59'"
-   		  	 + " AND gameID = " + gameid
+   		  	 + " AND resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
+   		  	 + " AND " +  "'" + dateTime +" 23:59:59'"
+   		  	 + sql_gameID
    		  	 + " AND roundStatus = 1 "
    		  	 + sql_end;
         

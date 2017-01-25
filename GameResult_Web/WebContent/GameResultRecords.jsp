@@ -65,11 +65,12 @@ if(date == null) {
 	date = trans.format(c_date);
 }
 
-String gameid = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(gameid == null)
-	gameid = EnumAllGamesList.GAME_1.getValue();
+String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+if(sel_gameID == null)
+	sel_gameID = EnumAllGamesList.GAME_0.getValue();
 %>
-<form name="selection" action="GameResultRecords.jsp" method="get"> 請選擇筆數
+<form name="selection" action="GameResultRecords.jsp" method="get">
+&nbsp;請選擇筆數&nbsp;
 <select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
@@ -88,9 +89,36 @@ if(gameid == null)
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-Date:<input name = <%=CommonString.PARAMETER_DATE%> id= <%=CommonString.PARAMETER_DATE%> type= "text" value = <%=date%>><br>
-UerID:<input name = <%=CommonString.PAREMETER_USERID%> id= <%=CommonString.PAREMETER_USERID%> type= "text" value = <%=userid%>>
-GameID:<input name = <%=CommonString.PARAMETER_GAMEID%> id = <%=CommonString.PARAMETER_GAMEID%> type= "text" value = <%=gameid%>>
+&nbsp;賽果建立時間&nbsp;<input name = <%=CommonString.PARAMETER_DATE%> 
+							id= <%=CommonString.PARAMETER_DATE%>
+							type= "text" value = <%=date%>><br>
+&nbsp;請選擇遊戲&nbsp;
+<select name="gameID" size="ALL" id="gameID" onChange="change()">
+<option value=<%=EnumAllGamesList.GAME_0.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>
+<option value=<%=EnumAllGamesList.GAME_1.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_1.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_2.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_2.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_2.getValue()%></option>		
+<option value=<%=EnumAllGamesList.GAME_3.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_3.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_3.getValue()%></option> 		
+<option value=<%=EnumAllGamesList.GAME_4.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_4.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_4.getValue()%></option> 
+<option value=<%=EnumAllGamesList.GAME_5.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_5.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_5.getValue()%></option> 
+<option value=<%=EnumAllGamesList.GAME_6.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_6.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
+</select><br>
+&nbsp;玩家唯一碼&nbsp;<input name = <%=CommonString.PAREMETER_USERID%>
+						   id= <%=CommonString.PAREMETER_USERID%>
+						   type= "text" value = <%=userid%>>
 <input type="submit" value="送出查詢" >
 </form>
 <br>
@@ -106,7 +134,7 @@ int pageSize = 5;
 pageSize = Integer.parseInt(sel);
 
 GameResultRecords ed = new GameResultRecords();
-int totalPages = ed.getTotalPage(pageSize, userid, date, gameid);
+int totalPages = ed.getTotalPage(pageSize, userid, date, sel_gameID);
 
 String currentPage = request.getParameter("pageIndex");
 if(currentPage==null)  
@@ -119,7 +147,7 @@ if(pageIndex < 1){
     pageIndex = totalPages;  
 }
 
-List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, gameid);
+List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
 %>
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5' width = "1024">
@@ -142,24 +170,25 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	%>
       <tr>
       	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
-          <th><%=map.get("roundUUID") %></th>  
+          <th><%=map.get(CommonString.ROUNDUUID)%></th>  
           <th>
-	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
+	          <a href="PlayerDetail.jsp?
+	          	<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
 	            <%=map.get(CommonString.PAREMETER_USERID)%>
 	          </a>
  		  </th> 
           <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
           <th><%=map.get(CommonString.BETTING)%></th>  
-          <th><%=map.get(CommonString.LINE)%></th>  
+          <th><%=map.get(CommonString.LINE)%></th>
           <th><%=map.get(CommonString.RESULTS)%></th>
           <th><%=map.get(CommonString.AGENT)%></th>
           <th><%=map.get(CommonString.ORDERID)%></th>
-          <th width = 30%>
+          <th width = "30%">
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
           	for(int j = 0; j < 15; j++) {
-				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=32 width=32 />";
+				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=45 width=45 />";
 				if((j+1)%5==0)
 					text += "<br>";
 				out.println(text);
@@ -184,22 +213,22 @@ if(upPage < 1)
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
-	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
 
 </body>
