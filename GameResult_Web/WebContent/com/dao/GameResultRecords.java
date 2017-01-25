@@ -52,8 +52,9 @@ public class GameResultRecords {
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()){  
-	    		Map<String, String> map=new HashMap<String, String>();  
-	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID));  
+	    		Map<String, String> map=new HashMap<String, String>();
+	    		int length = rs.getString(CommonString.ROUNDUUID).length();
+	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length-22, length));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
 	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));

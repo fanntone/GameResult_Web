@@ -27,7 +27,7 @@
 <style>
 table, td, th {
     border: 3px solid #FFAC55;
-    text-align: left;
+    text-align: center;
 }
 
 table {
@@ -37,6 +37,8 @@ table {
 th, td {
     padding: 15px;
 }
+
+
 </style>
 </head>
 <body>
@@ -165,7 +167,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
           	for(int j = 0; j < 15; j++) {
-				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" />";
+				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=48 width=48 />";
 				if((j+1)%5==0)
 					text += "<br>";
 				out.println(text);
