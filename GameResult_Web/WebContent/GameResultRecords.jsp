@@ -150,18 +150,17 @@ if(pageIndex < 1){
 List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
 %>
 
-<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5' width = "1024">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5' width = "1280">
 	<tr>
-		<th>賽果建立時間</th>
-	    <th>局號</th>
-	    <th>玩家唯一碼</th>
-	    <th>遊戲編號</th>
-	    <th>下注點數</th>
-	    <th>下注線數</th>
-	    <th>輸贏點數</th>
+		<th>時間</th>
+	    <th>押注編號</th>
+	    <th>玩家編碼</th>
+	    <th>押金</th>
+	    <th>線數</th>
+	    <th>贏金</th>
 	    <th>代理商 </th>
-	    <th>注單號碼</th>
-	    <th>詳細下注記錄 </th>
+	    <th>注單號碼(BG)</th>
+	    <th>轉輪結果</th>
 	</tr>
 	<%  
 	  Map<String, String> map=null;  
@@ -169,6 +168,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	      map = (Map<String, String>)list.get(i);
 	%>
       <tr>
+
       	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th><%=map.get(CommonString.ROUNDUUID)%></th>  
           <th>
@@ -176,8 +176,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	          	<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
 	            <%=map.get(CommonString.PAREMETER_USERID)%>
 	          </a>
- 		  </th> 
-          <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
+ 		  </th>
           <th><%=map.get(CommonString.BETTING)%></th>  
           <th><%=map.get(CommonString.LINE)%></th>
           <th><%=map.get(CommonString.RESULTS)%></th>
@@ -188,13 +187,13 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
           	for(int j = 0; j < 15; j++) {
-				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=45 width=45 />";
+				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=56 width=56 />";
 				if((j+1)%5==0)
 					text += "<br>";
 				out.println(text);
 			}
           %>
-          </th>      
+          </th>     
       </tr>  
 	<%}%>
 </table>
