@@ -116,11 +116,11 @@ if(sel_gameID == null)
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_6.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select><br>
-&nbsp;玩家唯一碼&nbsp;<input name = <%=CommonString.PAREMETER_USERID%>
-						   id= <%=CommonString.PAREMETER_USERID%>
+&nbsp;玩家唯一碼&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
+						   id=<%=CommonString.PAREMETER_USERID%>
 						   type= "text" value = <%=userid%>>
 <input type="submit" value="送出查詢" >
-</form>
+
 <br>
 
 <script language="JavaScript">
@@ -229,6 +229,7 @@ if(upPage < 1)
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
 	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
-
+到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+</form>						   
 </body>
 </html>
