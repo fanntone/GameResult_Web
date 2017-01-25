@@ -122,21 +122,17 @@ if(pageIndex < 1){
 List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, gameid);
 %>
 
-<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5' width = "1024">
 	<tr>
-	    <th>局號 UUID</th>
+		<th>賽果建立時間</th>
+	    <th>局號</th>
 	    <th>玩家唯一碼</th>
 	    <th>遊戲編號</th>
 	    <th>下注點數</th>
 	    <th>下注線數</th>
 	    <th>輸贏點數</th>
-	    <th>特殊獎項狀態</th>
-	    <th>特殊獎金點數</th>
-	    <th>下注前  玩家持有點數</th>
-	    <th>下注後  玩家持有點數</th>
 	    <th>代理商 </th>
 	    <th>注單號碼</th>
-	    <th>賽果建立時間</th>
 	    <th>詳細下注記錄 </th>
 	</tr>
 	<%  
@@ -144,7 +140,8 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	  for(int i = 0; i < list.size(); i++) {  
 	      map = (Map<String, String>)list.get(i);
 	%>
-      <tr>  
+      <tr>
+      	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th><%=map.get("roundUUID") %></th>  
           <th>
 	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
@@ -155,19 +152,14 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           <th><%=map.get(CommonString.BETTING)%></th>  
           <th><%=map.get(CommonString.LINE)%></th>  
           <th><%=map.get(CommonString.RESULTS)%></th>
-          <th><%=map.get(CommonString.ROUNDSTATUS)%></th>  
-          <th><%=map.get(CommonString.PRIZERESULTS)%></th>  
-          <th><%=map.get(CommonString.BEFOREBALANCE)%></th> 
-          <th><%=map.get(CommonString.AFTERBALANCE)%></th>  
           <th><%=map.get(CommonString.AGENT)%></th>
-          <th><%=map.get(CommonString.ORDERID)%></th>  
-          <th><%=map.get(CommonString.RESULTSDATE)%></th>
-          <th>
+          <th><%=map.get(CommonString.ORDERID)%></th>
+          <th width = 30%>
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
           	for(int j = 0; j < 15; j++) {
-				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=48 width=48 />";
+				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=32 width=32 />";
 				if((j+1)%5==0)
 					text += "<br>";
 				out.println(text);
