@@ -19,7 +19,7 @@ public class PlayersWinRanking {
 	private String sql_end = ";";
 	
 	private void openConn() {  
-	    String url=CommonString.DB_URL;  
+	    String url="jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
 	    String user=CommonString.DB_USER;  
 	    String password=CommonString.DB_PW;  
 	     try {  

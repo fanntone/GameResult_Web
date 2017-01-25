@@ -57,7 +57,6 @@ document.selection.submit();
 	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_100.getValue())){%>
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
-</form>
 <br>
 
 <%
@@ -126,6 +125,7 @@ if(upPage < 1)
 <a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;上一頁</a>  
 <a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;下一頁</a>
 <a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;末頁</a>
-
+到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+</form>	
 </body>
 </html>

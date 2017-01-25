@@ -97,7 +97,6 @@ pageSize = Integer.parseInt(sel_page);
 <br>
 &nbsp;Date&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
 &nbsp;<input type="submit" value="送出查詢" >
-</form>
 <script language="JavaScript">
   $(document).ready(function(){ 
     $("#date").datepicker({appendText: "  點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
@@ -213,5 +212,7 @@ pageSize = Integer.parseInt(sel_page);
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+</form>	
 </body>
 </html>
