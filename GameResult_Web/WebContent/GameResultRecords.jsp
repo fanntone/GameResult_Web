@@ -185,13 +185,15 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           <th width = "30%">
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
+          	String text = "";
           	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
-          	for(int j = 0; j < 15; j++) {
-				String text = "<img src=\"images/i"+ ps.Wheel[j] + ".png\" height=56 width=56 />";
-				if((j+1)%5==0)
-					text += "<br>";
-				out.println(text);
+          	for(int j = 0; j < 3; j++) {
+          		for(int k = 0; k < 5; k++) {
+					text += "<img src=\"images/i"+ ps.Wheel[j][k] + ".png\" height=56 width=56 />";
+          		}
+    			text += "<br>";
 			}
+			out.println(text);
           %>
           </th>     
       </tr>  
