@@ -15,7 +15,7 @@ public class OnlinePeopleCountsReportMonth {
 	private PreparedStatement psmt=null;  
 	private ResultSet rs=null;
 	
-	private void openConn() {  
+	public void openConn() {  
 	    String url=CommonString.DB_URL;  
 	    String user=CommonString.DB_USER;  
 	    String password=CommonString.DB_PW;  
@@ -34,9 +34,9 @@ public class OnlinePeopleCountsReportMonth {
 		openConn();
 		
         try {
-        	String sql_1 = "set @test_1:= '2017/01/13 00:00:00';";
-        	String sql_2 = "set @test_2:= '2017/01/14 00:00:00';";
-        	String sql_3 = "select all Time(time) as Times from test_report where time between @test_1 and ADDDATE(@test_2, interval -5 minute);";
+        	String sql_1 = "set @test_1:= '2017/01/01 00:00:00';";
+        	String sql_2 = "set @test_2:= '2017/01/31 23:59:59';";
+        	String sql_3 = "select all Time(time) as Times from test_report group by Time(time);";
         	psmt=conn.prepareStatement(sql_1);  
         	rs = psmt.executeQuery(sql_1);
         	psmt=conn.prepareStatement(sql_2);  
