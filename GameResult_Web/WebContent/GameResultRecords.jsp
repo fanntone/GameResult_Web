@@ -168,13 +168,11 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	      map = (Map<String, String>)list.get(i);
 	%>
       <tr>
-
       	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th><%=map.get(CommonString.ROUNDUUID)%></th>  
           <th>
-	          <a href="PlayerDetail.jsp?
-	          	<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
-	            <%=map.get(CommonString.PAREMETER_USERID)%>
+	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
+	          <%=map.get(CommonString.PAREMETER_USERID)%>
 	          </a>
  		  </th>
           <th><%=map.get(CommonString.BETTING)%></th>  
