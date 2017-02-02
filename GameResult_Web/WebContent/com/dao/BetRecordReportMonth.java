@@ -50,7 +50,7 @@ public class BetRecordReportMonth {
 	    try {
 	    	sql = " select resultsDate as Day, "
 	    		+ " count(distinct gameID) as Games, "
-	    		+ " count(userID) as Players, "
+	    		+ " count(distinct userID) as Players, "
 	    		+ " count(betting) as Rounds, "
 	    		+ " sum(betting) as Bet, "
 	    		+ " sum(results) as Win, "
