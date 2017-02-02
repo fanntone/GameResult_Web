@@ -110,18 +110,15 @@ document.selection.submit();
 	    maps = (Map<String, String>)time_list.get(times);
 	    String times_ = maps.get("Times");
 %><th><%=times_%></th><%
-	List<Map<String, String>> list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
+	int[] list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
 													 Integer.parseInt(sel_month),
 													 Integer.parseInt(sel_year),
-													 Integer.parseInt(sel_game));
-	Map<String, String> map = null;
+													 Integer.parseInt(sel_game),
+													 times_);
 	int row_sum = 0;
-	for(int ii = 0; ii < list.size(); ii++) {  
-	    map = (Map<String, String>)list.get(ii);
-	    String counts = map.get("Counts_1");
-		if(counts == null)
-			counts = "0";
-	    row_sum += Integer.valueOf(counts);
+	for(int ii = 0; ii < max_day; ii++) {  
+	    int counts = list[ii];
+	    row_sum += counts;
 %><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
 
 <tr><th style="background-color:#00BBFF">MAX</th><%

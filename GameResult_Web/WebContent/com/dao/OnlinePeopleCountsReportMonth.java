@@ -15,7 +15,7 @@ public class OnlinePeopleCountsReportMonth {
 	private PreparedStatement psmt=null;  
 	private ResultSet rs=null;
 	
-	public void openConn() {  
+	private void openConn() {  
 	    String url=CommonString.DB_URL;  
 	    String user=CommonString.DB_USER;  
 	    String password=CommonString.DB_PW;  
@@ -55,15 +55,13 @@ public class OnlinePeopleCountsReportMonth {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
+				
 		return list;
 	}
 	
-	public List<Map<String, String>> getAllData(String datetime, int sel_month, int sel_year, int sel_game) {  
-        List<Map<String, String>> list =new ArrayList<Map<String, String>>();
-        openConn();
+	public int[] getAllData(String datetime, int sel_month, int sel_year, int sel_game, String times) {  
         
+        openConn();
         int max = 31;
         if (sel_month == 2) {
         	max = 28;
@@ -72,26 +70,26 @@ public class OnlinePeopleCountsReportMonth {
         }
         else if (sel_month == 4 || sel_month == 6 || sel_month == 9 || sel_month == 11)
         	max = 30;
-        	
+        int[] count_day = new int[max];
+        
         try {
-        	String sql = "set @test_1:= '" + datetime +"';";
+        	String sql = "set @test_1:= '" + datetime + "';";
         	psmt=conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);
-			String sql_2 = "select Sum(" + CommonString.gameid_array[sel_game] + ")as counts from test_report where time = ADDDATE(@test_1, interval 0 DAY) ";
-        	for(int i = 1; i<max; i++) {
-        		sql_2 += " UNION ALL ";
-        		sql_2 += " select Sum(" + CommonString.gameid_array[sel_game] +  ")as counts from test_report" ;
-        		sql_2 += " where time = ADDDATE(@test_1, interval " + i + " DAY)";
-        	}
+			String sql_2;
+			sql_2 = " select Sum(" + CommonString.gameid_array[sel_game] + ")as counts "
+				  + " , DAY(time)as days"
+				  + " from test_report "
+				  + " where Time(time) = '" + times + "' "
+				  + " and Month(time) = " + sel_month
+				  + " group by DAY(time)";
         	sql_2 += ";";
         	psmt=conn.prepareStatement(sql_2);
-        	rs = psmt.executeQuery(sql_2);
-        	
+        	rs = psmt.executeQuery(sql_2);       	
         	while (rs.next())
         	{
-    			Map<String, String> map=new HashMap<String, String>();
-				map.put("Counts_1", rs.getString("counts"));
-				list.add(map);
+        		int index = rs.getInt("days");
+				count_day[index-1] = rs.getInt("counts");
         	}
         	closeConn();
         	
@@ -99,7 +97,7 @@ public class OnlinePeopleCountsReportMonth {
           e.printStackTrace();  
         }
             
-        return list;  
+        return count_day;  
 	}
 	
 	
