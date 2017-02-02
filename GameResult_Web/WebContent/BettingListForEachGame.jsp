@@ -61,6 +61,8 @@ if(asc.equalsIgnoreCase("1"))
 else
 	reorder = "1";
 String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+if(sel_gameID == null)
+	sel_gameID = EnumAllGamesList.GAME_1.getValue();
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null) {
 	java.util.Date c_date = new java.util.Date();
@@ -70,7 +72,6 @@ if(date == null) {
 String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
 if(sel_page == null)
 	sel_page = "5";
-
 int pageSize;
 pageSize = Integer.parseInt(sel_page);
 
@@ -132,7 +133,7 @@ pageSize = Integer.parseInt(sel_page);
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
-			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Player ID(玩家編號)</a></th>
 	<th><a href = "BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
@@ -171,18 +172,15 @@ pageSize = Integer.parseInt(sel_page);
 														asc,
 														pageSize,
 														pageIndex);
-	int totalPages = data.getTotalPage(pageSize, date, sel_gameID);	 
-		
+	int totalPages = data.getTotalPage(pageSize, date, sel_gameID);	 	
 	if(pageIndex < 1){  
 	    pageIndex = 1;  
 	}else if(pageIndex > totalPages){  
 	    pageIndex = totalPages;  
 	}
-	
 	int nextPage = pageIndex + 1;
 	if(nextPage > totalPages)
 		nextPage = totalPages;
-
 	int upPage = pageIndex - 1;
 	if(upPage < 1)
 		upPage = 1;
