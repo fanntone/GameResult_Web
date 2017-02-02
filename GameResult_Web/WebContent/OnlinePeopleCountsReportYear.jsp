@@ -87,7 +87,7 @@ document.selection.submit();
 	    maps = (Map<String, String>)time_list.get(times);
 	    String times_ = maps.get("Times");
 %><th><%=times_%></th><%
-	List<Map<String, String>> list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
+	int[] list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
 													 Integer.parseInt(sel_month),
 													 Integer.parseInt(sel_year),
 													 Integer.parseInt(sel_game),
@@ -95,15 +95,12 @@ document.selection.submit();
 	Map<String, String> map = null;
 	int row_sum = 0;
 
-	for(int ii = 0; ii < list.size(); ii++) {  
-	    map = (Map<String, String>)list.get(ii);
-	    String counts = map.get("Counts_1");
-		if(counts == null)
-			counts = "0";
-		if(Integer.valueOf(counts) > max_array[ii])
-			max_array[ii] = Integer.valueOf(counts);
-		sum_array[ii] = sum_array[ii] + Integer.valueOf(counts);
-		row_sum += Integer.valueOf(counts);
+	for(int ii = 0; ii < 12; ii++) {  
+	    int counts = list[ii];
+		if(counts > max_array[ii])
+			max_array[ii] = counts;
+		sum_array[ii] = sum_array[ii] + counts;
+		row_sum += counts;
 		
 %><th><%=counts%></th><%}%><th><%=row_sum/(float)12%></th></tr><%}%>
 
