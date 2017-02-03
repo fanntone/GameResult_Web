@@ -42,7 +42,7 @@ th, td {
 		<th><a href = "BetRecordReportYear.jsp" target = "_blank">投注金額年報表</a></th>
 	</tr>
 	<tr>
-		<th>玩家金幣異動查詢</th>
+		<th><a href = "PlayersMoneyChange.jsp" target = "_blank">玩家金幣異動查詢</a></th>
 		<th></th>
 		<th></th>
 		<th></th>
