@@ -89,7 +89,7 @@ document.selection.submit();
 		int max_day = 31;
 		for(day = 1; day < 32; day++) { 
 			if(month == 2 && day == 29) {
-				if(Integer.parseInt(sel_month)%4 == 0)
+				if(Integer.parseInt(sel_year)%4 == 0)
 					max_day = 29;
 				else
 					max_day = 28;
