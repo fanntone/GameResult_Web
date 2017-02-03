@@ -111,6 +111,8 @@ if(userID == null)
 		
 	for(int day = 1; day <= max_day ; day++) {
 		int[] list = data.getAllRecords(sel_year, sel_month, day, userID);
+		if(list == null)
+			list = new int[] {0,0,0, 0,0,0, 0};
 %>
 
 <tr>
