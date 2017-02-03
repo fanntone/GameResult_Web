@@ -49,4 +49,10 @@ public class CommonString {
 	// db table: test_report
 	public static final String[] gameid_array = new String[] {"game01+game02+game03+game04+game05+game06",
 															  "game01", "game02","game03", "game04", "game05", "game06"};
+	public static final String DAYTIMEBRGIN = " 00:00:00 ";
+	public static final String DAYTIMEEND = " 23:59:59 ";
+	public static final String TIMEDATE_QUATO = "'";
+	public static final String SQLQUERYEND = ";";
+	public static final String DOTS = ",";
+	
 }

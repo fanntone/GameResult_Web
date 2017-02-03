@@ -33,11 +33,12 @@ public class GameOnlinePlayers {
 	public List<Map<String, String>> getAllByPage(int pageSize, int pageIndex, String gameid) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
-        String sql=" select *" +
-        		" from member_Login, member_Account" +
-   			 	" where member_Login.userID = member_Account.userID" + 
-   			 	" and member_Login.gameID = " +
-	   			 gameid; 
+        String sql = " select *"
+        		   + " from member_Login, member_Account"
+        		   + " where member_Login.userID = member_Account.userID"
+        		   + " and member_Login.gameID = "
+        		   + gameid
+        		   + CommonString.SQLQUERYEND; 
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
@@ -63,11 +64,12 @@ public class GameOnlinePlayers {
 	
     public int countRs(String gameid){  
         int count = 0;  
-        String sql = " select count(*)" +
-        		" from member_Login, member_Account" +
-   			 	" where member_Login.userID = member_Account.userID" + 
-   			 	" and member_Login.gameID = " +
-	   			 gameid;
+        String sql = " select count(*)"
+        		   + " from member_Login, member_Account"
+        		   + " where member_Login.userID = member_Account.userID"
+        		   + " and member_Login.gameID = "
+        		   + gameid
+        		   + CommonString.SQLQUERYEND;
         
         openConn();
         try {  

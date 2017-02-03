@@ -43,12 +43,10 @@ public class BetRecordByDay {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
-    	String sql_end = ";";
-    	String sql_quato = "'";
 	    try {
 	    	Map<String, String> map = new HashMap<String, String>();  
 	    	sql = "select count(distinct gameID) as counts from resultsRecords where Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
@@ -56,7 +54,7 @@ public class BetRecordByDay {
 	    	}
 	    	
 	    	sql = "select count(distinct userID) as counts from resultsRecords where Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
@@ -64,7 +62,7 @@ public class BetRecordByDay {
 	    	}
 
 	    	sql = "select count(betting) as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
@@ -72,7 +70,7 @@ public class BetRecordByDay {
 	    	}
 	    	
 	    	sql = "select sum(betting) as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
@@ -80,7 +78,7 @@ public class BetRecordByDay {
 	    	}
 	    	
 	    	sql = "select sum(results) as counts from resultsRecords where results > 0 and Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
@@ -88,7 +86,7 @@ public class BetRecordByDay {
 	    	}
 	    	
 	    	sql = "select sum(betting) - sum(results) as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
@@ -96,7 +94,7 @@ public class BetRecordByDay {
 	    	}
 	    	
 	    	sql = "select sum(results)/sum(betting)*100 as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
-	    		+ sql_quato + date + sql_quato +  sql_end;
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  

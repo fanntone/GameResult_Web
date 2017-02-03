@@ -82,8 +82,8 @@ public class OnlinePeopleCountsReportMonth {
 				  + " from test_report "
 				  + " where Time(time) = '" + times + "' "
 				  + " and Month(time) = " + sel_month
-				  + " group by DAY(time)";
-        	sql_2 += ";";
+				  + " group by DAY(time)"
+				  + CommonString.SQLQUERYEND;
         	psmt=conn.prepareStatement(sql_2);
         	rs = psmt.executeQuery(sql_2);       	
         	while (rs.next())
@@ -114,7 +114,8 @@ public class OnlinePeopleCountsReportMonth {
         int max = 0;
         String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from test_report"
         		+" where time BETWEEN " + "'" + date +" 00:00:00'"
-    			+" AND " +  "'" + date +" 23:59:59';";
+    			+" AND " +  "'" + date +" 23:59:59'"
+    			+CommonString.SQLQUERYEND;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);

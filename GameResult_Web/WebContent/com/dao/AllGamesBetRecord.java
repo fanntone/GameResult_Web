@@ -49,7 +49,6 @@ public class AllGamesBetRecord {
     		orderby_str = " order by " + orderby + " ASC;"; 
     	else
     		orderby_str = " order by " + orderby + " DESC;";
-    	String sql_quato = "'";
 	    try {
 	    	sql = " select gameID," 
 	    		+ " count(distinct userID) as Players,"
@@ -59,7 +58,7 @@ public class AllGamesBetRecord {
 	    		+ " sum(betting)-sum(results) as Profit,"
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
-	    		+ sql_quato + date + sql_quato 
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		+ " GROUP by gameID"
 	    		+ orderby_str;
 	    	

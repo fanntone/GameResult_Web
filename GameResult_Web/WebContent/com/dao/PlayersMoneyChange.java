@@ -41,12 +41,8 @@ public class PlayersMoneyChange {
 		int[] list = new int[] {0,0,0,0,0,0,0};
 		openConn();
 	    try {
-	    	String sql_quato = "'";
-	    	String time_start = " 00:00:00 ";
-	    	String time_end = " 23:59:00 ";
-	    	String sql_end = ";";
 	    	String Day;
-	    	if(day<10)
+	    	if(day < 10)
 	    		Day= "0" + String.valueOf(day);
 	    	else
 	    		Day = String.valueOf(day);
@@ -54,11 +50,11 @@ public class PlayersMoneyChange {
 	    			   + " SUM(CONVERT(afterBalance, SIGNED) - CONVERT(beforeBalance, SIGNED)) AS counts "
 	    			   + " from resultsRecords "
 	    			   + " where resultsDate between " 
-	    			   + sql_quato + sel_year + "/" + sel_month + "/" + Day + time_start + sql_quato
-	    			   + " and " + sql_quato + sel_year + "/" + sel_month + "/" + Day + time_end + sql_quato
+	    			   + CommonString.TIMEDATE_QUATO + sel_year + "/" + sel_month + "/" + Day + CommonString.DAYTIMEBRGIN + CommonString.TIMEDATE_QUATO
+	    			   + " and " + CommonString.TIMEDATE_QUATO + sel_year + "/" + sel_month + "/" + Day + CommonString.DAYTIMEEND + CommonString.TIMEDATE_QUATO
 	    			   + " and userID = " + userID 
 	    			   + " group by gameID ";
-	    	sql += sql_end;
+	    	sql += CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();
 	    	while(rs.next()) {

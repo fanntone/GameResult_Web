@@ -43,7 +43,6 @@ public class BetRecordReportYear {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
-    	String sql_end = ";";
     	String sql_gameID = " and gameID = " + sel_gameID;
     	if(sel_gameID.equalsIgnoreCase("ALL"))
     		sql_gameID = "";
@@ -62,7 +61,7 @@ public class BetRecordReportYear {
 	    		+ " and '" + year + "/12/31 23:59:59' "
 	    		+ sql_gameID
 	    		+ " GROUP by Month(resultsDate)" 
-	    		+ sql_end;
+	    		+ CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {

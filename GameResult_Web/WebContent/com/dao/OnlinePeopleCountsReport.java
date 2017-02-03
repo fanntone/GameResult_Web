@@ -36,7 +36,8 @@ public class OnlinePeopleCountsReport {
         try {
         	String sql = "select * from test_report"
         				+" where time BETWEEN " + "'" + datetime +" 00:00:00'"
-        				+" AND " +  "'" + datetime +" 23:59:59'";
+        				+" AND " +  "'" + datetime +" 23:59:59'"
+        				+ CommonString.SQLQUERYEND;
         	psmt=conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);
         	
@@ -69,7 +70,8 @@ public class OnlinePeopleCountsReport {
         int max = 0;  
         String sql = " select MAX(" + label_name + ") from test_report"
         		+" where time BETWEEN " + "'" + datetime +" 00:00:00'"
-    			+" AND " +  "'" + datetime +" 23:59:59'";
+    			+" AND " +  "'" + datetime +" 23:59:59'"
+    			+ CommonString.SQLQUERYEND;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -95,7 +97,8 @@ public class OnlinePeopleCountsReport {
         float avg = 0;  
         String sql = " select AVG( "+ label_name + ") from test_report"
         		+" where time BETWEEN " + "'" + datetime +" 00:00:00'"
-    			+" AND " +  "'" + datetime +" 23:59:59'";
+    			+" AND " +  "'" + datetime +" 23:59:59'"
+    			+ CommonString.SQLQUERYEND;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  

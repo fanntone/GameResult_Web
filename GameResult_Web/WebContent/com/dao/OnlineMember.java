@@ -33,11 +33,11 @@ public class OnlineMember {
 	public List<Map<String, String>> getAllempByPage(int pageSize,int pageIndex) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();
-        String dots = ",";
         String sql = " select member_Login.userID,member_Account.balance,member_Login.gameID" +
         			 " from member_Login, member_Account" +
         			 " where member_Login.userID = member_Account.userID Limit "
-        			 + pageSize*(pageIndex-1) + dots +(pageSize);  
+        			 + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
+        			 + CommonString.SQLQUERYEND;  
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
@@ -63,7 +63,7 @@ public class OnlineMember {
 	
     public int countRs(){  
         int count = 0;  
-        String sql = " select count(*) from member_Login";   
+        String sql = " select count(*) from member_Login" + CommonString.SQLQUERYEND;   
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  

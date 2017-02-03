@@ -14,9 +14,7 @@ public class PlayersWinRanking {
 
 	private Connection conn = null;  
 	private PreparedStatement psmt = null;  
-	private ResultSet rs = null;  
-	private String sql_quato = "'";
-	private String sql_end = ";";
+	private ResultSet rs = null;
 	
 	private void openConn() {  
 	    String url="jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
@@ -63,9 +61,10 @@ public class PlayersWinRanking {
 	    		+ " sum(betting)-sum(results) as Profit,"
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
-	    		+ sql_quato + date + sql_quato 
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO 
 	    		+ " GROUP by userID "
-	    		+ orderby_str;
+	    		+ orderby_str
+	    		+ CommonString.SQLQUERYEND;
 	    	
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -91,8 +90,8 @@ public class PlayersWinRanking {
         int count = 0;  
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
-	    		   + sql_quato + date + sql_quato
-	    		   + sql_end;
+	    		   + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+	    		   + CommonString.SQLQUERYEND;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  

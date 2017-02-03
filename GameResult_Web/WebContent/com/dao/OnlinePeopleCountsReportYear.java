@@ -68,8 +68,8 @@ public class OnlinePeopleCountsReportYear {
 						 + " from test_report "
 						 + " where Time(time) = '" + time + "'"
 						 + " and Year(time) = " + sel_year
-						 + " group by Month(time) ";    	
-        	sql_2 += ";";
+						 + " group by Month(time) "
+						 + CommonString.SQLQUERYEND;
         	psmt=conn.prepareStatement(sql_2);
         	rs = psmt.executeQuery(sql_2);
         	

@@ -70,7 +70,7 @@ public class BettingListForEachGame {
 	    		+ orderby_str
 			  	+ " Limit "
 			  	+ pageSize*(pageIndex-1) + dots +(pageSize);
-	    	sql += ";";
+	    	sql += CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {
@@ -96,7 +96,8 @@ public class BettingListForEachGame {
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
 	    		   + sql_quato + date + sql_quato 
-	    		   + " AND gameID = " + gameid;
+	    		   + " AND gameID = " + gameid
+	    		   + CommonString.SQLQUERYEND;
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  

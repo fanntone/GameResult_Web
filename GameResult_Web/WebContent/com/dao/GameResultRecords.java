@@ -13,8 +13,7 @@ import java.util.Map;
 public class GameResultRecords {
 	private Connection conn=null;  
 	private PreparedStatement psmt=null;  
-	private ResultSet rs=null;  
-	private String sql_end = ";";
+	private ResultSet rs=null;
 	
 	private void openConn() {
 	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
@@ -37,7 +36,6 @@ public class GameResultRecords {
     													 String gameID){
     	openConn(); 
     	List<Map<String, String>> list =new ArrayList<Map<String, String>>();  
-    	String dots = ",";
     	String sql_gameID = " ";
     	if(!gameID.equalsIgnoreCase("ALL"))
     		sql_gameID = " AND gameID = " + gameID;
@@ -48,8 +46,8 @@ public class GameResultRecords {
 				  	 + " AND roundStatus = 1 "
 				  	 + " order by roundUUID ASC "
 				  	 + " Limit "
-				  	 + pageSize*(pageIndex-1) + dots +(pageSize)
-				  	 + sql_end;
+				  	 + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
+				  	 + CommonString.SQLQUERYEND;
 	    try {
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -96,7 +94,7 @@ public class GameResultRecords {
    		  	 + " AND " +  "'" + dateTime +" 23:59:59'"
    		  	 + sql_gameID
    		  	 + " AND roundStatus = 1 "
-   		  	 + sql_end;
+   		  	 + CommonString.SQLQUERYEND;
         
         openConn();  
         try {  
