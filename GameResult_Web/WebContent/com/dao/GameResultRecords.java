@@ -41,10 +41,10 @@ public class GameResultRecords {
     		sql_gameID = " AND gameID = " + gameID;
     	String sql = " select * from resultsRecords where userID = " + userID 
 				  	 + " AND resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
-				  	 + " AND " +  "'" + dateTime +" 23:59:59'"
+				  	 + " AND " +  "'" + dateTime +" 23:59:59' "
 				  	 + sql_gameID
-				  	 + " AND roundStatus = 1 "
-				  	 + " order by roundUUID ASC "
+				  	 + " AND roundStatus >= 1 "
+				  	 + " order by orderID DESC "
 				  	 + " Limit "
 				  	 + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
 				  	 + CommonString.SQLQUERYEND;
@@ -53,8 +53,9 @@ public class GameResultRecords {
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()){  
 	    		Map<String, String> map=new HashMap<String, String>();
-	    		int length = rs.getString(CommonString.ROUNDUUID).length();
-	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length-22, length));  
+	    		String rs_string = rs.getString(CommonString.ROUNDUUID);
+	    		int length = rs_string.length();
+	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length-22));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
 	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
@@ -91,9 +92,9 @@ public class GameResultRecords {
     	
         String sql = "select count(*) from resultsRecords where userID = " + userID
    		  	 + " AND resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
-   		  	 + " AND " +  "'" + dateTime +" 23:59:59'"
+   		  	 + " AND " +  "'" + dateTime +" 23:59:59' "
    		  	 + sql_gameID
-   		  	 + " AND roundStatus = 1 "
+   		  	 + " AND roundStatus >= 1 "
    		  	 + CommonString.SQLQUERYEND;
         
         openConn();  

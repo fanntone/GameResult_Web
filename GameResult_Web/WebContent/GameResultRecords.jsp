@@ -152,6 +152,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width = "1280">
 	<tr>
+		<th>注單號碼(BG)</th>
 		<th>時間</th>
 	    <th>押注編號</th>
 	    <th>玩家編碼</th>
@@ -159,7 +160,6 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	    <th>線數</th>
 	    <th>贏金</th>
 	    <th>代理商 </th>
-	    <th>注單號碼(BG)</th>
 	    <th>轉輪結果</th>
 	</tr>
 	<%  
@@ -168,6 +168,7 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	      map = (Map<String, String>)list.get(i);
 	%>
       <tr>
+      	  <th><%=map.get(CommonString.ORDERID)%></th>
       	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th><%=map.get(CommonString.ROUNDUUID)%></th>  
           <th>
@@ -179,19 +180,20 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
           <th><%=map.get(CommonString.LINE)%></th>
           <th><%=map.get(CommonString.RESULTS)%></th>
           <th><%=map.get(CommonString.AGENT)%></th>
-          <th><%=map.get(CommonString.ORDERID)%></th>
           <th width = "30%">
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
-          	String text = "";
-          	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
-          	for(int j = 0; j < 3; j++) {
-          		for(int k = 0; k < 5; k++) {
-					text += "<img src=\"images/i"+ ps.Wheel[j][k] + ".png\" height=56 width=56 />";
-          		}
-    			text += "<br>";
-			}
-			out.println(text);
+          	if(jsonstring.contains("Wheel")) {
+              	String text = "";
+              	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
+              	for(int j = 0; j < 3; j++) {
+              		for(int k = 0; k < 5; k++) {
+    					text += "<img src=\"images/i"+ ps.Wheel[j][k] + ".png\" height=56 width=56 />";
+              		}
+        			text += "<br>";
+    			}
+    			out.println(text);
+          	}
           %>
           </th>     
       </tr>  
