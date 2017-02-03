@@ -44,6 +44,7 @@ public class PlayersMoneyChange {
 	    	String sql_quato = "'";
 	    	String time_start = " 00:00:00 ";
 	    	String time_end = " 23:59:00 ";
+	    	String sql_end = ";";
 	    	String Day;
 	    	if(day<10)
 	    		Day= "0" + String.valueOf(day);
@@ -57,6 +58,7 @@ public class PlayersMoneyChange {
 	    			   + " and " + sql_quato + sel_year + "/" + sel_month + "/" + Day + time_end + sql_quato
 	    			   + " and userID = " + userID 
 	    			   + " group by gameID ";
+	    	sql += sql_end;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();
 	    	while(rs.next()) {
