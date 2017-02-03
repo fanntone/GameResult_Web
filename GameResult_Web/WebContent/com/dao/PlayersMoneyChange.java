@@ -55,6 +55,7 @@ public class PlayersMoneyChange {
 	    			   + " where resultsDate between " 
 	    			   + sql_quato + sel_year + "/" + sel_month + "/" + Day + time_start + sql_quato
 	    			   + " and " + sql_quato + sel_year + "/" + sel_month + "/" + Day + time_end + sql_quato
+	    			   + " and userID = " + userID 
 	    			   + " group by gameID ";
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();
