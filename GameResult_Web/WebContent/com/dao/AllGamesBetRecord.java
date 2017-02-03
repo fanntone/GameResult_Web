@@ -55,7 +55,7 @@ public class AllGamesBetRecord {
 	    		+ " count(betting) as Rounds,"
 	    		+ " sum(betting) as Bet,"
 	    		+ " sum(results) as Win,"
-	    		+ " sum(betting)-sum(results) as Profit,"
+	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit,"
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
