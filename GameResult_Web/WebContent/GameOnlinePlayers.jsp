@@ -44,10 +44,10 @@ document.selection.submit();
 	if(userID == null || userID == "")
 		userID = "ALL";
 	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-	if(gameID == null || userID == "")
+	if(gameID == null || gameID == "")
 		gameID = "ALL";
 %>
-<form name="selection" action="GameOnlinePlayers.jsp" method="get">
+<form name="selection" action="GameOnlinePlayers.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;<select name="select" size="1" id="select" onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
@@ -130,10 +130,18 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;首頁</a>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;上一頁</a>  
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;下一頁</a>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;末頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;首頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;上一頁</a>  
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;下一頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;末頁</a>
 到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
 </form>	
 </body>

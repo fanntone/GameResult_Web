@@ -55,6 +55,8 @@ public class GameOnlinePlayers {
         		   + " where member_Login.userID = member_Account.userID "
         		   + sub_query
         		   + sub_query2
+        		   + " Limit "
+        		   + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
         		   + CommonString.SQLQUERYEND; 
         try {  
             psmt=conn.prepareStatement(sql);  
