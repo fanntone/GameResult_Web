@@ -47,12 +47,11 @@ public class OnlinePeopleCountsReportYear {
 				list.add(map);
         	}
         	
-			conn.close();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-			
+        closeConn();	
 		return list;
 	}
 	
@@ -77,12 +76,11 @@ public class OnlinePeopleCountsReportYear {
         	{
         		count_mounts[rs.getInt("mounts")-1] = rs.getInt("counts");
         	}
-        	closeConn();
         	
         } catch (SQLException e) {  
           e.printStackTrace();  
         }
-            
+    	closeConn(); 
         return count_mounts;  
 	}
 	

@@ -30,6 +30,15 @@ public class GameOnlinePlayers {
 	    }  
 	}
 	
+	private void closeConn() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Map<String, String>> getAllByPage(int pageSize, int pageIndex, String gameid) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
@@ -53,12 +62,7 @@ public class GameOnlinePlayers {
             e.printStackTrace();  
         }  
         
-        try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        closeConn();
         return list;  
 	}
 	

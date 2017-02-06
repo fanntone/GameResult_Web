@@ -30,7 +30,7 @@ public class AllGamesOnlinePlayers {
 	    }  
 	}
 	
-	private void disConn() {
+	private void closeConn() {
         try {
 			conn.close();
 		} catch (SQLException e) {
@@ -63,7 +63,7 @@ public class AllGamesOnlinePlayers {
 		}catch (SQLException e) {  
             e.printStackTrace();  
         }
-		disConn();
+		closeConn();
         return list;
 	}	
 }

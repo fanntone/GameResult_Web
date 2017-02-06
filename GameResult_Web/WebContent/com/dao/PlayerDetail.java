@@ -30,6 +30,15 @@ public class PlayerDetail {
 	    }  
 	} 
 	
+	private void closeConn() {
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Map<String, String>> getAllData(int userID) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();  
@@ -55,12 +64,7 @@ public class PlayerDetail {
             e.printStackTrace();  
         }
         
-        try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        closeConn();
         return list;
 	}
 }

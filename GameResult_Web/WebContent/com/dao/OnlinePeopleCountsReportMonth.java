@@ -29,6 +29,15 @@ public class OnlinePeopleCountsReportMonth {
 	    }  
 	}
 	
+	private void closeConn() {
+        try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Map<String,String>> getAllTimeList() {
 		List<Map<String, String>> list =new ArrayList<Map<String, String>>();
 		openConn();
@@ -49,12 +58,11 @@ public class OnlinePeopleCountsReportMonth {
 				map.put("Times", rs.getString("Times"));
 				list.add(map);
         	}
-        	
-			conn.close();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+        closeConn();
 				
 		return list;
 	}
@@ -78,7 +86,7 @@ public class OnlinePeopleCountsReportMonth {
         	rs = psmt.executeQuery(sql);
 			String sql_2;
 			sql_2 = " select Sum(" + CommonString.gameid_array[sel_game] + ")as counts "
-				  + " , DAY(time)as days"
+				  + " ,DAY(time)as days"
 				  + " from test_report "
 				  + " where Time(time) = '" + times + "' "
 				  + " and Month(time) = " + sel_month
@@ -98,16 +106,6 @@ public class OnlinePeopleCountsReportMonth {
         }
             
         return count_day;  
-	}
-	
-	
-	public void closeConn() {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
     public String getMaxGamePeopleByGameID(String date, int sel_game) {
