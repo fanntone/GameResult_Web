@@ -123,7 +123,7 @@ if(userID == null)
 	<th><%=list[3]%></th>
 	<th><%=list[4]%></th>
 	<th><%=list[5]%></th>
-	<th><%=list[6]%>%</th>
+	<th><%=list[6]%></th>
 </tr>
 <%}%>
 </table>
