@@ -55,7 +55,12 @@ public class GameResultRecords {
 	    		Map<String, String> map=new HashMap<String, String>();
 	    		String rs_string = rs.getString(CommonString.ROUNDUUID);
 	    		int length = rs_string.length();
-	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length-22));  
+	    		int begin_index = 22;
+	    		if(rs_string.contains("FreeGame") && !rs_string.contains("EnterFreeGame"))
+	    			begin_index = 23;
+	    		if(rs_string.contains("BonusGame")&& !rs_string.contains("EnterBonusGame"))
+	    			begin_index = 18;
+	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length - begin_index));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
 	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
