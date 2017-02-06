@@ -30,12 +30,18 @@ th, td {
 </style>
 </head>
 <body>
-
-<%
+<form name="selection" action="AllGamesOnlinePlayers.jsp" method="get">
+<% String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+if(gameID == null || gameID == "")
+	gameID = "ALL";	
 AllGamesOnlinePlayers data = new AllGamesOnlinePlayers();
-List<Map<String, String>> list = data.getAllData();
+List<Map<String, String>> list = data.getAllData(gameID);
 %>
-
+&nbsp;輸入遊戲編號&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
+						    id=<%=CommonString.PARAMETER_GAMEID%>
+						    type= "text" value = <%=gameID%>>
+<input type="submit" value="送出查詢" >
+<br><br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 		<th>遊戲(Game)</th>
@@ -56,5 +62,6 @@ List<Map<String, String>> list = data.getAllData();
     </tr>  
 	<%}%>
 </table>
+</form>
 </body>
 </html>

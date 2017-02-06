@@ -13,8 +13,8 @@ import java.util.Map;
 public class AllGamesOnlinePlayers {
 
 	private Connection conn=null;  
-	private PreparedStatement psmt=null;  
-	private ResultSet rs=null; 	
+	private PreparedStatement psmt=null;
+	private ResultSet rs=null;
 	
 	private void openConn() {  
 	    String url=CommonString.DB_URL;  
@@ -30,45 +30,39 @@ public class AllGamesOnlinePlayers {
 	    }  
 	}
 	
-	public List<Map<String, String>> getAllData() {  
-		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
-        List<String> game_list = new ArrayList<String>();
-        for(EnumAllGamesList eu : EnumAllGamesList.values()) {
-        	game_list.add(eu.getValue());
-        }
-		
-		for(int i = 1; i < game_list.size(); i++) {  
-		    Map<String, String> map=new HashMap<String, String>();
-		    String game_id = game_list.get(i);
-		    map.put(CommonString.PARAMETER_GAMEID, String.valueOf(game_id));
-		    map.put(CommonString.ONLINEPLAYERS, String.valueOf(countRs(game_id)));
-		    list.add(map);
-		}  
-        return list;
-	}
-	
-    public int countRs(String game_id){  
-        int count = 0;  
-        String sql = " select count(*) from member_Login where gameID = " + game_id ;   
-        openConn();  
-        try {  
-            psmt=conn.prepareStatement(sql);  
-            rs=psmt.executeQuery();  
-            while(rs.next()){  
-                count=rs.getInt(1);
-            }  
-        } catch (SQLException e) {  
-            e.printStackTrace();  
-        }
-        
+	private void disConn() {
         try {
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        return count;  
-    }
+	}
 	
+	public List<Map<String, String>> getAllData(String gameID) {
+		openConn();
+		List<Map<String, String>> list=new ArrayList<Map<String, String>>(); 
+		String sub_query = " where gameID = " + gameID;
+		if(gameID.equalsIgnoreCase("ALL"))
+			sub_query = " ";
+		String sql = " select gameID, count(*) as Counts from member_Login "
+				   + sub_query
+				   + " group by gameID "
+				   + CommonString.SQLQUERYEND;
+		try {
+	        psmt=conn.prepareStatement(sql);  
+	        rs=psmt.executeQuery(); 
+            while(rs.next()) { 
+			    Map<String, String> map = new HashMap<String, String>();
+			    map.put(CommonString.PARAMETER_GAMEID, rs.getString("gameID"));
+			    map.put(CommonString.ONLINEPLAYERS, rs.getString("Counts"));
+			    list.add(map);
+            }
+			
+		}catch (SQLException e) {  
+            e.printStackTrace();  
+        }
+		disConn();
+        return list;
+	}	
 }
