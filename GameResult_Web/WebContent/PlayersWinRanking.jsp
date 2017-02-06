@@ -65,7 +65,7 @@ else
 	reorder = "1";
 
 String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null) {
+if(date == null || date == "") {
 	java.util.Date c_date = new java.util.Date();
 	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
 	date = trans.format(c_date);
