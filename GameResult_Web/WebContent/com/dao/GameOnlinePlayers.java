@@ -39,14 +39,22 @@ public class GameOnlinePlayers {
 		}
 	}
 	
-	public List<Map<String, String>> getAllByPage(int pageSize, int pageIndex, String gameid) {  
+	public List<Map<String, String>> getAllByPage(int pageSize, int pageIndex, String gameID, String userID) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
-        openConn();  
-        String sql = " select *"
-        		   + " from member_Login, member_Account"
-        		   + " where member_Login.userID = member_Account.userID"
-        		   + " and member_Login.gameID = "
-        		   + gameid
+        openConn();
+        String sub_query = " and member_Login.userID = " + userID;
+        if(userID.equalsIgnoreCase("ALL"))
+        	sub_query = " ";
+        
+        String sub_query2 = " and member_Login.gameID = " + gameID;
+        if(gameID.equalsIgnoreCase("ALL"))
+        	sub_query2 = " ";
+        	
+        String sql = " select * "
+        		   + " from member_Login, member_Account "
+        		   + " where member_Login.userID = member_Account.userID "
+        		   + sub_query
+        		   + sub_query2
         		   + CommonString.SQLQUERYEND; 
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -60,19 +68,26 @@ public class GameOnlinePlayers {
             }  
         } catch (SQLException e) {  
             e.printStackTrace();  
-        }  
-        
+        }    
         closeConn();
         return list;  
 	}
 	
-    public int countRs(String gameid){  
-        int count = 0;  
-        String sql = " select count(*)"
-        		   + " from member_Login, member_Account"
-        		   + " where member_Login.userID = member_Account.userID"
-        		   + " and member_Login.gameID = "
-        		   + gameid
+    public int countRs(String gameID, String userID){  
+        int count = 0;
+        String sub_query = " and member_Login.userID = " + userID;
+        if(userID.equalsIgnoreCase("ALL") || userID.isEmpty())
+        	sub_query = " ";
+        
+        String sub_query2 = " and member_Login.gameID = " + gameID;
+        if(gameID.equalsIgnoreCase("ALL"))
+        	sub_query2 = " ";
+        
+        String sql = " select count(*) "
+        		   + " from member_Login, member_Account "
+        		   + " where member_Login.userID = member_Account.userID "
+        		   + sub_query
+        		   + sub_query2
         		   + CommonString.SQLQUERYEND;
         
         openConn();
@@ -95,8 +110,8 @@ public class GameOnlinePlayers {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize, String gameid) {  
-        int totalPage=countRs(gameid);
+    public int getTotalPage(int pageSize, String gameID, String userID) {  
+        int totalPage=countRs(gameID, userID);
         if(pageSize> totalPage)
         	return 1;
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  

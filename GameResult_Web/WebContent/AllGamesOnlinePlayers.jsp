@@ -30,7 +30,7 @@ th, td {
 </style>
 </head>
 <body>
-<form name="selection" action="AllGamesOnlinePlayers.jsp" method="get">
+<form name="selection" action="AllGamesOnlinePlayers.jsp" method="post">
 <% String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 if(gameID == null || gameID == "")
 	gameID = "ALL";	
@@ -55,7 +55,7 @@ List<Map<String, String>> list = data.getAllData(gameID);
     <tr> 
        	<th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
        	<th>
-	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
+	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=map.get(CommonString.PARAMETER_GAMEID)%>" target = "_blank">
 	       	<%=map.get(CommonString.ONLINEPLAYERS)%>
 	       	</a>
 	    </th>

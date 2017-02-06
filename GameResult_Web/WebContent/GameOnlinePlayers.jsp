@@ -38,9 +38,17 @@ document.selection.submit();
 }
 </script>
 
-<%String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
-<form name="selection" action="GameOnlinePlayers.jsp" method="post"> 請選擇筆數
-<select name="select" size="1" id="select" onChange="change()">
+<%	String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
+<%
+	String userID = request.getParameter(CommonString.PAREMETER_USERID);
+	if(userID == null || userID == "")
+		userID = "ALL";
+	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	if(gameID == null || userID == "")
+		gameID = "ALL";
+%>
+<form name="selection" action="GameOnlinePlayers.jsp" method="get">
+&nbsp;請選擇筆數&nbsp;<select name="select" size="1" id="select" onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -58,33 +66,34 @@ document.selection.submit();
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-
+&nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
+						    id=<%=CommonString.PAREMETER_USERID%>
+						    type= "text" value = <%=userID%>>
+&nbsp;輸入遊戲編號&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
+							id=<%=CommonString.PARAMETER_GAMEID%>
+							type= "text" value = <%=gameID%>>
+<input type="submit" value="送出查詢" >
+<br>
 <%
-String gameid = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(gameid == null)
-	gameid = EnumAllGamesList.GAME_1.getValue();
-
 int pageSize = 5;
 if(sel != null)
 	pageSize = Integer.parseInt(sel);
 
 GameOnlinePlayers data = new GameOnlinePlayers();
-int totalPages = data.getTotalPage(pageSize, gameid);
+int totalPages = data.getTotalPage(pageSize, gameID, userID);
 
 String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 if(currentPage==null)  
     currentPage="1";  
- 
+
 int pageIndex = Integer.parseInt(currentPage);  
 if(pageIndex < 1) {  
     pageIndex = 1;  
 } else if(pageIndex > totalPages){  
     pageIndex = totalPages;  
-} 
+}
 
-
-
-List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameid);
+List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, userID);
 %>
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
@@ -121,10 +130,10 @@ if(upPage < 1)
 %>
 
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;首頁</a>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;上一頁</a>  
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;下一頁</a>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameid%>">&nbsp;末頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;首頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;上一頁</a>  
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;下一頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;末頁</a>
 到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
 </form>	
 </body>
