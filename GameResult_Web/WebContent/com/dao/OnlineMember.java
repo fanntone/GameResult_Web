@@ -14,8 +14,8 @@ public class OnlineMember {
 
 	private Connection conn=null;  
 	private PreparedStatement psmt=null;  
-	private ResultSet rs=null; 	
-	
+	private ResultSet rs=null;
+
 	private void openConn() {  
 	    String url=CommonString.DB_URL;  
 	    String user=CommonString.DB_USER;  
@@ -30,14 +30,19 @@ public class OnlineMember {
 	    }  
 	}
 	
-	public List<Map<String, String>> getAllempByPage(int pageSize,int pageIndex) {  
+	public List<Map<String, String>> getAllempByPage(int pageSize,int pageIndex, String gameID) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();
-        String sql = " select member_Login.userID,member_Account.balance,member_Login.gameID" +
-        			 " from member_Login, member_Account" +
-        			 " where member_Login.userID = member_Account.userID Limit "
-        			 + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
-        			 + CommonString.SQLQUERYEND;  
+        String sub_query = " and member_Login.gameID = " + gameID;
+        if(gameID.equalsIgnoreCase("ALL"))
+        	sub_query = " ";
+        String sql = " select member_Login.userID, member_Account.balance, member_Login.gameID"
+        		   + " from member_Login, member_Account"
+        		   + " where member_Login.userID = member_Account.userID "
+        		   + sub_query
+        		   + " Limit "
+        		   + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
+        		   + CommonString.SQLQUERYEND;  
         try {  
             psmt=conn.prepareStatement(sql);  
             rs=psmt.executeQuery();  
@@ -61,9 +66,12 @@ public class OnlineMember {
         return list;
 	}
 	
-    public int countRs(){  
-        int count = 0;  
-        String sql = " select count(*) from member_Login" + CommonString.SQLQUERYEND;   
+    public int countRs(String gameID){  
+        int count = 0;
+        String sub_query = " and member_Login.gameID = " + gameID;
+        if(gameID.equalsIgnoreCase("ALL"))
+        	sub_query = " ";
+        String sql = " select count(*) from member_Login" + sub_query + CommonString.SQLQUERYEND;   
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
@@ -84,8 +92,8 @@ public class OnlineMember {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize) {  
-        int totalPage=countRs();
+    public int getTotalPage(int pageSize, String gameID) {  
+        int totalPage=countRs(gameID);
         if(pageSize> totalPage)
         	return 1;
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);  

@@ -38,8 +38,13 @@ document.selection.submit();
 </script>
 
 <% String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
-<form name="selection" action="OnlineMember.jsp" method="post"> 請選擇筆數
-<select name="select" size="1" id="select" onChange="change()">
+<% String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+if(gameID == null)
+	gameID = "ALL";	
+%>
+
+<form name="selection" action="OnlineMember.jsp" method="get">
+&nbsp;請選擇筆數&nbsp;<select name="select" size="1" id="select" onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -55,16 +60,19 @@ document.selection.submit();
 <option value=<%=EnumSelectionList.SELECT_100.getValue()%>
 	<%if (sel != null && sel.equals(EnumSelectionList.SELECT_100.getValue())){%>
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option>
-</select>
-<br>
-
+</select><br>
+&nbsp;輸入遊戲編號&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
+						    id=<%=CommonString.PARAMETER_GAMEID%>
+						    type= "text" value = <%=gameID%>>
+<input type="submit" value="送出查詢" >
+<br><br>
 <%
 int pageSize = 5;
 if(sel != null)
 	pageSize = Integer.parseInt(sel);
 
 OnlineMember data = new OnlineMember();
-int totalPages = data.getTotalPage(pageSize);
+int totalPages = data.getTotalPage(pageSize, gameID);
 
 String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 if(currentPage==null)  
@@ -75,9 +83,9 @@ if(pageIndex < 1){
     pageIndex = 1;  
 }else if(pageIndex > totalPages){  
     pageIndex = totalPages;  
-} 
+}
 
-List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex);
+List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameID);
 %>
 
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
