@@ -49,6 +49,9 @@ document.selection.submit();
 }
 </script>
 <%
+String userID = request.getParameter(CommonString.PAREMETER_USERID);
+if(userID == null || userID == "")
+	userID = "ALL";
 String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
 if(orderby == null)
 	orderby = "1";
@@ -75,7 +78,7 @@ int pageSize;
 pageSize = Integer.parseInt(sel_page);
 
 %>
-<form name="selection" action="PlayersWinRanking.jsp" method="get">
+<form name="selection" action="PlayersWinRanking.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;
 <select name="sel_page" size="1" id="sel_page" onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
@@ -95,7 +98,10 @@ pageSize = Integer.parseInt(sel_page);
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-&nbsp;Date&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+&nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
+						    id=<%=CommonString.PAREMETER_USERID%>
+						    type= "text" value = <%=userID%>>
 &nbsp;<input type="submit" value="送出查詢" >
 <script language="JavaScript">
   $(document).ready(function(){ 
@@ -139,9 +145,10 @@ pageSize = Integer.parseInt(sel_page);
 	List<Map<String, String>> list = data.getAllRecords(date,
 														orderby,
 														asc,
+														userID,
 														pageSize,
 														pageIndex);
-	int totalPages = data.getTotalPage(pageSize, date);
+	int totalPages = data.getTotalPage(pageSize, date, userID);
 		
 	if(pageIndex < 1){  
 	    pageIndex = 1;  
@@ -196,21 +203,25 @@ pageSize = Integer.parseInt(sel_page);
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&pageIndex=1">&nbsp;首頁</a>
 <a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
 <a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
 <a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
 到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
 </form>	

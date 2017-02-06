@@ -42,6 +42,7 @@ public class PlayersWinRanking {
 	public List<Map<String, String>> getAllRecords(String date,
 												   String orderby,
 												   String asc,
+												   String userID,
 												   int pageSize,
 												   int pageIndex){
 		openConn(); 
@@ -52,7 +53,11 @@ public class PlayersWinRanking {
     		orderby_str = " order by " + orderby + " ASC;"; 
     	else
     		orderby_str = " order by " + orderby + " DESC;";
-
+    	
+        String sub_query = " and userID = " + userID;
+        if(userID.equalsIgnoreCase("ALL"))
+        	sub_query = " ";
+        
 	    try {
 	    	sql = " select userID," 
 	    		+ " count(betting) as Rounds,"
@@ -62,6 +67,7 @@ public class PlayersWinRanking {
 	    		+ " sum(results)/sum(betting)*100 as PayRate"
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO 
+	    		+ sub_query
 	    		+ " GROUP by userID "
 	    		+ orderby_str
 	    		+ CommonString.SQLQUERYEND;
@@ -86,11 +92,15 @@ public class PlayersWinRanking {
 		return list;
 	}
 	
-    public int countRs(String date){  
-        int count = 0;  
+    public int countRs(String date, String userID){  
+        int count = 0;
+        String sub_query = " and userID = " + userID;
+        if(userID.equalsIgnoreCase("ALL"))
+        	sub_query = " ";
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
 	    		   + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+	    		   + sub_query
 	    		   + CommonString.SQLQUERYEND;
         openConn();  
         try {  
@@ -107,8 +117,8 @@ public class PlayersWinRanking {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize, String datetime) {  
-        int totalPage=countRs(datetime);
+    public int getTotalPage(int pageSize, String datetime, String userID) {  
+        int totalPage=countRs(datetime, userID);
         if(pageSize> totalPage)
         	return 1;
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);
