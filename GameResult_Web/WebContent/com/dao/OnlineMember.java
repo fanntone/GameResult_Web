@@ -68,10 +68,10 @@ public class OnlineMember {
 	
     public int countRs(String gameID){  
         int count = 0;
-        String sub_query = " and member_Login.gameID = " + gameID;
+        String sub_query = " where member_Login.gameID = " + gameID;
         if(gameID.equalsIgnoreCase("ALL"))
         	sub_query = " ";
-        String sql = " select count(*) from member_Login" + sub_query + CommonString.SQLQUERYEND;   
+        String sql = " select count(*) from member_Login " + sub_query + CommonString.SQLQUERYEND;   
         openConn();  
         try {  
             psmt=conn.prepareStatement(sql);  
