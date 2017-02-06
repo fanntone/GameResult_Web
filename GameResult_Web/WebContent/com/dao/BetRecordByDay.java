@@ -61,7 +61,7 @@ public class BetRecordByDay {
 	    		map.put("Players", rs.getString("counts"));
 	    	}
 
-	    	sql = "select count(betting) as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
+	    	sql = "select count(betting) as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -69,7 +69,7 @@ public class BetRecordByDay {
 	    		map.put("Rounds", rs.getString("counts"));
 	    	}
 	    	
-	    	sql = "select sum(betting) as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
+	    	sql = "select sum(betting) as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -77,7 +77,7 @@ public class BetRecordByDay {
 	    		map.put("Bet", rs.getString("counts"));
 	    	}
 	    	
-	    	sql = "select sum(results) as counts from resultsRecords where results > 0 and Date(resultsDate) = " 
+	    	sql = "select sum(results) as counts from resultsRecords where results >= 0 and Date(resultsDate) = " 
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -85,7 +85,7 @@ public class BetRecordByDay {
 	    		map.put("Win", rs.getString("counts"));
 	    	}
 	    	
-	    	sql = "select sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
+	    	sql = "select sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
@@ -93,7 +93,7 @@ public class BetRecordByDay {
 	    		map.put("Profit", rs.getString("counts"));
 	    	}
 	    	
-	    	sql = "select sum(results)/sum(betting)*100 as counts from resultsRecords where betting > 0 and Date(resultsDate) = " 
+	    	sql = "select sum(results)/sum(betting)*100 as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO +  CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
