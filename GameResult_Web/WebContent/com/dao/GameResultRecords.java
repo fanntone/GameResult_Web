@@ -39,10 +39,14 @@ public class GameResultRecords {
     	String sql_gameID = " ";
     	if(!gameID.equalsIgnoreCase("ALL"))
     		sql_gameID = " AND gameID = " + gameID;
-    	String sql = " select * from resultsRecords where userID = " + userID 
-				  	 + " AND resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
+    	String sql_userID = " " ;
+    	if(!userID.equalsIgnoreCase("ALL"))
+    		sql_userID = " AND userID = " + userID;
+    	String sql = " select * from resultsRecords " 
+				  	 + " WHERE resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
 				  	 + " AND " +  "'" + dateTime +" 23:59:59' "
 				  	 + sql_gameID
+				  	 + sql_userID
 				  	 + " AND roundStatus >= 1 "
 				  	 + " order by orderID DESC "
 				  	 + " Limit "
@@ -94,11 +98,14 @@ public class GameResultRecords {
     	String sql_gameID = " ";
     	if(!gameID.equalsIgnoreCase("ALL"))
     		sql_gameID = " AND gameID = " + gameID;
-    	
-        String sql = "select count(*) from resultsRecords where userID = " + userID
-   		  	 + " AND resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
+    	String sql_userID = " " ;
+    	if(!userID.equalsIgnoreCase("ALL"))
+    		sql_userID = " AND userID = " + userID;
+        String sql = "select count(*) from resultsRecords "
+   		  	 + " WHERE resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
    		  	 + " AND " +  "'" + dateTime +" 23:59:59' "
    		  	 + sql_gameID
+   		  	 + sql_userID
    		  	 + " AND roundStatus >= 1 "
    		  	 + CommonString.SQLQUERYEND;
         

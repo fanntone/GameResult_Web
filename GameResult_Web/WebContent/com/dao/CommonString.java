@@ -39,7 +39,7 @@ public class CommonString {
 	public static final String STATUS = "status";
 	public static final String REGTYPE = "regType";
 	public static final String GM = "gm";
-	public static final String TEST_UESRID = "8846597";
+	public static final String TEST_UESRID = "8846614";
 	
 	public static final String[] days_array = new String[] {"01","02","03","04","05","06","07","08","09","10",
 															"11","12","13","14","15","16","17","18","19","20",
