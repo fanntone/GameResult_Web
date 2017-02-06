@@ -46,13 +46,17 @@ public class PlayersMoneyChange {
 	    		Day= "0" + String.valueOf(day);
 	    	else
 	    		Day = String.valueOf(day);
+	    	
+	    	String sub_query = " and userID = " + userID;
+	        if(userID.equalsIgnoreCase("ALL"))
+	        	sub_query = " ";
 	    	String sql = " select gameID, "
 	    			   + " SUM(CONVERT(afterBalance, SIGNED) - CONVERT(beforeBalance, SIGNED)) AS counts "
 	    			   + " from resultsRecords "
 	    			   + " where resultsDate between " 
 	    			   + CommonString.TIMEDATE_QUATO + sel_year + "/" + sel_month + "/" + Day + CommonString.DAYTIMEBRGIN + CommonString.TIMEDATE_QUATO
 	    			   + " and " + CommonString.TIMEDATE_QUATO + sel_year + "/" + sel_month + "/" + Day + CommonString.DAYTIMEEND + CommonString.TIMEDATE_QUATO
-	    			   + " and userID = " + userID 
+	    			   + sub_query
 	    			   + " group by gameID ";
 	    	sql += CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
