@@ -54,8 +54,8 @@ if(date == null) {
 	date = trans.format(c_date);
 }
 %>
-<form name="selection" action="BetRecordByDay.jsp" method="get">
-Date:<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+<form name="selection" action="BetRecordByDay.jsp" method="post">
+&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>>&nbsp;
 <input type="submit" value="°e¥X¬d¸ß" >
 </form>
 <script language="JavaScript">
