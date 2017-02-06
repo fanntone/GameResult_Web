@@ -49,6 +49,9 @@ document.selection.submit();
 }
 </script>
 <%
+String userID = request.getParameter(CommonString.PAREMETER_USERID);
+if(userID == null || userID == "")
+	userID = "ALL";
 String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
 if(orderby == null)
 	orderby = "1";
@@ -118,8 +121,11 @@ pageSize = Integer.parseInt(sel_page);
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-&nbsp;Date&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
-&nbsp;<input type="submit" value="送出查詢" >
+&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+&nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
+						    id=<%=CommonString.PAREMETER_USERID%>
+						    type= "text" value = <%=userID%>>
+&nbsp;<input type="submit" value="送出查詢"> <br>
 
 <script language="JavaScript">
   $(document).ready(function(){ 
@@ -170,9 +176,10 @@ pageSize = Integer.parseInt(sel_page);
 														sel_gameID,
 														orderby,
 														asc,
+														userID,
 														pageSize,
 														pageIndex);
-	int totalPages = data.getTotalPage(pageSize, date, sel_gameID);	 	
+	int totalPages = data.getTotalPage(pageSize, date, sel_gameID, userID);	 	
 	if(pageIndex < 1){  
 	    pageIndex = 1;  
 	}else if(pageIndex > totalPages){  

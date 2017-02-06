@@ -68,7 +68,7 @@ document.selection.submit();
 <br>
 &nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						    id=<%=CommonString.PAREMETER_USERID%>
-						    type= "text" value = <%=userID%>>
+						    type= "text" value = <%=userID%>><br>
 &nbsp;輸入遊戲編號&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
 							id=<%=CommonString.PARAMETER_GAMEID%>
 							type= "text" value = <%=gameID%>>

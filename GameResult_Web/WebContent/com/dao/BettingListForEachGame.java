@@ -45,6 +45,7 @@ public class BettingListForEachGame {
 												   String gameID,
 												   String orderby,
 												   String asc,
+												   String userID,
 												   int pageSize,
 												   int pageIndex){
 		openConn(); 
@@ -55,22 +56,26 @@ public class BettingListForEachGame {
     		orderby_str = " order by " + orderby + " ASC "; 
     	else
     		orderby_str = " order by " + orderby + " DESC ";
-
+    	
+    	String sub_query = " and userID = " + userID;
+    	if(userID.equalsIgnoreCase("ALL"))
+    		sub_query = " ";
 	    try {
-	    	sql = " select userID," 
-	    		+ " count(betting) as Rounds,"
-	    		+ " sum(betting) as Bet,"
-	    		+ " sum(results) as Win,"
-	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit,"
-	    		+ " sum(results)/sum(betting)*100 as PayRate"
+	    	sql = " select userID, " 
+	    		+ " count(betting) as Rounds, "
+	    		+ " sum(betting) as Bet, "
+	    		+ " sum(results) as Win, "
+	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
+	    		+ " sum(results)/sum(betting)*100 as PayRate "
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ sql_quato + date + sql_quato 
 	    		+ " and gameID = " +  gameID
-	    		+ " GROUP by userID"
+	    		+ sub_query
+	    		+ " GROUP by userID "
 	    		+ orderby_str
 			  	+ " Limit "
-			  	+ pageSize*(pageIndex-1) + dots +(pageSize);
-	    	sql += CommonString.SQLQUERYEND;
+			  	+ pageSize*(pageIndex-1) + dots +(pageSize)
+	    		+ CommonString.SQLQUERYEND;
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {
@@ -84,19 +89,23 @@ public class BettingListForEachGame {
 	    		list.add(map);	
 	    	}	    	
         } catch (SQLException e) {  
-            e.printStackTrace();  
+            e.printStackTrace();
         }
 	    
 	    closeConn();
 		return list;
 	}
 	
-    public int countRs(String date, String gameid){  
-        int count = 0;  
+    public int countRs(String date, String gameid, String userID){  
+        int count = 0;
+    	String sub_query = " and userID = " + userID;
+    	if(userID.equalsIgnoreCase("ALL"))
+    		sub_query = " ";
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
 	    		   + sql_quato + date + sql_quato 
 	    		   + " AND gameID = " + gameid
+	    		   + sub_query
 	    		   + CommonString.SQLQUERYEND;
         openConn();  
         try {  
@@ -113,8 +122,8 @@ public class BettingListForEachGame {
         return count;  
     }  
 
-    public int getTotalPage(int pageSize, String datetime, String gameid) {  
-        int totalPage=countRs(datetime, gameid);
+    public int getTotalPage(int pageSize, String datetime, String gameid, String userID) {  
+        int totalPage=countRs(datetime, gameid, userID);
         if(pageSize> totalPage)
         	return 1;
         return (totalPage%pageSize==0)?(totalPage/pageSize):(totalPage/pageSize+1);
