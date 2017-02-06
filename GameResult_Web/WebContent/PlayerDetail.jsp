@@ -33,7 +33,7 @@ th, td {
 <%
 String users = request.getParameter(CommonString.PAREMETER_USERID);
 PlayerDetail data = new PlayerDetail();
-if(users == null)
+if(users == null || users == "" || users.replaceAll("\\s","").isEmpty())
 	users = "1001001";
 int id = Integer.parseInt(users);
 if(id < 0)

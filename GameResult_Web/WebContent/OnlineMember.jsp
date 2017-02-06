@@ -39,7 +39,7 @@ document.selection.submit();
 
 <% String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
 <% String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(gameID == null || gameID == "")
+if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
 	gameID = "ALL";	
 %>
 

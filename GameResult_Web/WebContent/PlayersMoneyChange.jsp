@@ -55,7 +55,7 @@ String sel_year = request.getParameter("years");
 if(sel_year == null)
 	sel_year = "2017";
 String userID = request.getParameter("userID");
-if(userID == null || userID == "")
+if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 	userID = "ALL";
 %>
 <form name="selection" action="PlayersMoneyChange.jsp" method="post">

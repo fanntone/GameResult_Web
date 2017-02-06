@@ -50,7 +50,7 @@ document.selection.submit();
 </script>
 <%
 String userID = request.getParameter(CommonString.PAREMETER_USERID);
-if(userID == null || userID == "")
+if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 	userID = "ALL";
 String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
 if(orderby == null)

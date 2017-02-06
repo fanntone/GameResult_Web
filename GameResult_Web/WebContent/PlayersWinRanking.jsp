@@ -50,13 +50,13 @@ document.selection.submit();
 </script>
 <%
 String userID = request.getParameter(CommonString.PAREMETER_USERID);
-if(userID == null || userID == "")
+if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 	userID = "ALL";
 String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
-if(orderby == null)
+if(orderby == null || orderby == "" || orderby.replaceAll("\\s","").isEmpty())
 	orderby = "1";
 String asc = request.getParameter(CommonString.PARAMETER_ASC);
-if(asc == null)
+if(asc == null || asc == "" || asc.replaceAll("\\s","").isEmpty())
 	asc = "1";
 String reorder;
 if(asc.equalsIgnoreCase("1"))

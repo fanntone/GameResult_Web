@@ -41,10 +41,10 @@ document.selection.submit();
 <%	String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
 <%
 	String userID = request.getParameter(CommonString.PAREMETER_USERID);
-	if(userID == null || userID == "")
+	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 		userID = "ALL";
 	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-	if(gameID == null || gameID == "")
+	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
 		gameID = "ALL";
 %>
 <form name="selection" action="GameOnlinePlayers.jsp" method="post">

@@ -55,7 +55,7 @@ if(sel == null)
 	sel = "5";
 
 String userid = request.getParameter(CommonString.PAREMETER_USERID);
-if(userid == null || userid == "")
+if(userid == null || userid == "" || userid.replaceAll("\\s","").isEmpty())
 	userid = "ALL";
 
 String date = request.getParameter(CommonString.PARAMETER_DATE);
