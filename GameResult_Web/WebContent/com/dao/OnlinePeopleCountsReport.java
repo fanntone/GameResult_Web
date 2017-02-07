@@ -43,7 +43,7 @@ public class OnlinePeopleCountsReport {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         openConn();
         try {
-        	String sql = "select * from people_count"
+        	String sql = "select * from people_count "
         			   +" where time BETWEEN " + "'" + datetime +" 00:00:00'"
         			   +" AND " +  "'" + datetime +" 23:59:59'"
         			   + CommonString.SQLQUERYEND;
@@ -51,13 +51,13 @@ public class OnlinePeopleCountsReport {
         	rs = psmt.executeQuery(sql);        	
 			while(rs.next()) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("time", rs.getString("test_report.time"));
-			map.put("Game1",rs.getString("test_report.game01"));
-			map.put("Game2",rs.getString("test_report.game02"));
-			map.put("Game3",rs.getString("test_report.game03"));
-			map.put("Game4",rs.getString("test_report.game04"));
-			map.put("Game5",rs.getString("test_report.game05"));
-			map.put("Game6",rs.getString("test_report.game06"));
+			map.put("time", rs.getString("people_count.time"));
+			map.put("Game1",rs.getString("people_count.game01"));
+			map.put("Game2",rs.getString("people_count.game02"));
+			map.put("Game3",rs.getString("people_count.game03"));
+			map.put("Game4",rs.getString("people_count.game04"));
+			map.put("Game5",rs.getString("people_count.game05"));
+			map.put("Game6",rs.getString("people_count.game06"));
 			list.add(map);
 			}            
         } catch (SQLException e) {  
