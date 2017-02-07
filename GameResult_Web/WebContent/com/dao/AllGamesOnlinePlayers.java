@@ -12,17 +12,17 @@ import java.util.Map;
 
 public class AllGamesOnlinePlayers {
 
-	private Connection conn=null;  
-	private PreparedStatement psmt=null;
-	private ResultSet rs=null;
+	private Connection conn = null;  
+	private PreparedStatement psmt = null;
+	private ResultSet rs = null;
 	
 	private void openConn() {  
-	    String url=CommonString.DB_URL;  
-	    String user=CommonString.DB_USER;  
-	    String password=CommonString.DB_PW;  
+	    String url = CommonString.DB_URL;  
+	    String user = CommonString.DB_USER;  
+	    String password = CommonString.DB_PW;  
 	    try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn=DriverManager.getConnection(url,user,password);
+	        conn = DriverManager.getConnection(url, user, password);
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -41,7 +41,7 @@ public class AllGamesOnlinePlayers {
 	
 	public List<Map<String, String>> getAllData(String gameID) {
 		openConn();
-		List<Map<String, String>> list=new ArrayList<Map<String, String>>(); 
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>(); 
 		String sub_query = " where gameID = " + gameID;
 		if(gameID.equalsIgnoreCase("ALL"))
 			sub_query = " ";
@@ -50,17 +50,16 @@ public class AllGamesOnlinePlayers {
 				   + " group by gameID "
 				   + CommonString.SQLQUERYEND;
 		try {
-	        psmt=conn.prepareStatement(sql);  
-	        rs=psmt.executeQuery(); 
+	        psmt = conn.prepareStatement(sql);  
+	        rs = psmt.executeQuery(); 
             while(rs.next()) { 
 			    Map<String, String> map = new HashMap<String, String>();
 			    map.put(CommonString.PARAMETER_GAMEID, rs.getString("gameID"));
 			    map.put(CommonString.PAREMETER_USERID, rs.getString("userID"));
 			    map.put(CommonString.ONLINEPLAYERS, rs.getString("Counts"));
 			    list.add(map);
-            }
-			
-		}catch (SQLException e) {  
+            }			
+		} catch (SQLException e) {  
             e.printStackTrace();  
         }
 		closeConn();

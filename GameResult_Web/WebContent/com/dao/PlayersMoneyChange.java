@@ -12,12 +12,12 @@ public class PlayersMoneyChange {
 	private ResultSet rs = null;  
 	
 	private void openConn() {  
-	    String url="jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
-	    String user=CommonString.DB_USER;  
-	    String password=CommonString.DB_PW;  
+	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
+	    String user = CommonString.DB_USER;  
+	    String password = CommonString.DB_PW;  
 	     try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn=DriverManager.getConnection(url,user,password);  
+	        conn = DriverManager.getConnection(url,user,password);  
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -45,8 +45,7 @@ public class PlayersMoneyChange {
 	    	if(day < 10)
 	    		Day= "0" + String.valueOf(day);
 	    	else
-	    		Day = String.valueOf(day);
-	    	
+	    		Day = String.valueOf(day);	    	
 	    	String sub_query = " and userID = " + userID;
 	        if(userID.equalsIgnoreCase("ALL"))
 	        	sub_query = " ";
@@ -59,39 +58,37 @@ public class PlayersMoneyChange {
 	    			   + sub_query
 	    			   + " group by gameID ";
 	    	sql += CommonString.SQLQUERYEND;
-	    	psmt=conn.prepareStatement(sql);  
-	    	rs=psmt.executeQuery();
+	    	psmt = conn.prepareStatement(sql);  
+	    	rs = psmt.executeQuery();
 	    	while(rs.next()) {
 	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_1.getValue())) {
 	    			list[1] = rs.getInt("counts");
-	    			list[0] +=  rs.getInt("counts");
+	    			list[0] += rs.getInt("counts");
 	    		}
 	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_2.getValue())) {
 	    			list[2] = rs.getInt("counts");
-	    			list[0] +=  rs.getInt("counts");
+	    			list[0] += rs.getInt("counts");
 	    		}
 	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_3.getValue())) {
 	    			list[3] = rs.getInt("counts");
-	    			list[0] +=  rs.getInt("counts");
+	    			list[0] += rs.getInt("counts");
 	    		}
 	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_4.getValue())) {
 	    			list[4] = rs.getInt("counts");
-	    			list[0] +=  rs.getInt("counts");
+	    			list[0] += rs.getInt("counts");
 	    		}
 	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_5.getValue())) {
 	    			list[5] = rs.getInt("counts");
-	    			list[0] +=  rs.getInt("counts");
+	    			list[0] += rs.getInt("counts");
 	    		}
 	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_6.getValue())) {
 	    			list[6] = rs.getInt("counts");
-	    			list[0] +=  rs.getInt("counts");
+	    			list[0] += rs.getInt("counts");
 	    		}
-	    	}
-	    	
+	    	}	    	
         } catch (SQLException e) {  
             e.printStackTrace();  
         }
-	    
 	    closeConn();
 		return list;
 	}

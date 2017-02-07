@@ -12,18 +12,17 @@ import java.util.Map;
 
 public class AllGamesBetRecord {
 
-
 	private Connection conn = null;  
 	private PreparedStatement psmt = null;  
 	private ResultSet rs = null;
 	
 	private void openConn() {  
-	    String url="jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords"; 
-	    String user=CommonString.DB_USER;  
-	    String password=CommonString.DB_PW;  
-	     try {  
+	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords"; 
+	    String user = CommonString.DB_USER;  
+	    String password = CommonString.DB_PW;  
+	    try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn=DriverManager.getConnection(url,user,password);  
+	        conn = DriverManager.getConnection(url, user, password);  
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -49,21 +48,20 @@ public class AllGamesBetRecord {
     		orderby_str = " order by " + orderby + " ASC;"; 
     	else
     		orderby_str = " order by " + orderby + " DESC;";
+    	sql = " select gameID, " 
+    		+ " count(distinct userID) as Players, "
+    		+ " count(betting) as Rounds, "
+    		+ " sum(betting) as Bet, "
+    		+ " sum(results) as Win, "
+    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit ,"
+    		+ " sum(results)/sum(betting)*100 as PayRate "
+    		+ " from resultsRecords where Date(resultsDate) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+ " GROUP by gameID "
+    		+ orderby_str;
 	    try {
-	    	sql = " select gameID, " 
-	    		+ " count(distinct userID) as Players, "
-	    		+ " count(betting) as Rounds, "
-	    		+ " sum(betting) as Bet, "
-	    		+ " sum(results) as Win, "
-	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit ,"
-	    		+ " sum(results)/sum(betting)*100 as PayRate "
-	    		+ " from resultsRecords where Date(resultsDate) = "
-	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-	    		+ " GROUP by gameID "
-	    		+ orderby_str;
-	    	
-	    	psmt=conn.prepareStatement(sql);  
-	    	rs=psmt.executeQuery();  
+	    	psmt = conn.prepareStatement(sql);  
+	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {
 		    	Map<String, String> map = new HashMap<String, String>();  
 	    		map.put("Game", rs.getString("gameID"));
@@ -78,9 +76,7 @@ public class AllGamesBetRecord {
         } catch (SQLException e) {  
             e.printStackTrace();  
         }
-	    
 	    closeConn();
 		return list;
 	}
-	
 }

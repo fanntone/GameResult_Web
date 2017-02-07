@@ -17,12 +17,12 @@ public class BetRecordReportYear {
 	private ResultSet rs = null;  
 	
 	private void openConn() {  
-	    String url="jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
-	    String user=CommonString.DB_USER;  
-	    String password=CommonString.DB_PW;  
-	     try {  
+	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
+	    String user = CommonString.DB_USER;  
+	    String password = CommonString.DB_PW;  
+	    try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn=DriverManager.getConnection(url,user,password);  
+	        conn = DriverManager.getConnection(url, user, password);  
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -46,24 +46,24 @@ public class BetRecordReportYear {
     	String sql_gameID = " and gameID = " + sel_gameID;
     	if(sel_gameID.equalsIgnoreCase("ALL"))
     		sql_gameID = "";
+    	sql = " select resultsDate as Month, "
+    		+ " count(distinct gameID) as Games, "
+    		+ " count(distinct userID) as Players, "
+    		+ " count(betting) as Rounds, "
+    		+ " sum(betting) as Bet, "
+    		+ " sum(results) as Win, "
+    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
+    		+ " sum(results)/sum(betting)*100 as PayRate "
+    		+ " from resultsRecords "
+    		+ " where resultsDate "
+    		+ " between '" + year + "/01/01 00:00:00' "
+    		+ " and '" + year + "/12/31 23:59:59' "
+    		+ sql_gameID
+    		+ " GROUP by Month(resultsDate)" 
+    		+ CommonString.SQLQUERYEND;
 	    try {
-	    	sql = " select resultsDate as Month, "
-	    		+ " count(distinct gameID) as Games, "
-	    		+ " count(distinct userID) as Players, "
-	    		+ " count(betting) as Rounds, "
-	    		+ " sum(betting) as Bet, "
-	    		+ " sum(results) as Win, "
-	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
-	    		+ " sum(results)/sum(betting)*100 as PayRate "
-	    		+ " from resultsRecords "
-	    		+ " where resultsDate "
-	    		+ " between '" + year + "/01/01 00:00:00' "
-	    		+ " and '" + year + "/12/31 23:59:59' "
-	    		+ sql_gameID
-	    		+ " GROUP by Month(resultsDate)" 
-	    		+ CommonString.SQLQUERYEND;
-	    	psmt=conn.prepareStatement(sql);  
-	    	rs=psmt.executeQuery();  
+	    	psmt = conn.prepareStatement(sql);  
+	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {
 		    	Map<String, String> map = new HashMap<String, String>();  
 	    		map.put("Month", rs.getString("Month").substring(5, 7));
@@ -75,12 +75,10 @@ public class BetRecordReportYear {
 	    		map.put("Profit", rs.getString("Profit"));
 	    		map.put("PayRate", rs.getString("PayRate"));
 	    		list.add(map);
-	    	}
-	    	
+	    	}	    	
         } catch (SQLException e) {  
             e.printStackTrace();  
-        }
-	    
+        }	    
 	    closeConn();
 		return list;
 	}
