@@ -10,7 +10,6 @@
 <%@ page import="com.dao.PlayersWinRanking"%>
 <%@ page import="com.dao.EnumSelectionList"%>
 <%@ page import="com.dao.EnumAllGamesList"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,27 +21,22 @@
   article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
-
 <title>玩家總輸贏排行(每日)</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
@@ -63,7 +57,6 @@ if(asc.equalsIgnoreCase("1"))
 	reorder = "0";
 else
 	reorder = "1";
-
 String date = request.getParameter(CommonString.PARAMETER_DATE);
 if(date == null || date == "") {
 	java.util.Date c_date = new java.util.Date();
@@ -73,10 +66,8 @@ if(date == null || date == "") {
 String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
 if(sel_page == null)
 	sel_page = "5";
-
 int pageSize;
 pageSize = Integer.parseInt(sel_page);
-
 %>
 <form name="selection" action="PlayersWinRanking.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;
@@ -150,9 +141,9 @@ pageSize = Integer.parseInt(sel_page);
 														pageIndex);
 	int totalPages = data.getTotalPage(pageSize, date, userID);
 		
-	if(pageIndex < 1){  
+	if(pageIndex < 1) {  
 	    pageIndex = 1;  
-	}else if(pageIndex > totalPages){  
+	} else if(pageIndex > totalPages){  
 	    pageIndex = totalPages;
 	}
 	
