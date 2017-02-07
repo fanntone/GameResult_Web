@@ -43,14 +43,14 @@ public class OnlinePeopleCountsReport {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         openConn();
         try {
-        	String sql = "select * from test_report"
+        	String sql = "select * from people_count"
         			   +" where time BETWEEN " + "'" + datetime +" 00:00:00'"
         			   +" AND " +  "'" + datetime +" 23:59:59'"
         			   + CommonString.SQLQUERYEND;
         	psmt = conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);        	
 			while(rs.next()) {
-			Map<String, String> map=new HashMap<String, String>();
+			Map<String, String> map = new HashMap<String, String>();
 			map.put("time", rs.getString("test_report.time"));
 			map.put("Game1",rs.getString("test_report.game01"));
 			map.put("Game2",rs.getString("test_report.game02"));
@@ -69,7 +69,7 @@ public class OnlinePeopleCountsReport {
 	
     public String getMaxGamePeopleByGameID(String gameID, String datetime, String label_name) {
         int max = 0;  
-        String sql = " select MAX(" + label_name + ") from test_report"
+        String sql = " select MAX(" + label_name + ") from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
         		   + " AND " +  "'" + datetime +" 23:59:59'"
         		   + CommonString.SQLQUERYEND;
@@ -89,7 +89,7 @@ public class OnlinePeopleCountsReport {
     
     public String getAvgGamePeopleByGameID(String gameID, String datetime,  String label_name) {
         float avg = 0;  
-        String sql = " select AVG( "+ label_name + ") from test_report"
+        String sql = " select AVG( "+ label_name + ") from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
     			   + " AND " +  "'" + datetime +" 23:59:59'"
     			   + CommonString.SQLQUERYEND;

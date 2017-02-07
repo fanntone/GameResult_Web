@@ -35,7 +35,7 @@ public class OnlinePeopleCountsReportYear {
 		
         try {
         	String sql_1 = "set @test_1:= '2017/01/31 00:00:00';";
-        	String sql_2 = "select distinct Time(time) as Times from test_report where time between @test_1 and ADDDATE(@test_1, interval  1 DAY);";
+        	String sql_2 = "select distinct Time(time) as Times from people_count where time between @test_1 and ADDDATE(@test_1, interval  1 DAY);";
         	psmt = conn.prepareStatement(sql_1);  
         	rs = psmt.executeQuery(sql_1);
         	psmt = conn.prepareStatement(sql_2);  
@@ -64,7 +64,7 @@ public class OnlinePeopleCountsReportYear {
         	rs = psmt.executeQuery(sql);
 			String sql_2 = " select Month(time) as mounts, "
 						 + " Sum(" + CommonString.gameid_array[sel_game] + ")as counts "
-						 + " from test_report "
+						 + " from people_count "
 						 + " where Time(time) = '" + time + "'"
 						 + " and Year(time) = " + sel_year
 						 + " group by Month(time) "

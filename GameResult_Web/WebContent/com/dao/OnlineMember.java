@@ -39,7 +39,7 @@ public class OnlineMember {
 		}
 	}
 	
-	public List<Map<String, String>> getAllempByPage(int pageSize,int pageIndex, String gameID) {  
+	public List<Map<String, String>> getAllempByPage(int pageSize, int pageIndex, String gameID) {  
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();
         String sub_query = " and member_Login.gameID = " + gameID;

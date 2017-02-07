@@ -45,7 +45,7 @@ public class OnlinePeopleCountsReportMonth {
         try {
         	String sql_1 = "set @test_1:= '2017/01/01 00:00:00';";
         	String sql_2 = "set @test_2:= '2017/01/31 23:59:59';";
-        	String sql_3 = "select all Time(time) as Times from test_report group by Time(time);";
+        	String sql_3 = "select all Time(time) as Times from people_count group by Time(time);";
         	psmt = conn.prepareStatement(sql_1);  
         	rs = psmt.executeQuery(sql_1);
         	psmt = conn.prepareStatement(sql_2);  
@@ -84,7 +84,7 @@ public class OnlinePeopleCountsReportMonth {
 			String sql_2;
 			sql_2 = " select Sum(" + CommonString.gameid_array[sel_game] + ")as counts "
 				  + " ,DAY(time)as days"
-				  + " from test_report "
+				  + " from people_count "
 				  + " where Time(time) = '" + times + "' "
 				  + " and Month(time) = " + sel_month
 				  + " group by DAY(time)"
@@ -105,7 +105,7 @@ public class OnlinePeopleCountsReportMonth {
 	
     public String getMaxGamePeopleByGameID(String date, int sel_game) {
         int max = 0;
-        String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from test_report"
+        String sql = " select MAX(" + CommonString.gameid_array[sel_game] + ")from people_count"
         		   + " where time BETWEEN " + "'" + date +" 00:00:00'"
         		   + " AND " +  "'" + date +" 23:59:59'"
         		   + CommonString.SQLQUERYEND;
@@ -126,7 +126,7 @@ public class OnlinePeopleCountsReportMonth {
     
     public String getAvgGamePeopleByGameID(String datetime,  int sel_game) {
         float avg = 0;  
-        String sql = " select AVG( "+ CommonString.gameid_array[sel_game] + ") from test_report"
+        String sql = " select AVG( "+ CommonString.gameid_array[sel_game] + ") from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
         		   + " AND " +  "'" + datetime +" 23:59:59'";
         openConn();  
