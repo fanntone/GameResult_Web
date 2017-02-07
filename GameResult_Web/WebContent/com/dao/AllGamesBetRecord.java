@@ -50,16 +50,16 @@ public class AllGamesBetRecord {
     	else
     		orderby_str = " order by " + orderby + " DESC;";
 	    try {
-	    	sql = " select gameID," 
-	    		+ " count(distinct userID) as Players,"
-	    		+ " count(betting) as Rounds,"
-	    		+ " sum(betting) as Bet,"
-	    		+ " sum(results) as Win,"
-	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit,"
-	    		+ " sum(results)/sum(betting)*100 as PayRate"
+	    	sql = " select gameID, " 
+	    		+ " count(distinct userID) as Players, "
+	    		+ " count(betting) as Rounds, "
+	    		+ " sum(betting) as Bet, "
+	    		+ " sum(results) as Win, "
+	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit ,"
+	    		+ " sum(results)/sum(betting)*100 as PayRate "
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-	    		+ " GROUP by gameID"
+	    		+ " GROUP by gameID "
 	    		+ orderby_str;
 	    	
 	    	psmt=conn.prepareStatement(sql);  
