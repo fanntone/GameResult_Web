@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -8,7 +7,6 @@
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.AllGamesBetRecord"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,50 +18,44 @@
   article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
-
 <title>各遊戲投注統計</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
 <%
-
-String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
-if(orderby == null)
-	orderby = "1";
-String asc = request.getParameter(CommonString.PARAMETER_ASC);
-if(asc == null)
-	asc = "1";
-String reorder;
-if(asc.equalsIgnoreCase("1"))
-	reorder = "0";
-else
-	reorder = "1";
-String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null || date == "") {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
-	date = trans.format(c_date);
+	String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
+	if(orderby == null)
+		orderby = "1";
+	String asc = request.getParameter(CommonString.PARAMETER_ASC);
+	if(asc == null)
+		asc = "1";
+	String reorder;
+	if(asc.equalsIgnoreCase("1"))
+		reorder = "0";
+	else
+		reorder = "1";
+	String date = request.getParameter(CommonString.PARAMETER_DATE);
+	if(date == null || date == "") {
+		java.util.Date c_date = new java.util.Date();
+		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+		date = trans.format(c_date);
 }
 %>
 <form name="selection" action="AllGamesBetRecord.jsp" method="post">
@@ -104,7 +96,7 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>>
 	AllGamesBetRecord data = new AllGamesBetRecord();
 	List<Map<String, String>> list = data.getAllRecords(date, orderby, asc);
 %>
-<tr>
+	<tr>
 	<%
 		Map<String, String> map = null;
 		int games = 0;
@@ -140,7 +132,6 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>>
 	<th><%=rayrate%>%</th>
 </tr>
 <%}%>
-
 </table>
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -43,31 +42,31 @@ document.selection.submit();
 }
 </script>
 <%
-String userID = request.getParameter(CommonString.PAREMETER_USERID);
-if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
-	userID = "ALL";
-String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
-if(orderby == null || orderby == "" || orderby.replaceAll("\\s","").isEmpty())
-	orderby = "1";
-String asc = request.getParameter(CommonString.PARAMETER_ASC);
-if(asc == null || asc == "" || asc.replaceAll("\\s","").isEmpty())
-	asc = "1";
-String reorder;
-if(asc.equalsIgnoreCase("1"))
-	reorder = "0";
-else
-	reorder = "1";
-String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null || date == "") {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
-	date = trans.format(c_date);
-}
-String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
-if(sel_page == null)
-	sel_page = "5";
-int pageSize;
-pageSize = Integer.parseInt(sel_page);
+	String userID = request.getParameter(CommonString.PAREMETER_USERID);
+	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
+		userID = "ALL";
+	String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
+	if(orderby == null || orderby == "" || orderby.replaceAll("\\s","").isEmpty())
+		orderby = "1";
+	String asc = request.getParameter(CommonString.PARAMETER_ASC);
+	if(asc == null || asc == "" || asc.replaceAll("\\s","").isEmpty())
+		asc = "1";
+	String reorder;
+	if(asc.equalsIgnoreCase("1"))
+		reorder = "0";
+	else
+		reorder = "1";
+	String date = request.getParameter(CommonString.PARAMETER_DATE);
+	if(date == null || date == "") {
+		java.util.Date c_date = new java.util.Date();
+		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+		date = trans.format(c_date);
+	}
+	String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
+	if(sel_page == null)
+		sel_page = "5";
+	int pageSize;
+	pageSize = Integer.parseInt(sel_page);
 %>
 <form name="selection" action="PlayersWinRanking.jsp" method="post">
 &nbsp;½Ð¿ï¾Üµ§¼Æ&nbsp;
@@ -139,18 +138,15 @@ pageSize = Integer.parseInt(sel_page);
 														userID,
 														pageSize,
 														pageIndex);
-	int totalPages = data.getTotalPage(pageSize, date, userID);
-		
+	int totalPages = data.getTotalPage(pageSize, date, userID);		
 	if(pageIndex < 1) {  
 	    pageIndex = 1;  
 	} else if(pageIndex > totalPages){  
 	    pageIndex = totalPages;
 	}
-	
 	int nextPage = pageIndex + 1;
 	if(nextPage > totalPages)
 		nextPage = totalPages;
-
 	int upPage = pageIndex - 1;
 	if(upPage < 1)
 		upPage = 1;

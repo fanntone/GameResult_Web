@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -10,6 +8,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="com.dao.EnumSelectionList"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -26,12 +25,10 @@ table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
@@ -44,13 +41,13 @@ document.selection.submit();
 }
 </script>
 <% 
-String sel = request.getParameter(CommonString.PARAMETER_SELECT);
-String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null) {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
-	date = trans.format(c_date);
-}
+	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+	String date = request.getParameter(CommonString.PARAMETER_DATE);
+	if(date == null) {
+		java.util.Date c_date = new java.util.Date();
+		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+		date = trans.format(c_date);
+	}
 %>
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post">請選擇遊戲:&nbsp;
 <select name="select" size="ALL" id="select" onChange="change()">
@@ -88,15 +85,15 @@ if(date == null) {
 </script>
 <br>
 <%
-OnlinePeopleCountsReport data = new OnlinePeopleCountsReport();
-List<Map<String, String>> list = data.getAllData(date);
-int size = 0;
-if(sel == null) {
-	sel = "0";
-	size = list.size();
-}
-else
-	size = Integer.parseInt(sel);
+	OnlinePeopleCountsReport data = new OnlinePeopleCountsReport();
+	List<Map<String, String>> list = data.getAllData(date);
+	int size = 0;
+	if(sel == null) {
+		sel = "0";
+		size = list.size();
+	}
+	else
+		size = Integer.parseInt(sel);
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
@@ -123,13 +120,13 @@ else
 	   		<th>Game <%=EnumAllGamesList.GAME_6.getValue()%></th>
 	   <%}%>
 	</tr>
-	<%  
-	  Map<String, String> map = null;
-	  int max_all = 0;
-	  int totals = 0;
-	  float avg = 0;
-	  for(int i = 0; i < list.size(); i++) {  
-	      map = (Map<String, String>)list.get(i);
+	<%
+		Map<String, String> map = null;
+	  	int max_all = 0;
+	  	int totals = 0;
+	  	float avg = 0;
+	  	for(int i = 0; i < list.size(); i++) {  
+	      	map = (Map<String, String>)list.get(i);
 	%>
     <tr>
     	<th><%=map.get(CommonString.TIME) %></th>

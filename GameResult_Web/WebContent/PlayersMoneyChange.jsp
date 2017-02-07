@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -9,7 +8,6 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.PlayersMoneyChange"%>
 <%@ page import="com.dao.EnumAllGamesList" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,54 +19,47 @@
   article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
-
 <title>玩家金幣異動查詢</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
 <%
-String sel_month = request.getParameter("months");
-if(sel_month == null)
-	sel_month = "01";
-String sel_year = request.getParameter("years");
-if(sel_year == null)
-	sel_year = "2017";
-String userID = request.getParameter("userID");
-if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
-	userID = "ALL";
+	String sel_month = request.getParameter("months");
+	if(sel_month == null)
+		sel_month = "01";
+	String sel_year = request.getParameter("years");
+	if(sel_year == null)
+		sel_year = "2017";
+	String userID = request.getParameter("userID");
+	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
+		userID = "ALL";
 %>
 <form name="selection" action="PlayersMoneyChange.jsp" method="post">
 &nbsp;玩家唯一碼&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						   id=<%=CommonString.PAREMETER_USERID%>
-						   type= "text" value = <%=userID%>>
-<br>
+						   type= "text" value = <%=userID%>><br>
 &nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
 <option value = "2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
 <option value = "2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
-</select>
-<br>
+</select><br>
 &nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
 <option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
 <option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
@@ -83,8 +74,7 @@ if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 <option value = "11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
 <option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
 </select>
-</form>
-<br>
+</form><br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
 	<th>日期</th>
@@ -114,7 +104,6 @@ if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 		if(list == null)
 			list = new int[] {0,0,0, 0,0,0, 0};
 %>
-
 <tr>
 	<th><%=sel_month%>/<%=day%></th>
 	<th><%=list[0]%></th>

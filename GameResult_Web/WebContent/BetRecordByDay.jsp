@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.BetRecordByDay"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,39 +18,34 @@
   article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
-
 <title>每日平台投注查詢</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
 <%
-String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null || date == "") {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
-	date = trans.format(c_date);
-}
+	String date = request.getParameter(CommonString.PARAMETER_DATE);
+	if(date == null || date == "") {
+		java.util.Date c_date = new java.util.Date();
+		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+		date = trans.format(c_date);
+	}
 %>
 <form name="selection" action="BetRecordByDay.jsp" method="post">
 &nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>>&nbsp;
@@ -114,7 +107,6 @@ if(date == null || date == "") {
 	<th><%=rayrate%>%</th>
 	<%}%>
 </tr>
-
 </table>
 </body>
 </html>

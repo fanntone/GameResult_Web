@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="com.dao.OnlineMember"%>
@@ -8,7 +6,7 @@
 <%@ page import="com.dao.EnumSelectionList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -18,31 +16,26 @@ table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
-
-<% String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
-<% String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
-	gameID = "ALL";	
+<% 	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
+		gameID = "ALL";
 %>
-
 <form name="selection" action="OnlineMember.jsp" method="get">
 &nbsp;請選擇筆數&nbsp;<select name="select" size="1" id="select" onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
@@ -67,27 +60,25 @@ if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
 <input type="submit" value="送出查詢" >
 <br><br>
 <%
-int pageSize = 5;
-if(sel != null)
-	pageSize = Integer.parseInt(sel);
-
-OnlineMember data = new OnlineMember();
-int totalPages = data.getTotalPage(pageSize, gameID);
-
-String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-if(currentPage==null)  
-    currentPage="1";  
- 
-int pageIndex = Integer.parseInt(currentPage);  
-if(pageIndex < 1){  
-    pageIndex = 1;  
-}else if(pageIndex > totalPages){  
-    pageIndex = totalPages;  
-}
-
-List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameID);
+	int pageSize = 5;
+	if(sel != null)
+		pageSize = Integer.parseInt(sel);
+	
+	OnlineMember data = new OnlineMember();
+	int totalPages = data.getTotalPage(pageSize, gameID);
+	
+	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
+	if(currentPage==null)  
+	    currentPage="1";  
+	 
+	int pageIndex = Integer.parseInt(currentPage);  
+	if(pageIndex < 1){  
+	    pageIndex = 1;  
+	}else if(pageIndex > totalPages){  
+	    pageIndex = totalPages;  
+	}
+	List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameID);
 %>
-
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	    <th>玩家編號(useID)</th>
@@ -95,9 +86,9 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameI
 	    <th>所在遊戲(Game)</th>
 	</tr>
 	<%
-	  Map<String, String> map=null;  
-	  for(int i = 0; i < list.size(); i++) {  
-	      map = (Map<String, String>)list.get(i);
+		Map<String, String> map=null;  
+	  	for(int i = 0; i < list.size(); i++) {
+	  		map = (Map<String, String>)list.get(i);
 	%>
     <tr>
         <th>
@@ -110,17 +101,15 @@ List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameI
     </tr>  
 	<%}%>
 </table>
-
 <%
-int nextPage = pageIndex + 1;
-if(nextPage > totalPages)
-	nextPage = totalPages;
-
-int upPage = pageIndex - 1;
-if(upPage < 1)
-	upPage = 1;
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+	
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
 %>
-
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
 <a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  

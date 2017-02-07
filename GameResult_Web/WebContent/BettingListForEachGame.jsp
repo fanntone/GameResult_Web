@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -10,7 +9,6 @@
 <%@ page import="com.dao.BettingListForEachGame"%>
 <%@ page import="com.dao.EnumSelectionList"%>
 <%@ page import="com.dao.EnumAllGamesList"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,27 +20,22 @@
   article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
   body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
-
 <title>單一遊戲投注清單</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
@@ -77,7 +70,6 @@ if(sel_page == null)
 	sel_page = "5";
 int pageSize;
 pageSize = Integer.parseInt(sel_page);
-
 %>
 <form name="selection" action="BettingListForEachGame.jsp" method="post">
 &nbsp;請選擇遊戲&nbsp;
@@ -180,9 +172,9 @@ pageSize = Integer.parseInt(sel_page);
 														pageSize,
 														pageIndex);
 	int totalPages = data.getTotalPage(pageSize, date, sel_gameID, userID);	 	
-	if(pageIndex < 1){  
+	if(pageIndex < 1) {  
 	    pageIndex = 1;  
-	}else if(pageIndex > totalPages){  
+	} else if(pageIndex > totalPages){  
 	    pageIndex = totalPages;  
 	}
 	int nextPage = pageIndex + 1;
@@ -226,7 +218,6 @@ pageSize = Integer.parseInt(sel_page);
 </tr>
 <%}%>
 </table>
-
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>

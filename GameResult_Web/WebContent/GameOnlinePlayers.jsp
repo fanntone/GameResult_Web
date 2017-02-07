@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="com.dao.GameOnlinePlayers"%>
@@ -9,7 +7,7 @@
 <%@ page import="com.dao.EnumSelectionList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -19,25 +17,21 @@ table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
-
 <%	String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
 <%
 	String userID = request.getParameter(CommonString.PAREMETER_USERID);
@@ -92,10 +86,8 @@ if(pageIndex < 1) {
 } else if(pageIndex > totalPages){  
     pageIndex = totalPages;  
 }
-
 List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, userID);
 %>
-
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	    <th>玩家編號(useID)</th>
@@ -118,7 +110,6 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, 
     </tr>  
 	<%}%>
 </table>
-
 <%
 int nextPage = pageIndex + 1;
 if(nextPage > totalPages)
@@ -128,7 +119,6 @@ int upPage = pageIndex - 1;
 if(upPage < 1)
 	upPage = 1;
 %>
-
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>

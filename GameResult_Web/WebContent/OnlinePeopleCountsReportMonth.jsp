@@ -1,42 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>遊戲在線人數月報表</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
-
 <%String sel_game = request.getParameter("games");%>
 <%String sel_month = request.getParameter("months");%>
 <%String sel_year = request.getParameter("years");%>
@@ -70,9 +63,7 @@ document.selection.submit();
 <option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
-
 </form>
-
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
@@ -101,7 +92,6 @@ document.selection.submit();
 			}			
 	%><th><%=month%>/<%=day%></th><%}%><th><%=sel_month%>月平均</th>
 </tr>
-
 <tr><%
 	OnlinePeopleCountsReportMonth data = new OnlinePeopleCountsReportMonth();
 	List<Map<String, String>> time_list = data.getAllTimeList();
@@ -120,7 +110,6 @@ document.selection.submit();
 	    int counts = list[ii];
 	    row_sum += counts;
 %><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
-
 <tr><th style="background-color:#00BBFF">MAX</th><%
 		float row_max = 0;
 		for(int j = 0; j < (day-1) ; j++){
@@ -129,7 +118,6 @@ document.selection.submit();
 			row_max += Integer.parseInt(max_people);
 			
 %><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th style="background-color:#00BBFF"><%=row_max/max_day%></th></tr>
-
 <tr><th style="background-color:#00BBFF">AVG</th><%
 		float row_avg = 0;
 		for(int avg = 0; avg < (day-1) ; avg++){
@@ -137,7 +125,6 @@ document.selection.submit();
 															  Integer.parseInt(sel_game));
 			row_avg += Float.parseFloat(avg_people);
 %><th style="background-color:#00BBFF"><%=avg_people%></th><%}%><th style="background-color:#00BBFF"><%=row_avg/max_day%></th></tr>
-
 </table>
 </body>
 </html>

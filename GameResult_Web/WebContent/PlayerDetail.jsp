@@ -1,44 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ page import="com.dao.PlayerDetail"%>
 <%@ page import="com.dao.CommonString"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>會員資料</title>
 <style>
-
 table, td, th {
     border: 3px solid #FFAC55;
     text-align: left;
 }
-
 table {
     border-collapse: collapse;
     width: auto;
 }
-
 th, td {
     padding: 15px;
 }
 </style>
 </head>
 <body>
-
 <%
-String users = request.getParameter(CommonString.PAREMETER_USERID);
-PlayerDetail data = new PlayerDetail();
-if(users == null || users == "" || users.replaceAll("\\s","").isEmpty())
-	users = "1001001";
-int id = Integer.parseInt(users);
-if(id < 0)
-	id = 1;
-List<Map<String, String>> list = data.getAllData(id);
+	String users = request.getParameter(CommonString.PAREMETER_USERID);
+	PlayerDetail data = new PlayerDetail();
+	if(users == null || users == "" || users.replaceAll("\\s","").isEmpty())
+		users = "1001001";
+	int id = Integer.parseInt(users);
+	if(id < 0)
+		id = 1;
+	List<Map<String, String>> list = data.getAllData(id);
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
@@ -72,6 +67,5 @@ List<Map<String, String>> list = data.getAllData(id);
     </tr>  
 	<%}%>  
 </table>
-
 </body>
 </html>

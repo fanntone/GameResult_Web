@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.dao.GameResultRecords" %>
@@ -12,7 +10,7 @@
 <%@ page import="com.dao.EnumSelectionList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -29,45 +27,39 @@ table, td, th {
     border: 3px solid #FFAC55;
     text-align: center;
 }
-
 table {
     border-collapse: collapse;
 }
-
 th, td {
     padding: 15px;
 }
-
-
 </style>
 </head>
 <body>
-
 <script>
 function change(){
 document.selection.submit();
 }
 </script>
-
 <% 
-String sel = request.getParameter(CommonString.PARAMETER_SELECT);
-if(sel == null)
-	sel = "5";
-
-String userid = request.getParameter(CommonString.PAREMETER_USERID);
-if(userid == null || userid == "" || userid.replaceAll("\\s","").isEmpty())
-	userid = "ALL";
-
-String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null) {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
-	date = trans.format(c_date);
-}
-
-String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(sel_gameID == null)
-	sel_gameID = EnumAllGamesList.GAME_0.getValue();
+	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+	if(sel == null)
+		sel = "5";
+	
+	String userid = request.getParameter(CommonString.PAREMETER_USERID);
+	if(userid == null || userid == "" || userid.replaceAll("\\s","").isEmpty())
+		userid = "ALL";
+	
+	String date = request.getParameter(CommonString.PARAMETER_DATE);
+	if(date == null) {
+		java.util.Date c_date = new java.util.Date();
+		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+		date = trans.format(c_date);
+	}
+	
+	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	if(sel_gameID == null)
+		sel_gameID = EnumAllGamesList.GAME_0.getValue();
 %>
 <form name="selection" action="GameResultRecords.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;
@@ -120,36 +112,28 @@ if(sel_gameID == null)
 						   id=<%=CommonString.PAREMETER_USERID%>
 						   type= "text" value = <%=userid%>>
 <input type="submit" value="送出查詢" >
-
 <br>
-
 <script language="JavaScript">
   $(document).ready(function(){ 
     $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
   });
 </script>
-
 <%
-int pageSize = 5;
-pageSize = Integer.parseInt(sel);
-
-GameResultRecords ed = new GameResultRecords();
-int totalPages = ed.getTotalPage(pageSize, userid, date, sel_gameID);
-
-String currentPage = request.getParameter("pageIndex");
-if(currentPage==null)  
-    currentPage="1";  
- 
-int pageIndex = Integer.parseInt(currentPage);  
-if(pageIndex < 1){  
-    pageIndex = 1;  
-}else if(pageIndex > totalPages){  
-    pageIndex = totalPages;  
-}
-
-List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
+	int pageSize = 5;
+	pageSize = Integer.parseInt(sel);
+	GameResultRecords ed = new GameResultRecords();
+	int totalPages = ed.getTotalPage(pageSize, userid, date, sel_gameID);
+	String currentPage = request.getParameter("pageIndex");
+	if(currentPage==null)  
+	    currentPage="1";  
+	int pageIndex = Integer.parseInt(currentPage);  
+	if(pageIndex < 1) {  
+	    pageIndex = 1;  
+	} else if(pageIndex > totalPages){  
+	    pageIndex = totalPages;  
+	}
+	List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
 %>
-
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width = "1280">
 	<tr>
 		<th>注單號碼(BG)</th>
@@ -162,10 +146,10 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
 	    <th>代理商 </th>
 	    <th>轉輪結果</th>
 	</tr>
-	<%  
-	  Map<String, String> map=null;  
-	  for(int i = 0; i < list.size(); i++) {  
-	      map = (Map<String, String>)list.get(i);
+	<%
+		Map<String, String> map=null;  
+	  	for(int i = 0; i < list.size(); i++) {
+	  		map = (Map<String, String>)list.get(i);
 	%>
       <tr>
       	  <th><%=map.get(CommonString.ORDERID)%></th>
@@ -199,17 +183,15 @@ List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, use
       </tr>  
 	<%}%>
 </table>
-
 <%
-int nextPage = pageIndex + 1;
-if(nextPage > totalPages)
-	nextPage = totalPages;
-
-int upPage = pageIndex - 1;
-if(upPage < 1)
-	upPage = 1;
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+	
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
 %>
-
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
