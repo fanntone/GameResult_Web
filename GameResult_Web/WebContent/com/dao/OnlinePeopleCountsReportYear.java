@@ -43,7 +43,7 @@ public class OnlinePeopleCountsReportYear {
         	while (rs.next())
         	{
     			Map<String, String> map = new HashMap<String, String>();
-				map.put("Times", rs.getString("Times"));
+				map.put(CommonString.TIMES, rs.getString(CommonString.TIMES));
 				list.add(map);
         	}    	
 		} catch (SQLException e1) {
