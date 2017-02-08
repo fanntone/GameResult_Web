@@ -37,7 +37,7 @@ public class CommonString {
 	public static final String ROUNDUUID = "roundUUID";
 	public static final String CURRENCY = "currency";
 	public static final String LOGINID = "loginID";
-	public static final String PASSWORD = "passWord";
+	public static final String PASSWORD = "passWords";
 	public static final String NICKNAME = "nickName";
 	public static final String USERSTATUS = "userStatus";
 	public static final String STATUS = "status";
