@@ -89,7 +89,7 @@ public class OnlinePeopleCountsReport {
     
     public String getAvgGamePeopleByGameID(String gameID, String datetime,  String label_name) {
         float avg = 0;  
-        String sql = " select AVG( "+ label_name + ") from people_count"
+        String sql = " select sum( "+ label_name + ")/288 from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
     			   + " AND " +  "'" + datetime +" 23:59:59'"
     			   + CommonString.SQLQUERYEND;

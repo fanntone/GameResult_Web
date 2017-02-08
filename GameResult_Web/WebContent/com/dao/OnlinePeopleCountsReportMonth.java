@@ -126,7 +126,7 @@ public class OnlinePeopleCountsReportMonth {
     
     public String getAvgGamePeopleByGameID(String datetime,  int sel_game) {
         float avg = 0;  
-        String sql = " select AVG( "+ CommonString.gameid_array[sel_game] + ") from people_count"
+        String sql = " select SUM( "+ CommonString.gameid_array[sel_game] + ")/288 from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
         		   + " AND " +  "'" + datetime +" 23:59:59'";
         openConn();  
