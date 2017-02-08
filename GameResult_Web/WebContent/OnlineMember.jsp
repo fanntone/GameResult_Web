@@ -33,12 +33,14 @@ document.selection.submit();
 </script>
 <% 	
 	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+	if(sel == null)
+		sel = EnumSelectionList.SELECT_5.getValue();
 	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
 		gameID = CommonString.ALL;
 %>
 <form name="selection" action="OnlineMember.jsp" method="post">
-&nbsp;請選擇筆數&nbsp;<select name=<%=CommonString.PARAMETER_SELECT %> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
+&nbsp;請選擇筆數&nbsp;<select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
