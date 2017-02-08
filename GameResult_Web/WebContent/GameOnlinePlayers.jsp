@@ -69,24 +69,24 @@
 <input type="submit" value="送出查詢" >
 <br>
 <%
-int pageSize = 5;
-if(sel != null)
-	pageSize = Integer.parseInt(sel);
-
-GameOnlinePlayers data = new GameOnlinePlayers();
-int totalPages = data.getTotalPage(pageSize, gameID, userID);
-
-String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-if(currentPage==null)  
-    currentPage="1";  
-
-int pageIndex = Integer.parseInt(currentPage);  
-if(pageIndex < 1) {  
-    pageIndex = 1;  
-} else if(pageIndex > totalPages){  
-    pageIndex = totalPages;  
-}
-List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, userID);
+	int pageSize = 5;
+	if(sel != null)
+		pageSize = Integer.parseInt(sel);
+	
+	GameOnlinePlayers data = new GameOnlinePlayers();
+	int totalPages = data.getTotalPage(pageSize, gameID, userID);
+	
+	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
+	if(currentPage == null)  
+	    currentPage = "1";  
+	
+	int pageIndex = Integer.parseInt(currentPage);  
+	if(pageIndex < 1) {  
+	    pageIndex = 1;  
+	} else if(pageIndex > totalPages){  
+	    pageIndex = totalPages;  
+	}
+	List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, userID);
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
@@ -101,7 +101,7 @@ List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, 
 	%>
     <tr> 
         <th>
-            <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
+            <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target="_blank">
                <%=map.get(CommonString.PAREMETER_USERID)%>
             </a>
         </th>
@@ -132,7 +132,7 @@ if(upPage < 1)
 <a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;末頁</a>
-到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+到第&nbsp;<input name= "pageIndex" id="pageIndex" type="text" value=<%=pageIndex%>>頁
 </form>	
 </body>
 </html>

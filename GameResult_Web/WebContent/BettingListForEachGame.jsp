@@ -73,7 +73,7 @@
 %>
 <form name="selection" action="BettingListForEachGame.jsp" method="post">
 &nbsp;請選擇遊戲&nbsp;
-<select name="gameID" size="ALL" id="gameID" onChange="change()">
+<select name="gameID" size="1" id="gameID" onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_1.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_1.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>		
@@ -113,7 +113,7 @@
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-&nbsp;<input name="date" id= "date" type= "text" value=<%=date%>><br>
+&nbsp;<input name="date" id="date" type="text" value=<%=date%>><br>
 &nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						    id=<%=CommonString.PAREMETER_USERID%>
 						    type="text" value=<%=userID%>>

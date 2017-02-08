@@ -26,11 +26,12 @@
 </head>
 <body>
 <form name="selection" action="AllGamesOnlinePlayers.jsp" method="post">
-<% String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(gameID == null || gameID == "")
-	gameID = "ALL";	
-AllGamesOnlinePlayers data = new AllGamesOnlinePlayers();
-List<Map<String, String>> list = data.getAllData(gameID);
+<%
+	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
+		gameID = CommonString.ALL;	
+	AllGamesOnlinePlayers data = new AllGamesOnlinePlayers();
+	List<Map<String, String>> list = data.getAllData(gameID);
 %>
 &nbsp;¿é¤J¹CÀ¸½s¸¹&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
 						    id=<%=CommonString.PARAMETER_GAMEID%>

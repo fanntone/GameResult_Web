@@ -130,7 +130,7 @@
 	PlayersWinRanking data = new PlayersWinRanking();
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 	if(currentPage == null)  
-	    currentPage="1";
+	    currentPage = "1";
 	int pageIndex = Integer.parseInt(currentPage);  
 	List<Map<String, String>> list = data.getAllRecords(date,
 														orderby,

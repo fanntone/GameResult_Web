@@ -43,13 +43,13 @@
 <%
 	String sel_month = request.getParameter(CommonString.PARAMETER_MONTH);
 	if(sel_month == null)
-		sel_month = "01";
+		sel_month = CommonString.DEFAULTMONTH;
 	String sel_year = request.getParameter(CommonString.PARAMETER_YEAR);
 	if(sel_year == null)
-		sel_year = "2017";
+		sel_year = CommonString.DEFAULTYEAR;
 	String userID = request.getParameter(CommonString.PAREMETER_USERID);
 	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
-		userID = "ALL";
+		userID = CommonString.ALL;
 %>
 <form name="selection" action="PlayersMoneyChange.jsp" method="post">
 &nbsp;ª±®a°ß¤@½X&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>

@@ -41,15 +41,15 @@
 	}
 </script>
 <%
-	String sel_month = request.getParameter("months");
+	String sel_month = request.getParameter(CommonString.PARAMETER_MONTH);
 	if(sel_month == null)
-		sel_month = "01";
-	String sel_year = request.getParameter("years");
+		sel_month = CommonString.DEFAULTMONTH;
+	String sel_year = request.getParameter(CommonString.PARAMETER_YEAR);
 	if(sel_year == null)
-		sel_year = "2017";
+		sel_year = CommonString.DEFAULTYEAR;
 	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(sel_gameID == null)
-		sel_gameID = "ALL";
+		sel_gameID = CommonString.ALL;
 %>
 <form name="selection" action="BetRecordReportMonth.jsp" method="get">
 &nbsp;請選擇遊戲&nbsp;<select name="gameID" size="ALL" id="gameID" onChange="change()">
@@ -76,13 +76,13 @@
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select>
 <br>
-&nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
+&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
 <option value="2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
 <option value="2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
 <br>
-&nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
+&nbsp;請選擇月份&nbsp;<select name="month" size="1" id="month" onChange="change()">
 <option value="1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
 <option value="2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
 <option value="3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>

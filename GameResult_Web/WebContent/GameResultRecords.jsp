@@ -42,13 +42,13 @@
 	}
 </script>
 <% 
-	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+	String sel = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
 	if(sel == null)
 		sel = "5";
 	
 	String userid = request.getParameter(CommonString.PAREMETER_USERID);
 	if(userid == null || userid == "" || userid.replaceAll("\\s","").isEmpty())
-		userid = "ALL";
+		userid = CommonString.ALL;
 	
 	String date = request.getParameter(CommonString.PARAMETER_DATE);
 	if(date == null) {
@@ -63,7 +63,7 @@
 %>
 <form name="selection" action="GameResultRecords.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;
-<select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
+<select name=<%=CommonString.PARAMETER_SELPAGESIZE%> size="1" id=<%=CommonString.PARAMETER_SELPAGESIZE%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -84,8 +84,7 @@
 &nbsp;賽果建立時間&nbsp;<input name = <%=CommonString.PARAMETER_DATE%> 
 							id= <%=CommonString.PARAMETER_DATE%>
 							type="text" value=<%=date%>><br>
-&nbsp;請選擇遊戲&nbsp;
-<select name="gameID" size="ALL" id="gameID" onChange="change()">
+&nbsp;請選擇遊戲&nbsp;<select name="gameID" size="ALL" id="gameID" onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_0.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>
@@ -124,8 +123,8 @@
 	GameResultRecords ed = new GameResultRecords();
 	int totalPages = ed.getTotalPage(pageSize, userid, date, sel_gameID);
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-	if(currentPage==null)  
-	    currentPage="1";  
+	if(currentPage == null)  
+	    currentPage = "1";  
 	int pageIndex = Integer.parseInt(currentPage);  
 	if(pageIndex < 1) {  
 	    pageIndex = 1;  

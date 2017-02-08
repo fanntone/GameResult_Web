@@ -17,7 +17,7 @@ public class PlayersWinRanking {
 	private ResultSet rs = null;
 	
 	private void openConn() {  
-	    String url =" jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
+	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
 	    String user = CommonString.DB_USER;  
 	    String password = CommonString.DB_PW;  
 	    try {  
@@ -57,12 +57,12 @@ public class PlayersWinRanking {
         String sub_query = " and userID = " + userID;
         if(userID.equalsIgnoreCase("ALL"))
         	sub_query = " ";
-    	sql = " select userID," 
-    		+ " count(betting) as Rounds,"
-    		+ " sum(betting) as Bet,"
-    		+ " sum(results) as Win,"
-    		+ " sum(betting)-sum(results) as Profit,"
-    		+ " sum(results)/sum(betting)*100 as PayRate"
+    	sql = " select userID, " 
+    		+ " count(betting) as Rounds, "
+    		+ " sum(betting) as Bet, "
+    		+ " sum(results) as Win, "
+    		+ " sum(betting)-sum(results) as Profit, "
+    		+ " sum(results)/sum(betting)*100 as PayRate "
     		+ " from resultsRecords where Date(resultsDate) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO 
     		+ sub_query
@@ -94,7 +94,7 @@ public class PlayersWinRanking {
         String sub_query = " and userID = " + userID;
         if(userID.equalsIgnoreCase("ALL"))
         	sub_query = " ";
-        String sql = "select count(distinct userID) as Players"
+        String sql = " select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
 	    		   + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		   + sub_query
