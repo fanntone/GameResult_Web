@@ -43,11 +43,11 @@ public class GameOnlinePlayers {
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();  
         openConn();
         String sub_query = " and member_Login.userID = " + userID;
-        if(userID.equalsIgnoreCase("ALL"))
+        if(userID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
         
         String sub_query2 = " and member_Login.gameID = " + gameID;
-        if(gameID.equalsIgnoreCase("ALL"))
+        if(gameID.equalsIgnoreCase(CommonString.ALL))
         	sub_query2 = " ";
         	
         String sql = " select * "
@@ -63,7 +63,7 @@ public class GameOnlinePlayers {
             rs = psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put(CommonString.PAREMETER_USERID,rs.getString(CommonString.PAREMETER_USERID));
+                map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
                 map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
                 map.put(CommonString.BALANCE, rs.getString(CommonString.BALANCE));  
                 list.add(map);  
@@ -78,10 +78,10 @@ public class GameOnlinePlayers {
     public int countRs(String gameID, String userID){  
         int count = 0;
         String sub_query = " and member_Login.userID = " + userID;
-        if(userID.equalsIgnoreCase("ALL") || userID.isEmpty())
+        if(userID.equalsIgnoreCase(CommonString.ALL) || userID.isEmpty())
         	sub_query = " ";        
         String sub_query2 = " and member_Login.gameID = " + gameID;
-        if(gameID.equalsIgnoreCase("ALL"))
+        if(gameID.equalsIgnoreCase(CommonString.ALL))
         	sub_query2 = " ";        
         String sql = " select count(*) "
         		   + " from member_Login, member_Account "

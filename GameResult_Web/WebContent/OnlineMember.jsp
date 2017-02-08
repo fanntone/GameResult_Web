@@ -35,10 +35,10 @@ document.selection.submit();
 	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
 	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
-		gameID = "ALL";
+		gameID = CommonString.ALL;
 %>
 <form name="selection" action="OnlineMember.jsp" method="get">
-&nbsp;請選擇筆數&nbsp;<select name="select" size="1" id="select" onChange="change()">
+&nbsp;請選擇筆數&nbsp;<select name=<%=CommonString.PARAMETER_SELECT %> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -93,12 +93,12 @@ document.selection.submit();
 	%>
     <tr>
         <th>
-        	<a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
-               <%=map.get("userID")%>
+        	<a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target="_blank">
+               <%=map.get(CommonString.PAREMETER_USERID)%>
            	</a>
         </th>
-        <th><%=map.get("blance")%></th>
-        <th><%=map.get("gameID")%></th>
+        <th><%=map.get(CommonString.BALANCE)%></th>
+        <th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
     </tr>  
 	<%}%>
 </table>
@@ -116,7 +116,7 @@ document.selection.submit();
 <a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
 <a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
 <a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
-到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 </form>	
 </body>
 </html>

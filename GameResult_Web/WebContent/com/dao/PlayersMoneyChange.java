@@ -47,7 +47,7 @@ public class PlayersMoneyChange {
 	    	else
 	    		Day = String.valueOf(day);	    	
 	    	String sub_query = " and userID = " + userID;
-	        if(userID.equalsIgnoreCase("ALL"))
+	        if(userID.equalsIgnoreCase(CommonString.ALL))
 	        	sub_query = " ";
 	    	String sql = " select gameID, "
 	    			   + " SUM(CONVERT(afterBalance, SIGNED) - CONVERT(beforeBalance, SIGNED)) AS counts "
@@ -61,29 +61,29 @@ public class PlayersMoneyChange {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();
 	    	while(rs.next()) {
-	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_1.getValue())) {
-	    			list[1] = rs.getInt("counts");
-	    			list[0] += rs.getInt("counts");
+	    		if(rs.getString(CommonString.PARAMETER_GAMEID).equalsIgnoreCase(EnumAllGamesList.GAME_1.getValue())) {
+	    			list[1] = rs.getInt(CommonString.COUNTS);
+	    			list[0] += rs.getInt(CommonString.COUNTS);
 	    		}
-	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_2.getValue())) {
-	    			list[2] = rs.getInt("counts");
-	    			list[0] += rs.getInt("counts");
+	    		if(rs.getString(CommonString.PARAMETER_GAMEID).equalsIgnoreCase(EnumAllGamesList.GAME_2.getValue())) {
+	    			list[2] = rs.getInt(CommonString.COUNTS);
+	    			list[0] += rs.getInt(CommonString.COUNTS);
 	    		}
-	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_3.getValue())) {
-	    			list[3] = rs.getInt("counts");
-	    			list[0] += rs.getInt("counts");
+	    		if(rs.getString(CommonString.PARAMETER_GAMEID).equalsIgnoreCase(EnumAllGamesList.GAME_3.getValue())) {
+	    			list[3] = rs.getInt(CommonString.COUNTS);
+	    			list[0] += rs.getInt(CommonString.COUNTS);
 	    		}
-	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_4.getValue())) {
-	    			list[4] = rs.getInt("counts");
-	    			list[0] += rs.getInt("counts");
+	    		if(rs.getString(CommonString.PARAMETER_GAMEID).equalsIgnoreCase(EnumAllGamesList.GAME_4.getValue())) {
+	    			list[4] = rs.getInt(CommonString.COUNTS);
+	    			list[0] += rs.getInt(CommonString.COUNTS);
 	    		}
-	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_5.getValue())) {
-	    			list[5] = rs.getInt("counts");
-	    			list[0] += rs.getInt("counts");
+	    		if(rs.getString(CommonString.PARAMETER_GAMEID).equalsIgnoreCase(EnumAllGamesList.GAME_5.getValue())) {
+	    			list[5] = rs.getInt(CommonString.COUNTS);
+	    			list[0] += rs.getInt(CommonString.COUNTS);
 	    		}
-	    		if(rs.getString("gameID").equalsIgnoreCase(EnumAllGamesList.GAME_6.getValue())) {
-	    			list[6] = rs.getInt("counts");
-	    			list[0] += rs.getInt("counts");
+	    		if(rs.getString(CommonString.PARAMETER_GAMEID).equalsIgnoreCase(EnumAllGamesList.GAME_6.getValue())) {
+	    			list[6] = rs.getInt(CommonString.COUNTS);
+	    			list[0] += rs.getInt(CommonString.COUNTS);
 	    		}
 	    	}	    	
         } catch (SQLException e) {  

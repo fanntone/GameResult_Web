@@ -50,7 +50,7 @@ public class BetRecordByDay {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("Games", rs.getString("counts"));
+	    		map.put(CommonString.GAMES, rs.getString(CommonString.COUNTS));
 	    	}
 	    	
 	    	sql = "select count(distinct userID) as counts from resultsRecords where Date(resultsDate) = " 
@@ -58,7 +58,7 @@ public class BetRecordByDay {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("Players", rs.getString("counts"));
+	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.COUNTS));
 	    	}
 
 	    	sql = "select count(betting) as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
@@ -66,7 +66,7 @@ public class BetRecordByDay {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("Rounds", rs.getString("counts"));
+	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.COUNTS));
 	    	}
 	    	
 	    	sql = "select sum(betting) as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
@@ -74,7 +74,7 @@ public class BetRecordByDay {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("Bet", rs.getString("counts"));
+	    		map.put(CommonString.BET, rs.getString(CommonString.COUNTS));
 	    	}
 	    	
 	    	sql = "select sum(results) as counts from resultsRecords where results >= 0 and Date(resultsDate) = " 
@@ -82,7 +82,7 @@ public class BetRecordByDay {
 	    	psmt=conn.prepareStatement(sql);  
 	    	rs=psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("Win", rs.getString("counts"));
+	    		map.put(CommonString.WIN, rs.getString(CommonString.COUNTS));
 	    	}
 	    	
 	    	sql = "select sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
@@ -90,7 +90,7 @@ public class BetRecordByDay {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("Profit", rs.getString("counts"));
+	    		map.put(CommonString.PROFIT, rs.getString(CommonString.COUNTS));
 	    	}
 	    	
 	    	sql = "select sum(results)/sum(betting)*100 as counts from resultsRecords where betting >= 0 and Date(resultsDate) = " 
@@ -98,7 +98,7 @@ public class BetRecordByDay {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
-	    		map.put("PayRate", rs.getString("counts"));
+	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.COUNTS));
 	    	}
     		list.add(map);	    	
         } catch (SQLException e) {  

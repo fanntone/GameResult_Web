@@ -64,13 +64,13 @@ public class AllGamesBetRecord {
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {
 		    	Map<String, String> map = new HashMap<String, String>();  
-	    		map.put("Game", rs.getString("gameID"));
-	    		map.put("Players", rs.getString("Players"));
-	    		map.put("Rounds", rs.getString("Rounds"));
-	    		map.put("Bet", rs.getString("Bet"));
-	    		map.put("Win", rs.getString("Win"));
-	    		map.put("Profit", rs.getString("Profit"));
-	    		map.put("PayRate", rs.getString("PayRate"));
+	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
+	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
+	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
+	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
+	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
+	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 	    		list.add(map);	
 	    	}	    	
         } catch (SQLException e) {  

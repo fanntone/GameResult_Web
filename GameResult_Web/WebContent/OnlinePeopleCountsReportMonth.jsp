@@ -36,7 +36,7 @@
 	String sel_year = request.getParameter(CommonString.PARAMETER_YEAR);
 %>
 <form name="selection" action="OnlinePeopleCountsReportMonth.jsp" method="post">
-&nbsp;請選擇遊戲&nbsp;<select name="gameID" size="1" id="gameID" onChange="change()">
+&nbsp;請選擇遊戲&nbsp;<select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
 <option value="0"  <%if (sel_gameID == null || sel_gameID.equals("0"))  {%> selected <%}%>>ALL</option>
 <option value="1"  <%if (sel_gameID != null && sel_gameID.equals("1"))  {%> selected <%}%>>game01</option>
 <option value="2"  <%if (sel_gameID != null && sel_gameID.equals("2"))  {%> selected <%}%>>game02</option>
@@ -46,7 +46,7 @@
 <option value="6"  <%if (sel_gameID != null && sel_gameID.equals("6"))  {%> selected <%}%>>game06</option>
 </select>
 <br>
-&nbsp;請選擇月份&nbsp;<select name="month" size="1" id="month" onChange="change()">
+&nbsp;請選擇月份&nbsp;<select name=<%=CommonString.PARAMETER_MONTH%> size="1" id=<%=CommonString.PARAMETER_MONTH%> onChange="change()">
 <option value="1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
 <option value="2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
 <option value="3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
@@ -61,7 +61,7 @@
 <option value="12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
 </select>
 <br>
-&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
+&nbsp;請選擇年份&nbsp;<select name=<%=CommonString.PARAMETER_YEAR%> size="1" id=<%=CommonString.PARAMETER_YEAR%> onChange="change()">
 <option value="2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
@@ -74,9 +74,9 @@
 		if(sel_gameID == null)
 			sel_gameID = "0";
 		if(sel_month == null)
-			sel_month = "1";
+			sel_month = CommonString.DEFAULTMONTH;
 		if(sel_year == null)
-			sel_year = "2017";
+			sel_year = CommonString.DEFAULTYEAR;
 		int month = Integer.valueOf(sel_month).intValue();		
 		int day = 1;
 		int max_day = 31;
@@ -100,7 +100,7 @@
 	Map<String, String> maps = null;
 	for(int times = 0; times < time_list.size(); times++) {  
 	    maps = (Map<String, String>)time_list.get(times);
-	    String times_ = maps.get("Times");
+	    String times_ = maps.get(CommonString.TIMES);
 %><th><%=times_%></th><%
 	int[] list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
 								 Integer.parseInt(sel_month),

@@ -50,7 +50,7 @@
 	}
 %>
 <form name="selection" action="OnlinePeopleCountsReport.jsp" method="post">請選擇遊戲:&nbsp;
-<select name="select" size="ALL" id="select" onChange="change()">
+<select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT %> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_0.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())) {%>
 		selected <%}%>>ALL</option>
@@ -74,7 +74,7 @@
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select>
 <br>
-點一下顯示日曆:&nbsp;<input name ="date" id="date" type="text" value=<%=date%>>
+點一下顯示日曆:&nbsp;<input name =<%=CommonString.PARAMETER_DATE%> id=<%=CommonString.PARAMETER_DATE%> type="text" value=<%=date%>>
 <input type="submit" value="送出查詢">
 </form>
 
@@ -134,12 +134,12 @@
         <th>
 	    <%
 			int all = 0;
-			all = Integer.parseInt(map.get("Game1"))
-				+ Integer.parseInt(map.get("Game2"))
-				+ Integer.parseInt(map.get("Game3"))
-				+ Integer.parseInt(map.get("Game4"))
-				+ Integer.parseInt(map.get("Game5"))
-				+ Integer.parseInt(map.get("Game6"));
+			all = Integer.parseInt(map.get(CommonString.gameid_array[1]))
+				+ Integer.parseInt(map.get(CommonString.gameid_array[2]))
+				+ Integer.parseInt(map.get(CommonString.gameid_array[3]))
+				+ Integer.parseInt(map.get(CommonString.gameid_array[4]))
+				+ Integer.parseInt(map.get(CommonString.gameid_array[5]))
+				+ Integer.parseInt(map.get(CommonString.gameid_array[6]));
 			if(all > max_all)
 				max_all = all;
 			totals += all;
@@ -150,17 +150,17 @@
 	    </th>
         <%}%>
         <% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-        <th><%=map.get("Game1")%></th><%}%>
+        <th><%=map.get(CommonString.gameid_array[1])%></th><%}%>
         <% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-        <th><%=map.get("Game2")%></th><%}%>
+        <th><%=map.get(CommonString.gameid_array[2])%></th><%}%>
         <% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-        <th><%=map.get("Game3")%></th><%}%>
+        <th><%=map.get(CommonString.gameid_array[3])%></th><%}%>
         <% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-        <th><%=map.get("Game4")%></th><%}%>
+        <th><%=map.get(CommonString.gameid_array[4])%></th><%}%>
         <% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-        <th><%=map.get("Game5")%></th><%}%>
+        <th><%=map.get(CommonString.gameid_array[5])%></th><%}%>
         <% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-        <th><%=map.get("Game6")%></th><%}%>
+        <th><%=map.get(CommonString.gameid_array[6])%></th><%}%>
     </tr>
     <%if(i+1 == list.size()){ %>
     <tr>
@@ -168,34 +168,46 @@
    		<% if(sel == null || sel.equals("0")){ %>
         <th style="background-color:#00BBFF"><%=max_all%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date, "game01")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
+   												date, CommonString.gameid_array[1])%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date, "game02")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
+   												date, CommonString.gameid_array[2])%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date, "game03")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(),
+   												date, CommonString.gameid_array[3])%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date, "game04")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(),
+   												date, CommonString.gameid_array[4])%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date, "game05")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(),
+   												date, CommonString.gameid_array[5])%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date, "game06")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(),
+   												date, CommonString.gameid_array[6])%></th><%}%>
     </tr>
     <tr>
 	 	<th style="background-color:#00BBFF">AVG</th>
    		<% if(sel == null || sel.equals("0")){ %>
         <th style="background-color:#00BBFF"><%=avg%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(), date, "game01")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
+   												date, "game01")%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(), date, "game02")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
+   												date, CommonString.gameid_array[2])%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(), date, "game03")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(),
+   												date, CommonString.gameid_array[3])%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(), date, "game04")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(),
+   												date, CommonString.gameid_array[4])%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(), date, "game05")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(),
+   												date, CommonString.gameid_array[5])%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(), date, "game06")%></th><%}%>
+   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(),
+   												date, CommonString.gameid_array[6])%></th><%}%>
 	</tr>
     <%}%>
 <%}%>

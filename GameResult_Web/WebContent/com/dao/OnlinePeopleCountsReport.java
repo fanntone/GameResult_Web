@@ -45,19 +45,19 @@ public class OnlinePeopleCountsReport {
         try {
         	String sql = "select * from people_count "
         			   +" where time BETWEEN " + "'" + datetime +" 00:00:00'"
-        			   +" AND " +  "'" + datetime +" 23:59:59'"
+        			   +" AND " + "'" + datetime +" 23:59:59'"
         			   + CommonString.SQLQUERYEND;
         	psmt = conn.prepareStatement(sql);  
         	rs = psmt.executeQuery(sql);        	
 			while(rs.next()) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("time", rs.getString("people_count.time"));
-			map.put("Game1",rs.getString("people_count.game01"));
-			map.put("Game2",rs.getString("people_count.game02"));
-			map.put("Game3",rs.getString("people_count.game03"));
-			map.put("Game4",rs.getString("people_count.game04"));
-			map.put("Game5",rs.getString("people_count.game05"));
-			map.put("Game6",rs.getString("people_count.game06"));
+			map.put(CommonString.TIME, rs.getString("people_count.time"));
+			map.put(CommonString.gameid_array[1], rs.getString("people_count.game01"));
+			map.put(CommonString.gameid_array[2], rs.getString("people_count.game02"));
+			map.put(CommonString.gameid_array[3], rs.getString("people_count.game03"));
+			map.put(CommonString.gameid_array[4], rs.getString("people_count.game04"));
+			map.put(CommonString.gameid_array[5], rs.getString("people_count.game05"));
+			map.put(CommonString.gameid_array[6], rs.getString("people_count.game06"));
 			list.add(map);
 			}            
         } catch (SQLException e) {  
@@ -71,7 +71,7 @@ public class OnlinePeopleCountsReport {
         int max = 0;  
         String sql = " select MAX(" + label_name + ") from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
-        		   + " AND " +  "'" + datetime +" 23:59:59'"
+        		   + " AND " + "'" + datetime +" 23:59:59'"
         		   + CommonString.SQLQUERYEND;
         openConn();  
         try {  

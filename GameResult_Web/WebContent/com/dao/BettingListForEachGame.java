@@ -80,12 +80,12 @@ public class BettingListForEachGame {
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {
 		    	Map<String, String> map = new HashMap<String, String>();
-	    		map.put("Players", rs.getString("userID"));
-	    		map.put("Rounds", rs.getString("Rounds"));
-	    		map.put("Bet", rs.getString("Bet"));
-	    		map.put("Win", rs.getString("Win"));
-	    		map.put("Profit", rs.getString("Profit"));
-	    		map.put("PayRate", rs.getString("PayRate"));
+	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PAREMETER_USERID));
+	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
+	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
+	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
+	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 	    		list.add(map);	
 	    	}	    	
         } catch (SQLException e) {  
@@ -98,7 +98,7 @@ public class BettingListForEachGame {
     public int countRs(String date, String gameid, String userID){  
         int count = 0;
     	String sub_query = " and userID = " + userID;
-    	if(userID.equalsIgnoreCase("ALL"))
+    	if(userID.equalsIgnoreCase(CommonString.ALL))
     		sub_query = " ";
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "

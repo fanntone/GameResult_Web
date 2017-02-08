@@ -45,7 +45,7 @@ public class AllGamesOnlinePlayers {
 		String sub_query = " where gameID = " + gameID;
 		if(gameID.equalsIgnoreCase("ALL"))
 			sub_query = " ";
-		String sql = " select gameID, userID, count(*) as Counts from member_Login "
+		String sql = " select gameID, userID, count(*) as OnlinePlayers from member_Login "
 				   + sub_query
 				   + " group by gameID "
 				   + CommonString.SQLQUERYEND;
@@ -54,9 +54,9 @@ public class AllGamesOnlinePlayers {
 	        rs = psmt.executeQuery(); 
             while(rs.next()) { 
 			    Map<String, String> map = new HashMap<String, String>();
-			    map.put(CommonString.PARAMETER_GAMEID, rs.getString("gameID"));
-			    map.put(CommonString.PAREMETER_USERID, rs.getString("userID"));
-			    map.put(CommonString.ONLINEPLAYERS, rs.getString("Counts"));
+			    map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
+			    map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
+			    map.put(CommonString.ONLINEPLAYERS, rs.getString(CommonString.ONLINEPLAYERS));
 			    list.add(map);
             }			
 		} catch (SQLException e) {  

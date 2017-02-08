@@ -69,9 +69,9 @@ public class GameResultRecords {
 	    		String rs_string = rs.getString(CommonString.ROUNDUUID);
 	    		int length = rs_string.length();
 	    		int begin_index = 22;
-	    		if(rs_string.contains("FreeGame") && !rs_string.contains("EnterFreeGame"))
+	    		if(rs_string.contains(CommonString.FREEGAME) && !rs_string.contains(CommonString.ENTERFREEGAME))
 	    			begin_index = 23;
-	    		if(rs_string.contains("BonusGame")&& !rs_string.contains("EnterBonusGame"))
+	    		if(rs_string.contains(CommonString.BONUSGAME)&& !rs_string.contains(CommonString.ENTERBONUSGAME))
 	    			begin_index = 18;
 	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length - begin_index));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));

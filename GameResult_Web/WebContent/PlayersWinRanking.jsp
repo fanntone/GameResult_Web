@@ -37,8 +37,8 @@
 </head>
 <body>
 <script>
-	function change(){
-	document.selection.submit();
+	function change() {
+		document.selection.submit();
 	}
 </script>
 <%
@@ -70,7 +70,7 @@
 %>
 <form name="selection" action="PlayersWinRanking.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;
-<select name="sel_page" size="1" id="sel_page" onChange="change()">
+<select name=<%=CommonString.PARAMETER_SELPAGESIZE%> size="1" id=<%=CommonString.PARAMETER_SELPAGESIZE%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel_page == null || sel_page.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -88,7 +88,7 @@
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-&nbsp;<input name="date" id="date" type="text" value=<%=date%>><br>
+&nbsp;<input name=<%=CommonString.PARAMETER_DATE%> id=<%=CommonString.PARAMETER_DATE%> type="text" value=<%=date%>><br>
 &nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						    id=<%=CommonString.PAREMETER_USERID%>
 						    type="text" value=<%=userID%>>
@@ -163,18 +163,18 @@
 		float rayrate = 0;
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
-	      	if(map.get("Players") != null)
-	      		players = Integer.parseInt(map.get("Players"));
-	      	if(map.get("Rounds") != null)
-	      		rounds = Integer.parseInt(map.get("Rounds"));
-	      	if(map.get("Bet") != null)
-	      		bet = Integer.parseInt(map.get("Bet"));
-	      	if(map.get("Win") != null)
-	      		win = Integer.parseInt(map.get("Win"));
-	      	if(map.get("Profit") != null)
-	      		profit = Integer.parseInt(map.get("Profit"));
-	      	if(map.get("PayRate") != null)
-	      		rayrate = Float.parseFloat(map.get("PayRate"));
+	      	if(map.get(CommonString.PLAYERS) != null)
+	      		players = Integer.parseInt(map.get(CommonString.PLAYERS));
+	      	if(map.get(CommonString.ROUNDS) != null)
+	      		rounds = Integer.parseInt(map.get(CommonString.ROUNDS));
+	      	if(map.get(CommonString.BET) != null)
+	      		bet = Integer.parseInt(map.get(CommonString.BET));
+	      	if(map.get(CommonString.WIN) != null)
+	      		win = Integer.parseInt(map.get(CommonString.WIN));
+	      	if(map.get(CommonString.PROFIT) != null)
+	      		profit = Integer.parseInt(map.get(CommonString.PROFIT));
+	      	if(map.get(CommonString.PAYRATE) != null)
+	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
 	%>
 	<th><%=players%></th>
 	<th><%=rounds%></th>
@@ -210,7 +210,7 @@
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
-到第&nbsp;<input name="pageIndex" id="pageIndex" type="text" value=<%=pageIndex%>>頁
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 </form>	
 </body>
 </html>

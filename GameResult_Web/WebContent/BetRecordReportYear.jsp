@@ -36,20 +36,20 @@
 </head>
 <body>
 <script>
-	function change(){
-	document.selection.submit();
+	function change() {
+		document.selection.submit();
 	}
 </script>
 <%
 	String sel_year = request.getParameter(CommonString.PARAMETER_YEAR);
 	if(sel_year == null)
-		sel_year = "2017";
+		sel_year = CommonString.DEFAULTYEAR;
 	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(sel_gameID == null)
-		sel_gameID = "ALL";
+		sel_gameID = CommonString.ALL;
 %>
 <form name="selection" action="BetRecordReportYear.jsp" method="get">
-&nbsp;請選擇遊戲&nbsp;<select name="gameID" size="ALL" id="gameID" onChange="change()">
+&nbsp;請選擇遊戲&nbsp;<select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_0.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>		
@@ -73,7 +73,7 @@
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select>
 <br>
-&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
+&nbsp;請選擇年份&nbsp;<select name=<%=CommonString.PARAMETER_YEAR%> size="1" id=<%=CommonString.PARAMETER_YEAR%> onChange="change()">
 <option value="2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
 <option value="2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
 <option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
@@ -88,7 +88,7 @@
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
 	<th>Month(月份)</th>
-<%if(sel_gameID.equalsIgnoreCase("ALL")){%>
+<%if(sel_gameID.equalsIgnoreCase(CommonString.ALL)){%>
 	<th>Games(遊戲數量)</th>
 <%}%>
 	<th>Players(玩家數量)</th>
@@ -114,23 +114,23 @@
 		float rayrate = 0;
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
-	      	if(map.get("Games") != null)
-	      		games = Integer.parseInt(map.get("Games"));
-	      	if(map.get("Players") != null)
-	      		players = Integer.parseInt(map.get("Players"));
-	      	if(map.get("Rounds") != null)
-	      		rounds = Integer.parseInt(map.get("Rounds"));
-	      	if(map.get("Bet") != null)
-	      		bet = Integer.parseInt(map.get("Bet"));
-	      	if(map.get("Win") != null)
-	      		win = Integer.parseInt(map.get("Win"));
-	      	if(map.get("Profit") != null)
-	      		profit = Integer.parseInt(map.get("Profit"));
-	      	if(map.get("PayRate") != null)
-	      		rayrate = Float.parseFloat(map.get("PayRate"));
+	      	if(map.get(CommonString.GAMES) != null)
+	      		games = Integer.parseInt(map.get(CommonString.GAMES));
+	      	if(map.get(CommonString.PLAYERS) != null)
+	      		players = Integer.parseInt(map.get(CommonString.PLAYERS));
+	      	if(map.get(CommonString.ROUNDS) != null)
+	      		rounds = Integer.parseInt(map.get(CommonString.ROUNDS));
+	      	if(map.get(CommonString.BET) != null)
+	      		bet = Integer.parseInt(map.get(CommonString.BET));
+	      	if(map.get(CommonString.WIN) != null)
+	      		win = Integer.parseInt(map.get(CommonString.WIN));
+	      	if(map.get(CommonString.PROFIT) != null)
+	      		profit = Integer.parseInt(map.get(CommonString.PROFIT));
+	      	if(map.get(CommonString.PAYRATE) != null)
+	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
 	%>
-	<th><%=map.get("Month")%></th>
-<%if(sel_gameID.equalsIgnoreCase("ALL")){%>
+	<th><%=map.get(CommonString.MONTH)%></th>
+<%if(sel_gameID.equalsIgnoreCase(CommonString.ALL)){%>
 	<th><%=games%></th>
 <%}%>
 	<th><%=players%></th>

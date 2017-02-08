@@ -45,7 +45,7 @@ public class OnlinePeopleCountsReportMonth {
         try {
         	String sql_1 = "set @test_1:= '2017/01/01 00:00:00';";
         	String sql_2 = "set @test_2:= '2017/01/31 23:59:59';";
-        	String sql_3 = "select all Time(time) as Times from people_count group by Time(time);";
+        	String sql_3 = "select all Time(time) as times from people_count group by Time(time);";
         	psmt = conn.prepareStatement(sql_1);  
         	rs = psmt.executeQuery(sql_1);
         	psmt = conn.prepareStatement(sql_2);  
@@ -55,7 +55,7 @@ public class OnlinePeopleCountsReportMonth {
         	while (rs.next())
         	{
     			Map<String, String> map = new HashMap<String, String>();
-				map.put("Times", rs.getString("Times"));
+				map.put(CommonString.TIMES, rs.getString(CommonString.TIMES));
 				list.add(map);
         	}
 		} catch (SQLException e1) {
@@ -83,7 +83,7 @@ public class OnlinePeopleCountsReportMonth {
         	rs = psmt.executeQuery(sql);
 			String sql_2;
 			sql_2 = " select Sum(" + CommonString.gameid_array[sel_game] + ")as counts "
-				  + " ,DAY(time)as days"
+				  + " ,DAY(time)as Days"
 				  + " from people_count "
 				  + " where Time(time) = '" + times + "' "
 				  + " and Month(time) = " + sel_month
@@ -93,8 +93,8 @@ public class OnlinePeopleCountsReportMonth {
         	rs = psmt.executeQuery(sql_2);       	
         	while (rs.next())
         	{
-        		int index = rs.getInt("days");
-				count_day[index-1] = rs.getInt("counts");
+        		int index = rs.getInt(CommonString.DAYS);
+				count_day[index-1] = rs.getInt(CommonString.COUNTS);
         	}        	
         } catch (SQLException e) {  
           e.printStackTrace();  

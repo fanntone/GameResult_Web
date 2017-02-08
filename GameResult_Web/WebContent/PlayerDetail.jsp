@@ -54,16 +54,16 @@
 	      map = (Map<String, String>)list.get(i);
 	%>
     <tr>
-    	<th><%=map.get("userID")%></th>
-        <th><%=map.get("currency")%></th>
-        <th><%=map.get("loginID")%></th>
-        <th><%=map.get("passWord")%></th>
-        <th><%=map.get("nickName")%></th>
-        <th><%=map.get("balance")%></th>
-        <th><%=map.get("userStatus")%></th>
-        <th><%=map.get("status")%></th>
-        <th><%=map.get("regType")%></th>
-        <th><%=map.get("gm")%></th>
+    	<th><%=map.get(CommonString.PAREMETER_USERID)%></th>
+        <th><%=map.get(CommonString.CURRENCY)%></th>
+        <th><%=map.get(CommonString.LOGINID)%></th>
+        <th><%=map.get(CommonString.PASSWORD)%></th>
+        <th><%=map.get(CommonString.NICKNAME)%></th>
+        <th><%=map.get(CommonString.BALANCE)%></th>
+        <th><%=map.get(CommonString.USERSTATUS)%></th>
+        <th><%=map.get(CommonString.STATUS)%></th>
+        <th><%=map.get(CommonString.REGTYPE)%></th>
+        <th><%=map.get(CommonString.GM)%></th>
     </tr>  
 	<%}%>  
 </table>

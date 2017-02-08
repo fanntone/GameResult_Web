@@ -35,8 +35,8 @@
 </head>
 <body>
 <script>
-	function change(){
-	document.selection.submit();
+	function change() {
+		document.selection.submit();
 	}
 </script>
 <%
@@ -59,13 +59,13 @@
 }
 %>
 <form name="selection" action="AllGamesBetRecord.jsp" method="post">
-&nbsp;Date:&nbsp;<input name="date" id="date" type="text" value=<%=date%>>
-<input type="submit" value="送出查詢" >
+&nbsp;Date:&nbsp;<input name=<%=CommonString.PARAMETER_DATE%> id=<%=CommonString.PARAMETER_DATE%> type="text" value=<%=date%>>
+<input type="submit" value="送出查詢">
 </form>
 <script language="JavaScript">
-  $(document).ready(function(){ 
-    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
-  });
+	$(document).ready(function() {
+		$("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+  	});
 </script>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
@@ -108,23 +108,24 @@
 		float rayrate = 0;
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
-	      	if(map.get("Game") != null)
-	      		games = Integer.parseInt(map.get("Game"));
-	      	if(map.get("Players") != null)
-	      		players = Integer.parseInt(map.get("Players"));
-	      	if(map.get("Rounds") != null)
-	      		rounds = Integer.parseInt(map.get("Rounds"));
-	      	if(map.get("Bet") != null)
-	      		bet = Integer.parseInt(map.get("Bet"));
-	      	if(map.get("Win") != null)
-	      		win = Integer.parseInt(map.get("Win"));
-	      	if(map.get("Profit") != null)
-	      		profit = Integer.parseInt(map.get("Profit"));
-	      	if(map.get("PayRate") != null)
-	      		rayrate = Float.parseFloat(map.get("PayRate"));
+	      	if(map.get(CommonString.PARAMETER_GAMEID) != null)
+	      		games = Integer.parseInt(map.get(CommonString.PARAMETER_GAMEID));
+	      	if(map.get(CommonString.PLAYERS) != null)
+	      		players = Integer.parseInt(map.get(CommonString.PLAYERS));
+	      	if(map.get(CommonString.ROUNDS) != null)
+	      		rounds = Integer.parseInt(map.get(CommonString.ROUNDS));
+	      	if(map.get(CommonString.BET) != null)
+	      		bet = Integer.parseInt(map.get(CommonString.BET));
+	      	if(map.get(CommonString.WIN) != null)
+	      		win = Integer.parseInt(map.get(CommonString.WIN));
+	      	if(map.get(CommonString.PROFIT) != null)
+	      		profit = Integer.parseInt(map.get(CommonString.PROFIT));
+	      	if(map.get(CommonString.PAYRATE) != null)
+	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
 	%>
-	<th><a href="BettingListForEachGame.jsp?gameID=<%=games%>&date=<%=date%>" target="_blank"><%=games%></a></th>
-	<th><a href="PlayersWinRanking.jsp?&date=<%=date%>" target="_blank"><%=players%></a></th>
+	<th><a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=games%>
+				&<%=CommonString.PARAMETER_DATE%>=<%=date%>" target="_blank"><%=games%></a></th>
+	<th><a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>" target="_blank"><%=players%></a></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>
 	<th><%=win%></th>

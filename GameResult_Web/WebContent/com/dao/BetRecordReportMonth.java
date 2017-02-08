@@ -66,14 +66,14 @@ public class BetRecordReportMonth {
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {
 		    	Map<String, String> map = new HashMap<String, String>();  
-	    		map.put("Day", rs.getString("Day").substring(0,10));
-	    		map.put("Games", rs.getString("Games"));
-	    		map.put("Players", rs.getString("Players"));
-	    		map.put("Rounds", rs.getString("Rounds"));
-	    		map.put("Bet", rs.getString("Bet"));
-	    		map.put("Win", rs.getString("Win"));
-	    		map.put("Profit", rs.getString("Profit"));
-	    		map.put("PayRate", rs.getString("PayRate"));
+	    		map.put(CommonString.DAY, rs.getString(CommonString.DAY).substring(0,10));
+	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
+	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
+	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
+	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
+	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
+	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 	    		list.add(map);
 	    	}	    	
         } catch (SQLException e) {  

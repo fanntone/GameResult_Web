@@ -33,6 +33,7 @@ public class CommonString {
 	public static final String RESULTSDATE = "resultsDate";
 	public static final String RESULTSPARAMS = "resultsParams";
 	public static final String TIME = "time";
+	public static final String TIMES = "times";
 	public static final String ROUNDUUID = "roundUUID";
 	public static final String CURRENCY = "currency";
 	public static final String LOGINID = "loginID";
@@ -46,6 +47,21 @@ public class CommonString {
 	public static final String ALL = "ALL";
 	public static final String DEFAULTMONTH = "01";
 	public static final String DEFAULTYEAR = "2017";
+	public static final String FREEGAME = "FreeGame";
+	public static final String BONUSGAME = "BonusGame";
+	public static final String ENTERFREEGAME = "EnterFreeGame";
+	public static final String ENTERBONUSGAME = "EnterBonusGame";
+	public static final String PLAYERS = "Players";
+	public static final String ROUNDS = "Rounds";
+	public static final String BET = "Bet";
+	public static final String WIN = "Win";
+	public static final String PROFIT = "Profit";
+	public static final String PAYRATE  = "PayRate";
+	public static final String COUNTS = "counts";
+	public static final String GAMES = "Games";
+	public static final String DAY = "Day";
+	public static final String DAYS = "Days";
+	public static final String MONTH = "Month";
 	
 	public static final String[] days_array = new String[] {"01","02","03","04","05","06","07","08","09","10",
 															"11","12","13","14","15","16","17","18","19","20",
@@ -59,6 +75,5 @@ public class CommonString {
 	public static final String DAYTIMEEND = " 23:59:59 ";
 	public static final String TIMEDATE_QUATO = "'";
 	public static final String SQLQUERYEND = ";";
-	public static final String DOTS = ",";
-	
+	public static final String DOTS = ",";	
 }

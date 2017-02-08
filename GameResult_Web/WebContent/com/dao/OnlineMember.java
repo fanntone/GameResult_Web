@@ -57,9 +57,9 @@ public class OnlineMember {
             rs = psmt.executeQuery();  
             while(rs.next()) {  
                 Map<String, String> map=new HashMap<String, String>();  
-                map.put("userID", rs.getString("member_Login.userID"));
-                map.put("blance", rs.getString("member_Account.balance"));
-                map.put("gameID",rs.getString("member_Login.gameID"));
+                map.put(CommonString.PAREMETER_USERID, rs.getString("member_Login.userID"));
+                map.put(CommonString.BALANCE, rs.getString("member_Account.balance"));
+                map.put(CommonString.PARAMETER_GAMEID, rs.getString("member_Login.gameID"));
                 list.add(map);
             }
         } catch (SQLException e) {  
