@@ -13,24 +13,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>各遊戲在線玩家清單</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <%	String sel = request.getParameter(CommonString.PARAMETER_SELECT);%>
 <%
@@ -62,10 +62,10 @@ document.selection.submit();
 <br>
 &nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						    id=<%=CommonString.PAREMETER_USERID%>
-						    type= "text" value = <%=userID%>><br>
+						    type="text" value=<%=userID%>><br>
 &nbsp;輸入遊戲編號&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
 							id=<%=CommonString.PARAMETER_GAMEID%>
-							type= "text" value = <%=gameID%>>
+							type="text" value=<%=gameID%>>
 <input type="submit" value="送出查詢" >
 <br>
 <%

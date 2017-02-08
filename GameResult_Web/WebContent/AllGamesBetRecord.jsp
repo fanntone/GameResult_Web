@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -15,29 +15,29 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <style>
-  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
-  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+	article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+ 	body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 <title>各遊戲投注統計</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <%
 	String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
@@ -59,7 +59,7 @@ document.selection.submit();
 }
 %>
 <form name="selection" action="AllGamesBetRecord.jsp" method="post">
-Date:<input name = "date" id= "date" type= "text" value = <%=date%>>
+&nbsp;Date:&nbsp;<input name="date" id="date" type="text" value=<%=date%>>
 <input type="submit" value="送出查詢" >
 </form>
 <script language="JavaScript">
@@ -70,25 +70,25 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Game(遊戲名稱)</a></th>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=2
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=3
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=4
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=5
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=6
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=7
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
@@ -123,8 +123,8 @@ Date:<input name = "date" id= "date" type= "text" value = <%=date%>>
 	      	if(map.get("PayRate") != null)
 	      		rayrate = Float.parseFloat(map.get("PayRate"));
 	%>
-	<th><a href = "BettingListForEachGame.jsp?gameID=<%=games%>&date=<%=date%>" target = "_blank"><%=games%></a></th>
-	<th><a href = "PlayersWinRanking.jsp?&date=<%=date%>" target = "_blank"><%=players%></a></th>
+	<th><a href="BettingListForEachGame.jsp?gameID=<%=games%>&date=<%=date%>" target="_blank"><%=games%></a></th>
+	<th><a href="PlayersWinRanking.jsp?&date=<%=date%>" target="_blank"><%=players%></a></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>
 	<th><%=win%></th>

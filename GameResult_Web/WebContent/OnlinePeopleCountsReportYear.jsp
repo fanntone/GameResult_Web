@@ -11,44 +11,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>遊戲在線人數年報表</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <%
-	String sel_game = request.getParameter("games");
-	String sel_month = request.getParameter("months");
-	String sel_year = request.getParameter("years");
+	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	String sel_month = request.getParameter(CommonString.PARAMETER_MONTH);
+	String sel_year = request.getParameter(CommonString.PARAMETER_YEAR);
 %>
 <form name="selection" action="OnlinePeopleCountsReportYear.jsp" method="post">
-&nbsp;請選擇遊戲&nbsp;<select name="games" size="1" id="games" onChange="change()">
-<option value = "0"  <%if (sel_game == null || sel_game.equals("0"))  {%> selected <%}%>>ALL</option>
-<option value = "1"  <%if (sel_game != null && sel_game.equals("1"))  {%> selected <%}%>>game01</option>
-<option value = "2"  <%if (sel_game != null && sel_game.equals("2"))  {%> selected <%}%>>game02</option>
-<option value = "3"  <%if (sel_game != null && sel_game.equals("3"))  {%> selected <%}%>>game03</option>
-<option value = "4"  <%if (sel_game != null && sel_game.equals("4"))  {%> selected <%}%>>game04</option>
-<option value = "5"  <%if (sel_game != null && sel_game.equals("5"))  {%> selected <%}%>>game05</option>
-<option value = "5"  <%if (sel_game != null && sel_game.equals("6"))  {%> selected <%}%>>game06</option>
+&nbsp;請選擇遊戲&nbsp;<select name="gameID" size="1" id="gameID" onChange="change()">
+<option value="0"  <%if (sel_gameID == null || sel_gameID.equals("0"))  {%> selected <%}%>>ALL</option>
+<option value="1"  <%if (sel_gameID != null && sel_gameID.equals("1"))  {%> selected <%}%>>game01</option>
+<option value="2"  <%if (sel_gameID != null && sel_gameID.equals("2"))  {%> selected <%}%>>game02</option>
+<option value="3"  <%if (sel_gameID != null && sel_gameID.equals("3"))  {%> selected <%}%>>game03</option>
+<option value="4"  <%if (sel_gameID != null && sel_gameID.equals("4"))  {%> selected <%}%>>game04</option>
+<option value="5"  <%if (sel_gameID != null && sel_gameID.equals("5"))  {%> selected <%}%>>game05</option>
+<option value="6"  <%if (sel_gameID != null && sel_gameID.equals("6"))  {%> selected <%}%>>game06</option>
 </select>
 <br>
-&nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
-<option value = "2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
-<option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
+&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
+<option value="2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
+<option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
 </form>
 <br>
@@ -56,8 +56,8 @@ document.selection.submit();
 <tr>
 	<th>時間\(月份)</th>
 	<%
-		if(sel_game == null)
-			sel_game = "0";
+		if(sel_gameID == null)
+			sel_gameID = "0";
 		if(sel_month == null)
 			sel_month = "1";
 		if(sel_year == null)
@@ -81,7 +81,7 @@ document.selection.submit();
 	int[] list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
 								 Integer.parseInt(sel_month),
 								 Integer.parseInt(sel_year),
-								 Integer.parseInt(sel_game),
+								 Integer.parseInt(sel_gameID),
 								 times_);
 	Map<String, String> map = null;
 	int row_sum = 0;

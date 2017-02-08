@@ -11,17 +11,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>會員資料</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
@@ -29,7 +29,7 @@ th, td {
 	String users = request.getParameter(CommonString.PAREMETER_USERID);
 	PlayerDetail data = new PlayerDetail();
 	if(users == null || users == "" || users.replaceAll("\\s","").isEmpty())
-		users = "1001001";
+		users = CommonString.TEST_UESRID;
 	int id = Integer.parseInt(users);
 	if(id < 0)
 		id = 1;

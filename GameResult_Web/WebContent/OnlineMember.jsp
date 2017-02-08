@@ -31,7 +31,8 @@ function change(){
 document.selection.submit();
 }
 </script>
-<% 	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+<% 	
+	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
 	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
 		gameID = "ALL";

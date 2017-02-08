@@ -21,24 +21,24 @@
 </style>
 <title>在線人數查詢</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <% 
 	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
@@ -74,7 +74,7 @@ document.selection.submit();
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select>
 <br>
-點一下顯示日曆:&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>>
+點一下顯示日曆:&nbsp;<input name ="date" id="date" type="text" value=<%=date%>>
 <input type="submit" value="送出查詢">
 </form>
 

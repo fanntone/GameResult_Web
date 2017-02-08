@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ page import="com.dao.OnlinePeopleCountsReportMonth"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -17,59 +17,59 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <style>
-  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
-  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+  	article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  	body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 <title>單一遊戲投注清單</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <%
-String userID = request.getParameter(CommonString.PAREMETER_USERID);
-if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
-	userID = "ALL";
-String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
-if(orderby == null)
-	orderby = "1";
-String asc = request.getParameter(CommonString.PARAMETER_ASC);
-if(asc == null)
-	asc = "1";
-String reorder;
-if(asc.equalsIgnoreCase("1"))
-	reorder = "0";
-else
-	reorder = "1";
-String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-if(sel_gameID == null)
-	sel_gameID = EnumAllGamesList.GAME_1.getValue();
-String date = request.getParameter(CommonString.PARAMETER_DATE);
-if(date == null || date == "") {
-	java.util.Date c_date = new java.util.Date();
-	SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
-	date = trans.format(c_date);
-}
-String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
-if(sel_page == null)
-	sel_page = "5";
-int pageSize;
-pageSize = Integer.parseInt(sel_page);
+	String userID = request.getParameter(CommonString.PAREMETER_USERID);
+	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
+		userID = "ALL";
+	String orderby = request.getParameter(CommonString.PARAMETER_ORDERBY);
+	if(orderby == null)
+		orderby = "1";
+	String asc = request.getParameter(CommonString.PARAMETER_ASC);
+	if(asc == null)
+		asc = "1";
+	String reorder;
+	if(asc.equalsIgnoreCase("1"))
+		reorder = "0";
+	else
+		reorder = "1";
+	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	if(sel_gameID == null)
+		sel_gameID = EnumAllGamesList.GAME_1.getValue();
+	String date = request.getParameter(CommonString.PARAMETER_DATE);
+	if(date == null || date == "") {
+		java.util.Date c_date = new java.util.Date();
+		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
+		date = trans.format(c_date);
+	}
+	String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
+	if(sel_page == null)
+		sel_page = "5";
+	int pageSize;
+	pageSize = Integer.parseInt(sel_page);
 %>
 <form name="selection" action="BettingListForEachGame.jsp" method="post">
 &nbsp;請選擇遊戲&nbsp;
@@ -113,10 +113,10 @@ pageSize = Integer.parseInt(sel_page);
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>><br>
+&nbsp;<input name="date" id= "date" type= "text" value=<%=date%>><br>
 &nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						    id=<%=CommonString.PAREMETER_USERID%>
-						    type= "text" value = <%=userID%>>
+						    type="text" value=<%=userID%>>
 &nbsp;<input type="submit" value="送出查詢"> <br>
 
 <script language="JavaScript">
@@ -127,32 +127,32 @@ pageSize = Integer.parseInt(sel_page);
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
-	<th><a href = "BettingListForEachGame.jsp
+	<th><a href="BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Player ID(玩家編號)</a></th>
-	<th><a href = "BettingListForEachGame.jsp
+	<th><a href="BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
-	<th><a href = "BettingListForEachGame.jsp
+	<th><a href="BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
-	<th><a href = "BettingListForEachGame.jsp
+	<th><a href="BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
-	<th><a href = "BettingListForEachGame.jsp
+	<th><a href="BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
-	<th><a href = "BettingListForEachGame.jsp
+	<th><a href="BettingListForEachGame.jsp
 			?<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 			&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
@@ -160,9 +160,9 @@ pageSize = Integer.parseInt(sel_page);
 </tr>
 <%
 	BettingListForEachGame data = new BettingListForEachGame();
-	String currentPage = request.getParameter("pageIndex");
-	if(currentPage==null)  
-	    currentPage="1";
+	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
+	if(currentPage == null)  
+	    currentPage = "1";
 	int pageIndex = Integer.parseInt(currentPage);  
 	List<Map<String, String>> list = data.getAllRecords(date,
 														sel_gameID,
@@ -243,7 +243,7 @@ pageSize = Integer.parseInt(sel_page);
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
-到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+到第&nbsp;<input name="pageIndex" id="pageIndex" type="text" value=<%=pageIndex%>>頁
 </form>	
 </body>
 </html>

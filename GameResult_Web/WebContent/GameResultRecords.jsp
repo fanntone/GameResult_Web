@@ -8,8 +8,8 @@
 <%@ page import="com.dao.EnumAllGamesList"%>
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="com.dao.EnumSelectionList"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,28 +18,28 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <style>
-  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
-  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+  	article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  	body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 <title>賽果資訊</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: center;
-}
-table {
-    border-collapse: collapse;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: center;
+	}
+	table {
+	    border-collapse: collapse;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <% 
 	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
@@ -83,7 +83,7 @@ document.selection.submit();
 <br>
 &nbsp;賽果建立時間&nbsp;<input name = <%=CommonString.PARAMETER_DATE%> 
 							id= <%=CommonString.PARAMETER_DATE%>
-							type= "text" value = <%=date%>><br>
+							type="text" value=<%=date%>><br>
 &nbsp;請選擇遊戲&nbsp;
 <select name="gameID" size="ALL" id="gameID" onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_0.getValue()%>
@@ -110,7 +110,7 @@ document.selection.submit();
 </select><br>
 &nbsp;玩家唯一碼&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						   id=<%=CommonString.PAREMETER_USERID%>
-						   type= "text" value = <%=userid%>>
+						   type="text" value=<%=userid%>>
 <input type="submit" value="送出查詢" >
 <br>
 <script language="JavaScript">
@@ -123,7 +123,7 @@ document.selection.submit();
 	pageSize = Integer.parseInt(sel);
 	GameResultRecords ed = new GameResultRecords();
 	int totalPages = ed.getTotalPage(pageSize, userid, date, sel_gameID);
-	String currentPage = request.getParameter("pageIndex");
+	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 	if(currentPage==null)  
 	    currentPage="1";  
 	int pageIndex = Integer.parseInt(currentPage);  
@@ -134,7 +134,7 @@ document.selection.submit();
 	}
 	List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
 %>
-<table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width = "1280">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width="1280">
 	<tr>
 		<th>注單號碼(BG)</th>
 		<th>時間</th>
@@ -156,7 +156,7 @@ document.selection.submit();
       	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
           <th><%=map.get(CommonString.ROUNDUUID)%></th>  
           <th>
-	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target = "_blank">
+	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target="_blank">
 	          <%=map.get(CommonString.PAREMETER_USERID)%>
 	          </a>
  		  </th>
@@ -164,7 +164,7 @@ document.selection.submit();
           <th><%=map.get(CommonString.LINE)%></th>
           <th><%=map.get(CommonString.RESULTS)%></th>
           <th><%=map.get(CommonString.AGENT)%></th>
-          <th width = "30%">
+          <th width="30%">
           <%
           	String jsonstring = map.get(CommonString.RESULTSPARAMS);
           	if(jsonstring.contains("Wheel")) {
@@ -213,7 +213,7 @@ document.selection.submit();
 	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
 	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
-到第&nbsp;<input name= "pageIndex" id= "pageIndex" type= "text" value=<%=pageIndex%>>頁
+到第&nbsp;<input name="pageIndex" id="pageIndex" type="text" value=<%=pageIndex%>>頁
 </form>						   
 </body>
 </html>

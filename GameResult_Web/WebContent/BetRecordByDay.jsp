@@ -15,29 +15,29 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <style>
-  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
-  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+	article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  	body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 <title>每日平台投注查詢</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <%
 	String date = request.getParameter(CommonString.PARAMETER_DATE);
@@ -48,7 +48,7 @@ document.selection.submit();
 	}
 %>
 <form name="selection" action="BetRecordByDay.jsp" method="post">
-&nbsp;<input name = "date" id= "date" type= "text" value = <%=date%>>&nbsp;
+&nbsp;<input name="date" id="date" type="text" value=<%=date%>>&nbsp;
 <input type="submit" value="送出查詢" >
 </form>
 <script language="JavaScript">
@@ -98,7 +98,7 @@ document.selection.submit();
 	      	if(map.get("PayRate") != null)
 	      		rayrate = Float.parseFloat(map.get("PayRate"));
 	%>
-	<th><a href = "AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>" target = "_blank"><%=games%></a></th>
+	<th><a href="AllGamesBetRecord.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>" target="_blank"><%=games%></a></th>
 	<th><%=players%></th>
 	<th><%=rounds%></th>
 	<th><%=bet%></th>

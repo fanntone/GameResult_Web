@@ -16,38 +16,38 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <style>
-  article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
-  body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+  	article,aside,figure,figcaption,footer,header,hgroup,menu,nav,section {display:block;}
+  	body {font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 </style>
 <title>玩家金幣異動查詢</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
 <script>
-function change(){
-document.selection.submit();
-}
+	function change(){
+	document.selection.submit();
+	}
 </script>
 <%
-	String sel_month = request.getParameter("months");
+	String sel_month = request.getParameter(CommonString.PARAMETER_MONTH);
 	if(sel_month == null)
 		sel_month = "01";
-	String sel_year = request.getParameter("years");
+	String sel_year = request.getParameter(CommonString.PARAMETER_YEAR);
 	if(sel_year == null)
 		sel_year = "2017";
-	String userID = request.getParameter("userID");
+	String userID = request.getParameter(CommonString.PAREMETER_USERID);
 	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 		userID = "ALL";
 %>
@@ -55,24 +55,24 @@ document.selection.submit();
 &nbsp;玩家唯一碼&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						   id=<%=CommonString.PAREMETER_USERID%>
 						   type= "text" value = <%=userID%>><br>
-&nbsp;請選擇年份&nbsp;<select name="years" size="1" id="years" onChange="change()">
-<option value = "2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
-<option value = "2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
-<option value = "2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
+&nbsp;請選擇年份&nbsp;<select name="year" size="1" id="year" onChange="change()">
+<option value="2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
+<option value="2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
+<option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select><br>
-&nbsp;請選擇月份&nbsp;<select name="months" size="1" id="months" onChange="change()">
-<option value = "1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
-<option value = "2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
-<option value = "3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
-<option value = "4"  <%if (sel_month != null && sel_month.equals("4"))  {%> selected <%}%>>4</option>
-<option value = "5"  <%if (sel_month != null && sel_month.equals("5"))  {%> selected <%}%>>5</option>
-<option value = "6"  <%if (sel_month != null && sel_month.equals("6"))  {%> selected <%}%>>6</option>
-<option value = "7"  <%if (sel_month != null && sel_month.equals("7"))  {%> selected <%}%>>7</option>
-<option value = "8"  <%if (sel_month != null && sel_month.equals("8"))  {%> selected <%}%>>8</option>
-<option value = "9"  <%if (sel_month != null && sel_month.equals("9"))  {%> selected <%}%>>9</option>
-<option value = "10" <%if (sel_month != null && sel_month.equals("10")) {%> selected <%}%>>10</option>
-<option value = "11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
-<option value = "12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
+&nbsp;請選擇月份&nbsp;<select name="month" size="1" id="month" onChange="change()">
+<option value="1"  <%if (sel_month == null || sel_month.equals("1"))  {%> selected <%}%>>1</option>
+<option value="2"  <%if (sel_month != null && sel_month.equals("2"))  {%> selected <%}%>>2</option>
+<option value="3"  <%if (sel_month != null && sel_month.equals("3"))  {%> selected <%}%>>3</option>
+<option value="4"  <%if (sel_month != null && sel_month.equals("4"))  {%> selected <%}%>>4</option>
+<option value="5"  <%if (sel_month != null && sel_month.equals("5"))  {%> selected <%}%>>5</option>
+<option value="6"  <%if (sel_month != null && sel_month.equals("6"))  {%> selected <%}%>>6</option>
+<option value="7"  <%if (sel_month != null && sel_month.equals("7"))  {%> selected <%}%>>7</option>
+<option value="8"  <%if (sel_month != null && sel_month.equals("8"))  {%> selected <%}%>>8</option>
+<option value="9"  <%if (sel_month != null && sel_month.equals("9"))  {%> selected <%}%>>9</option>
+<option value="10" <%if (sel_month != null && sel_month.equals("10")) {%> selected <%}%>>10</option>
+<option value="11" <%if (sel_month != null && sel_month.equals("11")) {%> selected <%}%>>11</option>
+<option value="12" <%if (sel_month != null && sel_month.equals("12")) {%> selected <%}%>>12</option>
 </select>
 </form><br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>

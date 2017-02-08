@@ -11,17 +11,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>遊戲在線人數清單</title>
 <style>
-table, td, th {
-    border: 3px solid #FFAC55;
-    text-align: left;
-}
-table {
-    border-collapse: collapse;
-    width: auto;
-}
-th, td {
-    padding: 15px;
-}
+	table, td, th {
+	    border: 3px solid #FFAC55;
+	    text-align: left;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: auto;
+	}
+	th, td {
+	    padding: 15px;
+	}
 </style>
 </head>
 <body>
@@ -34,7 +34,7 @@ List<Map<String, String>> list = data.getAllData(gameID);
 %>
 &nbsp;輸入遊戲編號&nbsp;<input name=<%=CommonString.PARAMETER_GAMEID%>
 						    id=<%=CommonString.PARAMETER_GAMEID%>
-						    type= "text" value = <%=gameID%>>
+						    type="text" value=<%=gameID%>>
 <input type="submit" value="送出查詢" >
 <br><br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
@@ -43,14 +43,14 @@ List<Map<String, String>> list = data.getAllData(gameID);
 	   	<th>遊戲人數(Online Players)</th>
 	</tr>
 	<%  
-	  	Map<String, String> map=null;  
+	  	Map<String, String> map  =null;  
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
 	%>
     <tr> 
        	<th><%=map.get(CommonString.PARAMETER_GAMEID)%></th>
        	<th>
-	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=map.get(CommonString.PARAMETER_GAMEID)%>" target = "_blank">
+	       	<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=map.get(CommonString.PARAMETER_GAMEID)%>" target="_blank">
 	       	<%=map.get(CommonString.ONLINEPLAYERS)%>
 	       	</a>
 	    </th>
