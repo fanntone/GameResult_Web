@@ -37,8 +37,8 @@
 </head>
 <body>
 <script>
-	function change(){
-	document.selection.submit();
+	function change()	{
+		document.selection.submit();
 	}
 </script>
 <% 
@@ -46,9 +46,9 @@
 	if(sel == null)
 		sel = "5";
 	
-	String userid = request.getParameter(CommonString.PAREMETER_USERID);
-	if(userid == null || userid == "" || userid.replaceAll("\\s","").isEmpty())
-		userid = CommonString.ALL;
+	String userID = request.getParameter(CommonString.PAREMETER_USERID);
+	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
+		userID = CommonString.ALL;
 	
 	String date = request.getParameter(CommonString.PARAMETER_DATE);
 	if(date == null) {
@@ -81,10 +81,10 @@
 		selected <%}%>><%=EnumSelectionList.SELECT_100.getValue()%></option> 
 </select>
 <br>
-&nbsp;賽果建立時間&nbsp;<input name = <%=CommonString.PARAMETER_DATE%> 
-							id= <%=CommonString.PARAMETER_DATE%>
+&nbsp;賽果建立時間&nbsp;<input name=<%=CommonString.PARAMETER_DATE%> 
+							id=<%=CommonString.PARAMETER_DATE%>
 							type="text" value=<%=date%>><br>
-&nbsp;請選擇遊戲&nbsp;<select name="gameID" size="ALL" id="gameID" onChange="change()">
+&nbsp;請選擇遊戲&nbsp;<select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_0.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>
@@ -107,21 +107,21 @@
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_6.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_6.getValue()%></option> 
 </select><br>
-&nbsp;玩家唯一碼&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
-						   id=<%=CommonString.PAREMETER_USERID%>
-						   type="text" value=<%=userid%>>
+&nbsp;玩家唯一碼&nbsp;<input 	name=<%=CommonString.PAREMETER_USERID%>
+							id=<%=CommonString.PAREMETER_USERID%>
+							type="text" value=<%=userID%>>
 <input type="submit" value="送出查詢" >
 <br>
 <script language="JavaScript">
-  $(document).ready(function(){ 
-    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
-  });
+	$(document).ready(function() { 
+    	$("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+  	});
 </script>
 <%
 	int pageSize = 5;
 	pageSize = Integer.parseInt(sel);
 	GameResultRecords ed = new GameResultRecords();
-	int totalPages = ed.getTotalPage(pageSize, userid, date, sel_gameID);
+	int totalPages = ed.getTotalPage(pageSize, userID, date, sel_gameID);
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 	if(currentPage == null)  
 	    currentPage = "1";  
@@ -131,7 +131,7 @@
 	} else if(pageIndex > totalPages){  
 	    pageIndex = totalPages;  
 	}
-	List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userid, date, sel_gameID);
+	List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userID, date, sel_gameID);
 %>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width="1280">
 	<tr>
@@ -165,8 +165,8 @@
           <th><%=map.get(CommonString.AGENT)%></th>
           <th width="30%">
           <%
-          	String jsonstring = map.get(CommonString.RESULTSPARAMS);
-          	if(jsonstring.contains("Wheel")) {
+          		String jsonstring = map.get(CommonString.RESULTSPARAMS);
+          		if(jsonstring.contains("Wheel")) {
               	String text = "";
               	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
               	for(int j = 0; j < 3; j++) {
@@ -194,25 +194,25 @@
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
-	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
-	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
-	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
-	&<%=CommonString.PAREMETER_USERID%>=<%=userid%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
-到第&nbsp;<input name="pageIndex" id="pageIndex" type="text" value=<%=pageIndex%>>頁
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 </form>						   
 </body>
 </html>
