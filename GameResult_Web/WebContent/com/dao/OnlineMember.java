@@ -43,10 +43,10 @@ public class OnlineMember {
 		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
         openConn();
         String sub_query = " and member_Login.gameID = " + gameID;
-        if(gameID.equalsIgnoreCase("ALL"))
+        if(gameID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
-        String sql = " select member_Login.userID, member_Account.balance, member_Login.gameID"
-        		   + " from member_Login, member_Account"
+        String sql = " select member_Login.userID, member_Account.balance, member_Login.gameID "
+        		   + " from member_Login, member_Account "
         		   + " where member_Login.userID = member_Account.userID "
         		   + sub_query
         		   + " Limit "

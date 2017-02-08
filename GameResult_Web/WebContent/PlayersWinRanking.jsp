@@ -191,25 +191,25 @@
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
-		&pageIndex=1">&nbsp;首頁</a>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
 <a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
-		&pageIndex=<%=upPage%>">&nbsp;上一頁</a>  
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
 <a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
-		&pageIndex=<%=nextPage%>">&nbsp;下一頁</a>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
 <a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
-		&pageIndex=<%=totalPages%>">&nbsp;末頁</a>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
 到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 </form>	
 </body>
