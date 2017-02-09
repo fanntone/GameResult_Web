@@ -68,7 +68,7 @@ public class AllGamesBetRecord {
 	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
 	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
 	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
-	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN))
+	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
 	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
 	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 	    		list.add(map);	
