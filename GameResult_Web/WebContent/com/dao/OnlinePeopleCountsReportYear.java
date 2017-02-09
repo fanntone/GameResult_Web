@@ -47,7 +47,6 @@ public class OnlinePeopleCountsReportYear {
 				list.add(map);
         	}    	
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         closeConn();	
@@ -85,7 +84,6 @@ public class OnlinePeopleCountsReportYear {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -33,7 +33,6 @@ public class OnlinePeopleCountsReportMonth {
         try {
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +58,6 @@ public class OnlinePeopleCountsReportMonth {
 				list.add(map);
         	}
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         closeConn();			
