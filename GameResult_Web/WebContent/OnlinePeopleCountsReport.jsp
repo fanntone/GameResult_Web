@@ -163,50 +163,50 @@
         <th><%=map.get(CommonString.gameid_array[6])%></th><%}%>
     </tr>
     <%if(i+1 == list.size()){ %>
-    <tr>
-    	<th style="background-color:#00BBFF">MAX</th>
+    <tr style="background-color:#00BBFF">
+    	<th>MAX</th>
    		<% if(sel == null || sel.equals("0")){ %>
-        <th style="background-color:#00BBFF"><%=max_all%></th><%}%>
+        <th><%=max_all%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
    												date, CommonString.gameid_array[1])%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
    												date, CommonString.gameid_array[2])%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(),
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(),
    												date, CommonString.gameid_array[3])%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(),
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(),
    												date, CommonString.gameid_array[4])%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(),
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(),
    												date, CommonString.gameid_array[5])%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(),
+   		<th><%=data.getMaxGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(),
    												date, CommonString.gameid_array[6])%></th><%}%>
     </tr>
-    <tr>
-	 	<th style="background-color:#00BBFF">AVG</th>
+    <tr style="background-color:#00BBFF">
+	 	<th>AVG</th>
    		<% if(sel == null || sel.equals("0")){ %>
-        <th style="background-color:#00BBFF"><%=avg%></th><%}%>
+        <th><%=avg%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
    												date, "game01")%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
    												date, CommonString.gameid_array[2])%></th><%}%>
    		<% if(size == 3 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(),
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_3.getValue(),
    												date, CommonString.gameid_array[3])%></th><%}%>
    		<% if(size == 4 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(),
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_4.getValue(),
    												date, CommonString.gameid_array[4])%></th><%}%>
    		<% if(size == 5 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(),
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_5.getValue(),
    												date, CommonString.gameid_array[5])%></th><%}%>
    		<% if(size == 6 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
-   		<th style="background-color:#00BBFF"><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(),
+   		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_6.getValue(),
    												date, CommonString.gameid_array[6])%></th><%}%>
 	</tr>
     <%}%>

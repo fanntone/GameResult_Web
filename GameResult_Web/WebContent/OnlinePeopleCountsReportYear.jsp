@@ -94,19 +94,19 @@
 		row_sum += counts;		
 %><th><%=counts%></th><%}%><th><%=row_sum/(float)12%></th></tr><%}%>
 
-<tr><th style="background-color:#00BBFF">MAX</th><%
+<tr style="background-color:#00BBFF"><th>MAX</th><%
 		float row_max = 0;
 		for(int j = 0; j < (month-1) ; j++){
 			String max_people = String.valueOf(max_array[j]);
 			row_max += max_array[j];
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th style="background-color:#00BBFF"><%=row_max/12%></th></tr>
+%><th><%=max_people%></th><%}%><th><%=row_max/12%></th></tr>
 
-<tr><th style="background-color:#00BBFF">AVG</th><%
+<tr style="background-color:#00BBFF"><th>AVG</th><%
 		float row_avg = 0;
 		for(int avg = 0; avg < (month-1) ; avg++){
 			String max_people = String.valueOf(sum_array[avg]/(float)time_list.size());
 			row_avg += Float.parseFloat(max_people);
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th style="background-color:#00BBFF"><%=row_avg/12%></th></tr>
+%><th><%=max_people%></th><%}%><th><%=row_avg/12%></th></tr>
 </table>
 </body>
 </html>

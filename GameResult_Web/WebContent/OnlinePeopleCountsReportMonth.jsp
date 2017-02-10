@@ -112,21 +112,21 @@
 	    int counts = list[ii];
 	    row_sum += counts;
 %><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
-<tr><th style="background-color:#00BBFF">MAX</th><%
+<tr style="background-color:#00BBFF"><th>MAX</th><%
 		float row_max = 0;
 		for(int j = 0; j < (day-1) ; j++){
 			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
 															  Integer.parseInt(sel_gameID));
 			row_max += Integer.parseInt(max_people);
 			
-%><th style="background-color:#00BBFF"><%=max_people%></th><%}%><th style="background-color:#00BBFF"><%=row_max/max_day%></th></tr>
-<tr><th style="background-color:#00BBFF">AVG</th><%
+%><th><%=max_people%></th><%}%><th><%=row_max/max_day%></th></tr>
+<tr style="background-color:#00BBFF"><th>AVG</th><%
 		float row_avg = 0;
 		for(int avg = 0; avg < (day-1) ; avg++){
 			String avg_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
 															  Integer.parseInt(sel_gameID));
 			row_avg += Float.parseFloat(avg_people);
-%><th style="background-color:#00BBFF"><%=avg_people%></th><%}%><th style="background-color:#00BBFF"><%=row_avg/max_day%></th></tr>
+%><th><%=avg_people%></th><%}%><th><%=row_avg/max_day%></th></tr>
 </table>
 </body>
 </html>
