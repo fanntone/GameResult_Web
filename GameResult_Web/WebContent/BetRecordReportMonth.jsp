@@ -51,7 +51,7 @@
 	if(sel_gameID == null)
 		sel_gameID = CommonString.ALL;
 %>
-<form name="selection" action="BetRecordReportMonth.jsp" method="get">
+<form name="selection" action="BetRecordReportMonth.jsp" method="post">
 &nbsp;½Ð¿ï¾Ü¹CÀ¸&nbsp;<select name=<%=CommonString.PARAMETER_GAMEID%> size="ALL" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_0.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>

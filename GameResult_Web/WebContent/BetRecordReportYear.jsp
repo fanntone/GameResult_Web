@@ -48,7 +48,7 @@
 	if(sel_gameID == null)
 		sel_gameID = CommonString.ALL;
 %>
-<form name="selection" action="BetRecordReportYear.jsp" method="get">
+<form name="selection" action="BetRecordReportYear.jsp" method="post">
 &nbsp;請選擇遊戲&nbsp;<select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
 <option value=<%=EnumAllGamesList.GAME_0.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
@@ -74,15 +74,15 @@
 </select>
 <br>
 &nbsp;請選擇年份&nbsp;<select name=<%=CommonString.PARAMETER_YEAR%> size="1" id=<%=CommonString.PARAMETER_YEAR%> onChange="change()">
-<option value="2016"  <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
-<option value="2017"  <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
-<option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
+<option value="2016" <%if (sel_year == null || sel_year.equals("2016"))  {%> selected <%}%>>2016</option>
+<option value="2017" <%if (sel_year != null && sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
+<option value="2018" <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
 </form>
 <script language="JavaScript">
-  $(document).ready(function(){ 
-    $("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
-  });
+	$(document).ready(function() { 
+    	$("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
+    });
 </script>
 <br>
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
