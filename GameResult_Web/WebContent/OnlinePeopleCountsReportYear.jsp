@@ -37,18 +37,18 @@
 %>
 <form name="selection" action="OnlinePeopleCountsReportYear.jsp" method="post">
 &nbsp;請選擇遊戲&nbsp;<select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
-<option value="0"  <%if (sel_gameID == null || sel_gameID.equals("0"))  {%> selected <%}%>>ALL</option>
-<option value="1"  <%if (sel_gameID != null && sel_gameID.equals("1"))  {%> selected <%}%>>game01</option>
-<option value="2"  <%if (sel_gameID != null && sel_gameID.equals("2"))  {%> selected <%}%>>game02</option>
-<option value="3"  <%if (sel_gameID != null && sel_gameID.equals("3"))  {%> selected <%}%>>game03</option>
-<option value="4"  <%if (sel_gameID != null && sel_gameID.equals("4"))  {%> selected <%}%>>game04</option>
-<option value="5"  <%if (sel_gameID != null && sel_gameID.equals("5"))  {%> selected <%}%>>game05</option>
-<option value="6"  <%if (sel_gameID != null && sel_gameID.equals("6"))  {%> selected <%}%>>game06</option>
+<option value="0" <%if (sel_gameID == null || sel_gameID.equals("0"))  {%> selected <%}%>>ALL</option>
+<option value="1" <%if (sel_gameID != null && sel_gameID.equals("1"))  {%> selected <%}%>>game01</option>
+<option value="2" <%if (sel_gameID != null && sel_gameID.equals("2"))  {%> selected <%}%>>game02</option>
+<option value="3" <%if (sel_gameID != null && sel_gameID.equals("3"))  {%> selected <%}%>>game03</option>
+<option value="4" <%if (sel_gameID != null && sel_gameID.equals("4"))  {%> selected <%}%>>game04</option>
+<option value="5" <%if (sel_gameID != null && sel_gameID.equals("5"))  {%> selected <%}%>>game05</option>
+<option value="6" <%if (sel_gameID != null && sel_gameID.equals("6"))  {%> selected <%}%>>game06</option>
 </select>
 <br>
 &nbsp;請選擇年份&nbsp;<select name=<%=CommonString.PARAMETER_YEAR%> size="1" id=<%=CommonString.PARAMETER_YEAR%> onChange="change()">
-<option value="2017"  <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
-<option value="2018"  <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
+<option value="2017" <%if (sel_year == null || sel_year.equals("2017"))  {%> selected <%}%>>2017</option>
+<option value="2018" <%if (sel_year != null && sel_year.equals("2018"))  {%> selected <%}%>>2018</option>
 </select>
 </form>
 <br>
@@ -68,7 +68,7 @@
 		int[] sum_array = new int[] {0,0,0, 0,0,0, 0,0,0, 0,0,0};
 		int day = 1;
 		int sum_count = 0;
-		for(month = 1; month <= 12; month++){ 
+		for(month = 1; month <= 12; month++) { 
 	%><th><%=month%></th><%}%><th><%=sel_year%>年平均</th>
 </tr>
 <tr><%
@@ -93,14 +93,12 @@
 		sum_array[ii] = sum_array[ii] + counts;
 		row_sum += counts;		
 %><th><%=counts%></th><%}%><th><%=row_sum/(float)12%></th></tr><%}%>
-
 <tr style="background-color:#00BBFF"><th>MAX</th><%
 		float row_max = 0;
 		for(int j = 0; j < (month-1) ; j++){
 			String max_people = String.valueOf(max_array[j]);
 			row_max += max_array[j];
 %><th><%=max_people%></th><%}%><th><%=row_max/12%></th></tr>
-
 <tr style="background-color:#00BBFF"><th>AVG</th><%
 		float row_avg = 0;
 		for(int avg = 0; avg < (month-1) ; avg++){
