@@ -19,7 +19,7 @@ public class BettingListForEachGame {
 	private String dots = ",";
 	
 	private void openConn() {  
-	    String url = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords"; 
+	    String url = CommonString.DB_GF_RECOREDRESULT; 
 	    String user = CommonString.DB_USER;  
 	    String password = CommonString.DB_PW;  
 	    try {  

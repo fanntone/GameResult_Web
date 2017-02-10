@@ -17,7 +17,7 @@ public class OnlinePeopleCountsReport {
 	private ResultSet rs = null; 	
 	
 	private void openConn() {  
-	    String url = CommonString.DB_URL;  
+	    String url = CommonString.DB_GF_MEMBER;  
 	    String user = CommonString.DB_USER;  
 	    String password = CommonString.DB_PW;  
 	    try {  

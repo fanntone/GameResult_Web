@@ -1,8 +1,8 @@
 package com.dao;
 
 public class CommonString {
-//	public static String DB_URL = "jdbc:mysql://10.36.1.102:3306/TEST";
-	public static String DB_URL = "jdbc:mysql://10.36.1.102:3306/GF_Member";
+	public static String DB_GF_RECOREDRESULT = "jdbc:mysql://10.36.1.102:3306/GF_ResultsRecords";
+	public static String DB_GF_MEMBER = "jdbc:mysql://10.36.1.102:3306/GF_Member";
 	public static String DB_USER = "root";
 	public static String DB_PW = "3edc2wsx!QAZ";
 	public static String DB_DRIVER = "com.mysql.jdbc.Driver";
