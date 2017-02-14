@@ -75,9 +75,9 @@ document.selection.submit();
 	    currentPage="1";  
 	 
 	int pageIndex = Integer.parseInt(currentPage);  
-	if(pageIndex < 1){  
+	if(pageIndex < 1) {  
 	    pageIndex = 1;  
-	}else if(pageIndex > totalPages){  
+	} else if(pageIndex > totalPages) {  
 	    pageIndex = totalPages;  
 	}
 	List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameID);

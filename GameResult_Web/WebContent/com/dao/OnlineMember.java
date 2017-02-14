@@ -22,7 +22,7 @@ public class OnlineMember {
 	    String password = CommonString.DB_PW;  
 	    try {  
 	        Class.forName(CommonString.DB_DRIVER);  
-	        conn = DriverManager.getConnection(url,user,password);  
+	        conn = DriverManager.getConnection(url, user, password);  
 	    } catch (ClassNotFoundException e) {  
 	        e.printStackTrace();  
 	    } catch (SQLException e) {  
@@ -39,7 +39,7 @@ public class OnlineMember {
 	}
 	
 	public List<Map<String, String>> getAllempByPage(int pageSize, int pageIndex, String gameID) {  
-		List<Map<String, String>> list=new ArrayList<Map<String, String>>();  
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();  
         openConn();
         String sub_query = " and member_Login.gameID = " + gameID;
         if(gameID.equalsIgnoreCase(CommonString.ALL))
@@ -73,7 +73,11 @@ public class OnlineMember {
         String sub_query = " where member_Login.gameID = " + gameID;
         if(gameID.equalsIgnoreCase("ALL"))
         	sub_query = " ";
-        String sql = " select count(*) from member_Login " + sub_query + CommonString.SQLQUERYEND;   
+        String sql = " select count(member_Login.userID) "
+        		   + " from member_Login, member_Account "
+        		   + " where member_Login.userID = member_Account.userID "        		   
+        		   + sub_query
+        		   + CommonString.SQLQUERYEND;   
         openConn();  
         try {  
             psmt = conn.prepareStatement(sql);  
