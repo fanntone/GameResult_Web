@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,12 +46,12 @@ public class OnlinePeopleCountsReportMonth {
         	String sql_1 = "set @test_1:= '2017/01/01 00:00:00';";
         	String sql_2 = "set @test_2:= '2017/01/31 23:59:59';";
         	String sql_3 = "select all Time(time) as times from people_count group by Time(time);";
-        	psmt = conn.prepareStatement(sql_1);  
+        	psmt = conn.prepareStatement(sql_1);
         	rs = psmt.executeQuery(sql_1);
-        	psmt = conn.prepareStatement(sql_2);  
+        	psmt = conn.prepareStatement(sql_2);
         	rs = psmt.executeQuery(sql_2);
-        	psmt = conn.prepareStatement(sql_3);  
-        	rs = psmt.executeQuery(sql_3);      	
+        	psmt = conn.prepareStatement(sql_3);
+        	rs = psmt.executeQuery(sql_3);  	
         	while (rs.next())
         	{
     			Map<String, String> map = new HashMap<String, String>();
@@ -124,20 +125,27 @@ public class OnlinePeopleCountsReportMonth {
     
     public String getAvgGamePeopleByGameID(String datetime,  int sel_game) {
         float avg = 0;  
-        String sql = " select SUM( "+ CommonString.gameid_array[sel_game] + ")/288 from people_count"
-        		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
+        String sql = " select AVG( " + CommonString.gameid_array[sel_game] + ") from people_count"
+        		   + " where time BETWEEN " + "'" + datetime + " 00:00:00'"
         		   + " AND " +  "'" + datetime +" 23:59:59'";
         openConn();  
         try {  
             psmt = conn.prepareStatement(sql);  
             rs = psmt.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 avg = rs.getFloat(1);
+                return FormatDecimal(avg);
             }  
         } catch (SQLException e) {
             e.printStackTrace();  
         }   
     	closeConn();
     	return String.valueOf(avg);
+    }
+    
+    public String FormatDecimal(float x) {
+    	DecimalFormat df = new DecimalFormat("#.#");
+    	String s = df.format(x);
+    	return s;
     }
 }

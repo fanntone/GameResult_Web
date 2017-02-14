@@ -67,7 +67,7 @@
 </select>
 </form>
 <br>
-<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5' width="1440">
 <tr>
 	<th>時間\(月/日)</th>
 	<%
@@ -102,7 +102,7 @@
 	    maps = (Map<String, String>)time_list.get(times);
 	    String times_ = maps.get(CommonString.TIMES);
 %><th><%=times_%></th><%
-	int[] list = data.getAllData(sel_year + "/"+ Integer.parseInt(sel_month) +"/01 " + times_,
+	int[] list = data.getAllData(sel_year + "/" + Integer.parseInt(sel_month) + "/01 " + times_,
 								 Integer.parseInt(sel_month),
 								 Integer.parseInt(sel_year),
 								 Integer.parseInt(sel_gameID),
@@ -111,22 +111,21 @@
 	for(int ii = 0; ii < max_day; ii++) {  
 	    int counts = list[ii];
 	    row_sum += counts;
-%><th><%=counts%></th><%}%><th><%=row_sum/(float)max_day%></tr><%}%>
+%><th><%=counts%></th><%}%><th><%=data.FormatDecimal(row_sum/(float)max_day)%></tr><%}%>
 <tr style="background-color:#00BBFF"><th>MAX</th><%
 		float row_max = 0;
 		for(int j = 0; j < (day-1) ; j++){
 			String max_people = data.getMaxGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[j],
 															  Integer.parseInt(sel_gameID));
 			row_max += Integer.parseInt(max_people);
-			
-%><th><%=max_people%></th><%}%><th><%=row_max/max_day%></th></tr>
+%><th><%=max_people%></th><%}%><th><%=data.FormatDecimal(row_max/max_day)%></th></tr>
 <tr style="background-color:#00BBFF"><th>AVG</th><%
 		float row_avg = 0;
-		for(int avg = 0; avg < (day-1) ; avg++){
+		for(int avg = 0; avg < (day-1) ; avg++) {
 			String avg_people = data.getAvgGamePeopleByGameID(sel_year + "/" + sel_month + "/" + CommonString.days_array[avg],
 															  Integer.parseInt(sel_gameID));
 			row_avg += Float.parseFloat(avg_people);
-%><th><%=avg_people%></th><%}%><th><%=row_avg/max_day%></th></tr>
+%><th><%=avg_people%></th><%}%><th><%=data.FormatDecimal(row_avg/max_day)%></th></tr>
 </table>
 </body>
 </html>
