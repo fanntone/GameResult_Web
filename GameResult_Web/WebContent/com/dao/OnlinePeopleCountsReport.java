@@ -43,27 +43,27 @@ public class OnlinePeopleCountsReport {
         openConn();
         try {
         	String sql = "select * from people_count "
-        			   +" where time BETWEEN " + "'" + datetime +" 00:00:00'"
+        			   +" where time BETWEEN " + "'" + datetime + " 00:00:00'"
         			   +" AND " + "'" + datetime +" 23:59:59'"
         			   + CommonString.SQLQUERYEND;
-        	psmt = conn.prepareStatement(sql);  
-        	rs = psmt.executeQuery(sql);        	
+        	psmt = conn.prepareStatement(sql);
+        	rs = psmt.executeQuery(sql);	
 			while(rs.next()) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put(CommonString.TIME, rs.getString("people_count.time"));
-			map.put(CommonString.gameid_array[1], rs.getString("people_count.game01"));
-			map.put(CommonString.gameid_array[2], rs.getString("people_count.game02"));
-			map.put(CommonString.gameid_array[3], rs.getString("people_count.game03"));
-			map.put(CommonString.gameid_array[4], rs.getString("people_count.game04"));
-			map.put(CommonString.gameid_array[5], rs.getString("people_count.game05"));
-			map.put(CommonString.gameid_array[6], rs.getString("people_count.game06"));
+			map.put(CommonString.TIME, rs.getString(CommonString.TIME));
+			map.put(CommonString.gameid_array[1], rs.getString(CommonString.gameid_array[1]));
+			map.put(CommonString.gameid_array[2], rs.getString(CommonString.gameid_array[2]));
+			map.put(CommonString.gameid_array[3], rs.getString(CommonString.gameid_array[3]));
+			map.put(CommonString.gameid_array[4], rs.getString(CommonString.gameid_array[4]));
+			map.put(CommonString.gameid_array[5], rs.getString(CommonString.gameid_array[5]));
+			map.put(CommonString.gameid_array[6], rs.getString(CommonString.gameid_array[6]));
 			list.add(map);
 			}            
         } catch (SQLException e) {  
           e.printStackTrace();  
         }
         closeConn();     
-        return list;  
+        return list;
 	}
 	
     public String getMaxGamePeopleByGameID(String gameID, String datetime, String label_name) {
@@ -88,7 +88,7 @@ public class OnlinePeopleCountsReport {
     
     public String getAvgGamePeopleByGameID(String gameID, String datetime,  String label_name) {
         float avg = 0;  
-        String sql = " select sum( "+ label_name + ")/288 from people_count"
+        String sql = " select AVG( "+ label_name + ") from people_count"
         		   + " where time BETWEEN " + "'" + datetime +" 00:00:00'"
     			   + " AND " +  "'" + datetime +" 23:59:59'"
     			   + CommonString.SQLQUERYEND;

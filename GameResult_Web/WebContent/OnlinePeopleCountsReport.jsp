@@ -144,7 +144,7 @@
 				max_all = all;
 			totals += all;
 			if(i+1 == list.size())
-				avg = totals/(i+1);
+				avg = totals/(float)(i+1);
 	    %>
 	    <%=all%>
 	    </th>
