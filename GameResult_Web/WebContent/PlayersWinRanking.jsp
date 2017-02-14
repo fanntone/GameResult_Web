@@ -186,25 +186,25 @@
 <%}%>
 </table>
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
-<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
-<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
 		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
-<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELECT%>=<%=sel_page%>
+<a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 		&<%=CommonString.PARAMETER_ORDERBY%>=1
 		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>

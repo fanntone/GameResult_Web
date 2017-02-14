@@ -32,16 +32,16 @@
 		document.selection.submit();
 	}
 </script>
-<%	String sel = request.getParameter(CommonString.PARAMETER_SELECT);
+<%	String sel = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
 	String userID = request.getParameter(CommonString.PAREMETER_USERID);
 	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 		userID = CommonString.ALL;
-	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	String gameID = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
 	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
 		gameID = CommonString.ALL;
 %>
 <form name="selection" action="GameOnlinePlayers.jsp" method="post">
-&nbsp;請選擇筆數&nbsp;<select name=<%=CommonString.PARAMETER_SELECT%> size="1" id=<%=CommonString.PARAMETER_SELECT%> onChange="change()">
+&nbsp;請選擇筆數&nbsp;<select name=<%=CommonString.PARAMETER_SELPAGESIZE%> size="1" id=<%=CommonString.PARAMETER_SELPAGESIZE%> onChange="change()">
 <option value=<%=EnumSelectionList.SELECT_5.getValue()%>
 	<%if (sel == null || sel.equals(EnumSelectionList.SELECT_5.getValue()))  {%>
 		selected <%}%>><%=EnumSelectionList.SELECT_5.getValue()%></option>
@@ -119,16 +119,20 @@
 		upPage = 1;
 %>
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=1
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;首頁</a>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage %>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;上一頁</a>  
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage %>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;下一頁</a>
-<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
 		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;末頁</a>
 到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁

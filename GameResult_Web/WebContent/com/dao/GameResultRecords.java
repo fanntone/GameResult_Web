@@ -58,7 +58,7 @@ public class GameResultRecords {
     			   + " AND roundStatus >= 1 "
     			   + " order by orderID DESC "
     			   + " Limit "
-    			   + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
+    			   + pageSize*(pageIndex-1) + CommonString.DOTS + (pageSize)
     			   + CommonString.SQLQUERYEND;
 	    try {
 	    	psmt = conn.prepareStatement(sql);  
