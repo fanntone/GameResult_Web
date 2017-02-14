@@ -44,7 +44,7 @@ public class OnlinePeopleCountsReport {
         try {
         	String sql = "select * from people_count "
         			   +" where time BETWEEN " + "'" + datetime + " 00:00:00'"
-        			   +" AND " + "'" + datetime +" 23:59:59'"
+        			   +" AND " + "'" + datetime + " 23:59:59'"
         			   + CommonString.SQLQUERYEND;
         	psmt = conn.prepareStatement(sql);
         	rs = psmt.executeQuery(sql);	
