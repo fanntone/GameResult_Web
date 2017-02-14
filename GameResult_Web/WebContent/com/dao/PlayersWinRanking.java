@@ -49,9 +49,9 @@ public class PlayersWinRanking {
     	String sql;
     	String orderby_str;
     	if(asc.equalsIgnoreCase("1"))
-    		orderby_str = " order by " + orderby + " ASC;"; 
+    		orderby_str = " order by " + orderby + " ASC "; 
     	else
-    		orderby_str = " order by " + orderby + " DESC;";
+    		orderby_str = " order by " + orderby + " DESC ";
     	
         String sub_query = " and userID = " + userID;
         if(userID.equalsIgnoreCase(CommonString.ALL))
@@ -67,6 +67,8 @@ public class PlayersWinRanking {
     		+ sub_query
     		+ " GROUP by userID "
     		+ orderby_str
+		    + " Limit "
+		    + pageSize*(pageIndex-1) + CommonString.DOTS +(pageSize)
     		+ CommonString.SQLQUERYEND;
 	    try {	    	
 	    	psmt = conn.prepareStatement(sql);  

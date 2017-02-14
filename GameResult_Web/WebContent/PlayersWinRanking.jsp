@@ -65,8 +65,6 @@
 	String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
 	if(sel_page == null)
 		sel_page = "5";
-	int pageSize;
-	pageSize = Integer.parseInt(sel_page);
 %>
 <form name="selection" action="PlayersWinRanking.jsp" method="post">
 &nbsp;請選擇筆數&nbsp;
@@ -104,7 +102,7 @@
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
-			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家數量)</a></th>
+			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家編號)</a></th>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
 			&<%=CommonString.PARAMETER_ORDERBY%>=1
@@ -127,23 +125,25 @@
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
 <%
+	int pageSize = 5;
+	pageSize = Integer.parseInt(sel_page);
 	PlayersWinRanking data = new PlayersWinRanking();
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
 	if(currentPage == null)  
 	    currentPage = "1";
 	int pageIndex = Integer.parseInt(currentPage);  
-	List<Map<String, String>> list = data.getAllRecords(date,
-														orderby,
-														asc,
-														userID,
-														pageSize,
-														pageIndex);
 	int totalPages = data.getTotalPage(pageSize, date, userID);		
 	if(pageIndex < 1) {  
 	    pageIndex = 1;  
 	} else if(pageIndex > totalPages){  
 	    pageIndex = totalPages;
 	}
+	List<Map<String, String>> list = data.getAllRecords(date,
+														orderby,
+														asc,
+														userID,
+														pageSize,
+														pageIndex);
 	int nextPage = pageIndex + 1;
 	if(nextPage > totalPages)
 		nextPage = totalPages;
