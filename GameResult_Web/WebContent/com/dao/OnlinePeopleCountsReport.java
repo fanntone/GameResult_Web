@@ -50,14 +50,14 @@ public class OnlinePeopleCountsReport {
         	rs = psmt.executeQuery(sql);	
 			while(rs.next()) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put(CommonString.TIME, rs.getString(CommonString.TIME));
-			map.put(CommonString.gameid_array[1], rs.getString(CommonString.gameid_array[1]));
-			map.put(CommonString.gameid_array[2], rs.getString(CommonString.gameid_array[2]));
-			map.put(CommonString.gameid_array[3], rs.getString(CommonString.gameid_array[3]));
-			map.put(CommonString.gameid_array[4], rs.getString(CommonString.gameid_array[4]));
-			map.put(CommonString.gameid_array[5], rs.getString(CommonString.gameid_array[5]));
-			map.put(CommonString.gameid_array[6], rs.getString(CommonString.gameid_array[6]));
-			list.add(map);
+				map.put(CommonString.TIME, rs.getString(CommonString.TIME));
+				map.put(CommonString.gameid_array[1], rs.getString(CommonString.gameid_array[1]));
+				map.put(CommonString.gameid_array[2], rs.getString(CommonString.gameid_array[2]));
+				map.put(CommonString.gameid_array[3], rs.getString(CommonString.gameid_array[3]));
+				map.put(CommonString.gameid_array[4], rs.getString(CommonString.gameid_array[4]));
+				map.put(CommonString.gameid_array[5], rs.getString(CommonString.gameid_array[5]));
+				map.put(CommonString.gameid_array[6], rs.getString(CommonString.gameid_array[6]));
+				list.add(map);
 			}            
         } catch (SQLException e) {  
           e.printStackTrace();  
@@ -94,7 +94,7 @@ public class OnlinePeopleCountsReport {
     			   + CommonString.SQLQUERYEND;
         openConn();  
         try {  
-            psmt = conn.prepareStatement(sql);  
+            psmt = conn.prepareStatement(sql);
             rs = psmt.executeQuery();
             while(rs.next()){
                 avg = rs.getFloat(1);
