@@ -92,19 +92,19 @@
 			max_array[ii] = counts;
 		sum_array[ii] = sum_array[ii] + counts;
 		row_sum += counts;		
-%><th><%=counts%></th><%}%><th><%=row_sum/(float)12%></th></tr><%}%>
+%><th><%=counts%></th><%}%><th><%=data.FormatDecimal(row_sum/(float)12)%></th></tr><%}%>
 <tr style="background-color:#00BBFF"><th>MAX</th><%
 		float row_max = 0;
 		for(int j = 0; j < (month-1) ; j++){
 			String max_people = String.valueOf(max_array[j]);
 			row_max += max_array[j];
-%><th><%=max_people%></th><%}%><th><%=row_max/12%></th></tr>
+%><th><%=max_people%></th><%}%><th><%=data.FormatDecimal(row_max/12)%></th></tr>
 <tr style="background-color:#00BBFF"><th>AVG</th><%
 		float row_avg = 0;
 		for(int avg = 0; avg < (month-1) ; avg++){
-			String max_people = String.valueOf(sum_array[avg]/(float)time_list.size());
-			row_avg += Float.parseFloat(max_people);
-%><th><%=max_people%></th><%}%><th><%=row_avg/12%></th></tr>
+			String avg_people = String.valueOf(data.FormatDecimal(sum_array[avg]/(float)time_list.size()));
+			row_avg += Float.parseFloat(avg_people);
+%><th><%=avg_people%></th><%}%><th><%=data.FormatDecimal(row_avg/12)%></th></tr>
 </table>
 </body>
 </html>

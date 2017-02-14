@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ public class OnlinePeopleCountsReportYear {
 		openConn();
 		
         try {
-        	String sql_1 = "set @test_1:= '2017/02/07 00:00:00';";
+        	String sql_1 = "set @test_1:= '2017/02/13 00:00:00';";
         	String sql_2 = "select distinct Time(time) as Times from people_count where time between @test_1 and ADDDATE(@test_1, interval  1 DAY);";
         	psmt = conn.prepareStatement(sql_1);  
         	rs = psmt.executeQuery(sql_1);
@@ -87,4 +88,10 @@ public class OnlinePeopleCountsReportYear {
 			e.printStackTrace();
 		}
 	}
+	
+    public String FormatDecimal(float x) {
+    	DecimalFormat df = new DecimalFormat("#.#");
+    	String s = df.format(x);
+    	return s;
+    }
 }
