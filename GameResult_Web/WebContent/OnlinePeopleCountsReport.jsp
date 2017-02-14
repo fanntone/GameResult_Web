@@ -192,7 +192,7 @@
         <th><%=avg%></th><%}%>
    		<% if(size == 1 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_1.getValue(),
-   												date, "game01")%></th><%}%>
+   												date, CommonString.gameid_array[1])%></th><%}%>
    		<% if(size == 2 || sel == null || sel.equals(EnumSelectionList.SELECT_0.getValue())){ %>
    		<th><%=data.getAvgGamePeopleByGameID(EnumAllGamesList.GAME_2.getValue(),
    												date, CommonString.gameid_array[2])%></th><%}%>
