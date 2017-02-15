@@ -55,8 +55,6 @@ public class GameResultRecords {
     			   + " AND " +  "'" + dateTime +" 23:59:59' "
     			   + sql_gameID
     			   + sql_userID
-    			   + " AND roundStatus >= 1 "
-    			   + " order by orderID DESC "
     			   + " Limit "
     			   + pageSize*(pageIndex-1) + CommonString.DOTS + (pageSize)
     			   + CommonString.SQLQUERYEND;
@@ -69,9 +67,9 @@ public class GameResultRecords {
 	    		int length = rs_string.length();
 	    		int begin_index = 22;
 	    		if(rs_string.contains(CommonString.FREEGAME) && !rs_string.contains(CommonString.ENTERFREEGAME))
-	    			begin_index = 23;
+	    			begin_index = 22;
 	    		if(rs_string.contains(CommonString.BONUSGAME)&& !rs_string.contains(CommonString.ENTERBONUSGAME))
-	    			begin_index = 18;
+	    			begin_index = 19;
 	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length - begin_index));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
@@ -104,12 +102,11 @@ public class GameResultRecords {
     	String sql_userID = " " ;
     	if(!userID.equalsIgnoreCase("ALL"))
     		sql_userID = " AND userID = " + userID;
-        String sql = "select count(*) from resultsRecords "
+        String sql = " select count(1) from resultsRecords "
 	   		  	   + " WHERE resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
 	   		  	   + " AND " +  "'" + dateTime +" 23:59:59' "
 	   		  	   + sql_gameID
 	   		  	   + sql_userID
-	   		  	   + " AND roundStatus >= 1 "
 	   		  	   + CommonString.SQLQUERYEND;         
         try {  
             psmt = conn.prepareStatement(sql);  
