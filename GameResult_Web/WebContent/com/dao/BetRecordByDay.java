@@ -46,13 +46,14 @@ public class BetRecordByDay {
 	    	Map<String, String> map = new HashMap<String, String>();  
 	    	sql = " select count(distinct gameID) as Games, " 
 	    		+ " count(distinct userID) as Players, "
-	    		+ " count(betting > 0) as Rounds, "
+	    		+ " count(betting) as Rounds, "
 	    		+ " sum(betting) as Bet, "
 	    		+ " sum(results) as Win, "
 	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
 	    		+ " sum(results)/sum(betting)*100 as PayRate "
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+	    		+ " and betting > 0"
 	    		+ CommonString.SQLQUERYEND;
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
