@@ -44,28 +44,37 @@ public class BetRecordByDay {
     	String sql;
 	    try {
 	    	Map<String, String> map = new HashMap<String, String>();  
-	    	sql = " select count(distinct gameID) as Games, " 
+	    	sql = " select gameID as Games, " 
 	    		+ " count(distinct userID) as Players, "
-	    		+ " count(betting) as Rounds, "
 	    		+ " sum(betting) as Bet, "
 	    		+ " sum(results) as Win, "
 	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
 	    		+ " sum(results)/sum(betting)*100 as PayRate "
 	    		+ " from resultsRecords where Date(resultsDate) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-	    		+ " and betting > 0"
 	    		+ CommonString.SQLQUERYEND;
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();  
 	    	while(rs.next()) {  
 	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
 	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
-	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
 	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
 	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
 	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
 	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 	    	}
+	    	
+	    	sql = " select count(*) as Rounds "
+	    		+ " from resultsRecords where Date(resultsDate) = "
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+	    	    + " and betting > 0"
+	    	    + CommonString.SQLQUERYEND ;
+	    	psmt = conn.prepareStatement(sql);  
+	    	rs = psmt.executeQuery(); 
+	    	while(rs.next()) {  
+	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
+	    	}
+	    	
     		list.add(map);	    	
         } catch (SQLException e) {  
             e.printStackTrace();  

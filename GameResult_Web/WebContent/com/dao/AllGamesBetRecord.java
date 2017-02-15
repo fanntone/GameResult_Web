@@ -41,7 +41,7 @@ public class AllGamesBetRecord {
 	public List<Map<String, String>> getAllRecords(String date, String orderby, String asc) {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-    	String sql;
+    	String sql, sql_2, sql_3;
     	String orderby_str;
     	if(asc.equalsIgnoreCase("1"))
     		orderby_str = " order by " + orderby + " ASC;"; 
@@ -55,23 +55,38 @@ public class AllGamesBetRecord {
     		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit ,"
     		+ " sum(results)/sum(betting)*100 as PayRate "
     		+ " from resultsRecords where Date(resultsDate) = "
-    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-    		+ " GROUP by gameID "
-    		+ orderby_str;
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO;
+
+    	sql_2 = " select distinct gameID "
+        	  + " from resultsRecords where Date(resultsDate) = "
+        	  + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    	      + CommonString.SQLQUERYEND;
 	    try {
-	    	psmt = conn.prepareStatement(sql);  
-	    	rs = psmt.executeQuery();  
+	    	psmt = conn.prepareStatement(sql_2);  
+	    	rs = psmt.executeQuery();
+	    	String[] gameID_array = new String[50];
+	    	int i = 0;
 	    	while(rs.next()) {
-		    	Map<String, String> map = new HashMap<String, String>();  
-	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
-	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
-	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
-	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
-	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
-	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
-	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
-	    		list.add(map);	
-	    	}	    	
+	    		gameID_array[i] = rs.getString(CommonString.PARAMETER_GAMEID);
+	    		i++;	
+	    	}
+	    	for(int j = 0; j < i; j++) {
+	        	sql_3 = sql + " and gameID = " + gameID_array[j] + orderby_str;
+		    	psmt = conn.prepareStatement(sql_3);  
+		    	rs = psmt.executeQuery();  
+		    	while(rs.next()) {
+			    	Map<String, String> map = new HashMap<String, String>();  
+		    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
+		    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
+		    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
+		    		map.put(CommonString.BET, rs.getString(CommonString.BET));
+		    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
+		    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+		    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
+		    		list.add(map);	
+		    	}
+	    	}
+
         } catch (SQLException e) {  
             e.printStackTrace();  
         }
