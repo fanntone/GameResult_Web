@@ -44,7 +44,7 @@ public class BetRecordByDay {
     	String sql;
 	    try {
 	    	Map<String, String> map = new HashMap<String, String>();  
-	    	sql = " select gameID as Games, " 
+	    	sql = " select count(distinct gameID) as Games, " 
 	    		+ " count(distinct userID) as Players, "
 	    		+ " sum(betting) as Bet, "
 	    		+ " sum(results) as Win, "
