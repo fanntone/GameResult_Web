@@ -55,14 +55,15 @@ public class GameResultRecords {
     			   + " AND " +  "'" + dateTime +" 23:59:59' "
     			   + sql_gameID
     			   + sql_userID
+    			   + " order by orderID DESC "
     			   + " Limit "
-    			   + pageSize*(pageIndex-1) + CommonString.DOTS + (pageSize)
+    			   + pageSize*(pageIndex - 1) + CommonString.DOTS + (pageSize)
     			   + CommonString.SQLQUERYEND;
 	    try {
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();
 	    	while(rs.next()){  
-	    		Map<String, String> map=new HashMap<String, String>();
+	    		Map<String, String> map = new HashMap<String, String>();
 	    		String rs_string = rs.getString(CommonString.ROUNDUUID);
 	    		int length = rs_string.length();
 	    		int begin_index = 22;
@@ -112,7 +113,7 @@ public class GameResultRecords {
             psmt = conn.prepareStatement(sql);  
             rs = psmt.executeQuery();  
             while(rs.next()){
-                count=rs.getInt(1);
+                count = rs.getInt(1);
             }  
         } catch (SQLException e) {  
             e.printStackTrace();  
