@@ -43,39 +43,27 @@ public class BetRecordByDay {
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
 	    try {
-	    	Map<String, String> map = new HashMap<String, String>();  
-	    	sql = " select count(distinct gameID) as Games, " 
-	    		+ " count(distinct userID) as Players, "
-	    		+ " sum(betting) as Bet, "
-	    		+ " sum(results) as Win, "
-	    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
-	    		+ " sum(results)/sum(betting)*100 as PayRate "
-	    		+ " from resultsRecords where Date(resultsDate) = "
+	    	
+	    	sql = " select * " 
+	    		+ " from betRecordsByDay where Date(times) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+	    		+ " order by 1 DESC "
+	    		+ " Limit 1 "
 	    		+ CommonString.SQLQUERYEND;
 	    	psmt = conn.prepareStatement(sql);  
-	    	rs = psmt.executeQuery();  
-	    	while(rs.next()) {  
+	    	rs = psmt.executeQuery();
+	    	while(rs.next()) {
+	    		Map<String, String> map = new HashMap<String, String>();  
+	    		map.put(CommonString.TIMES, rs.getString(CommonString.TIMES));
 	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
 	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
+	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
 	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
 	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
 	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
 	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
-	    	}
-	    	
-	    	sql = " select count(*) as Rounds "
-	    		+ " from resultsRecords where Date(resultsDate) = "
-	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-	    	    + " and betting > 0"
-	    	    + CommonString.SQLQUERYEND ;
-	    	psmt = conn.prepareStatement(sql);  
-	    	rs = psmt.executeQuery(); 
-	    	while(rs.next()) {  
-	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
-	    	}
-	    	
-    		list.add(map);	    	
+	    		list.add(map);
+	    	}	    	
         } catch (SQLException e) {  
             e.printStackTrace();  
         }	    
