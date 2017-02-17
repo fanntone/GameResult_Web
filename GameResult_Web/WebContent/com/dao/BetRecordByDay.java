@@ -44,7 +44,10 @@ public class BetRecordByDay {
     	String sql;
 	    try {
 	    	
-	    	sql = " select *, count(distinct gameID) as Games " 
+	    	sql = " select *, " 
+	    		+ " (select count(distinct gameID) from betRecordsByDay where Date(times) = "
+	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO	
+	    		+ " ) as Games "
 	    		+ " from betRecordsByDay where Date(times) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		+ " order by 1 DESC "
