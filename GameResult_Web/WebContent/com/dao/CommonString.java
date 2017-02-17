@@ -75,5 +75,6 @@ public class CommonString {
 	public static final String DAYTIMEEND = " 23:59:59 ";
 	public static final String TIMEDATE_QUATO = "'";
 	public static final String SQLQUERYEND = ";";
-	public static final String DOTS = ",";	
+	public static final String DOTS = ",";
+	
 }

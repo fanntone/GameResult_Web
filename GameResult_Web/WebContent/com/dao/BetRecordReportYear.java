@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,47 +39,59 @@ public class BetRecordReportYear {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String year, String sel_gameID){
+	public List<Map<String, String>> getAllRecords(String year, String sel_gameID) {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
     	String sql_gameID = " and gameID = " + sel_gameID;
     	if(sel_gameID.equalsIgnoreCase("ALL"))
     		sql_gameID = "";
-    	sql = " select resultsDate as Month, "
-    		+ " count(distinct gameID) as Games, "
-    		+ " count(distinct userID) as Players, "
-    		+ " count(betting) as Rounds, "
-    		+ " sum(betting) as Bet, "
-    		+ " sum(results) as Win, "
-    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
-    		+ " sum(results)/sum(betting)*100 as PayRate "
-    		+ " from resultsRecords "
-    		+ " where resultsDate "
-    		+ " between '" + year + "/01/01 00:00:00' "
-    		+ " and '" + year + "/12/31 23:59:59' "
-    		+ sql_gameID
-    		+ " GROUP by Month(resultsDate)" 
-    		+ CommonString.SQLQUERYEND;
-	    try {
-	    	psmt = conn.prepareStatement(sql);  
-	    	rs = psmt.executeQuery();  
-	    	while(rs.next()) {
-		    	Map<String, String> map = new HashMap<String, String>();  
-	    		map.put(CommonString.MONTH, rs.getString(CommonString.MONTH).substring(5, 7));
-	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
-	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
-	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
-	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
-	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
-	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
-	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
-	    		list.add(map);
-	    	}	    	
-        } catch (SQLException e) {  
-            e.printStackTrace();  
-        }	    
+    	
+        for(int month = 1 ; month <= 12; month++) {
+        	sql = " select "
+    			+ " Month(times) as times,"
+    	    	+ " count(distinct gameID) as Games, "
+    	    	+ " sum(Players) as Players, "
+    	    	+ " sum(Rounds) as Rounds, "
+	    		+ " sum(Bet) as Bet, "
+    	    	+ " sum(Win) as Win, "
+    	    	+ " sum(Profit) as Profit, "
+    	    	+ " AVG(PayRate) as PayRate "
+    	    	+ " from betRecordsByDay "
+    	    	+ " where Year(times) = " + year
+    	    	+ " and Month(times) = " + month
+        		+ sql_gameID
+        		+ CommonString.SQLQUERYEND;
+    	    try {
+    	    	psmt = conn.prepareStatement(sql);  
+    	    	rs = psmt.executeQuery();
+    	    	while(rs.next()) {
+    		    	Map<String, String> map = new HashMap<String, String>();  
+    		    	if(rs.getString(CommonString.TIMES) == null)
+    		    		break;
+    	    		map.put(CommonString.TIMES, rs.getString(CommonString.TIMES));
+    	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
+    	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
+    	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
+    	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
+    	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
+    	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+    	    		float rtp = Float.valueOf(rs.getString(CommonString.PAYRATE));
+    	    		map.put(CommonString.PAYRATE, this.FormatDecimal(rtp));
+    	    		list.add(map);
+    	    	}	    	
+            } catch (SQLException e) {  
+                e.printStackTrace();  
+            }	
+        }
+   	
 	    closeConn();
 		return list;
 	}
+	
+    public String FormatDecimal(float x) {
+    	DecimalFormat df = new DecimalFormat("#.#");
+    	String s = df.format(x);
+    	return s;
+    }
 }

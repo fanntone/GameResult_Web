@@ -59,12 +59,12 @@ public class BetRecordReportMonth {
     	for(int day = 1; day <= max; day++) {
         	sql = " select *, "
     			+ " (select count(distinct gameID) "
-    	    	+ " from betRecordsByDay "
+    	    	+ " from betRecordsByFiveMins "
     	    	+ " where Year(times) = " + year
     	    	+ " and Month(times) = " + month
     	    	+ " and DAY(times) = " +  day
 	    		+ " ) as Games "
-    	    	+ " from betRecordsByDay "
+    	    	+ " from betRecordsByFiveMins "
     	    	+ " where Year(times) = " + year
     	    	+ " and Month(times) = " + month
     	    	+ " and DAY(times) = " +  day

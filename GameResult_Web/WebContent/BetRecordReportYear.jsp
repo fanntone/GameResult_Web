@@ -129,7 +129,7 @@
 	      	if(map.get(CommonString.PAYRATE) != null)
 	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
 	%>
-	<th><%=map.get(CommonString.MONTH)%></th>
+	<th><%=map.get(CommonString.TIMES)%></th>
 <%if(sel_gameID.equalsIgnoreCase(CommonString.ALL)){%>
 	<th><%=games%></th>
 <%}%>
