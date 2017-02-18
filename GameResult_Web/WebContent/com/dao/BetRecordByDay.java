@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +46,10 @@ public class BetRecordByDay {
 	    try {
 	    	
 	    	sql = " select *, " 
-	    		+ " (select count(distinct gameID) from betRecordsByDay where Date(times) = "
+	    		+ " (select count(distinct gameID) from betRecordsByFiveMins where Date(times) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO	
 	    		+ " ) as Games "
-	    		+ " from betRecordsByDay where Date(times) = "
+	    		+ " from betRecordsByFiveMins where Date(times) = "
 	    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		+ " order by 1 DESC "
 	    		+ " Limit 1 "
@@ -58,12 +59,12 @@ public class BetRecordByDay {
 	    	while(rs.next()) {
 	    		Map<String, String> map = new HashMap<String, String>();  
 	    		map.put(CommonString.TIMES, rs.getString(CommonString.TIMES));
-	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
-	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
-	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
-	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
-	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
-	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+	    		map.put(CommonString.GAMES, FormatDecimal(rs.getString(CommonString.GAMES)));
+	    		map.put(CommonString.PLAYERS, FormatDecimal(rs.getString(CommonString.PLAYERS)));
+	    		map.put(CommonString.ROUNDS, FormatDecimal(rs.getString(CommonString.ROUNDS)));
+	    		map.put(CommonString.BET, FormatDecimal(rs.getString(CommonString.BET)));
+	    		map.put(CommonString.WIN, FormatDecimal(rs.getString(CommonString.WIN)));
+	    		map.put(CommonString.PROFIT, FormatDecimal(rs.getString(CommonString.PROFIT)));
 	    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 	    		list.add(map);
 	    	}	    	
@@ -73,4 +74,10 @@ public class BetRecordByDay {
 	    closeConn();
 		return list;
 	}
+	
+    public String FormatDecimal(String x) {
+    	DecimalFormat df = new DecimalFormat("#,###");
+    	String s = df.format(Double.parseDouble(x));
+    	return s;
+    }
 }

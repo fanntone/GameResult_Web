@@ -49,7 +49,7 @@ public class BetRecordReportYear {
     	
         for(int month = 1 ; month <= 12; month++) {
         	sql = " select "
-    			+ " Month(times) as times,"
+    			+ " Month(times) as times, "
     	    	+ " count(distinct gameID) as Games, "
     	    	+ " sum(Players) as Players, "
     	    	+ " sum(Rounds) as Rounds, "
@@ -70,14 +70,14 @@ public class BetRecordReportYear {
     		    	if(rs.getString(CommonString.TIMES) == null)
     		    		break;
     	    		map.put(CommonString.TIMES, rs.getString(CommonString.TIMES));
-    	    		map.put(CommonString.GAMES, rs.getString(CommonString.GAMES));
-    	    		map.put(CommonString.PLAYERS, rs.getString(CommonString.PLAYERS));
-    	    		map.put(CommonString.ROUNDS, rs.getString(CommonString.ROUNDS));
-    	    		map.put(CommonString.BET, rs.getString(CommonString.BET));
-    	    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
-    	    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
+    	    		map.put(CommonString.GAMES, FormatDecimal(rs.getString(CommonString.GAMES)));
+    	    		map.put(CommonString.PLAYERS, FormatDecimal(rs.getString(CommonString.PLAYERS)));
+    	    		map.put(CommonString.ROUNDS, FormatDecimal(rs.getString(CommonString.ROUNDS)));
+    	    		map.put(CommonString.BET, FormatDecimal(rs.getString(CommonString.BET)));
+    	    		map.put(CommonString.WIN, FormatDecimal(rs.getString(CommonString.WIN)));
+    	    		map.put(CommonString.PROFIT, FormatDecimal(rs.getString(CommonString.PROFIT)));
     	    		float rtp = Float.valueOf(rs.getString(CommonString.PAYRATE));
-    	    		map.put(CommonString.PAYRATE, this.FormatDecimal(rtp));
+    	    		map.put(CommonString.PAYRATE, FormatDecimal(this.FormatDecimal(rtp)));
     	    		list.add(map);
     	    	}	    	
             } catch (SQLException e) {  
@@ -92,6 +92,12 @@ public class BetRecordReportYear {
     public String FormatDecimal(float x) {
     	DecimalFormat df = new DecimalFormat("#.#");
     	String s = df.format(x);
+    	return s;
+    }
+    
+    public String FormatDecimal(String x) {
+    	DecimalFormat df = new DecimalFormat("#,###");
+    	String s = df.format(Double.parseDouble(x));
     	return s;
     }
 }

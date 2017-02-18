@@ -123,27 +123,27 @@
 <tr>
 	<%
 		Map<String, String> map = null;
-		int games = 0;
-		int players = 0;
-		int rounds = 0;
-		int bet = 0;
-		int win = 0;
-		int profit = 0;
+		String games = "0";
+		String players = "0";
+		String rounds = "0";
+		String bet = "0";
+		String win = "0";
+		String profit = "0";
 		float rayrate = 0;
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
 	      	if(map.get(CommonString.GAMES) != null)
-	      		games = Integer.parseInt(map.get(CommonString.GAMES));
+	      		games = map.get(CommonString.GAMES);
 	      	if(map.get(CommonString.PLAYERS) != null)
-	      		players = Integer.parseInt(map.get(CommonString.PLAYERS));
+	      		players = map.get(CommonString.PLAYERS);
 	      	if(map.get(CommonString.ROUNDS) != null)
-	      		rounds = Integer.parseInt(map.get(CommonString.ROUNDS));
+	      		rounds = map.get(CommonString.ROUNDS);
 	      	if(map.get(CommonString.BET) != null)
-	      		bet = Integer.parseInt(map.get(CommonString.BET));
+	      		bet = map.get(CommonString.BET);
 	      	if(map.get(CommonString.WIN) != null)
-	      		win = Integer.parseInt(map.get(CommonString.WIN));
+	      		win = map.get(CommonString.WIN);
 	      	if(map.get(CommonString.PROFIT) != null)
-	      		profit = Integer.parseInt(map.get(CommonString.PROFIT));
+	      		profit = map.get(CommonString.PROFIT);
 	      	if(map.get(CommonString.PAYRATE) != null)
 	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));	      	
 	%>
