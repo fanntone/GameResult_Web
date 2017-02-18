@@ -57,14 +57,9 @@ public class PlayersWinRanking {
         String sub_query = " and userID = " + userID;
         if(userID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
-    	sql = " select userID, " 
-    		+ " count(betting) as Rounds, "
-    		+ " sum(betting) as Bet, "
-    		+ " sum(results) as Win, "
-    		+ " sum(betting)-sum(results) as Profit, "
-    		+ " sum(results)/sum(betting)*100 as PayRate "
-    		+ " from resultsRecords where Date(resultsDate) = "
-    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO 
+    	sql = " select * "
+    		+ " from PlayersWinRankingByDay where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
     		+ sub_query
     		+ " GROUP by userID "
     		+ orderby_str
@@ -83,7 +78,7 @@ public class PlayersWinRanking {
 	    		map.put(CommonString.PROFIT, FormatDecimal(rs.getString(CommonString.PROFIT)));
 	    		float rtp = Float.valueOf(rs.getString(CommonString.PAYRATE));
 	    		map.put(CommonString.PAYRATE, FormatDecimal(this.FormatDecimal(rtp)));
-	    		list.add(map);	
+	    		list.add(map);
 	    	}	    	
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,7 +93,7 @@ public class PlayersWinRanking {
         if(userID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
         String sql = " select count(distinct userID) as Players"
-        		   + " from resultsRecords where Date(resultsDate) = "
+        		   + " from PlayersWinRankingByDay where Date(times) = "
 	    		   + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		   + sub_query
 	    		   + CommonString.SQLQUERYEND;
