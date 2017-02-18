@@ -62,7 +62,7 @@ public class BetRecordReportMonth {
     	    	+ " from betRecordsByFiveMins "
     	    	+ " where Year(times) = " + year
     	    	+ " and Month(times) = " + month
-    	    	+ " and DAY(times) = " +  day
+    	    	+ " and DAY(times) = " + day
 	    		+ " ) as Games "
     	    	+ " from betRecordsByFiveMins "
     	    	+ " where Year(times) = " + year
