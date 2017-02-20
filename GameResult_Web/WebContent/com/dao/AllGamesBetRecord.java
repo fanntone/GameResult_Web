@@ -52,7 +52,7 @@ public class AllGamesBetRecord {
     		+ " count(betting) as Rounds, "
     		+ " sum(betting) as Bet, "
     		+ " sum(results) as Win, "
-    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit ,"
+    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
     		+ " sum(results)/sum(betting)*100 as PayRate "
     		+ " from resultsRecords where Date(resultsDate) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO;
@@ -82,7 +82,11 @@ public class AllGamesBetRecord {
 		    		map.put(CommonString.BET, rs.getString(CommonString.BET));
 		    		map.put(CommonString.WIN, rs.getString(CommonString.WIN));
 		    		map.put(CommonString.PROFIT, rs.getString(CommonString.PROFIT));
-		    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
+		    		String sum_bet = rs.getString(CommonString.BET);
+		    		if(sum_bet == null ||  sum_bet.equalsIgnoreCase("0") || sum_bet.equalsIgnoreCase(""))
+		    			map.put(CommonString.PAYRATE, "0");
+		    		else
+		    			map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
 		    		list.add(map);	
 		    	}
 	    	}
