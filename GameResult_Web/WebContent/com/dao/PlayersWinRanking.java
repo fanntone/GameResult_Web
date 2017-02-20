@@ -92,7 +92,7 @@ public class PlayersWinRanking {
         String sub_query = " and userID = " + userID;
         if(userID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
-        String sql = " select count(distinct userID) as Players"
+        String sql = " select count(*) as Players"
         		   + " from PlayersWinRankingByDay where Date(times) = "
 	    		   + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		   + sub_query
