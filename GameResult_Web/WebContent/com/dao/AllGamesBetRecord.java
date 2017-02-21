@@ -67,7 +67,8 @@ public class AllGamesBetRecord {
 		    		map.put(CommonString.BET, FormatDecimal(rs.getString(CommonString.BET)));
 		    		map.put(CommonString.WIN, FormatDecimal(rs.getString(CommonString.WIN)));
 		    		map.put(CommonString.PROFIT, FormatDecimal(rs.getString(CommonString.PROFIT)));
-		    		map.put(CommonString.PAYRATE, rs.getString(CommonString.PAYRATE));
+		    		float rtp = Float.valueOf(rs.getString(CommonString.PAYRATE));
+		    		map.put(CommonString.PAYRATE, FormatDecimal(this.FormatDecimal(rtp)));
 		    		list.add(map);
 		    	}
 
@@ -81,6 +82,12 @@ public class AllGamesBetRecord {
     public String FormatDecimal(String x) {
     	DecimalFormat df = new DecimalFormat("#,###");
     	String s = df.format(Double.parseDouble(x));
+    	return s;
+    }
+    
+    public String FormatDecimal(float x) {
+    	DecimalFormat df = new DecimalFormat("#.#");
+    	String s = df.format(x);
     	return s;
     }
 }
