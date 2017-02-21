@@ -58,8 +58,9 @@ public class PlayersWinRanking {
         if(userID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
     	sql = " select * "
-    		+ " from PlayersWinRankingByDay where Date(times) = "
+    		+ " from PlayersWinRankingByFiveMins where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+ " and times = (select Max(times) from PlayersWinRankingByFiveMins) "
     		+ sub_query
     		+ " GROUP by userID "
     		+ orderby_str
