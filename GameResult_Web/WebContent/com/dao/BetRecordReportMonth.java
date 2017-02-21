@@ -58,7 +58,7 @@ public class BetRecordReportMonth {
         else if (sel_month == 4 || sel_month == 6 || sel_month == 9 || sel_month == 11)
         	max = 30;
     	for(int day = 1; day <= max; day++) {
-        	sql = " select *, "
+        	sql = " select Date(times) as times, Players, Rounds, Bet, Win, Profit, PayRate,"
     			+ " (select count(distinct gameID) "
     	    	+ " from betRecordsByDay "
     	    	+ " where Year(times) = " + year
@@ -70,7 +70,7 @@ public class BetRecordReportMonth {
     	    	+ " and Month(times) = " + month
     	    	+ " and DAY(times) = " +  day
         		+ sql_gameID
-        		+ " group by Date(time) " 
+        		+ " group by Date(times) " 
         		+ CommonString.SQLQUERYEND;
     	    try {
     	    	psmt = conn.prepareStatement(sql);  
