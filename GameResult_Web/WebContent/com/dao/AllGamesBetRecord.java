@@ -45,12 +45,14 @@ public class AllGamesBetRecord {
     	String sql;
     	String orderby_str;
     	if(asc.equalsIgnoreCase("1"))
-    		orderby_str = " order by " + orderby + " ASC;"; 
+    		orderby_str = " order by " + orderby + " DESC "; 
     	else
-    		orderby_str = " order by " + orderby + " DESC;";
-    	sql = " select * " 
-    		+ " from betRecordsByDay where Date(times) = "
+    		orderby_str = " order by " + orderby + " DESC ";
+    	sql = " select Date(times) as times, "
+    		+ " gameID, Players, Rounds, Bet, Win, Profit, PayRate "
+    		+ " from betRecordsByFiveMins where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+ " and times = (select Max(times) from betRecordsByFiveMins) "
     		+ orderby_str
     		+ CommonString.SQLQUERYEND;
 	    try {
