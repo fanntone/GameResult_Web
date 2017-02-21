@@ -68,10 +68,14 @@ public class GameResultRecords {
 	    		int length = rs_string.length();
 	    		int begin_index = 22;
 	    		if(rs_string.contains(CommonString.FREEGAME) && !rs_string.contains(CommonString.ENTERFREEGAME))
-	    			begin_index = 22;
+	    			begin_index = rs_string.indexOf(CommonString.FREEGAME);
+	    		else if(rs_string.contains(CommonString.FREEGAME) && rs_string.contains(CommonString.ENTERFREEGAME))
+	    			begin_index = rs_string.indexOf(CommonString.ENTERFREEGAME);
 	    		if(rs_string.contains(CommonString.BONUSGAME)&& !rs_string.contains(CommonString.ENTERBONUSGAME))
-	    			begin_index = 19;
-	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(length - begin_index));  
+	    			begin_index = rs_string.indexOf(CommonString.BONUSGAME);
+	    		else if(rs_string.contains(CommonString.BONUSGAME)&& rs_string.contains(CommonString.ENTERBONUSGAME))
+	    			begin_index = rs_string.indexOf(CommonString.ENTERBONUSGAME);
+	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(begin_index, length));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
 	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
