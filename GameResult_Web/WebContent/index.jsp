@@ -31,21 +31,18 @@ th, td {
 		<th><a href = "OnlinePeopleCountsReport.jsp" target = "_blank">遊戲在線人數日報表</a></th>
 		<th><a href = "OnlinePeopleCountsReportMonth.jsp" target = "_blank">遊戲在線人數月報表</a></th>
 		<th><a href = "OnlinePeopleCountsReportYear.jsp" target = "_blank">遊戲在線人數年報表</a></th>
-		<th><a href = "GameResultRecords.jsp" target = "_blank">賽果查詢</a></th>
 	</tr>
 	<tr>
+		<th><a href = "GameResultRecords.jsp" target = "_blank">賽果查詢</a></th>
 		<th><a href = "BetRecordByDay.jsp" target = "_blank">每日平台投注查詢</a></th>
-		<th><a href = "AllGamesBetRecord.jsp" target = "_blank">各遊戲投注查詢</a></th>
-		<th><a href = "BettingListForEachGame.jsp" target = "_blank">遊戲日戰績查詢</a></th>
-		<th><a href = "PlayersWinRanking.jsp" target = "_blank">玩家輸贏排行(每日)</a></th>
+		<th><a href = "AllGamesBetRecord.jsp" target = "_blank">各遊戲投注查詢</a></th>	
 		<th><a href = "BetRecordReportMonth.jsp" target = "_blank">投注金額月報表</a></th>
 		<th><a href = "BetRecordReportYear.jsp" target = "_blank">投注金額年報表</a></th>
 	</tr>
 	<tr>
+		<th><a href = "BettingListForEachGame.jsp" target = "_blank">遊戲日戰績查詢</a></th>
 		<th><a href = "PlayersMoneyChange.jsp" target = "_blank">玩家金幣異動查詢</a></th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th><a href = "PlayersWinRanking.jsp" target = "_blank">玩家輸贏排行(每日)</a></th>
 		<th></th>
 		<th></th>
 	</tr>
