@@ -52,7 +52,9 @@ public class AllGamesBetRecord {
     		+ " gameID, Players, Rounds, Bet, Win, Profit, PayRate "
     		+ " from betRecordsByFiveMins where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-    		+ " and times = (select Max(times) from betRecordsByFiveMins) "
+    		+ " and times = (select Max(times) from betRecordsByFiveMins where Date(times) = " 
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+  ") "
     		+ orderby_str
     		+ CommonString.SQLQUERYEND;
 	    try {

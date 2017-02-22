@@ -60,7 +60,9 @@ public class PlayersWinRanking {
     	sql = " select * "
     		+ " from PlayersWinRankingByFiveMins where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-    		+ " and times = (select Max(times) from PlayersWinRankingByFiveMins) "
+    		+ " and times = (select Max(times) from PlayersWinRankingByFiveMins where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+ ") "
     		+ sub_query
     		+ " GROUP by userID "
     		+ orderby_str
@@ -93,7 +95,7 @@ public class PlayersWinRanking {
         String sub_query = " and userID = " + userID;
         if(userID.equalsIgnoreCase(CommonString.ALL))
         	sub_query = " ";
-        String sql = " select count(*) as Players"
+        String sql = " select count(distinct userID) as Players"
         		   + " from PlayersWinRankingByFiveMins where Date(times) = "
 	    		   + CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
 	    		   + sub_query
