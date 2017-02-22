@@ -59,15 +59,12 @@ public class BettingListForEachGame {
     	String sub_query = " and userID = " + userID;
     	if(userID.equalsIgnoreCase("ALL"))
     		sub_query = " ";
-    	sql = " select userID, " 
-    		+ " count(betting) as Rounds, "
-    		+ " sum(betting) as Bet, "
-    		+ " sum(results) as Win, "
-    		+ " sum(CONVERT(betting, SIGNED) - CONVERT(results, SIGNED)) as Profit, "
-    		+ " sum(results)/sum(betting)*100 as PayRate "
-    		+ " from resultsRecords where Date(resultsDate) = "
+    	sql = " select * " 
+    		+ " from PlayersWinRankingByFiveMins where Date(times) = "
     		+ sql_quato + date + sql_quato 
     		+ " and gameID = " +  gameID
+    		+ " and times = (select Max(times) from PlayersWinRankingByFiveMins where Date(times) =  "
+    		+ sql_quato + date + sql_quato + ") "
     		+ sub_query
     		+ " GROUP by userID "
     		+ orderby_str
