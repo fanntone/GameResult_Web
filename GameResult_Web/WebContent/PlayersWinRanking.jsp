@@ -101,27 +101,27 @@
 <tr>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
-			&<%=CommonString.PARAMETER_ORDERBY%>=1
+			&<%=CommonString.PARAMETER_ORDERBY%>=2
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Players(玩家編號)</a></th>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
-			&<%=CommonString.PARAMETER_ORDERBY%>=2
+			&<%=CommonString.PARAMETER_ORDERBY%>=4
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Rounds(投注次數)</a></th>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
-			&<%=CommonString.PARAMETER_ORDERBY%>=3
+			&<%=CommonString.PARAMETER_ORDERBY%>=5
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Bet(玩家投注金)</a></th>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
-			&<%=CommonString.PARAMETER_ORDERBY%>=4
+			&<%=CommonString.PARAMETER_ORDERBY%>=6
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Win(玩家贏金)</a></th>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
-			&<%=CommonString.PARAMETER_ORDERBY%>=5
+			&<%=CommonString.PARAMETER_ORDERBY%>=7
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Profit(官方利潤)</a></th>
 	<th><a href="PlayersWinRanking.jsp
 			?<%=CommonString.PARAMETER_DATE%>=<%=date%>
-			&<%=CommonString.PARAMETER_ORDERBY%>=6
+			&<%=CommonString.PARAMETER_ORDERBY%>=8
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
 <%
@@ -160,7 +160,7 @@
 		String bet = "0";
 		String win = "0";
 		String profit = "0";
-		float rayrate = 0;
+		String rayrate = "0";
 	  	for(int i = 0; i < list.size(); i++) {  
 	      	map = (Map<String, String>)list.get(i);
 	      	if(map.get(CommonString.PLAYERS) != null)
@@ -174,7 +174,7 @@
 	      	if(map.get(CommonString.PROFIT) != null)
 	      		profit = map.get(CommonString.PROFIT);
 	      	if(map.get(CommonString.PAYRATE) != null)
-	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
+	      		rayrate = map.get(CommonString.PAYRATE);
 	%>
 	<th><%=players%></th>
 	<th><%=rounds%></th>
