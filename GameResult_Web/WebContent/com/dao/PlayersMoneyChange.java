@@ -49,13 +49,12 @@ public class PlayersMoneyChange {
 	        if(userID.equalsIgnoreCase(CommonString.ALL))
 	        	sub_query = " ";
 	    	String sql = " select gameID, "
-	    			   + " Counts "
-	    			   + " from betRecordsByDay "
-	    			   + " where times between " 
-	    			   + CommonString.TIMEDATE_QUATO + sel_year + "/" + sel_month + "/" + Day + CommonString.DAYTIMEBRGIN + CommonString.TIMEDATE_QUATO
-	    			   + " and " + CommonString.TIMEDATE_QUATO + sel_year + "/" + sel_month + "/" + Day + CommonString.DAYTIMEEND + CommonString.TIMEDATE_QUATO
+	    			   + " sum(Counts) as counts"
+	    			   + " from PlayersWinRankingByFiveMins "
+	    			   + " where times = (select Max(times) from PlayersWinRankingByFiveMins where Date(times) = " 
+	    			   + "'" + sel_year + "/" + sel_month + "/" + Day + "') "
 	    			   + sub_query
-	    			   + " group by gameID ";
+	    			   + " group by gameID, userID ";
 	    	sql += CommonString.SQLQUERYEND;
 	    	psmt = conn.prepareStatement(sql);  
 	    	rs = psmt.executeQuery();
