@@ -43,16 +43,19 @@ public class BetRecordByDay {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
-    	sql = " select *, " 
-    		+ " (select count(distinct gameID) from betRecordsByFiveMins where Date(times) = "
-    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO	
-    		+ " ) as Games "
-    		+ " from betRecordsByFiveMins where Time(times) = "
-    		+ " (select Max(Time(times)) from betRecordsByFiveMins where Date(times) = "
+    	sql = " select times, "
+    		+ " count(distinct gameID) as Games, "
+    		+ " sum(Players) as Players, "
+    		+ " sum(Rounds) as Rounds, "
+    		+ " sum(Bet) as Bet, "
+    		+ " sum(Win) as Win, "
+    		+ " sum(Profit) as Profit, "
+    		+ " AVG(PayRate) as PayRate "
+    		+ " from betRecordsByFiveMins where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO 
+    		+ " and times = "
+    		+ " (select Max(times) from betRecordsByFiveMins where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO + ") "
-    		+ " and Date(times) = "
-    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
-    		+ " order by 1 DESC "
     		+ CommonString.SQLQUERYEND;
 	    try {
 	    	psmt = conn.prepareStatement(sql);  

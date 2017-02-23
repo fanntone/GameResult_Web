@@ -66,7 +66,7 @@ public class GameResultRecords {
 	    		Map<String, String> map = new HashMap<String, String>();
 	    		String rs_string = rs.getString(CommonString.ROUNDUUID);
 	    		int length = rs_string.length();
-	    		int begin_index = 22;
+	    		int begin_index = rs_string.indexOf(CommonString.MAINGAME);
 	    		if(rs_string.contains(CommonString.FREEGAME) && !rs_string.contains(CommonString.ENTERFREEGAME))
 	    			begin_index = rs_string.indexOf(CommonString.FREEGAME);
 	    		else if(rs_string.contains(CommonString.FREEGAME) && rs_string.contains(CommonString.ENTERFREEGAME))

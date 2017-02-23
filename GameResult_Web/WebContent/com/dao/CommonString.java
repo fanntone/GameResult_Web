@@ -47,6 +47,7 @@ public class CommonString {
 	public static final String ALL = "ALL";
 	public static final String DEFAULTMONTH = "01";
 	public static final String DEFAULTYEAR = "2017";
+	public static final String MAINGAME = "MainGame";
 	public static final String FREEGAME = "FreeGame";
 	public static final String BONUSGAME = "BonusGame";
 	public static final String ENTERFREEGAME = "EnterFreeGame";

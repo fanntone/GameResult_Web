@@ -133,7 +133,7 @@
 	}
 	List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userID, date, sel_gameID);
 %>
-<table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width="1280">
+<table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width="1440">
 	<tr>
 		<th>注單號碼(BG)</th>
 		<th>時間</th>
@@ -163,7 +163,7 @@
           <th><%=map.get(CommonString.LINE)%></th>
           <th><%=map.get(CommonString.RESULTS)%></th>
           <th><%=map.get(CommonString.AGENT)%></th>
-          <th width="30%">
+          <th width="35%">
           <%
           		String jsonstring = map.get(CommonString.RESULTSPARAMS);
           		if(jsonstring.contains("Wheel")) {
