@@ -56,7 +56,7 @@ public class GameResultRecords {
     			   + " AND " +  "'" + dateTime + " 23:59:59' "
     			   + sql_gameID
     			   + sql_userID
-    			   + " order by resultsDate DESC "
+    			   + " order by resultsDate desc , roundUUID desc"
     			   + " Limit "
     			   + pageSize*(pageIndex - 1) + CommonString.DOTS + (pageSize)
     			   + CommonString.SQLQUERYEND;
