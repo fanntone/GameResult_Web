@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;  
 import java.sql.PreparedStatement;  
 import java.sql.ResultSet;  
-import java.sql.SQLException;  
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;  
 import java.util.HashMap;  
 import java.util.List;  
@@ -52,7 +53,7 @@ public class GameResultRecords {
     		sql_userID = " AND userID = " + userID;
     	String sql = " select * from resultsRecords "
     			   + " WHERE resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
-    			   + " AND " +  "'" + dateTime +" 23:59:59' "
+    			   + " AND " +  "'" + dateTime + " 23:59:59' "
     			   + sql_gameID
     			   + sql_userID
     			   + " order by resultsDate DESC "
@@ -78,9 +79,9 @@ public class GameResultRecords {
 	    		map.put(CommonString.ROUNDUUID, rs.getString(CommonString.ROUNDUUID).substring(begin_index, length));  
 	    		map.put(CommonString.PAREMETER_USERID, rs.getString(CommonString.PAREMETER_USERID));
 	    		map.put(CommonString.PARAMETER_GAMEID, rs.getString(CommonString.PARAMETER_GAMEID));
-	    		map.put(CommonString.BETTING, rs.getString(CommonString.BETTING));
+	    		map.put(CommonString.BETTING, FormatDecimal(rs.getString(CommonString.BETTING)));
 	    		map.put(CommonString.LINE, rs.getString(CommonString.LINE));
-	    		map.put(CommonString.RESULTS, rs.getString(CommonString.RESULTS));
+	    		map.put(CommonString.RESULTS, FormatDecimal(rs.getString(CommonString.RESULTS)));
 	    		map.put(CommonString.ROUNDSTATUS, rs.getString(CommonString.ROUNDSTATUS));  
 	    		map.put(CommonString.PRIZERESULTS, rs.getString(CommonString.PRIZERESULTS));
 	    		map.put(CommonString.BEFOREBALANCE, rs.getString(CommonString.BEFOREBALANCE));
@@ -109,7 +110,7 @@ public class GameResultRecords {
     		sql_userID = " AND userID = " + userID;
         String sql = " select count(1) from resultsRecords "
 	   		  	   + " WHERE resultsDate BETWEEN " + "'" + dateTime +" 00:00:00'"
-	   		  	   + " AND " +  "'" + dateTime +" 23:59:59' "
+	   		  	   + " AND " +  "'" + dateTime + " 23:59:59' "
 	   		  	   + sql_gameID
 	   		  	   + sql_userID
 	   		  	   + CommonString.SQLQUERYEND;         
@@ -131,5 +132,17 @@ public class GameResultRecords {
         if(pageSize > totalPage)
         	return 1;
         return (totalPage%pageSize == 0)?(totalPage/pageSize):(totalPage/pageSize + 1);
-    }  
+    }
+    
+    public String FormatDecimal(String x) {
+    	DecimalFormat df = new DecimalFormat("#,###");
+    	String s = df.format(Double.parseDouble(x));
+    	return s;
+    }
+    
+    public String FormatDecimal(float x) {
+    	DecimalFormat df = new DecimalFormat("#.#");
+    	String s = df.format(x);
+    	return s;
+    }
 }
