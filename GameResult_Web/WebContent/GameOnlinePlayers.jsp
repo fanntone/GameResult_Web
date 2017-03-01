@@ -86,7 +86,33 @@
 	    pageIndex = totalPages;  
 	}
 	List<Map<String, String>> list = data.getAllByPage(pageSize, pageIndex, gameID, userID);
+
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+	
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
 %>
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=1
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;首頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;上一頁</a>  
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;下一頁</a>
+<a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>
+		&<%=CommonString.PAREMETER_USERID%>=<%=userID%>">&nbsp;末頁</a>
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	    <th>玩家編號(useID)</th>
@@ -109,15 +135,7 @@
     </tr>  
 	<%}%>
 </table>
-<%
-	int nextPage = pageIndex + 1;
-	if(nextPage > totalPages)
-		nextPage = totalPages;
-	
-	int upPage = pageIndex - 1;
-	if(upPage < 1)
-		upPage = 1;
-%>
+
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="GameOnlinePlayers.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
 		&<%=CommonString.PARAMETER_PAGEINDEX%>=1

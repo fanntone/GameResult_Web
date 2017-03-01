@@ -81,7 +81,29 @@ document.selection.submit();
 	    pageIndex = totalPages;  
 	}
 	List<Map<String, String>> list = data.getAllempByPage(pageSize, pageIndex, gameID);
+
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+	
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
 %>
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1
+	&<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;首頁</a>
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>
+	&<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;上一頁</a>  
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>
+	&<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;下一頁</a>
+<a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>
+	&<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=gameID%>">&nbsp;末頁</a>
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 	<tr>
 	    <th>玩家編號(useID)</th>
@@ -104,15 +126,7 @@ document.selection.submit();
     </tr>  
 	<%}%>
 </table>
-<%
-	int nextPage = pageIndex + 1;
-	if(nextPage > totalPages)
-		nextPage = totalPages;
-	
-	int upPage = pageIndex - 1;
-	if(upPage < 1)
-		upPage = 1;
-%>
+
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="OnlineMember.jsp?<%=CommonString.PARAMETER_PAGEINDEX%>=1
 	&<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>

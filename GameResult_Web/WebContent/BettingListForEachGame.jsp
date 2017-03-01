@@ -125,6 +125,59 @@
   });
 </script>
 <br>
+<%
+	BettingListForEachGame data = new BettingListForEachGame();
+	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
+	if(currentPage == null)  
+	    currentPage = "1";
+	int pageIndex = Integer.parseInt(currentPage);  
+	List<Map<String, String>> list = data.getAllRecords(date,
+														sel_gameID,
+														orderby,
+														asc,
+														userID,
+														pageSize,
+														pageIndex);
+	int totalPages = data.getTotalPage(pageSize, date, sel_gameID, userID);	 	
+	if(pageIndex < 1) {  
+	    pageIndex = 1;  
+	} else if(pageIndex > totalPages){  
+	    pageIndex = totalPages;  
+	}
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
+
+%>
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
+		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+		&<%=CommonString.PARAMETER_ORDERBY%>=1
+		&<%=CommonString.PARAMETER_ASC%>=<%=asc%>
+		&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center;" rules="all" cellpadding='5'>
 <tr>
 	<th><a href="BettingListForEachGame.jsp
@@ -164,32 +217,6 @@
 			&<%=CommonString.PARAMETER_ORDERBY%>=8
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate出獎率(%)</a></th>
 </tr>
-<%
-	BettingListForEachGame data = new BettingListForEachGame();
-	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-	if(currentPage == null)  
-	    currentPage = "1";
-	int pageIndex = Integer.parseInt(currentPage);  
-	List<Map<String, String>> list = data.getAllRecords(date,
-														sel_gameID,
-														orderby,
-														asc,
-														userID,
-														pageSize,
-														pageIndex);
-	int totalPages = data.getTotalPage(pageSize, date, sel_gameID, userID);	 	
-	if(pageIndex < 1) {  
-	    pageIndex = 1;  
-	} else if(pageIndex > totalPages){  
-	    pageIndex = totalPages;  
-	}
-	int nextPage = pageIndex + 1;
-	if(nextPage > totalPages)
-		nextPage = totalPages;
-	int upPage = pageIndex - 1;
-	if(upPage < 1)
-		upPage = 1;
-%>
 <tr>
 	<%
 		Map<String, String> map = null;

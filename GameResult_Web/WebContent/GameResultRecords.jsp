@@ -117,6 +117,7 @@
     	$("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
   	});
 </script>
+
 <%
 	int pageSize = 5;
 	pageSize = Integer.parseInt(sel);
@@ -132,7 +133,37 @@
 	    pageIndex = totalPages;  
 	}
 	List<Map<String, String>> list = ed.getAllRecordsByPage(pageSize, pageIndex, userID, date, sel_gameID);
+	int nextPage = pageIndex + 1;
+	if(nextPage > totalPages)
+		nextPage = totalPages;
+	
+	int upPage = pageIndex - 1;
+	if(upPage < 1)
+		upPage = 1;
 %>
+<p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=1">&nbsp;首頁</a>
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=upPage%>">&nbsp;上一頁</a>  
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=nextPage%>">&nbsp;下一頁</a>
+<a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
+	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
+	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
+	&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
+	&<%=CommonString.PARAMETER_PAGEINDEX%>=<%=totalPages%>">&nbsp;末頁</a>
+到第&nbsp;<input name=<%=CommonString.PARAMETER_PAGEINDEX%> id=<%=CommonString.PARAMETER_PAGEINDEX%> type="text" value=<%=pageIndex%>>頁
+
 <table style="border:1px #FFAC55 solid; padding:1px; text-align:center; font-size:18px;" rules="all" cellpadding='5' width="1440">
 	<tr>
 		<th>注單號碼(BG)</th>
@@ -182,15 +213,7 @@
       </tr>  
 	<%}%>
 </table>
-<%
-	int nextPage = pageIndex + 1;
-	if(nextPage > totalPages)
-		nextPage = totalPages;
-	
-	int upPage = pageIndex - 1;
-	if(upPage < 1)
-		upPage = 1;
-%>
+
 <p style="color:red">當前頁數:<%=pageIndex%>/<%=totalPages%>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
