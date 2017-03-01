@@ -57,12 +57,15 @@ public class BettingListForEachGame {
     		orderby_str = " order by " + orderby + " DESC ";
     	
     	String sub_query = " and userID = " + userID;
+    	String sub_query2 = " and gameID = " + gameID;
     	if(userID.equalsIgnoreCase("ALL"))
     		sub_query = " ";
+    	if(gameID.equalsIgnoreCase("ALL"))
+    		sub_query2 = " ";
     	sql = " select * " 
     		+ " from PlayersWinRankingByFiveMins where Date(times) = "
     		+ sql_quato + date + sql_quato 
-    		+ " and gameID = " +  gameID
+    		+ sub_query2
     		+ " and times = (select Max(times) from PlayersWinRankingByFiveMins where Date(times) =  "
     		+ sql_quato + date + sql_quato + ") "
     		+ sub_query
@@ -91,15 +94,18 @@ public class BettingListForEachGame {
 		return list;
 	}
 	
-    public int countRs(String date, String gameid, String userID){  
+    public int countRs(String date, String gameID, String userID){  
         int count = 0;
     	String sub_query = " and userID = " + userID;
+    	String sub_query2 = " and gameID = " + gameID;
     	if(userID.equalsIgnoreCase(CommonString.ALL))
     		sub_query = " ";
+    	if(gameID.equalsIgnoreCase("ALL"))
+    		sub_query2 = " ";    	
         String sql = "select count(distinct userID) as Players"
         		   + " from resultsRecords where Date(resultsDate) = "
 	    		   + sql_quato + date + sql_quato 
-	    		   + " AND gameID = " + gameid
+	    		   + sub_query2
 	    		   + sub_query
 	    		   + CommonString.SQLQUERYEND;
         openConn();  

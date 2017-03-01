@@ -57,8 +57,8 @@
 	else
 		reorder = "1";
 	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-	if(sel_gameID == null)
-		sel_gameID = EnumAllGamesList.GAME_1.getValue();
+	if(sel_gameID == null || sel_gameID == "")
+		sel_gameID = EnumAllGamesList.GAME_0.getValue();
 	String date = request.getParameter(CommonString.PARAMETER_DATE);
 	if(date == null || date == "") {
 		java.util.Date c_date = new java.util.Date();
@@ -74,6 +74,9 @@
 <form name="selection" action="BettingListForEachGame.jsp" method="post">
 &nbsp;½Ð¿ï¾Ü¹CÀ¸&nbsp;
 <select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
+<option value=<%=EnumAllGamesList.GAME_0.getValue()%>
+	<%if (sel_gameID == null || sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>		
 <option value=<%=EnumAllGamesList.GAME_1.getValue()%>
 	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.GAME_1.getValue())) {%>
 		selected <%}%>><%=EnumAllGamesList.GAME_1.getValue()%></option>		
