@@ -141,7 +141,7 @@
 	if(upPage < 1)
 		upPage = 1;
 %>
-<p style="color:red">讽玡计:<%=pageIndex%>/<%=totalPages%>
+<p style="color:red">&nbsp;讽玡计:<%=pageIndex%>/<%=totalPages%>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>
@@ -214,7 +214,7 @@
 	<%}%>
 </table>
 
-<p style="color:red">讽玡计:<%=pageIndex%>/<%=totalPages%>
+<p style="color:red">&nbsp;讽玡计:<%=pageIndex%>/<%=totalPages%>
 <a href="GameResultRecords.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel%>
 	&<%=CommonString.PARAMETER_DATE%>=<%=date%>
 	&<%=CommonString.PAREMETER_USERID%>=<%=userID%>

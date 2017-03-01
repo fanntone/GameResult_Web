@@ -152,7 +152,7 @@
 		upPage = 1;
 
 %>
-<p style="color:red">讽玡计:<%=pageIndex%>/<%=totalPages%>
+<p style="color:red">&nbsp;讽玡计:<%=pageIndex%>/<%=totalPages%>
 <a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
@@ -251,7 +251,7 @@
 </tr>
 <%}%>
 </table>
-<p style="color:red">讽玡计:<%=pageIndex%>/<%=totalPages%>
+<p style="color:red">&nbsp;讽玡计:<%=pageIndex%>/<%=totalPages%>
 <a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_SELPAGESIZE%>=<%=sel_page%>
 		&<%=CommonString.PARAMETER_GAMEID%>=<%=sel_gameID%>
 		&<%=CommonString.PARAMETER_DATE%>=<%=date%>
