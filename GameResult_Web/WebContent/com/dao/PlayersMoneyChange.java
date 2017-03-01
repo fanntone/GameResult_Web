@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 public class PlayersMoneyChange {
 	private Connection conn = null;  
@@ -90,4 +91,13 @@ public class PlayersMoneyChange {
 	    closeConn();
 		return list;
 	}
+	
+    public String FormatDecimal(String x) {
+    	if(x == null)
+    		return "0";
+    	DecimalFormat df = new DecimalFormat("#,###");
+    	String s = df.format(Double.parseDouble(x));
+    	return s;
+    }
+
 }

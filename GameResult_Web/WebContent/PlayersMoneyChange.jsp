@@ -106,13 +106,13 @@
 %>
 <tr>
 	<th><%=sel_month%>/<%=day%></th>
-	<th><%=list[0]%></th>
-	<th><%=list[1]%></th>
-	<th><%=list[2]%></th>
-	<th><%=list[3]%></th>
-	<th><%=list[4]%></th>
-	<th><%=list[5]%></th>
-	<th><%=list[6]%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[0]))%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[1]))%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[2]))%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[3]))%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[4]))%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[5]))%></th>
+	<th><%=data.FormatDecimal(String.valueOf(list[6]))%></th>
 </tr>
 <%}%>
 </table>
