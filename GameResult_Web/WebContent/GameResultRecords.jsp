@@ -39,6 +39,7 @@
 	    display: inline-block;
 	    border-bottom: 1px dotted black;
 	}
+	
 	.tooltip .tooltiptext {
 	    visibility: hidden;
 	    background-color: #555;
@@ -49,11 +50,11 @@
 	    position: absolute;
 	    z-index: 1;
 	    bottom: 125%;
-	    left: 50%;
-	    margin-left: -60px;
+	    left: 50%;	    
 	    opacity: 0;
 	    transition: opacity 1s;
 	}
+	
 	.tooltip .tooltiptext::after {
 	    content: "";
 	    position: absolute;
@@ -63,16 +64,17 @@
 	    border-width: 5px;
 	    border-style: solid;
 	    border-color: #555 transparent transparent transparent;
-	}	
+	}
+	
 	.tooltip:hover .tooltiptext {
 	    visibility: visible;
 	    opacity: 1;
-}
+	}
 </style>
 </head>
 <body>
 <script>
-	function change()	{
+	function change(){
 		document.selection.submit();
 	}
 </script>
@@ -242,19 +244,19 @@
 	  			}
   			out.println(text);
         	}
+       		String tipString = "";
+   			if(jsonstring.contains("Lines")) {
+       			GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);      			
+       			tipString = ps.Lines.replace("@", "<br />");
+   			}    
         %>
-	    <div class="tooltip">Detail
-       		<span class="tooltiptext">
-       		<%
-       			if(jsonstring.contains("Lines")) {
-           			GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
-           			out.println(ps.Lines);
-       			}       			
-       		%>
+	    <div class="tooltip" >Detail
+       		<span class="tooltiptext" style="width:200px; margin-left:-100px;">
+       		<%=tipString%>
             </span>
        	</div>
-        </th>     
-    </tr>  
+        </th>
+    </tr>
 	<%}%>
 </table>
 
