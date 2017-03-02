@@ -112,37 +112,35 @@
 			&<%=CommonString.PARAMETER_ORDERBY%>=7
 			&<%=CommonString.PARAMETER_ASC%>=<%=reorder%>">Pay Rate¥X¼ú²v(%)</a></th>
 </tr>
+<tr>
 <%
 	AllGamesBetRecord data = new AllGamesBetRecord();
 	List<Map<String, String>> list = data.getAllRecords(date, orderby, asc, sel_gameID);
+	Map<String, String> map = null;
+	String games = "0";
+	String players = "0";
+	String rounds = "0";
+	String bet = "0";
+	String win = "0";
+	String profit = "0";
+	float rayrate = 0;
+  	for(int i = 0; i < list.size(); i++) {  
+      	map = (Map<String, String>)list.get(i);
+      	if(map.get(CommonString.PARAMETER_GAMEID) != null)
+      		games = map.get(CommonString.PARAMETER_GAMEID);
+      	if(map.get(CommonString.PLAYERS) != null)
+      		players = map.get(CommonString.PLAYERS);
+      	if(map.get(CommonString.ROUNDS) != null)
+      		rounds = map.get(CommonString.ROUNDS);
+      	if(map.get(CommonString.BET) != null)
+      		bet = map.get(CommonString.BET);
+      	if(map.get(CommonString.WIN) != null)
+      		win = map.get(CommonString.WIN);
+      	if(map.get(CommonString.PROFIT) != null)
+      		profit = map.get(CommonString.PROFIT);
+      	if(map.get(CommonString.PAYRATE) != null)
+      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
 %>
-	<tr>
-	<%
-		Map<String, String> map = null;
-		String games = "0";
-		String players = "0";
-		String rounds = "0";
-		String bet = "0";
-		String win = "0";
-		String profit = "0";
-		float rayrate = 0;
-	  	for(int i = 0; i < list.size(); i++) {  
-	      	map = (Map<String, String>)list.get(i);
-	      	if(map.get(CommonString.PARAMETER_GAMEID) != null)
-	      		games = map.get(CommonString.PARAMETER_GAMEID);
-	      	if(map.get(CommonString.PLAYERS) != null)
-	      		players = map.get(CommonString.PLAYERS);
-	      	if(map.get(CommonString.ROUNDS) != null)
-	      		rounds = map.get(CommonString.ROUNDS);
-	      	if(map.get(CommonString.BET) != null)
-	      		bet = map.get(CommonString.BET);
-	      	if(map.get(CommonString.WIN) != null)
-	      		win = map.get(CommonString.WIN);
-	      	if(map.get(CommonString.PROFIT) != null)
-	      		profit = map.get(CommonString.PROFIT);
-	      	if(map.get(CommonString.PAYRATE) != null)
-	      		rayrate = Float.parseFloat(map.get(CommonString.PAYRATE));
-	%>
 	<th><a href="BettingListForEachGame.jsp?<%=CommonString.PARAMETER_GAMEID%>=<%=games%>
 				&<%=CommonString.PARAMETER_DATE%>=<%=date%>" target="_blank"><%=games%></a></th>
 	<th><a href="PlayersWinRanking.jsp?<%=CommonString.PARAMETER_DATE%>=<%=date%>" target="_blank"><%=players%></a></th>
