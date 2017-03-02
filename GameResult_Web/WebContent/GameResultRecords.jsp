@@ -33,6 +33,41 @@
 	th, td {
 	    padding: 15px;
 	}
+	
+	.tooltip {
+	    position: relative;
+	    display: inline-block;
+	    border-bottom: 1px dotted black;
+	}
+	.tooltip .tooltiptext {
+	    visibility: hidden;
+	    background-color: #555;
+	    color: #fff;
+	    text-align: center;
+	    border-radius: 6px;
+	    padding: 5px 0;
+	    position: absolute;
+	    z-index: 1;
+	    bottom: 125%;
+	    left: 50%;
+	    margin-left: -60px;
+	    opacity: 0;
+	    transition: opacity 1s;
+	}
+	.tooltip .tooltiptext::after {
+	    content: "";
+	    position: absolute;
+	    top: 100%;
+	    left: 50%;
+	    margin-left: -5px;
+	    border-width: 5px;
+	    border-style: solid;
+	    border-color: #555 transparent transparent transparent;
+	}	
+	.tooltip:hover .tooltiptext {
+	    visibility: visible;
+	    opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -56,7 +91,6 @@
 		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
 		date = trans.format(c_date);
 	}
-	
 	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(sel_gameID == null)
 		sel_gameID = EnumAllGamesList.GAME_0.getValue();
@@ -177,40 +211,50 @@
 	    <th>Âà½üµ²ªG</th>
 	</tr>
 	<%
-		Map<String, String> map=null;  
+		Map<String, String> map = null;  
 	  	for(int i = 0; i < list.size(); i++) {
 	  		map = (Map<String, String>)list.get(i);
 	%>
-      <tr>
-      	  <th><%=map.get(CommonString.ORDERID)%></th>
-      	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
-          <th><%=map.get(CommonString.ROUNDUUID)%></th>  
-          <th>
-	          <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target="_blank">
-	          <%=map.get(CommonString.PAREMETER_USERID)%>
-	          </a>
- 		  </th>
-          <th><%=map.get(CommonString.BETTING)%></th>  
-          <th><%=map.get(CommonString.LINE)%></th>
-          <th><%=map.get(CommonString.RESULTS)%></th>
-          <th><%=map.get(CommonString.AGENT)%></th>
-          <th width="35%">
-          <%
-          		String jsonstring = map.get(CommonString.RESULTSPARAMS);
-          		if(jsonstring.contains("Wheel")) {
-              	String text = "";
-              	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
-              	for(int j = 0; j < 3; j++) {
-              		for(int k = 0; k < 5; k++) {
-    					text += "<img src=\"images/i"+ ps.Wheel[j][k] + ".png\" height=56 width=56 />";
-              		}
-        			text += "<br>";
-    			}
-    			out.println(text);
-          	}
-          %>
-          </th>     
-      </tr>  
+    <tr>
+    	  <th><%=map.get(CommonString.ORDERID)%></th>
+    	  <th><%=map.get(CommonString.RESULTSDATE)%></th>
+        <th><%=map.get(CommonString.ROUNDUUID)%></th>  
+        <th>
+         <a href="PlayerDetail.jsp?<%=CommonString.PAREMETER_USERID%>=<%=map.get(CommonString.PAREMETER_USERID)%>" target="_blank">
+         <%=map.get(CommonString.PAREMETER_USERID)%>
+         </a>
+	  </th>
+        <th><%=map.get(CommonString.BETTING)%></th>  
+        <th><%=map.get(CommonString.LINE)%></th>
+        <th><%=map.get(CommonString.RESULTS)%></th>
+        <th><%=map.get(CommonString.AGENT)%></th>
+        <th width="35%">
+        <%
+       		String jsonstring = map.get(CommonString.RESULTSPARAMS);
+       		if(jsonstring.contains("Wheel")) {
+            	String text = "";
+            	GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
+            	for(int j = 0; j < 3; j++) {
+            		for(int k = 0; k < 5; k++) {
+  					text += "<img src=\"images/i"+ ps.Wheel[j][k] + ".png\" height=56 width=56 />";
+            		}
+      			text += "<br>";
+	  			}
+  			out.println(text);
+        	}
+        %>
+	    <div class="tooltip">Detail
+       		<span class="tooltiptext">
+       		<%
+       			if(jsonstring.contains("Lines")) {
+           			GameResultJsonParser ps = JSON.parseObject(jsonstring, GameResultJsonParser.class);
+           			out.println(ps.Lines);
+       			}       			
+       		%>
+            </span>
+       	</div>
+        </th>     
+    </tr>  
 	<%}%>
 </table>
 
