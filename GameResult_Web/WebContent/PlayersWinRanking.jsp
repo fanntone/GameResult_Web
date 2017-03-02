@@ -63,7 +63,7 @@
 		date = trans.format(c_date);
 	}
 	String sel_page = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
-	if(sel_page == null)
+	if(sel_page == null || sel_page == "" || sel_page.replaceAll("\\s","").isEmpty())
 		sel_page = "5";
 %>
 <form name="selection" action="PlayersWinRanking.jsp" method="post">
@@ -102,7 +102,7 @@
 	pageSize = Integer.parseInt(sel_page);
 	PlayersWinRanking data = new PlayersWinRanking();
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-	if(currentPage == null)  
+	if(currentPage == null || currentPage == "" || currentPage.replaceAll("\\s","").isEmpty())  
 	    currentPage = "1";
 	int pageIndex = Integer.parseInt(currentPage);  
 	int totalPages = data.getTotalPage(pageSize, date, userID);		

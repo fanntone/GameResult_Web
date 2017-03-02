@@ -33,7 +33,7 @@ document.selection.submit();
 </script>
 <% 	
 	String sel = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
-	if(sel == null)
+	if(sel == null || sel == "" || sel.replaceAll("\\s","").isEmpty())
 		sel = EnumSelectionList.SELECT_5.getValue();
 	String gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
 	if(gameID == null || gameID == "" || gameID.replaceAll("\\s","").isEmpty())
@@ -71,8 +71,8 @@ document.selection.submit();
 	int totalPages = data.getTotalPage(pageSize, gameID);
 	
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-	if(currentPage==null)  
-	    currentPage="1";  
+	if(currentPage == null || currentPage == "" || currentPage.replaceAll("\\s","").isEmpty())  
+	    currentPage = "1";  
 	 
 	int pageIndex = Integer.parseInt(currentPage);  
 	if(pageIndex < 1) {  

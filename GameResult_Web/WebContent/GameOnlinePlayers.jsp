@@ -33,6 +33,8 @@
 	}
 </script>
 <%	String sel = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
+	if(sel == null || sel == "" || sel.replaceAll("\\s","").isEmpty())
+		sel = "5";
 	String userID = request.getParameter(CommonString.PAREMETER_USERID);
 	if(userID == null || userID == "" || userID.replaceAll("\\s","").isEmpty())
 		userID = CommonString.ALL;
@@ -76,7 +78,7 @@
 	int totalPages = data.getTotalPage(pageSize, gameID, userID);
 	
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-	if(currentPage == null)  
+	if(currentPage == null || currentPage == "" || currentPage.replaceAll("\\s","").isEmpty())  
 	    currentPage = "1";  
 	
 	int pageIndex = Integer.parseInt(currentPage);  

@@ -80,7 +80,7 @@
 </script>
 <% 
 	String sel = request.getParameter(CommonString.PARAMETER_SELPAGESIZE);
-	if(sel == null)
+	if(sel == null || sel == "" || sel.replaceAll("\\s","").isEmpty())
 		sel = "5";
 	
 	String userID = request.getParameter(CommonString.PAREMETER_USERID);
@@ -94,7 +94,7 @@
 		date = trans.format(c_date);
 	}
 	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
-	if(sel_gameID == null)
+	if(sel_gameID == null || sel_gameID == "" || sel_gameID.replaceAll("\\s","").isEmpty())
 		sel_gameID = EnumAllGamesList.GAME_0.getValue();
 %>
 <form name="selection" action="GameResultRecords.jsp" method="post">
@@ -153,14 +153,13 @@
     	$("#date").datepicker({appendText: "點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
   	});
 </script>
-
 <%
 	int pageSize = 5;
 	pageSize = Integer.parseInt(sel);
 	GameResultRecords ed = new GameResultRecords();
 	int totalPages = ed.getTotalPage(pageSize, userID, date, sel_gameID);
 	String currentPage = request.getParameter(CommonString.PARAMETER_PAGEINDEX);
-	if(currentPage == null)  
+	if(currentPage == null || currentPage == "" || currentPage.replaceAll("\\s","").isEmpty())  
 	    currentPage = "1";  
 	int pageIndex = Integer.parseInt(currentPage);  
 	if(pageIndex < 1) {  
