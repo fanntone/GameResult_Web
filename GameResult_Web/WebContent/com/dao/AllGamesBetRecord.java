@@ -39,22 +39,32 @@ public class AllGamesBetRecord {
    		}
 	}
 	
-	public List<Map<String, String>> getAllRecords(String date, String orderby, String asc) {
+	public List<Map<String, String>> getAllRecords(String date, String orderby, String asc, String sel_gameID) {
 		openConn(); 
 	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     	String sql;
     	String orderby_str;
+    	String sub_query = "";
     	if(asc.equalsIgnoreCase("1"))
     		orderby_str = " order by " + orderby + " DESC "; 
     	else
     		orderby_str = " order by " + orderby + " DESC ";
+    	if(sel_gameID.equalsIgnoreCase("ALL"))
+    		sub_query = "";
+    	else
+    		sub_query = " and gameType = " + CommonString.TIMEDATE_QUATO + sel_gameID + CommonString.TIMEDATE_QUATO;
     	sql = " select Date(times) as times, "
-    		+ " gameID, Players, Rounds, Bet, Win, Profit, PayRate "
-    		+ " from betRecordsByFiveMins where Date(times) = "
+    		+ " betRecordsByFiveMins.gameID, "
+    		+ " gameList.gameType as gameType, "
+    		+ " Players, Rounds, Bet, Win, Profit, PayRate "
+    		+ " from betRecordsByFiveMins, gameList "
+    		+ " where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
     		+ " and times = (select Max(times) from betRecordsByFiveMins where Date(times) = " 
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
     		+  ") "
+    		+ " and betRecordsByFiveMins.gameID = gameList.gameID "
+    		+ sub_query
     		+ orderby_str
     		+ CommonString.SQLQUERYEND;
 	    try {

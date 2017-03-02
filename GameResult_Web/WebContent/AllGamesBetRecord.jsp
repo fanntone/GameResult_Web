@@ -7,6 +7,8 @@
 <%@ page import="com.dao.CommonString"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.dao.AllGamesBetRecord"%>
+<%@ page import="com.dao.EnumAllGamesList"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,9 +58,27 @@
 		java.util.Date c_date = new java.util.Date();
 		SimpleDateFormat trans = new SimpleDateFormat(CommonString.YYYYMMDD);
 		date = trans.format(c_date);
-}
+	}
+	String sel_gameID = request.getParameter(CommonString.PARAMETER_GAMEID);
+	if(sel_gameID == null || sel_gameID == "")
+		sel_gameID = "ALL";
 %>
 <form name="selection" action="AllGamesBetRecord.jsp" method="post">
+&nbsp;遊戲類別<select name=<%=CommonString.PARAMETER_GAMEID%> size="1" id=<%=CommonString.PARAMETER_GAMEID%> onChange="change()">
+<option value=<%=EnumAllGamesList.GAME_0.getValue()%>
+	<%if (sel_gameID == null || sel_gameID.equals(EnumAllGamesList.GAME_0.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.GAME_0.getValue()%></option>		
+<option value=<%=EnumAllGamesList.SLOT_GAME.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.SLOT_GAME.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.SLOT_GAME.getValue()%></option>		
+<option value=<%=EnumAllGamesList.TABLE_GAME.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.TABLE_GAME.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.TABLE_GAME.getValue()%></option>		
+<option value=<%=EnumAllGamesList.OTHERS.getValue()%>
+	<%if (sel_gameID != null && sel_gameID.equals(EnumAllGamesList.OTHERS.getValue())) {%>
+		selected <%}%>><%=EnumAllGamesList.OTHERS.getValue()%></option> 		
+</select>
+<br>
 &nbsp;Date:&nbsp;<input name=<%=CommonString.PARAMETER_DATE%> id=<%=CommonString.PARAMETER_DATE%> type="text" value=<%=date%>>
 <input type="submit" value="送出查詢">
 </form>
@@ -94,7 +114,7 @@
 </tr>
 <%
 	AllGamesBetRecord data = new AllGamesBetRecord();
-	List<Map<String, String>> list = data.getAllRecords(date, orderby, asc);
+	List<Map<String, String>> list = data.getAllRecords(date, orderby, asc, sel_gameID);
 %>
 	<tr>
 	<%

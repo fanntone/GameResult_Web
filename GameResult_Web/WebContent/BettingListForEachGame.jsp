@@ -120,8 +120,8 @@
 &nbsp;輸入玩家編號&nbsp;<input name=<%=CommonString.PAREMETER_USERID%>
 						    id=<%=CommonString.PAREMETER_USERID%>
 						    type="text" value=<%=userID%>>
-&nbsp;<input type="submit" value="送出查詢"> <br>
-
+&nbsp;<input type="submit" value="送出查詢">
+<br>
 <script language="JavaScript">
   $(document).ready(function(){ 
     $("#date").datepicker({appendText: "  點一下顯示日曆", firstDay: 1,  dateFormat: 'yy/mm/dd'});
