@@ -56,7 +56,7 @@ public class BetRecordReportYear {
 	    		+ " sum(Bet) as Bet, "
     	    	+ " sum(Win) as Win, "
     	    	+ " sum(Profit) as Profit, "
-    	    	+ " AVG(PayRate) as PayRate "
+    	    	+ " (sum(Win)/sum(Bet)*100) as PayRate "
     	    	+ " from betRecordsByDay "
     	    	+ " where Year(times) = " + year
     	    	+ " and Month(times) = " + month
