@@ -80,7 +80,7 @@ public class PlayersWinRanking {
 	    		map.put(CommonString.WIN, FormatDecimal(rs.getString(CommonString.WIN)));
 	    		map.put(CommonString.PROFIT, FormatDecimal(rs.getString(CommonString.PROFIT)));
 	    		float rtp = Float.valueOf(rs.getString(CommonString.PAYRATE));
-	    		map.put(CommonString.PAYRATE, FormatDecimal(this.FormatDecimal(rtp)));
+	    		map.put(CommonString.PAYRATE, FormatDecimal(rtp));
 	    		list.add(map);
 	    	}	    	
         } catch (SQLException e) {
