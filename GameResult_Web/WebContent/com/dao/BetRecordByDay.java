@@ -50,7 +50,17 @@ public class BetRecordByDay {
     		+ " sum(Bet) as Bet, "
     		+ " sum(Win) as Win, "
     		+ " sum(Profit) as Profit, "
-    		+ " AVG(PayRate) as PayRate "
+    		+ " (select sum(Win) from betRecordsByFiveMins where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+ " and times = "
+    		+ " (select Max(times) from betRecordsByFiveMins where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO + ") "
+    		+ ")/( select sum(Bet) from betRecordsByFiveMins where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO
+    		+ " and times = "
+    		+ " (select Max(times) from betRecordsByFiveMins where Date(times) = "
+    		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO + ")) "
+    		+ " as PayRate "
     		+ " from betRecordsByFiveMins where Date(times) = "
     		+ CommonString.TIMEDATE_QUATO + date + CommonString.TIMEDATE_QUATO 
     		+ " and times = "
@@ -73,7 +83,7 @@ public class BetRecordByDay {
 	    			map.put(CommonString.PAYRATE, "0");
 	    		else {
 		    		float rtp = Float.valueOf(rs.getString(CommonString.PAYRATE));
-		    		map.put(CommonString.PAYRATE, FormatDecimal(this.FormatDecimal(rtp)));
+		    		map.put(CommonString.PAYRATE, FormatDecimal(rtp*100));
 	    		}
 	    		list.add(map);
 	    	}	    	
@@ -93,7 +103,7 @@ public class BetRecordByDay {
     }
     
     public String FormatDecimal(float x) {
-    	DecimalFormat df = new DecimalFormat("#.#");
+    	DecimalFormat df = new DecimalFormat("#.###");
     	String s = df.format(x);
     	return s;
     }
